@@ -16,6 +16,9 @@ global.mongoose.connect(altasUrl, {
   useUnifiedTopology: true,
 });
 
+const rest = require('./commands/rest.js')
+rest(app)
+
 app.get('/test', (req, res) => {
   res.send('In the get')
 })

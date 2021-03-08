@@ -50,7 +50,7 @@ const Amenity = mongoose.model("Amenity", {
   description: {
     type: String,
     unique: true,
-    required: true,
+    required: true
   },
   icon: {
     type: String
@@ -124,8 +124,8 @@ const Availability = mongoose.model("Availability", {
 module.exports = {
   users: User,
   addresses: Address,
-  amenities = Amenity,
-  hostings = Hosting,
-  bookings = Booking,
-  availabilities = Availability
+  amenities: Amenity,
+  hostings: Hosting,
+  bookings: Booking,
+  availabilities: Availability
 }
