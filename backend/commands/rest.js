@@ -26,4 +26,18 @@ module.exports = (app) => {
     res.json(doc)
   })
 
+  app.post('/rest/amenities/', async (req, res) => {
+    let model = models['amenities']
+    let doc = new model(req.body)
+    try {
+      await doc.save()
+    }
+    catch (e) {
+      res.send('Save failed')
+      return
+    }
+
+    res.json(doc)
+  })
+
 };
