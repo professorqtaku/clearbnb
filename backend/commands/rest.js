@@ -14,4 +14,16 @@ module.exports = (app) => {
     res.json(docs)
   })
 
+  app.get('/rest/:model/:id', async (req, res) => {
+    let doc = ''
+    try {
+      doc = await models[req.params.model].findById(req.params.id)
+    }
+    catch(e) {
+      res.send('Not found')
+      return
+    }
+    res.json(doc)
+  })
+
 };
