@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Home from './pages/HomePage'
+import HomePage from './pages/HomePage'
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
 
       <main>
           <Switch>
-            <Route exact path="/" component={ Home }/>
+            <Route exact path="/" component={ HomePage }/>
           </Switch>
       </main>
 
