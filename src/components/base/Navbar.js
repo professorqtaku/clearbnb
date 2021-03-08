@@ -1,7 +1,12 @@
+import { Link, useHistory } from 'react-router-dom'
 export default function Navbar() {
 
-  function toRegister(e) {
-    console.log(e.target.value);
+  const history = useHistory()
+
+  function goTo(e) {
+    if(e.target.value) {
+        history.push('/' + e.target.value)
+    }
   }
 
   return (
@@ -26,10 +31,10 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarContent" style={ styles.content }>
             <ul className="navbar-nav">
               <li className="nav-item nav-link">
-                <button className="btn btn-sm" onClick={toRegister} value="register" style={styles.button}>Become member</button>
+                <button className="btn btn-sm" onClick={goTo} value="register" style={styles.button}>Become member</button>
               </li>
               <li className="nav-item nav-link">
-                <button className="btn btn-sm" onClick={toRegister} value="login" style={styles.button}>Login</button>
+                <button className="btn btn-sm" onClick={goTo} value="login" style={styles.button}>Login</button>
               </li>
             </ul>
           </div>
