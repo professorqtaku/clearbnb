@@ -15,7 +15,6 @@ function App() {
       </main>
 
       <footer>
-
       </footer>
       </Router>
     </div>
