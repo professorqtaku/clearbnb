@@ -18,7 +18,7 @@ export default function HostingDetailPage(props) {
   }, []);
 
   useEffect(() => {
-    console.log(hosting,'dwa');
+    console.log(hosting,'Hosting');
   }, [hosting]);
 
   return (
