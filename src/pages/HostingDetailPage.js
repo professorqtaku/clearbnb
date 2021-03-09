@@ -4,89 +4,70 @@ import { HostingContext } from "../contexts/HostingContextProvider";
 
 export default function HostingDetailPage(props) {
   const { hostingId } = useParams();
-  const { hostings, fetchHostings } = useContext(HostingContext);
-  const [hosting, setHosting] = useState(null)
-  
-  //const hosting = hostings.find(h => h.id = id)
-  
+  const [hosting, setHosting] = useState(null);
+
   const fetchHosting = async (hostingId) => {
-    let res = await fetch(`/rest/hostings/${hostingId}`)
-    res = await res.json()
-    setHosting(res)
+    let res = await fetch(`/rest/hostings/${hostingId}`);
+    res = await res.json();
+    setHosting(res);
   };
-  
 
   useEffect(() => {
-    console.log(hostingId);
-    fetchHosting(hostingId)
+    fetchHosting(hostingId);
   }, [hostingId]);
 
   useEffect(() => {
-    console.log('Hosting' ,hosting);
+    console.log("Hosting", hosting);
   }, [hosting]);
 
-  const page = (h) => {
-    console.log(h._id);
+  const defaultView = (hosting) => {
+    console.log(hosting._id);
     return (
       <div>
-      <h2>{h.title}</h2>
-        <img src={h.galleries[0]} style={styles.image} />
-      <div className="row">
+        <h2>{hosting.title}</h2>
+        <img src={hosting.galleries[0]} style={styles.image} />
+        <div className="row">
           <div className="col-sm-6">
             <h5>
-              {h.accommodation} with {h.host.firstName}{" "}
-              {h.host.lastName}
+              {hosting.accommodation} with {hosting.host.firstName} {hosting.host.lastName}
             </h5>
           </div>
-          <div className="col-sm-6 col-md-12">
-            <p className="col-4" style={styles.info}>
-              {h.guestAmount}{" "}
-              {h.guestAmount > 1 ? "Guests" : "Guest"}
+            <p className="col-4 col-sm-2" style={styles.info}>
+              {hosting.guestAmount} {hosting.guestAmount > 1 ? "Guests" : "Guest"}
             </p>
 
-            <p className="col-4" style={styles.info}>
-              {h.bedroomAmount}{" "}
-              {h.bedroomAmount > 1 ? "Bedrooms" : "Bedroom"}
+            <p className="col-4 col-sm-2" style={styles.info}>
+              {hosting.bedroomAmount} {hosting.bedroomAmount > 1 ? "Bedrooms" : "Bedroom"}
             </p>
 
-            <p className="col-4" style={styles.info}>
-              {h.bedAmount}{" "}
-              {h.bedAmount > 1 ? "Beds" : "Bed"}
+            <p className="col-4 col-sm-2" style={styles.info}>
+              {hosting.bedAmount} {hosting.bedAmount > 1 ? "Beds" : "Bed"}
             </p>
-          </div>
-        <h2 className="col-md-6">$ {h.price}/night </h2>
-      </div>
-      <div className="row">
-        <p>{h.description}</p>
-      </div>
+          <h2 className="col-md-6">$ {hosting.price}/night </h2>
+        </div>
+        <div className="row">
+          <p>{hosting.description}</p>
+        </div>
       </div>
     );
-  }
+  };
 
   const loading = (
     <div class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>)
-  return (
-    <div className="container">
-      {hosting ? (
-        page(hosting)
-      ) : (
-          loading
-      )}
-       
+      <span class="sr-only">Loading...</span>
     </div>
   );
+  return <div className="container">{hosting ? defaultView(hosting) : loading}</div>;
 }
 
 const styles = {
   image: {
-    width: '100%',
-    height: '25vh',
-    objectFit: 'cover'
+    width: "100%",
+    height: "calc(25vh + 10vw)",
+    objectFit: "cover",
   },
   info: {
-    margin: '0',
-    border: '1px solid black'
-  }
-}
+    margin: "0",
+    border: "1px solid black",
+  },
+};
