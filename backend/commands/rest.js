@@ -31,7 +31,6 @@ module.exports = (app) => {
     let model = models[req.params.model]
     let doc = new model(req.body)
     try {
-      console.log("generic");
       await doc.save()
     }
     catch (e) {
@@ -42,19 +41,27 @@ module.exports = (app) => {
     res.json(doc)
   })
 
-  app.post('/rest/:model/', async (req, res) => {
-    let model = models[req.params.model]
-    console.log(model);
-    let doc = ''
-    doc = new model(req.body)
-    console.log(doc.populate);
+  app.put('/rest/hostings/:id', async (req, res) => {
+    let model = models['hostings']
+    let hosting = await model.findById(req.params.id)
+    
+    if (req.body.galleries) {
+      hosting.galleries = hosting.galleries.concat(req.body.galleries)
+      delete req.body.galleries
+    }
+    if (req.body.amenities) {
+      hosting.amenities = hosting.galleries.concat(req.body.amenities)
+      delete req.body.amenities
+    }
+
+    Object.assign(hosting, req.body)
     try {
-      await doc.save()
+      await hosting.save()
     }
-    catch (e) {
-      res.send('Save failed')
-      return
+    catch(e) {
+      console.log(e);
     }
-    res.json(doc)
+
+    res.json(hosting)
   })
 };
