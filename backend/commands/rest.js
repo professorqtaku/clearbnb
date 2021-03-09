@@ -40,15 +40,20 @@ module.exports = (app) => {
     res.json(doc)
   })
 
-  app.post('/rest/hostings/', async (req, res) => {
-    let model = models['hostings']
-    let doc = new model(req.body)
+  app.post('/rest/:model/', async (req, res) => {
+    let model = models[req.params.model]
+    console.log(model);
+    let doc = ''
+    doc = new model(req.body)
+    console.log(doc);
     try {
       await doc.save()
     }
     catch (e) {
+      console.log(e);
       res.send('Save failed')
       return
     }
+    res.json(doc)
   })
 };

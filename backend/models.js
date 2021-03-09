@@ -20,13 +20,16 @@ const User = mongoose.model("User", {
   },
   phoneNumber: {
     type: Number
+  },
+  birthDate: {
+    type: Number,
+    require:true
   }
 })
 
 const Address = mongoose.model("Address", {
   street: {
     type: String,
-    unique: true,
     required: true,
   },
   city: {
