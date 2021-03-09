@@ -20,8 +20,15 @@ export default function SearchBar() {
   )
 }
 const gridContainer = {
-  backgroundColor: 'grey'
+  width: '700px',
+  backgroundColor: 'grey',
+  // backgroundColor: 'rgba(255, 255, 255, 0.73)',
+  display: 'grid',
+  gridTemplateRows: '1fr',
+  gridTemplateColumns: 'repeat(5, 1fr)',
+  padding: '20px',
+  
 }
 const gridItem = {
-  backgroundColor: 'white'
+  
 }

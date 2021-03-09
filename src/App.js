@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import Navbar from './components/base/Navbar'
 
+
 function App() {
   return (
     <div className="App">
@@ -26,5 +27,7 @@ function App() {
     </div>
   );
 }
+
+
 
 export default App;

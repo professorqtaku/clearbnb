@@ -27,3 +27,9 @@ code {
   outline: none !important;
   box-shadow: none;
 }
+
+main {
+  width: 80vw;
+  margin: 0 auto 0;
+}
+
