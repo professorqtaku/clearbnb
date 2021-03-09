@@ -22,8 +22,7 @@ const User = mongoose.model("User", {
     type: Number
   },
   birthDate: {
-    type: Number,
-    require:true
+    type: String
   }
 })
 

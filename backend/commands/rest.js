@@ -5,7 +5,8 @@ module.exports = (app) => {
   app.get('/rest/:model', async (req, res) => {
     let docs = ''
     try {
-      docs = await models[req.params.model].find()
+      docs = await models[req.params.model]
+        .find()
     }
     catch (e) {
       res.send('model not found')
@@ -17,7 +18,7 @@ module.exports = (app) => {
   app.get('/rest/:model/:id', async (req, res) => {
     let doc = ''
     try {
-      doc = await models[req.params.model].findById(req.params.id)
+      doc = await models[req.params.model].findById(req.params.id).populate(['host', 'address']).exec()
     }
     catch (e) {
       res.send('Not found')
@@ -26,10 +27,11 @@ module.exports = (app) => {
     res.json(doc)
   })
 
-  app.post('/rest/amenities/', async (req, res) => {
-    let model = models['amenities']
+  app.post('/rest/:model/', async (req, res) => {
+    let model = models[req.params.model]
     let doc = new model(req.body)
     try {
+      console.log("generic");
       await doc.save()
     }
     catch (e) {
@@ -45,12 +47,11 @@ module.exports = (app) => {
     console.log(model);
     let doc = ''
     doc = new model(req.body)
-    console.log(doc);
+    console.log(doc.populate);
     try {
       await doc.save()
     }
     catch (e) {
-      console.log(e);
       res.send('Save failed')
       return
     }
