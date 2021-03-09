@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from 'react'
 
 export const HostingContext = createContext()
 
-export default function HostingContextProvider() {
+export default function HostingContextProvider(props) {
   
   const [hostings, setHostings] = useState()
 
@@ -16,7 +16,7 @@ export default function HostingContextProvider() {
     fetchHostings()
   }, [])
 
-  const addHosting = (hosting) => {
+  const addHosting = async (hosting) => {
     let res = await fetch('/rest/hostings', {
       method: 'POST',
       headers: { "content-type": "application/json" },
@@ -30,7 +30,8 @@ export default function HostingContextProvider() {
 
   const values = {
     hostings,
-    addHosting
+    addHosting,
+    fetchHostings
   }
 
   return (
