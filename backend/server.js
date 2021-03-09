@@ -16,10 +16,6 @@ global.mongoose.connect(altasUrl, {
   useUnifiedTopology: true,
 });
 
-app.get('/test', (req, res) => {
-  res.send('In the get')
-})
-
 app.listen(3001, () => {
   console.log("Server started ar port 3001");
 });
