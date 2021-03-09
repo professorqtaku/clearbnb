@@ -2,7 +2,7 @@ import SearchBar from "../components/SearchBar"
 export default function HomePage() {
 
   return (
-    <div style={styles.grid}>
+    <div className="homePage" style={styles.grid}>
       <div style={styles.row1}>
         <SearchBar />
       </div>
