@@ -7,7 +7,7 @@ module.exports = (app) => {
     try {
       docs = await models[req.params.model].find()
     }
-    catch(e) {
+    catch (e) {
       res.send('model not found')
       return
     }
@@ -19,7 +19,7 @@ module.exports = (app) => {
     try {
       doc = await models[req.params.model].findById(req.params.id)
     }
-    catch(e) {
+    catch (e) {
       res.send('Not found')
       return
     }
@@ -40,4 +40,15 @@ module.exports = (app) => {
     res.json(doc)
   })
 
+  app.post('/rest/hostings/', async (req, res) => {
+    let model = models['hostings']
+    let doc = new model(req.body)
+    try {
+      await doc.save()
+    }
+    catch (e) {
+      res.send('Save failed')
+      return
+    }
+  })
 };

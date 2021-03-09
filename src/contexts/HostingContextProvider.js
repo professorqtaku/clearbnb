@@ -16,9 +16,21 @@ export default function HostingContextProvider() {
     fetchHostings()
   }, [])
 
+  const addHosting = (hosting) => {
+    let res = await fetch('/rest/hostings', {
+      method: 'POST',
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(hosting)
+    })
+    res = await res.json()
+    hosting.id = res.id
+    let newHostings = [...hostings, ...hosting]
+    setHostings(newHostings)
+  }
+
   const values = {
     hostings,
-    setHostings
+    addHosting
   }
 
   return (
