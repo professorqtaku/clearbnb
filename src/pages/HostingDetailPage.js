@@ -3,11 +3,11 @@ import { useContext, useEffect, useState } from "react";
 import { HostingContext } from "../contexts/HostingContextProvider";
 
 export default function HostingDetailPage(props) {
-  //const { hostingId } = useParams();
+  const { hostingId } = useParams();
   const { hostings, fetchHostings } = useContext(HostingContext);
   const [hosting, setHosting] = useState(null)
   
-  //const hostingData = hostings.find(h => h.id = id)
+  //const hosting = hostings.find(h => h.id = id)
   
   const fetchHosting = async (hostingId) => {
     let res = await fetch(`/rest/hostings/${hostingId}`)
@@ -17,14 +17,51 @@ export default function HostingDetailPage(props) {
   
 
   useEffect(() => {
-    // varje gång props ändras
-    console.warn(props.match.params.hostingId);
-    fetchHosting(props.match.params.hostingId)
-  }, [props.match.params.hostingId]);
+    console.log(hostingId);
+    fetchHosting(hostingId)
+  }, [hostingId]);
 
   useEffect(() => {
     console.log('Hosting' ,hosting);
   }, [hosting]);
+
+  const page = (h) => {
+    console.log(h._id);
+    return (
+      <div>
+      <h2>{h.title}</h2>
+        <img src={h.galleries[0]} style={styles.image} />
+      <div className="row">
+          <div className="col-sm-6">
+            <h5>
+              {h.accommodation} with {h.host.firstName}{" "}
+              {h.host.lastName}
+            </h5>
+          </div>
+          <div className="col-sm-6 col-md-12">
+            <p className="col-4" style={styles.info}>
+              {h.guestAmount}{" "}
+              {h.guestAmount > 1 ? "Guests" : "Guest"}
+            </p>
+
+            <p className="col-4" style={styles.info}>
+              {h.bedroomAmount}{" "}
+              {h.bedroomAmount > 1 ? "Bedrooms" : "Bedroom"}
+            </p>
+
+            <p className="col-4" style={styles.info}>
+              {h.bedAmount}{" "}
+              {h.bedAmount > 1 ? "Beds" : "Bed"}
+            </p>
+          </div>
+        <h2 className="col-md-6">$ {h.price}/night </h2>
+      </div>
+      <div className="row">
+        <p>{h.description}</p>
+      </div>
+      </div>
+    );
+  }
 
   const loading = (
     <div class="spinner-border" role="status">
@@ -33,40 +70,11 @@ export default function HostingDetailPage(props) {
   return (
     <div className="container">
       {hosting ? (
-        "Hello"
+        page(hosting)
       ) : (
           loading
       )}
-      {/* <h2>{hostingData.title}</h2>
-        <img src={hostingData.galleries[0]} style={styles.image} />
-      <div className="row">
-          <div className="col-sm-6">
-            <h5>
-              {hostingData.accommodation} with {hostingData.host.firstName}{" "}
-              {hostingData.host.lastName}
-            </h5>
-          </div>
-          <div className="col-sm-6 col-md-12">
-            <p className="col-4" style={styles.info}>
-              {hostingData.guestAmount}{" "}
-              {hostingData.guestAmount > 1 ? "Guests" : "Guest"}
-            </p>
-
-            <p className="col-4" style={styles.info}>
-              {hostingData.bedroomAmount}{" "}
-              {hostingData.bedroomAmount > 1 ? "Bedrooms" : "Bedroom"}
-            </p>
-
-            <p className="col-4" style={styles.info}>
-              {hostingData.bedAmount}{" "}
-              {hostingData.bedAmount > 1 ? "Beds" : "Bed"}
-            </p>
-          </div>
-        <h2 className="col-md-6">$ {hostingData.price}/night </h2>
-      </div>
-      <div className="row">
-        <p>{hostingData.description}</p>
-      </div> */}
+       
     </div>
   );
 }
