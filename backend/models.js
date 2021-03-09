@@ -58,6 +58,13 @@ const Amenity = mongoose.model("Amenity", {
     type: String
   }
 });
+const Accommodation = mongoose.model("Accommodation", {
+  description: {
+    type: String,
+    unique: true,
+    required: true
+  }
+});
 
 const Hosting = mongoose.model("Hosting", {
   price: {
@@ -78,9 +85,33 @@ const Hosting = mongoose.model("Hosting", {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Amenity"
   }],
+  accommodation: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Accommodation"
+  },
   galleries: [{
     type: String
-  }]
+  }],
+  title: {
+    type: String,
+    require: true
+  },
+  description: {
+    type: String,
+  },
+  guestAmount: {
+    type: Number,
+    require: true
+  },
+  bedAmount: {
+    type: Number,
+    require: true
+  },
+  bedroomAmount: {
+    type: Number,
+    require: true
+  },
+
 
 });
 
