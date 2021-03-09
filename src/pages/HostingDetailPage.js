@@ -1,25 +1,30 @@
-import { useParams } from 'react-router-dom'
-import { useContext, useEffect } from 'react'
-import { HostingContext } from '../contexts/HostingContextProvider'
+import { useParams, withRouter } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { HostingContext } from "../contexts/HostingContextProvider";
 
 export default function HostingDetailPage(props) {
-  const { id } = useParams()
-  const { hostings, fetchHostings } = useContext(HostingContext)
-  const hosting = ''
+  const { id } = useParams();
+  const { hostings, fetchHostings } = useContext(HostingContext);
+  const [hosting, setHosting] = useState(null)
   
-  //const hosting = hostings.find(h => h.id = id)
-  //console.log(hosting);
-  
-  useEffect(async () => {
-    console.log('before', hostings);
-    await fetchHostings();
-    console.log("afterd", hostings);
-  }, [])
+  const hostingData = hostings.find(h => h.id = id)
+
+  const fetchHosting = async () => {
+    await fetch(`/rest/hostings/${id}`).then(res => res.json()).then(data => setHosting(data))
+  };
+
+  useEffect(() => {
+    fetchHosting()
+  }, []);
+
+  useEffect(() => {
+    console.log(hosting,'dwa');
+  }, [hosting]);
 
   return (
     <div>
       <h1>Hosting detail</h1>
-      <p>{  }</p>
+      <p>hosting: { hostingData.price} </p>
     </div>
-  )
+  );
 }
