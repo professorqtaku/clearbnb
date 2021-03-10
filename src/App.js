@@ -6,6 +6,7 @@ import HostingDetailPage from './pages/HostingDetailPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import Navbar from './components/base/Navbar'
+import Footer from './components/base/Footer'
 
 function App() {
   return (
@@ -25,8 +26,10 @@ function App() {
           </Switch>
       </main>
 
-          <footer></footer>
-        </Router>
+      <footer>
+        <Footer />
+      </footer>
+      </Router>
       </HostingContextProvider>
     </div>
   );
