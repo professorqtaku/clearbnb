@@ -3,6 +3,7 @@ import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import Navbar from './components/base/Navbar'
+import Footer from './components/base/Footer'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       </main>
 
       <footer>
+        <Footer />
       </footer>
       </Router>
     </div>
