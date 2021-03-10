@@ -3,9 +3,12 @@ import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import Navbar from './components/base/Navbar'
+import Radium, { StyleRoot } from 'radium'
 
 function App() {
   return (
+    <StyleRoot>
+
     <div className="App">
         <Router>
         <header className="App-header">
@@ -24,6 +27,7 @@ function App() {
       </footer>
       </Router>
     </div>
+    </StyleRoot>
   );
 }
 
