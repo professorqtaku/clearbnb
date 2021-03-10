@@ -3,10 +3,13 @@ export default function Footer() {
       <div className="footer" style={styles.footer}>
           <button
           className="btn btn-sm"
-          style={styles.button}>Om oss</button>
+          style={styles.button}>About us</button>
           <button
           className="btn btn-sm"
-          style={styles.button}>Kontakta oss</button>
+          style={styles.button}>Contact us</button>
+          <button
+          className="btn btn-sm"
+          style={styles.button}>Become member</button>
         <center><p>Copyright 2021 | Group 5 TH Lund</p></center>
       </div>
     )

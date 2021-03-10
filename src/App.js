@@ -20,7 +20,7 @@ function App() {
             <Route exact path="/register" component={ RegisterPage }/>
           </Switch>
       </main>
-
+      
       <footer>
         <Footer />
       </footer>
