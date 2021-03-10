@@ -2,6 +2,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import SearchResultPage from './pages/SearchResultPage'
+
+
+
 import Navbar from './components/base/Navbar'
 import Footer from './components/base/Footer'
 
@@ -18,6 +22,7 @@ function App() {
             <Route exact path="/" component={ HomePage }/>
             <Route exact path="/login" component={ LoginPage }/>
             <Route exact path="/register" component={ RegisterPage }/>
+            <Route exact path="/search/:searchQuery/" component={ SearchResultPage }/>
           </Switch>
       </main>
 
