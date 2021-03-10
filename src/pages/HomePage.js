@@ -9,9 +9,6 @@ export default function HomePage() {
   return (
     <div>
       <h1>Home Page</h1>
-      <button className="btn" onClick={goTo} value="6047662ab42a7e261019ff88">
-        6047662ab42a7e261019ff88
-      </button>
     </div>
   );
 }
