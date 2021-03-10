@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-      <div className="footer">
+      <div className="footer" style={styles.footer}>
           <button
           className="btn btn-sm"
           style={styles.button}>Om oss</button>
@@ -14,12 +14,12 @@ export default function Footer() {
 
   const styles = {
     footer: {
-      backgroundColor: "var(--pink)",
-      color: "white !important",
+      backgroundColor: "var(--lightgrey)",
+      color: "var(--darkgrey) !important",
       
     },
     button: {
-      color: "black",
+      color: "var(--darkgrey)",
       ":focus": {
         outline: "none !important",
         boxShadow: "none",
