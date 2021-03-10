@@ -1,6 +1,8 @@
 const models = require('../models.js')
 const bcrypt = require('bcrypt')
 
+
+
 module.exports = (app) => {
   app.post('/api/users', async (req, res) => {
     let User = models['users']
@@ -8,31 +10,30 @@ module.exports = (app) => {
       res.json({ error: 'Someone is already logged in' })
       return
     }
+    
 
     const saltRounds = 10
     let hashedPassword = ''
     try {
       hashedPassword = await bcrypt.hash(req.body.password, saltRounds)
     } catch (e) {
-      res.send('Password is missing')
+      res.send({ error: 'Hash failed' })
+      return
     }
     let user = new User({ ...req.body, password: hashedPassword })
+    
+      
 
     let userExist = await User.findOne({ email: user.email })
     if (userExist) {
       res.send('E-mail already used/is missing')
       return
     }
-    try {
-      await user.save()
-      res.json({ success: true })
-    }
-    catch (e) {
-      res.send('Save failed')
-      return
-    }
+    await user.save()
+      .then(() => res.json({ 'success': true }))
+      .catch(() => res.send('Save failed'))
+    res.send('isValid')
   })
-
 }
 
 const hashPassword = async (password) => {
