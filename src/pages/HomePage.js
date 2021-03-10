@@ -1,5 +1,11 @@
 import SearchBar from "../components/SearchBar"
+import {useHistory} from 'react-router-dom'
+
 export default function HomePage() {
+  const history = useHistory()
+  const goTo = (e) => {
+    history.push(`/hosting/${e.target.value}`)
+  }
 
   return (
     <div className="homePage" style={styles.grid}>
