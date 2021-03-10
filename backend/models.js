@@ -158,6 +158,7 @@ module.exports = {
   users: User,
   addresses: Address,
   amenities: Amenity,
+  accommodations: Accommodation,
   hostings: Hosting,
   bookings: Booking,
   availabilities: Availability

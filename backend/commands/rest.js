@@ -18,7 +18,7 @@ module.exports = (app) => {
   app.get('/rest/:model/:id', async (req, res) => {
     let doc = ''
     try {
-      doc = await models[req.params.model].findById(req.params.id).populate(['host', 'address']).exec()
+      doc = await models[req.params.model].findById(req.params.id).populate(['host', 'address', 'accommodation']).exec()
     }
     catch (e) {
       res.send('Not found')

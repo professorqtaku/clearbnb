@@ -1,6 +1,5 @@
 import { useParams, withRouter } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { HostingContext } from "../contexts/HostingContextProvider";
+import { useEffect, useState } from "react";
 
 export default function HostingDetailPage(props) {
   const { hostingId } = useParams();
@@ -29,7 +28,7 @@ export default function HostingDetailPage(props) {
         <div className="row">
           <div className="col-sm-6">
             <h5>
-              {hosting.accommodation} with {hosting.host.firstName} {hosting.host.lastName}
+              {hosting.accommodation.description} with {hosting.host.firstName} {hosting.host.lastName}
             </h5>
           </div>
             <p className="col-4 col-sm-2" style={styles.info}>
@@ -65,6 +64,7 @@ const styles = {
     width: "100%",
     height: "calc(25vh + 10vw)",
     objectFit: "cover",
+    borderRadius: "10px",
   },
   info: {
     margin: "0",
