@@ -1,5 +1,5 @@
 import SearchBar from "../components/SearchBar"
-import {useHistory} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 export default function HomePage() {
   const history = useHistory()

@@ -1,23 +1,31 @@
 import React, { useState } from "react";
+import { Link, useHistory } from 'react-router-dom'
 import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
-
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
-
-
-
 export default function SearchBar() {
 
+  const history = useHistory()
+  const goToSearchPage = () => {
+    const usp = new URLSearchParams()
+    usp.set('location', location)
+    usp.set('datefrom', (`${startDate.getDay()}` + `${startDate.getDate()}` + `${startDate.getFullYear()}`))
+    usp.set('dateto', (`${endDate.getDay()}` + `${endDate.getDate()}` + `${endDate.getFullYear()}`))
+    usp.set('guests', guests)
+    history.push('/search/' + usp.toString())
+  }
+
+  const [location, setLocation] = useState('')
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [guests, setGuests] = useState('')
   
   return (
     <div style={styles.gridContainer}>
       <div style={styles.location}>
-        <input style={styles.input} placeholder="location"></input>
+        <input style={styles.input} onChange={event => setLocation(event.target.value)} placeholder="location"/>
       </div>
       <div style={styles.gridItem}>From
         <DatePicker style={styles.datePicker} selected={startDate} onChange={date => setStartDate(date)} />
@@ -26,10 +34,10 @@ export default function SearchBar() {
         <DatePicker style={styles.datePicker} selected={endDate} onChange={date => setEndDate(date)} />
       </div>
       <div style={styles.gridItem}>
-        <input style={styles.input} placeholder="Guests"></input>
+        <input style={styles.input} onChange={event => setGuests(event.target.value)} placeholder="Guests"/>
       </div>
       <div style={styles.gridItem}>
-        <button style={styles.input} >Search</button>
+        <button style={styles.input} onClick={goToSearchPage} >Search</button>
       </div>
     </div>
 
