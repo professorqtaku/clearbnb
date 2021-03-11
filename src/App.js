@@ -15,8 +15,8 @@ function App() {
     <StyleRoot>
 
     <div className="App">
-      <UserContextProvider>
       <HostingContextProvider>
+      <UserContextProvider>
         <Router>
         <header className="App-header">
           <Navbar />
@@ -35,8 +35,8 @@ function App() {
         <Footer />
       </footer>
       </Router>
-      </HostingContextProvider>
       </UserContextProvider>
+      </HostingContextProvider>
     </div>
     </StyleRoot>
   );

@@ -11,21 +11,46 @@ export default function UserContextProvider(props) {
       .then(async (res) => {
         return await res.json()
       })
-      .then(user => setUser(user))
-      .catch(() => {
-        console.log('No user logged in');
+      .then(user => {
+        if(!user.error)
+          setUser(user) 
       })
+      .catch((e) => console.log('Already login error', e))
   }
 
-    useEffect(() => {
-      fetchUser();
-      console.log(user, "res");
+    useEffect(async () => {
+      await fetchUser();
     }, []);
+  
+    useEffect(() => {
+      console.log(user);
+    }, [user]);
+  
+  const login = async (email, password) => {
+    let userInput = {
+      email: email,
+      password: password
+    }
+
+    let res = await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"  },
+      body: JSON.stringify(userInput),
+    })
+    res = await res.json()
+    if(!res.error){
+      setUser(res)
+      return true
+    }
+    return false
+  }
   
   const values = {
     user,
-    setUser
-    }
+    login
+  }
   
   return (
     <UserContext.Provider value={values}>

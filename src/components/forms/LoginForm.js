@@ -1,18 +1,30 @@
 import Radium from 'radium'
+import { UserContext } from '../../contexts/UserContextProvider'
+import { useContext } from 'react'
+import { useHistory } from 'react-router-dom'
 
 function LoginForm() {
+  const { login } = useContext(UserContext)
+  const history = useHistory()
 
-  const login = (e) => {
-    e.preventDefault()
-    let email = document.getElementById('inputEmail').value
-    let password = document.getElementById('inputPassword').value
+  const submitLogin = async (e) => {
+    e.preventDefault();
+    let email = document.getElementById('inputEmail').value.toString().trim()
+    let password = document.getElementById("inputPassword").value;
+    if (email && password) {
+      let isLogin = await login(email, password)
+      console.log("is", isLogin);
+      if (isLogin) {
+        history.push('/mypage')
+      }
+    }
   }
 
   return (
     <div style={styles.gridContainer} className="container">
       <div>
         <div className="text-center">
-          <form>
+          <form onSubmit={submitLogin}>
             <div className="mb-3">
               <label for="inputEmail" className="form-label">
                 Email address
@@ -23,6 +35,7 @@ function LoginForm() {
                 id="inputEmail"
                 placeholder="Email address..."
                 aria-describedby="emailHelp"
+                required
               />
             </div>
             <div className="mb-3">
@@ -34,9 +47,10 @@ function LoginForm() {
                 className="form-control"
                 id="inputPassword"
                 placeholder="Password..."
+                required
               />
             </div>
-            <button type="submit" style={styles.submit} onClick={login}>
+            <button type="submit" style={styles.submit}>
               Log in
             </button>
           </form>
