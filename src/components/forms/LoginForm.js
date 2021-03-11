@@ -1,11 +1,13 @@
 import Radium from 'radium'
 import { UserContext } from '../../contexts/UserContextProvider'
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import LoginErrorMessage from "../LoginErrorMessage";
 
 function LoginForm() {
   const { login } = useContext(UserContext)
   const history = useHistory()
+  const [ loginError, setLoginError ] = useState(false)
 
   const submitLogin = async (e) => {
     e.preventDefault();
@@ -13,10 +15,11 @@ function LoginForm() {
     let password = document.getElementById("inputPassword").value;
     if (email && password) {
       let isLogin = await login(email, password)
-      console.log("is", isLogin);
       if (isLogin) {
+        setLoginError(false)
         history.push('/mypage')
       }
+      setLoginError(true)
     }
   }
 
@@ -50,6 +53,7 @@ function LoginForm() {
                 required
               />
             </div>
+            <LoginErrorMessage loginError={ loginError }/>
             <button type="submit" style={styles.submit}>
               Log in
             </button>

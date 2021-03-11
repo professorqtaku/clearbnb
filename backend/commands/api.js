@@ -24,7 +24,7 @@ module.exports = (app) => {
       res.json(userExist);
       return
     }
-    res.json({ error: 'Bad credentials' })      
+    res.json({ error: 'Bad credentials' })  
   })
 
   app.get("/api/login", (req, res) => {

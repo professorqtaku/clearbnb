@@ -1,5 +1,9 @@
 import { Link, useHistory } from "react-router-dom";
-export default function Navbar() {
+import { useContext } from 'react'
+import { UserContext } from '../../contexts/UserContextProvider'
+
+export default function Navbar(props) {
+  const { user } = useContext(UserContext)
   const history = useHistory();
 
   function goTo(e) {
