@@ -11,18 +11,14 @@ module.exports = (app) => {
       return
     }
     
-
-    const saltRounds = 10
-    let hashedPassword = ''
-    try {
-      hashedPassword = await bcrypt.hash(req.body.password, saltRounds)
-    } catch (e) {
-      res.send({ error: 'Hash failed' })
+    req.body = trimObject(req.body)
+    if (!req.body.password.length) {
+      res.send('Password is missing')
       return
     }
+    let hashedPassword = await hashPassword(req.body.password)
+
     let user = new User({ ...req.body, password: hashedPassword })
-    
-      
 
     let userExist = await User.findOne({ email: user.email })
     if (userExist) {
@@ -32,19 +28,22 @@ module.exports = (app) => {
     await user.save()
       .then(() => res.json({ 'success': true }))
       .catch(() => res.send('Save failed'))
-    res.send('isValid')
   })
 }
 
 const hashPassword = async (password) => {
   const saltRounds = 10;
-  const myPlaintextPassword = "s0//P4$$w0rD";
-  const someOtherPlaintextPassword = "not_bacon";
-  let hashed = "";
-  await bcrypt.genSalt(saltRounds, async (err, salt) => {
-    await bcrypt.hash(myPlaintextPassword, salt, (err, hash) => {
-      console.log("hash", hash);
-      hashed = hash;
-    });
-  });
+  try {
+    return await bcrypt.hash(password, saltRounds);
+  } catch (e) {
+    res.send({ error: "Hash failed" });
+    return;
+  }
+}
+
+const trimObject = (objectToTrim) => {
+  for (let [key, value] of Object.entries(objectToTrim)) {
+    if (value.length) objectToTrim[key] = value.trim();
+  }
+  return objectToTrim
 }
