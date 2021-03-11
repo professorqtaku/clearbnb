@@ -17,7 +17,7 @@ export default function LoginPage() {
             <button type="submit" style={styles.submit}>Log in</button>
           </form>
           <div>
-            <a>Not a member? <a className="register">Register</a></a>
+            <button type="button" class="btn btn-link">Not a member yet?</button>
           </div>
         </div>
       </div>
