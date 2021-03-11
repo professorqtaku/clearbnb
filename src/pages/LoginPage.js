@@ -2,49 +2,53 @@ import { Redirect } from "react-router"
 
 export default function LoginPage() {
   return (
-    <div>
-      <form >
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+    <div style={styles.gridContainer} className="container">
+      <div >
+        <div className="text-center">
+          <form >
+            <div className="mb-3">
+              <label for="inputEmail" className="form-label">Email address</label>
+              <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" />
+            </div>
+            <div className="mb-3">
+              <label for="inputPassword" className="form-label">Password</label>
+              <input type="password" className="form-control" id="inputPassword" />
+            </div>
+            <button type="submit" style={styles.submit}>Log in</button>
+          </form>
+          <div>
+            <a>Not a member? <a className="register">Register</a></a>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" />
-        </div>
-        <button type="submit" class="btn btn-primary">Log in</button>
-      </form>
+      </div>
     </div>
   )
 
 }
 
 const styles = {
-  /*gridContainer: {
-    marginTop: '50px',
-    // backgroundColor: 'rgba(255, 255, 255, 0.73)',
+  gridContainer: {
+    width: '30%',
+    marginTop: '100px',
+    backgroundColor: 'rgba(255, 255, 255, 0.73)',
     display: 'grid',
-    gridTemplateRows: '3fr',
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gridGap: '10px'
-  },*/
-
-  wrapper: {
-    marginTop: '50px',
-    // backgroundColor: 'rgba(255, 255, 255, 0.73)',
-    display: 'grid',
-    gridTemplateRows: '3fr',
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gridGap: '10px'
+    border: '1px solid grey',
+    borderRadius: '20px',
+    padding: '20px'
   },
-  btn: {
-    backgroundColor: 'red'
+
+  submit: {
+    border: 'black',
+    color: 'white',
+    width: '40%',
+    paddingTop: '5px',
+    paddingBottom: '5px',
+    backgroundColor: '#FF646F',
+    borderRadius: '20px',
+    border: '1px solid grey',
+    marginBottom: '10px',
   },
   input: {
     width: '100%'
-  },
-
-  location: {
-    gridArea: '1/1/2/3'
   },
 }
