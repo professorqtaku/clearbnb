@@ -21,7 +21,7 @@ export default function UserContextProvider(props) {
     useEffect(async () => {
       await fetchUser();
     }, []);
-  
+   
     useEffect(() => {
       console.log(user);
     }, [user]);
