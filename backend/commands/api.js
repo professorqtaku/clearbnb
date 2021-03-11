@@ -1,27 +1,50 @@
 const models = require('../models.js')
 const bcrypt = require('bcrypt')
 
-module.exports = (app) => {
+module.exports = (app) => { 
   
-  app.post('/api/login', async (req, res) => { 
+  app.post('/api/login', async (req, res) => {
+    console.log(req.session.user);
     if (req.session.user) {
       res.json({ error: "Someone is already logged in" });
       return
     }
     let user = req.body
     console.log(user);
-    const userExist = await models['users'].findOne({ email: user.email })
+    let userExist = await models['users'].findOne({ email: user.email })
     if (!userExist) {
       res.send('Bad credentials')
       return
     }
     const match = await checkUser(user.password, userExist.password)
     if (match) {
-      //req.session.user = userExist;
-      res.json({ success: "Logged in" });
+      req.session.user = userExist;
+      userExist.password = ''
+      res.json(userExist);
+      return
     }
-    res.send('Bac credentials')
+    res.send('Bad credentials')
   })
+
+  app.get("/api/login", (req, res) => {
+    if (req.session.user) {
+      let user = { ...req.session.user };
+      delete user.password; // remove password in answer
+      res.json(user);
+    } else {
+      res.json({ error: "Not logged in" });
+    }
+  });
+
+  app.delete("/api/login", (req, res) => {
+    if (req.session.user) {
+      delete req.session.user;
+      res.json({ success: "Logged out" });
+    } else {
+      res.json({ error: "Was not logged in" });
+    }
+  });
+
 }
 
 const checkUser = async (password, passwordHash) => {
