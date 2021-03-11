@@ -16,6 +16,14 @@ module.exports = (app) => {
       res.send('Password is missing')
       return
     }
+
+    if (req.body.password !== req.body.confirmPassword) {
+      res.send('Password does not match')
+      return
+    }
+    else delete req.body.confirmPassword
+    console.log(req.body);
+
     let hashedPassword = await hashPassword(req.body.password)
 
     let user = new User({ ...req.body, password: hashedPassword })
