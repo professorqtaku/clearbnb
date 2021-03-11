@@ -22,7 +22,6 @@ module.exports = (app) => {
       return
     }
     else delete req.body.confirmPassword
-    console.log(req.body);
 
     let hashedPassword = await hashPassword(req.body.password)
 
