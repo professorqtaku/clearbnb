@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import HostingContextProvider, { HostingContext } from './contexts/HostingContextProvider'
+import UserContextProvider from './contexts/UserContextProvider'
 
 import HomePage from './pages/HomePage'
 import HostingDetailPage from './pages/HostingDetailPage'
@@ -14,6 +15,7 @@ function App() {
     <StyleRoot>
 
     <div className="App">
+      <UserContextProvider>
       <HostingContextProvider>
         <Router>
         <header className="App-header">
@@ -34,6 +36,7 @@ function App() {
       </footer>
       </Router>
       </HostingContextProvider>
+      </UserContextProvider>
     </div>
     </StyleRoot>
   );

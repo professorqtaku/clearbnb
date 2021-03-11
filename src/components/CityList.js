@@ -1,4 +1,3 @@
-import imageBerlin from "../assets/img/berlin.jfif";
 import CityCard from "./cards/CityCard"
 import Radium from 'radium'
 
