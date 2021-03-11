@@ -23,6 +23,10 @@ function LoginForm() {
     }
   }
 
+  const toRegister = () => {
+    history.push('/register')
+  }
+
   return (
     <div style={styles.gridContainer} className="container">
       <div>
@@ -59,7 +63,7 @@ function LoginForm() {
             </button>
           </form>
           <div>
-            <button type="button" class="btn btn-link" style={styles.link}>
+            <button type="button" className="btn btn-link" style={styles.link} onClick={toRegister}>
               Not a member yet?
             </button>
           </div>
