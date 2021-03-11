@@ -17,7 +17,6 @@ export default function HomePage() {
     </div>
   )
 }
-
 const styles = {
   grid: {
     margin: '0 auto 0',

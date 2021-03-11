@@ -39,11 +39,8 @@ export default function SearchBar() {
       <div style={styles.gridItem}>
         <button style={styles.input} onClick={goToSearchPage} >Search</button>
       </div>
-    </div>
-
-    
+    </div> 
   )
-  
 }
 
 const styles = {
