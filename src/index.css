@@ -27,3 +27,12 @@ code {
   outline: none !important;
   box-shadow: none;
 }
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  border-style: solid;
+  border-color: darkgray;
+  width: 100%;
+}

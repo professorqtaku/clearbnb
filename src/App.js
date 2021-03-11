@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import Navbar from './components/base/Navbar'
 import Footer from './components/base/Footer'
+import AboutPage from './pages/AboutPage'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route exact path="/" component={ HomePage }/>
             <Route exact path="/login" component={ LoginPage }/>
             <Route exact path="/register" component={ RegisterPage }/>
+            <Route exact path="/aboutus" component={ AboutPage }/>
           </Switch>
       </main>
       
