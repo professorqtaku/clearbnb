@@ -1,5 +1,6 @@
+import {useHistory} from 'react-router-dom'
+import CityList from '../components/CityList'
 import SearchBar from "../components/SearchBar"
-import {Link, useHistory} from 'react-router-dom'
 
 export default function HomePage() {
   const history = useHistory()
@@ -12,6 +13,7 @@ export default function HomePage() {
       <div style={styles.row1}>
         <SearchBar />
       </div>
+        <CityList />
     </div>
   )
 }

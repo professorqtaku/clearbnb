@@ -7,10 +7,13 @@ import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import Navbar from './components/base/Navbar'
 import Footer from './components/base/Footer'
+import Radium, { StyleRoot } from 'radium'
 
 
 function App() {
   return (
+    <StyleRoot>
+
     <div className="App">
       <HostingContextProvider>
         <Router>
@@ -33,6 +36,7 @@ function App() {
       </Router>
       </HostingContextProvider>
     </div>
+    </StyleRoot>
   );
 }
 
