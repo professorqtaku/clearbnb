@@ -54,6 +54,7 @@ function LoginForm() {
                 className="form-control"
                 id="inputPassword"
                 placeholder="Password..."
+                style={styles.input}
                 required
               />
             </div>
@@ -104,7 +105,7 @@ const styles = {
     },
   },
   input: {
-    width: "100%",
+    width: "100%"
   },
   link: {
     color: "var(--darkgrey)",

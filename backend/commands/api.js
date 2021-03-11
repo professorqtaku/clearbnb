@@ -21,7 +21,7 @@ module.exports = (app) => {
     if (match) { 
       req.session.user = userExist;
       userExist.password = ''
-      res.json(userExist);
+      res.json(userExist); 
       return
     }
     res.json({ error: 'Bad credentials' })  
@@ -33,7 +33,7 @@ module.exports = (app) => {
       delete user.password; // remove password in answer
       res.json(user);
     } else {
-      res.json({ error: "Not logged in" });
+      res.json({ error: "Not logged in" }); 
     }
   });
 

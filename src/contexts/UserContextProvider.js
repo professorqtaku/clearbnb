@@ -18,8 +18,8 @@ export default function UserContextProvider(props) {
       .catch((e) => console.log('Already login error', e))
   }
 
-    useEffect(async () => {
-      await fetchUser();
+    useEffect(() => {
+      fetchUser();
     }, []);
    
     useEffect(() => {
@@ -46,10 +46,23 @@ export default function UserContextProvider(props) {
     }
     return false
   }
+
+  const logout = async () => {
+    let res = await fetch('/api/login', {
+      method: "DELETE"
+    })
+    res = await res.json()
+    if (res.success) {
+      setUser(null)
+      return true
+    }
+    return false
+  }
   
   const values = {
     user,
-    login
+    login,
+    logout
   }
   
   return (
