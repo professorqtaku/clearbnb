@@ -31,28 +31,38 @@ export default function Navbar() {
 
           <div className="collapse navbar-collapse" id="navbarContent" style={styles.content}>
             <div className="mx-auto"></div>
-              <ul className="navbar-nav">
-                <li className="nav-item nav-link">
-                  <button
-                    className="btn btn-sm"
-                    onClick={goTo}
-                    value="register"
-                    style={styles.button}
-                  >
-                    Become member
+            <ul className="navbar-nav">
+              <li className="nav-item nav-link">
+                <button
+                  className="btn btn-sm"
+                  onClick={goTo}
+                  value="register"
+                  style={styles.button}
+                >
+                  Become member
                   </button>
-                </li>
-                <li className="nav-item nav-link">
-                  <button
-                    className="btn btn-sm"
-                    onClick={goTo}
-                    value="login"
-                    style={styles.button}
-                  >
-                    Login
+              </li>
+              <li className="nav-item nav-link">
+                <button
+                  className="btn btn-sm"
+                  onClick={goTo}
+                  value="login"
+                  style={styles.button}
+                >
+                  Login
                   </button>
-                </li>
-              </ul>
+              </li>
+              <li className="nav-item nav-link">
+                <button
+                  className="btn btn-sm"
+                  onClick={goTo}
+                  value="myPage"
+                  style={styles.button}
+                >
+                  My Page
+                  </button>
+              </li>
+            </ul>
           </div>
 
 
