@@ -1,46 +1,35 @@
-import { useEffect, useState } from 'react'
+import { HostingContext } from '../../contexts/HostingContextProvider'
+import { useEffect, useState, useContext } from 'react'
 import { useParams, withRouter } from "react-router-dom";
+
 
 export default function ResultList() {
 
-  const { urlsearchparam } = useParams()
-
-  const usp = new URLSearchParams(urlsearchparam)
-
-  console.log(usp.get("location"))
-  
-  for (const [key, value] of usp) {
-    console.log(`${key} => ${value}`)
-  }
-
-  const { location } = usp.get("location")
-  const { startDate } = usp.get("datefrom")
-  const { endDate } = usp.get("dateto")
-  const { guests } = usp.get("guests")
-  
-  const [hosting, setHosting] = useState(null);
-
-  const fetchHosting = async () => {
-    let res = await fetch(`/rest/hostings`);
-    res = await res.json();
-    setHosting(res);
-    return res;
-  };
+  const { hostings } = useContext(HostingContext)
 
   useEffect(() => {
-    fetchHosting();
-  }, []);
+    console.log("hostings: ", hostings
+    )
+  }, [hostings]);
 
-  
-  console.log(hosting)
+  const renderResults = (hostings) => {
 
+    const search = JSON.parse(localStorage.getItem("search"))
+    console.log("getsearch: ", search)
+    console.log("location: ", search[0].location)
+    const list = hostings.filter((hosting) => hosting.address.city.includes("Malmö"));
+    console.log("list before removing duplicates: ", list.length)
 
-  // const { filteredList } =  hosting.filter((item) => usp.includes(item));
-    
-
-  
-  return (
-    <h2>TEST_ResultList</h2>
+    return (
+      <div>
+        <h1>yes</h1>
+      </div>
+    )
+  }
+  const loading = (
+    <div>
+      Loading
+    </div>
   );
-  
+  return <div className="container">{hostings ? renderResults(hostings) : loading}</div>;
 }

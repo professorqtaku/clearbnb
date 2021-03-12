@@ -4,7 +4,7 @@ export const HostingContext = createContext()
 
 export default function HostingContextProvider(props) {
   
-  const [hostings, setHostings] = useState()
+  const [hostings, setHostings] = useState([])
 
   const fetchHostings = async () => {
     let docs = await fetch('/rest/hostings')
@@ -16,7 +16,7 @@ export default function HostingContextProvider(props) {
     fetchHostings()
   }, [])
 
-  const addHosting = async (hosting) => {
+  const addHosting = async hosting => {
     let res = await fetch('/rest/hostings', {
       method: 'POST',
       headers: { "content-type": "application/json" },
@@ -24,14 +24,16 @@ export default function HostingContextProvider(props) {
     })
     res = await res.json()
     hosting.id = res.id
-    let newHostings = [...hostings, ...hosting]
+    let newHostings = [...hostings, hosting]
     setHostings(newHostings)
   }
+
+  console.log("context hostings: ", hostings)
 
   const values = {
     hostings,
     addHosting,
-    fetchHostings
+    // fetchHostings
   }
 
   return (

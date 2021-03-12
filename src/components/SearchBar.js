@@ -9,12 +9,18 @@ export default function SearchBar() {
 
   const history = useHistory()
   const goToSearchPage = () => {
-    const usp = new URLSearchParams()
-    usp.set('location', location)
-    usp.set('datefrom', (`${startDate.getDay()}` + `${startDate.getDate()}` + `${startDate.getFullYear()}`))
-    usp.set('dateto', (`${endDate.getDay()}` + `${endDate.getDate()}` + `${endDate.getFullYear()}`))
-    usp.set('guests', guests)
-    history.push('/search/' + usp.toString())
+
+
+
+    const urlSearch = [{
+      location: `${location}`,
+      startDate: (`${startDate.getDay()}` + `${startDate.getDate()}` + `${startDate.getFullYear()}`),
+      endDate: (`${endDate.getDay()}` + `${endDate.getDate()}` + `${endDate.getFullYear()}`),
+      guests: `${guests}`,
+    }]
+
+    localStorage.setItem("search", `${JSON.stringify(urlSearch)}`);
+    history.push('/search/')
   }
 
   const [location, setLocation] = useState('')
