@@ -10,8 +10,6 @@ export default function SearchBar() {
   const history = useHistory()
   const goToSearchPage = () => {
 
-
-
     const urlSearch = [{
       location: `${location}`,
       startDate: (`${startDate.getDay()}` + `${startDate.getDate()}` + `${startDate.getFullYear()}`),

@@ -7,9 +7,14 @@ export default function SearchResultPage() {
   
 
   return (
-    <div>
+    <div style={wrapper}>
       <SearchBar/>
       <ResultList />
     </div>
   );
+}
+
+const wrapper = {
+  margin: '0px auto',
+  width: '95vw'
 }
