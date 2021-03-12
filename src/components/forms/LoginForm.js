@@ -1,10 +1,11 @@
 import Radium from 'radium'
 import { UserContext } from '../../contexts/UserContextProvider'
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import LoginErrorMessage from "../LoginErrorMessage";
 
-function LoginForm() {
+function LoginForm(props) {
+  const { toggleModal } = props
   const { setUser } = useContext(UserContext)
   const history = useHistory()
   const [loginError, setLoginError] = useState(false)
@@ -13,13 +14,14 @@ function LoginForm() {
     e.preventDefault();
     let email = document.getElementById('inputEmail').value.toString().trim()
     let password = document.getElementById("inputPassword").value;
+    console.log(email, password);
     if (email && password) {
       console.log("im here")
       let isLogin = await login(email, password)
-      console.log("jskfjnskj", email, password, isLogin)
       if (isLogin) {
         setLoginError(false)
-        if (window.location.pathname == "/register") {
+        if (window.location.pathname === "/register") {
+          toggleModal()
           history.push("/mypage")
         }
       }
@@ -50,6 +52,7 @@ function LoginForm() {
   };
 
   const toRegister = () => {
+    toggleModal()
     history.push('/register')
   }
 
@@ -95,7 +98,6 @@ function LoginForm() {
               className="btn btn-link"
               style={styles.link}
               onClick={toRegister}
-              data-bs-dismiss="modal"
             >
               Not a member yet?
             </button>

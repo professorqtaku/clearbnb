@@ -1,5 +1,5 @@
-import { useHistory } from "react-router-dom";
 import Nav from "./Nav";
+import LoginModal from "../modals/LoginModal"
 
 
 export default function GuestNav() {
@@ -13,7 +13,7 @@ export default function GuestNav() {
       <div className="mx-auto"></div>
       <ul className="navbar-nav">
         <Nav content="Become member" value="register" />
-        <Nav content="Login" toggle="modal" targetId="#loginModal"/>
+        <LoginModal buttonLabel="knapp"/>
       </ul>
     </div>
   );
