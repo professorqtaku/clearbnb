@@ -1,6 +1,7 @@
 import { useHistory } from 'react-router-dom'
+import Radium from 'radium'
 
-export default function Nav(props) {
+function Nav(props) {
   const history = useHistory();
 
   const content = props.content;
@@ -19,7 +20,8 @@ export default function Nav(props) {
     }
   };
 
-
+  
+  
   return (
     <li className="nav-item nav-link">
       <button
@@ -29,12 +31,13 @@ export default function Nav(props) {
         onClick={onclick}
         data-bs-toggle={toggle}
         data-bs-target={targetId}
-      >
+        >
         <span style={{color:textColor}}>{content}</span>
       </button>
     </li>
   );
 }
+export default Radium(Nav)
 
 const styles = {
   button: {

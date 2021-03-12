@@ -3,9 +3,8 @@ import CityList from '../components/CityList'
 
 export default function HomePage() {
   const history = useHistory()
-  const goTo = (e) => {
-    history.push(`/hosting/${e.target.value}`)
-  }
+
+  
 
   return (
     <div>
