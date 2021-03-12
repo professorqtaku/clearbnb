@@ -1,13 +1,8 @@
 import { useHistory } from "react-router-dom";
-import Radium from 'radium'
+import Nav from "./Nav";
 
 
 export default function GuestNav() {
-    const history = useHistory();
-
-  const goTo = (e) => {
-    history.push("/" + e.target.value);
-  };
   
   return (
     <div
@@ -17,26 +12,8 @@ export default function GuestNav() {
     >
       <div className="mx-auto"></div>
       <ul className="navbar-nav">
-        <li className="nav-item nav-link">
-          <button
-            className="btn btn-sm"
-            onClick={goTo}
-            value="register"
-            style={styles.button}
-          >
-            Become member
-          </button>
-        </li>
-        <li className="nav-item nav-link">
-          <button
-            className="btn btn-sm"
-            onClick={goTo}
-            value="login"
-            style={styles.button}
-          >
-            Login
-          </button>
-        </li>
+        <Nav content="Become member" value="register" />
+        <Nav content="Login" value="login"/>
       </ul>
     </div>
   );

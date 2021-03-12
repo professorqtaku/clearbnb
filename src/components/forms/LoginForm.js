@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 import LoginErrorMessage from "../LoginErrorMessage";
 
 function LoginForm() {
-  const { login } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
   const history = useHistory()
   const [ loginError, setLoginError ] = useState(false)
 
@@ -22,6 +22,28 @@ function LoginForm() {
       setLoginError(true)
     }
   }
+
+  const login = async (email, password) => {
+    let userInput = {
+      email: email,
+      password: password,
+    };
+
+    let res = await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(userInput),
+    });
+    res = await res.json();
+    if (!res.error) {
+      setUser(res);
+      return true;
+    }
+    return false;
+  };
 
   const toRegister = () => {
     history.push('/register')

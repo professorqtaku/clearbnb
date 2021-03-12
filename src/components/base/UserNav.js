@@ -1,19 +1,20 @@
 import { useHistory } from "react-router-dom";
 import { useContext } from "react"
 import { UserContext } from "../../contexts/UserContextProvider"
-import Radium from 'radium'
+import Nav from './Nav'
 
 export default function UserNav(props) {
   const history = useHistory();
-  const { user, logout } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
-  const goTo = (e) => {
-    history.push("/" + e.target.value);
-  };
-  
-  const loggingOut = () => {
-    let isLoggedOut = logout()
-    if (isLoggedOut) {
+
+  const logout = async () => {
+    let res = await fetch("/api/login", {
+      method: "DELETE",
+    });
+    res = await res.json();
+    if (res.success) {
+      setUser(null);
       history.push("/");
     }
   }
@@ -26,29 +27,8 @@ export default function UserNav(props) {
     >
       <div className="mx-auto"></div>
       <ul className="navbar-nav">
-        <li className="nav-item nav-link">
-          <button
-            className="btn btn-sm"
-            onClick={goTo}
-            value="mypage"
-            style={styles.button}
-          >
-            <span className="">
-              {user.firstName}
-              {/* <span className="material-icons" style={styles.icon}>person</span> */}
-            </span>
-          </button>
-        </li>
-        <li className="nav-item nav-link">
-          <button
-            className="btn btn-sm"
-            onClick={loggingOut}
-            value="logout"
-            style={styles.button}
-          >
-            Logout
-          </button>
-        </li>
+        <Nav content={ user.firstName } value="mypage"/>
+        <Nav content="Logout" onClick={logout} value="logout"/>
       </ul>
     </div>
   );

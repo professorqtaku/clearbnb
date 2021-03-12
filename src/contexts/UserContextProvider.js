@@ -23,46 +23,13 @@ export default function UserContextProvider(props) {
     }, []);
    
     useEffect(() => {
-      console.log(user);
+      console.log(user !== null);
     }, [user]);
-  
-  const login = async (email, password) => {
-    let userInput = {
-      email: email,
-      password: password
-    }
 
-    let res = await fetch("/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"  },
-      body: JSON.stringify(userInput),
-    })
-    res = await res.json()
-    if(!res.error){
-      setUser(res)
-      return true
-    }
-    return false
-  }
-
-  const logout = async () => {
-    let res = await fetch('/api/login', {
-      method: "DELETE"
-    })
-    res = await res.json()
-    if (res.success) {
-      setUser(null)
-      return true
-    }
-    return false
-  }
   
   const values = {
     user,
-    login,
-    logout
+    setUser
   }
   
   return (
