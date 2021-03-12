@@ -21,8 +21,8 @@ export default function UserNav(props) {
     }
   }
 
-  const showIcon = () => {
-    if(width > 770)
+  const showIcon = (innerWidth) => {
+    if(window.innerWidth > 770 && innerWidth > 770 )
     return (
       <Nav
         content={<span className="material-icons">person</span>}
@@ -32,6 +32,11 @@ export default function UserNav(props) {
     );
   }
 
+  const colorText = () => {
+    if (width < 770)
+      return "var(--green)"
+  };
+
   return (
     <div
       className="collapse navbar-collapse"
@@ -40,8 +45,8 @@ export default function UserNav(props) {
     >
       <div className="mx-auto"></div>
       <ul className="navbar-nav">
-        { showIcon() }
-        <Nav content={ user.firstName } value="mypage"/>
+        { showIcon(width) }
+        <Nav content={user.firstName} value="mypage" textColor={ colorText }/>
         <Nav content="Logout" onClick={logout} value="logout"/>
       </ul>
     </div>
