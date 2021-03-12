@@ -1,7 +1,7 @@
 const models = require('../models.js')
 const bcrypt = require('bcrypt')
 
-module.exports = (app) => { 
+module.exports = (app) => {
   
   app.post('/api/login', async (req, res) => {
     if (req.session.user) {
@@ -12,12 +12,11 @@ module.exports = (app) => {
     let user = req.body
     let userExist = await models['users'].findOne({ email: user.email })
     if (!userExist) {
-      res.send('Bad credentials')
+      res.json({ error: 'Bad credentials' })
       return
     }
     
     const match = await checkPassword(user.password, userExist.password)
-    console.log(match);
     if (match) { 
       req.session.user = userExist;
       userExist.password = ''

@@ -14,7 +14,9 @@ function LoginForm() {
     let email = document.getElementById('inputEmail').value.toString().trim()
     let password = document.getElementById("inputPassword").value;
     if (email && password) {
+      console.log("im here")
       let isLogin = await login(email, password)
+      console.log("jskfjnskj", email, password, isLogin)
       if (isLogin) {
         setLoginError(false)
         if (window.location.pathname == "/register") {
@@ -57,7 +59,7 @@ function LoginForm() {
         <div className="text-center">
           <form onSubmit={submitLogin}>
             <div className="mb-3">
-              <label for="inputEmail" className="form-label">
+              <label htmlFor="inputEmail" className="form-label">
                 Email address
               </label>
               <input
@@ -70,7 +72,7 @@ function LoginForm() {
               />
             </div>
             <div className="mb-3">
-              <label for="inputPassword" className="form-label">
+              <label htmlFor="inputPassword" className="form-label">
                 Password
               </label>
               <input

@@ -1,4 +1,4 @@
-export default function LoginModal(props) {
+export default function Modal(props) {
   const content = props.content
   const title = props.title
   const modalId = props.modalId
@@ -6,7 +6,7 @@ export default function LoginModal(props) {
     <div
       className="modal fade"
       id={modalId}
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="loginModalLabel"
       aria-hidden="true"
     >
