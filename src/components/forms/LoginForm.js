@@ -17,7 +17,9 @@ function LoginForm() {
       let isLogin = await login(email, password)
       if (isLogin) {
         setLoginError(false)
-        history.push('/mypage')
+        if (window.location.pathname == "/register") {
+          history.push("/mypage")
+        }
       }
       setLoginError(true)
     }
