@@ -27,7 +27,7 @@ export default function UserNav(props) {
     >
       <div className="mx-auto"></div>
       <ul className="navbar-nav">
-        <Nav content={ user.firstName } value="mypage"/>
+        <Nav content={ user.firstName } value="mypage" textColor="var(--green)"/>
         <Nav content="Logout" onClick={logout} value="logout"/>
       </ul>
     </div>

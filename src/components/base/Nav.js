@@ -6,6 +6,7 @@ export default function Nav(props) {
   const content = props.content;
   const value = props.value;
   const onClick = props.onClick;
+  const textColor = props.textColor
 
   const onclick = (e) => {
     if (!onClick) {
@@ -16,6 +17,7 @@ export default function Nav(props) {
     }
   };
 
+
   return (
     <li className="nav-item nav-link">
       <button
@@ -24,7 +26,7 @@ export default function Nav(props) {
         style={styles.button}
         onClick={onclick}
       >
-        <span className="">{content}</span>
+        <span style={{color:textColor}}>{content}</span>
       </button>
     </li>
   );
