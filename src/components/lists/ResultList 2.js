@@ -15,9 +15,8 @@ export default function ResultList() {
 
   const renderResults = (hostings) => {
 
-    const search = JSON.parse(localStorage.getItem("search"));
-    const allFilteredList = hostings.filter((hosting) => hosting.address.city.includes(search[0].location));
-    // const allFilteredList = filterCityList.filter((hosting) => hosting.guestAmount.includes(search[0].guests.toString()))
+    const search = JSON.parse(localStorage.getItem("search"))
+    const filteredList = hostings.filter((hosting) => hosting.address.city.includes(search[0].location));
 
     const card = hostingItem => (
       <div style={cardStyle}>
@@ -46,9 +45,9 @@ export default function ResultList() {
     )
 
     return (
-      <div>
-        <div style={list} >
-          {allFilteredList.map(hostingItem => card(hostingItem))}
+      <div style={list}>
+        <div>
+          {filteredList.map(hostingItem => card(hostingItem))}
         </div>
       </div>
     )
@@ -63,8 +62,6 @@ export default function ResultList() {
 
 
 const list = {
-  marginTop: '5vw',
-  marginBottom: '5vw',
   display: 'grid',
   gridTemplateColumns: '1fr',
   gridTemplateRows: '1fr',
@@ -75,8 +72,7 @@ const list = {
 const cardWrapper = {
   display: 'grid',
   gridTemplateColumns: '1fr 1fr',
-  padding: '2px',
-  gridGap: '2vw'
+  padding: '2px'
 }
 const cardStyle = {
 
