@@ -52,8 +52,8 @@ export default function HostingDetailPage(props) {
   };
 
   const loading = (
-    <div class="spinner-border" role="status">
-      <span class="sr-only">Loading...</span>
+    <div className="spinner-border" role="status">
+      <span className="sr-only">Loading...</span>
     </div>
   );
   return <div className="container">{hosting ? defaultView(hosting) : loading}</div>;

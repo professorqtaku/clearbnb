@@ -14,6 +14,7 @@ export default function HostingContextProvider(props) {
 
   useEffect(() => {
     fetchHostings()
+    console.log(hostings);
   }, [])
 
   const addHosting = async hosting => {
