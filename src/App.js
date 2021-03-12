@@ -6,6 +6,8 @@ import HomePage from './pages/HomePage'
 import HostingDetailPage from './pages/HostingDetailPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import Modal from './components/base/Modal'
+import LoginForm from "./components/forms/LoginForm";
 import Navbar from './components/base/Navbar'
 import Footer from './components/base/Footer'
 import Radium, { StyleRoot } from 'radium'
@@ -23,9 +25,10 @@ function App() {
       </header>
 
       <main>
+                <Modal content={<LoginForm />} title="Login" modalId="loginModal" />
           <Switch>
             <Route exact path="/" component={ HomePage }/>
-            <Route exact path="/login" component={ LoginPage }/>
+            {/* <Route exact path="/login" component={ LoginPage }/> */}
             <Route exact path="/register" component={RegisterPage} />
             <Route exact path="/hosting/:hostingId" component={HostingDetailPage} />
           </Switch>

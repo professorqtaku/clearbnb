@@ -5,9 +5,9 @@ import { useHistory } from 'react-router-dom'
 import LoginErrorMessage from "../LoginErrorMessage";
 
 function LoginForm() {
-  const { user, setUser } = useContext(UserContext)
+  const { setUser } = useContext(UserContext)
   const history = useHistory()
-  const [ loginError, setLoginError ] = useState(false)
+  const [loginError, setLoginError] = useState(false)
 
   const submitLogin = async (e) => {
     e.preventDefault();
@@ -80,13 +80,19 @@ function LoginForm() {
                 required
               />
             </div>
-            <LoginErrorMessage loginError={ loginError }/>
+            <LoginErrorMessage loginError={loginError} />
             <button type="submit" style={styles.submit}>
               Log in
             </button>
           </form>
           <div>
-            <button type="button" className="btn btn-link" style={styles.link} onClick={toRegister}>
+            <button
+              type="button"
+              className="btn btn-link"
+              style={styles.link}
+              onClick={toRegister}
+              data-bs-dismiss="modal"
+            >
               Not a member yet?
             </button>
           </div>
@@ -103,7 +109,6 @@ const styles = {
   gridContainer: {
     width: "90%",
     maxWidth: "400px",
-    marginTop: "100px",
     display: "grid",
     border: "1px solid grey",
     borderRadius: "20px",

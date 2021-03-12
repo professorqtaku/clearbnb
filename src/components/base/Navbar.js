@@ -12,7 +12,7 @@ export default function Navbar(props) {
     history.push("/" + e.target.value);
   }
 
-  const guestNav = () => {
+  const nav = () => {
     if(user)
     return (
       <UserNav />
@@ -43,7 +43,7 @@ export default function Navbar(props) {
             </span>
           </button>
 
-          { guestNav() }
+          { nav() }
         </div>
       </nav>
     </div>

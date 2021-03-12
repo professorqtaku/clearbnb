@@ -7,12 +7,14 @@ export default function Nav(props) {
   const value = props.value;
   const onClick = props.onClick;
   const textColor = props.textColor
+  const toggle = props.toggle
+  const targetId = props.targetId
 
   const onclick = (e) => {
-    if (!onClick) {
+    if (!onClick && value) {
       history.push("/" + value);
     }
-    else {
+    else if (onClick){
       onClick()
     }
   };
@@ -25,6 +27,8 @@ export default function Nav(props) {
         value={value}
         style={styles.button}
         onClick={onclick}
+        data-bs-toggle={toggle}
+        data-bs-target={targetId}
       >
         <span style={{color:textColor}}>{content}</span>
       </button>

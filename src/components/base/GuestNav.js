@@ -13,7 +13,7 @@ export default function GuestNav() {
       <div className="mx-auto"></div>
       <ul className="navbar-nav">
         <Nav content="Become member" value="register" />
-        <Nav content="Login" value="login"/>
+        <Nav content="Login" toggle="modal" targetId="#loginModal"/>
       </ul>
     </div>
   );
