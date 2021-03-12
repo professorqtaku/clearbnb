@@ -21,8 +21,9 @@ const styles = {
     paddingTop: '20px',
     paddingBottom: '20px',
     fontSize: '2em',
-    marginLeft: '30%',
-    marginRight: '30%',
+    marginLeft: 'min(200px, 20%)',
+    marginRight: 'min(200px, 20%)',
+    minWidth: '280px',
     borderRadius: '50px',
     boxShadow: '2px 3px 5px grey',
   }
