@@ -1,5 +1,6 @@
 import { useParams, withRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
+import BookingForm from '../components/forms/BookingForm'
 
 export default function HostingDetailPage(props) {
   const { hostingId } = useParams();
@@ -47,6 +48,7 @@ export default function HostingDetailPage(props) {
         <div className="row">
           <p>{hosting.description}</p>
         </div>
+        <BookingForm />
       </div>
     );
   };
