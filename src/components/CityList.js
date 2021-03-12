@@ -1,4 +1,3 @@
-import imageBerlin from "../assets/img/berlin.jfif";
 import CityCard from "./cards/CityCard"
 import Radium from 'radium'
 
@@ -6,7 +5,7 @@ function CityList(props) {
 
   return (
     <div className="container" style={styles}>
-      {cities.map(c => <CityCard city={ c }/>)}
+      {cities.map(c => <CityCard key={c.name} city={ c }/>)}
     </div>
   );
 }

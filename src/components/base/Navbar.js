@@ -1,10 +1,24 @@
 import { Link, useHistory } from "react-router-dom";
-export default function Navbar() {
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContextProvider";
+import GuestNav from './GuestNav'
+import UserNav from './UserNav'
+
+export default function Navbar(props) {
+  const { user } = useContext(UserContext);
   const history = useHistory();
 
-  function goTo(e) {
+  const goTo = (e) => {
     history.push("/" + e.target.value);
   }
+
+  const nav = () => {
+    if(user)
+    return (
+      <UserNav />
+      )
+    return <GuestNav />
+}
 
   return (
     <div>
@@ -29,43 +43,7 @@ export default function Navbar() {
             </span>
           </button>
 
-          <div className="collapse navbar-collapse" id="navbarContent" style={styles.content}>
-            <div className="mx-auto"></div>
-            <ul className="navbar-nav">
-              <li className="nav-item nav-link">
-                <button
-                  className="btn btn-sm"
-                  onClick={goTo}
-                  value="register"
-                  style={styles.button}
-                >
-                  Become member
-                  </button>
-              </li>
-              <li className="nav-item nav-link">
-                <button
-                  className="btn btn-sm"
-                  onClick={goTo}
-                  value="login"
-                  style={styles.button}
-                >
-                  Login
-                  </button>
-              </li>
-              <li className="nav-item nav-link">
-                <button
-                  className="btn btn-sm"
-                  onClick={goTo}
-                  value="myPage"
-                  style={styles.button}
-                >
-                  My Page
-                  </button>
-              </li>
-            </ul>
-          </div>
-
-
+          { nav() }
         </div>
       </nav>
     </div>
@@ -79,15 +57,5 @@ const styles = {
   },
   icon: {
     color: "white",
-  },
-  button: {
-    color: "white",
-    ":focus": {
-      outline: "none !important",
-      boxShadow: "none",
-    },
-  },
-  content: {
-    transition: "300ms",
-  },
+  }
 };
