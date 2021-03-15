@@ -2,9 +2,10 @@ import{ useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Form, FormGroup, Label } from 'reactstrap'
+import { Form, FormGroup, Label, Input } from 'reactstrap'
 import { UserContext } from '../../contexts/UserContextProvider'
 import LoginButton from '../buttons/LoginButton'
+import { addDays } from 'date-fns'
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
@@ -15,7 +16,8 @@ export default function BookingForm(props) {
   const { user } = useContext(UserContext)
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [guests, setGuests] = useState("");
+  const [guests, setGuests] = useState();
+  const [bookedDates, setBookedDates] = useState();
 
   const bookingSubmit = (e) => {
     e.preventDefault()
@@ -42,7 +44,9 @@ export default function BookingForm(props) {
           <Label for="date">From</Label>
           <DatePicker
             selected={startDate}
-            onChange={(date) => setStartDate(date)}
+            onChange={(date) => {
+              setStartDate(date);
+            }}
             dateFormat="yyyy-MM-dd"
             minDate={new Date()}
           />
@@ -53,16 +57,27 @@ export default function BookingForm(props) {
             selected={endDate}
             onChange={(date) => setEndDate(date)}
             dateFormat="yyyy-MM-dd"
+            startDate={startDate}
+            minDate={ addDays(startDate,1) }
           />
         </div>
-        <div className="form-group col-6">
-          <input
+        <div className="form-group col-12 col-md-8">
+          <Label>Guests</Label>
+          <Input
             style={styles.input}
-            onChange={(event) => setGuests(event.target.value)}
-            placeholder="Guests"
+            type="number"
+            placeholder={1}
+            min={1}
+            onChange={(e) => {
+              e.target.value > hosting.maxGuests
+                ? setGuests(hosting.maxGuests)
+                : setGuests(e.target.value);
+            }}
           />
         </div>
-        <div className="col-6">{bookButton()}</div>
+        <div className="col-8 col-md-4 align-self-end" style={styles.button}>
+          {bookButton()}
+        </div>
       </form>
     </div>
   );
@@ -70,12 +85,14 @@ export default function BookingForm(props) {
 
 const styles = {
   input: {
-    width: "100%",
   },
   container: {
     backgroundColor: 'var(--lightgrey)',
     maxWidth: '600px',
     padding: '2vw',
     borderRadius: '5px'
+  },
+  button:{
+    
   }
 };

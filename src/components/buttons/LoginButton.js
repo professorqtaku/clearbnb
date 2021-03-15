@@ -12,7 +12,7 @@ const ModalExample = (props) => {
 
   return (
     <div>
-      <button className="btn" style={ styles.button} onClick={toggle}>Log in</button>
+      <button className="btn" style={styles.button} onClick={toggle}>Log in</button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <div className="modal-header" toggle={toggle}>
           <h5 className="modal-title">Log in</h5>
