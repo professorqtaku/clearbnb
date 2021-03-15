@@ -16,7 +16,7 @@ export default function HostingDetailPage(props) {
     setHosting(res);
   };
 
-  const checkUser = (hosting, user) => {
+  const userView = (hosting, user) => {
     if (user) {
       if (hosting.host._id === user._id) {
         return hostView(hosting);
@@ -68,7 +68,7 @@ export default function HostingDetailPage(props) {
         <div className="row">
           <p>{hosting.description}</p>
         </div>
-        { checkUser(hosting, user) }
+        { userView(hosting, user) }
       </div>
     );
   };

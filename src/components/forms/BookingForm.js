@@ -23,7 +23,8 @@ export default function BookingForm(props) {
 
   const bookingSubmit = (e) => {
     e.preventDefault()
-    if (!user) {
+    if (!user || totalPrice <= 0) {
+      console.log("No user/date invalid");
       return
     }
   }
@@ -65,6 +66,14 @@ export default function BookingForm(props) {
     let total = days * price;
     setTotalPrice(total);
   };
+
+  const changeGuestNumber = e => {
+    console.log(e.target.value);
+    if (e.target.value > hosting.guestAmount) {
+      setGuests(hosting.guestAmount)
+      e.target.value = hosting.guestAmount
+    } else { setGuests(e.target.value) }      
+  }
   
   useEffect(() => {
 
@@ -108,11 +117,7 @@ export default function BookingForm(props) {
             placeholder="Guests"
             min={1}
             max={hosting.guestAmount}
-            onChange={(e) => {
-              e.target.value > hosting.guestAmount
-                ? setGuests(hosting.guestAmount)
-                : setGuests(e.target.value);
-            }}
+            onChange={ changeGuestNumber }
           />
         </div>
         <div className="col-8 col-md-4 align-self-end">
