@@ -2,8 +2,9 @@ import { useContext, useEffect, useState } from 'react'
 import { HostingContext } from '../contexts/HostingContextProvider'
 import { UserContext } from '../contexts/UserContextProvider'
 import MyHostingCard from '../components/cards/MyHostingCard'
+import Radium from 'radium'
 
-export default function MyHostingPage() {
+const MyHostingPage = () => {
   const { hostings } = useContext(HostingContext)
   const {user} = useContext(UserContext)
   const [ myHostings, setMyHostings ] = useState()
@@ -24,17 +25,32 @@ export default function MyHostingPage() {
 
   const showHostingCards = (hostings) => {
     return (
-      <div className="container">
-        <p>Cards</p>
+      <div className="container" style={styles.cardlist}>
          {hostings.map(h => <MyHostingCard key={ h._id } hosting={ h }/>)} 
       </div>
     )
   }
 
   return (
-    <div className="container">
+    <div className="container" style={styles.page}>
       <h5 className="">My hostings</h5>
       {myHostings && showHostingCards(myHostings) }
     </div>
   )
 }
+
+export default Radium(MyHostingPage)
+
+const styles = {
+  page: {
+    backgroundColor: "var(--lightgrey",
+  },
+  cardlist: {
+    display: "grid",
+    gridTemplateColumns: "1fr",
+    '@media (min-width: 1000px)': {
+      gridTemplateColumns: "repeat(2, 1fr)",
+      gridGap: "2vw"
+  },
+  }
+};

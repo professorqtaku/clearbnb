@@ -1,6 +1,7 @@
 import { useHistory } from 'react-router-dom'
+import Radium from 'radium'
 
-export default function MyHostingCard(props) {
+const MyHostingCard = (props) => {
   const hosting = props.hosting;
   const history = useHistory()
 
@@ -9,7 +10,7 @@ export default function MyHostingCard(props) {
   }
 
   return (
-    <div class="card mb-3" style={{ maxWidth: "540px" }} onClick={goTo}>
+    <div class="card mb-3" style={styles.card} onClick={goTo}>
       <div class="row g-0">
         <div class="col-md-4">
           <img src={hosting.galleries[0]} alt="..." style={styles.image} />
@@ -32,12 +33,30 @@ export default function MyHostingCard(props) {
   );
 }
 
+export default Radium(MyHostingCard)
 
 
 const styles = {
   image: {
     width: "100%",
-    objectFit: 'cover',
-    height: "100%"
+    objectFit: "cover",
+    height: "100%",
+    borderRadius: "10px 0 0 10px",
+    "@media (max-width: 773px)": {
+      height: "20vh",
+      borderRadius: "10px 10px 0 0",
+    },
+  },
+  card: {
+    maxWidth: "540px",
+    transition: "200ms",
+    margin: "0 auto",
+    border: "1px solid var(--darkgrey)",
+    borderRadius: "10px",
+    ":hover": {
+      opacity: "0.8",
+      cursor: "pointer",
+      transform: "scale(1.03)",
+    },
   },
 };
