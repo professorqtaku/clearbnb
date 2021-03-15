@@ -4,29 +4,29 @@ export default function RegisterForm() {
       <div style={styles.gridContainer} className="container">
         <div className="text-center">
           <div className="mb-3">
-            <label for="firstName" className="form-label">First Name</label>
+            <label htmlFor="firstName" className="form-label">First Name</label>
             <input type="firstName" className="form-control" id="firstNameInput" placeholder="First Name"></input>
           </div>
           <div className="mb-3">
-            <label for="lastName" className="form-label">Last Name</label>
+            <label htmlFor="lastName" className="form-label">Last Name</label>
             <input type="lastName" className="form-control" id="lastNameInput" placeholder="Last Name"></input>
           </div>
           <div className="mb-3">
-            <label for="email" className="form-label">Email Address</label>
+            <label htmlFor="email" className="form-label">Email Address</label>
             <input type="email" className="form-control" id="emailInput" placeholder="Email Address"></input>
           </div>
           <div className="mb-3">
-            <label for="password" className="form-label">Password</label>
+            <label htmlFor="password" className="form-label">Password</label>
             <input type="password" className="form-control" id="passwordInput" placeholder="Password"></input>
           </div>
           <div className="mb-3">
-            <label for="password" className="form-label">Confirm Password</label>
+            <label htmlFor="password" className="form-label">Confirm Password</label>
             <input type="password" className="form-control" id="confirmPasswordInput" placeholder="Confirm Password"></input>
           </div>
           <button type="submit" style={styles.submit}>Register</button>
           </div>
           <div>
-          <button type="button" class="btn btn-link"> Already have an account?</button>
+          <button type="button" style={styles.link} class="btn btn-link"> Already have an account?</button>
           </div>
       </div>
     </div>
@@ -62,8 +62,13 @@ const styles = {
     paddingBottom: '5px',
     backgroundColor: '#FF646F',
     borderRadius: '20px',
-    border: '1px solid grey',
+    
   },
+
+  link: {
+    margin: '0 auto',
+  },
+
   input: {
     width: '100%'
   },
