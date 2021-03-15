@@ -1,7 +1,6 @@
 export default function RegisterForm() {
   return (
     <div>
-      <h1>Register</h1>
       <div style={styles.gridContainer} className="container">
         <div className="text-center">
           <div className="mb-3">
@@ -36,7 +35,9 @@ export default function RegisterForm() {
 
 const styles = {
   gridContainer: {
-    width: '50%',
+    width: "90%",
+    maxWidth: "400px",
+    minWidth: "280px",
     marginTop: '100px',
     backgroundColor: 'rgba(255, 255, 255, 0.73)',
     display: 'grid',
