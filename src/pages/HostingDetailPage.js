@@ -1,10 +1,14 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import BookingForm from '../components/forms/BookingForm'
+import { UserContext } from '../contexts/UserContextProvider'
+import DeleteButton from '../components/buttons/DeleteButton'
 
 export default function HostingDetailPage(props) {
   const { hostingId } = useParams();
   const [hosting, setHosting] = useState(null);
+  const { user } = useContext(UserContext)
+
 
   const fetchHosting = async (hostingId) => {
     let res = await fetch(`/rest/hostings/${hostingId}`);
@@ -18,10 +22,10 @@ export default function HostingDetailPage(props) {
 
   useEffect(() => {
     console.log("Hosting", hosting);
+    hosting && console.log(hosting.host);
   }, [hosting]);
 
   const defaultView = (hosting) => {
-    console.log(hosting._id);
     return (
       <div>
         <h2>{hosting.title}</h2>
@@ -54,17 +58,28 @@ export default function HostingDetailPage(props) {
         <div className="row">
           <p>{hosting.description}</p>
         </div>
-        <BookingForm hosting={ hosting }/>
+        { hosting.host.id === user.id ? hostView(hosting) : <BookingForm hosting={hosting} />}
+
       </div>
     );
   };
+
+  const hostView = (hosting) => {
+    return (
+      <div style={styles.delete}>
+        <DeleteButton hosting={hosting}/>
+      </div>
+    )
+  }
 
   const loading = (
     <div className="spinner-border" role="status">
       <span className="sr-only">Loading...</span>
     </div>
   );
-  return <div className="container">{hosting ? defaultView(hosting) : loading}</div>;
+  return <div className="container">
+    {hosting ? defaultView(hosting) : loading}
+  </div>;
 }
 
 const styles = {
@@ -78,4 +93,8 @@ const styles = {
     margin: "0",
     border: "1px solid black",
   },
+  delete: {
+    margin: "0 auto",
+    width: "50%"
+  }
 };
