@@ -41,7 +41,7 @@ export default function BookingForm(props) {
   const bookButton = () => {
     if (user) {
       return (
-        <button className="btn" type="submit" onClick="book">Book</button>
+        <button className="btn" type="submit" onClick="book" style={styles.button }>Book</button>
       )
     }
       return (
@@ -60,11 +60,18 @@ export default function BookingForm(props) {
     let diff = end - start;
     setTotalDays(Math.round(diff / 86400000));
   };
+
+  const countPrice = (days, price) => {
+    let total = days * price;
+    setTotalPrice(total);
+  };
   
   useEffect(() => {
-      
-      countDays(startDate, endDate)
-    }, [startDate, endDate])
+
+    setTotalPrice(hosting.price);
+    countDays(startDate, endDate)
+    countPrice(totalDays, hosting.price)
+    }, [startDate, endDate, totalDays, guests])
   
   return (
     <div className="container" style={styles.container}>
@@ -94,36 +101,49 @@ export default function BookingForm(props) {
         </div>
         <div className="form-group col-12 col-md-8">
           <Label>Guests</Label>
-          <Input
+          <input
+            className="form-control"
             style={styles.input}
             type="number"
-            placeholder={1}
+            placeholder="Guests"
             min={1}
+            max={hosting.guestAmount}
             onChange={(e) => {
-              e.target.value > hosting.maxGuests
-                ? setGuests(hosting.maxGuests)
+              e.target.value > hosting.guestAmount
+                ? setGuests(hosting.guestAmount)
                 : setGuests(e.target.value);
             }}
           />
         </div>
-        <div className="col-8 col-md-4 align-self-end" style={styles.button}>
+        <div className="col-8 col-md-4 align-self-end">
           {bookButton()}
         </div>
       </form>
+      <hr />
+      <div>
+        <span>Total price: {totalPrice}</span>
+      </div>
     </div>
   );
 }
 
 const styles = {
-  input: {
-  },
+  input: {},
   container: {
-    backgroundColor: 'var(--lightgrey)',
-    maxWidth: '600px',
-    padding: '2vw',
-    borderRadius: '5px'
+    backgroundColor: "var(--lightgrey)",
+    maxWidth: "600px",
+    padding: "2vw",
+    borderRadius: "5px",
   },
-  button:{
-    
-  }
+  button: {
+    backgroundColor: "var(--pink)",
+    textAlign: 'center',
+    color: "white",
+    width: '100%',
+    fontWeight: "bold",
+    borderRadius: "50px",
+    ":focus": {
+      border: "none !important",
+    }
+  },
 };
