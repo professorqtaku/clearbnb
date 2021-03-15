@@ -7,7 +7,7 @@ export default function Footer() {
           <button
           className="btn btn-sm"
           style={styles.button}>Kontakta oss</button>
-        <center><p>Copyright 2021 | Group 5 TH Lund</p></center>
+        <center><p style={styles.text}>Copyright 2021 | Group 5 TH Lund</p></center>
       </div>
     )
   }
@@ -25,4 +25,7 @@ export default function Footer() {
         boxShadow: "none",
       }
     },
+    text: {
+      margin: "0"
+    }
   };
