@@ -16,16 +16,26 @@ export default function HostingDetailPage(props) {
     setHosting(res);
   };
 
+  const checkUser = (hosting, user) => {
+    if (user) {
+      if (hosting.host._id === user._id) {
+        return hostView(hosting);
+      }
+    }
+    return <BookingForm hosting={hosting} />;
+  }
+
   useEffect(() => {
     fetchHosting(hostingId);
   }, [hostingId]);
 
   useEffect(() => {
     console.log("Hosting", hosting);
-    hosting && console.log(hosting.host);
-  }, [hosting]);
+    hosting && console.log(hosting.host._id);
+    console.log(user, "userr");
+  }, [hosting, user]);
 
-  const defaultView = (hosting) => {
+  const defaultView = (hosting, user) => {
     return (
       <div>
         <h2>{hosting.title}</h2>
@@ -58,8 +68,7 @@ export default function HostingDetailPage(props) {
         <div className="row">
           <p>{hosting.description}</p>
         </div>
-        { hosting.host.id === user.id ? hostView(hosting) : <BookingForm hosting={hosting} />}
-
+        { checkUser(hosting, user) }
       </div>
     );
   };
@@ -78,7 +87,7 @@ export default function HostingDetailPage(props) {
     </div>
   );
   return <div className="container">
-    {hosting ? defaultView(hosting) : loading}
+    {hosting ? defaultView(hosting, user) : loading}
   </div>;
 }
 
