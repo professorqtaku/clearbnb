@@ -10,8 +10,8 @@ function HostingCard(props) {
       <img src={hosting.galleries[0]} style={styles.image} />
       </div>
       <div className="container">
-        <p style={styles.visitNow}>VISIT NOW</p>
-        <p style={styles.hosting}> {hosting.name}</p>
+        <p style={styles.hostingName}>{hosting.name}</p>
+        <p style={styles.hostingprice}> Price</p>
       </div>
     </div>
   );
@@ -39,10 +39,10 @@ const styles = {
     height: "100%",
   },
   imageContainer: {},
-  city: {
+  hostingprice: {
     fontWeight: "bold",
   },
-  visitNow: {
+  hostingName: {
     padding: '0',
     margin: '0',
     color: "var(--darkgrey)",
