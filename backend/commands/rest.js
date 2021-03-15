@@ -72,7 +72,6 @@ module.exports = (app) => {
   })
 
   app.delete('/rest/hostings/:id', async (req, res) => {
-    console.log("delete called");
     let model = models['hostings']
     let hosting = await model.findByIdAndRemove(req.params.id);
     if (hosting) {

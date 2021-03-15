@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
+import { useHistory } from 'react-router-dom'
+import { Modal } from "reactstrap";
 import Radium from "radium";
 
 const DeleteButton = (props) => {
   const hosting = props.hosting
+  const history = useHistory()
 
   const { buttonLabel, className } = props;
 
@@ -11,8 +13,18 @@ const DeleteButton = (props) => {
 
   const toggle = () => setModal(!modal);
 
-  const deleteHosting = () => {
-    console.log(hosting._id);
+  const deleteHosting = async () => {
+    let res = await fetch('/rest/hostings/' + hosting._id, {
+      method: "DELETE"
+    })
+    res = await res.json()
+    console.log(res);
+    if (res.success) {
+      history.push("/mypage")
+    }
+    else if (res.error) {
+      alert("Delete failed")
+    }
   }
 
   return (

@@ -68,7 +68,6 @@ export default function BookingForm(props) {
   };
 
   const changeGuestNumber = e => {
-    console.log(e.target.value);
     if (e.target.value > hosting.guestAmount) {
       setGuests(hosting.guestAmount)
       e.target.value = hosting.guestAmount
