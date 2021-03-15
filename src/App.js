@@ -6,9 +6,12 @@ import HomePage from './pages/HomePage'
 import MyPage from './pages/MyPage'
 import HostingDetailPage from './pages/HostingDetailPage'
 import RegisterPage from './pages/RegisterPage'
+import MyHostingPage from './pages/MyHostingPage'
+
 import Modal from './components/base/Modal'
 import Navbar from './components/base/Navbar'
 import Footer from './components/base/Footer'
+
 import { StyleRoot } from 'radium'
 
 function App() {
@@ -27,7 +30,8 @@ function App() {
           <Switch>
             <Route exact path="/" component={ HomePage }/>
             <Route exact path="/register" component={RegisterPage} />
-            <Route exact path="/myPage" component={MyPage} />
+            <Route exact path="/mypage" component={MyPage} />
+            <Route exact path="/mypage/hostings" component={MyHostingPage} />
             <Route exact path="/hosting/:hostingId" component={HostingDetailPage} />
           </Switch>
       </main>
