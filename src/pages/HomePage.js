@@ -1,10 +1,7 @@
-import {useHistory} from 'react-router-dom'
 import CityList from '../components/CityList'
 
 export default function HomePage() {
-  const history = useHistory()
 
-  
 
   return (
     <div>

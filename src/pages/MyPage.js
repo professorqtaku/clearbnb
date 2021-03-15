@@ -1,4 +1,3 @@
-import Radium from 'radium'
 export default function MyPage() {
   return (
     <div className="container text-center">
@@ -19,9 +18,6 @@ const styles = {
     border: 'none',
     paddingTop: '20px',
     paddingBottom: '20px',
-    //fontSize: '2em',
-    //marginLeft: 'min(200px, 20%)',
-    //marginRight: 'min(200px, 20%)',
     width: '100%',
     borderRadius: '50px',
     boxShadow: '2px 3px 5px grey',
