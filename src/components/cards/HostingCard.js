@@ -11,7 +11,7 @@ function HostingCard(props) {
       </div>
       <div className="container">
         <p style={styles.visitNow}>VISIT NOW</p>
-        <p style={styles.city}> {city.name}</p>
+        <p style={styles.hosting}> {hosting.name}</p>
       </div>
     </div>
   );
@@ -49,4 +49,4 @@ const styles = {
   },
 };
 
-export default Radium(CityCard)
+export default Radium(HostingCard)
