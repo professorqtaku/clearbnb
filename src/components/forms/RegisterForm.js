@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom'
 import RegisterErrorMessage from "../RegisterErrorMessage";
 
 function RegisterForm(props) {
-  const { toggleModal } = props
   const { setUser } = useContext(UserContext)
   const history = useHistory()
   const [registerError, setRegisterError] = useState(false)
@@ -19,12 +18,10 @@ function RegisterForm(props) {
     let confirmPassword = document.getElementById("confirmPasswordInput").value;
     console.log(email, password);
     if (email && password) {
-      console.log("im here")
       let isRegister = await register(firstName, lastName, email, password, confirmPassword)
       if (isRegister) {
         setRegisterError(false)
         if (window.location.pathname === "/register") {
-          toggleModal()
           history.push("/mypage")
         }
       }
@@ -41,7 +38,7 @@ function RegisterForm(props) {
       confirmPassword,
     };
 
-    let res = await fetch("/api/register", {
+    let res = await fetch("/api/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -50,6 +47,7 @@ function RegisterForm(props) {
       body: JSON.stringify(userInput),
     });
     res = await res.json();
+    console.log ("hejhej");
     if (!res.error) {
       setUser(res);
       return true;
@@ -58,40 +56,42 @@ function RegisterForm(props) {
   };
 
   const toLogin = () => {
-    toggleModal()
+
     history.push('/login')
   }
 
   return (
     <div>
       <div style={styles.gridContainer} className="container">
-         <div className="text-center">
-          <div className="mb-3">
+        <div className="text-center">
+        <form onSubmit={submitRegister}> 
+        <div className="mb-3">
             <label htmlFor="firstName" className="form-label">First Name</label>
-            <input type="firstName" className="form-control" id="firstNameInput" placeholder="First Name"></input>
+            <input type="firstName" className="form-control" id="firstNameInput" placeholder="First Name" required></input>
           </div>
           <div className="mb-3">
               <label htmlFor="lastName" className="form-label">Last Name</label>
-              <input type="lastName" className="form-control" id="lastNameInput" placeholder="Last Name"></input>
+              <input type="lastName" className="form-control" id="lastNameInput" placeholder="Last Name" required></input>
           </div>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">Email Address</label>
-             <input type="email" className="form-control" id="emailInput" placeholder="Email Address"></input>
+             <input type="email" className="form-control" id="emailInput" placeholder="Email Address" required></input>
           </div>
           <div className="mb-3">
             <label htmlFor="password" className="form-label">Password</label>
-            <input type="password" className="form-control" id="passwordInput" placeholder="Password"></input>
+            <input type="password" className="form-control" id="passwordInput" placeholder="Password" required></input>
           </div>
           <div className="mb-3">
             <label htmlFor="password" className="form-label">Confirm Password</label>
-            <input type="password" className="form-control" id="confirmPasswordInput" placeholder="Confirm Password"></input>
+            <input type="password" className="form-control" id="confirmPasswordInput" placeholder="Confirm Password" required></input>
           </div>
           <RegisterErrorMessage registerinError={registerError} />
           <button type="submit" style={styles.submit}>Register</button>
+        </form> 
           </div>
           <div>
-          <button type="button" style={styles.link} class="btn btn-link" onClick={toLogin}> Already have an account?</button>
-          </div>
+          <button type="button" style={styles.link} className="btn btn-link" onClick={toLogin}> Already have an account?</button>
+        </div>
       </div>
     </div>
    )

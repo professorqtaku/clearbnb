@@ -12,22 +12,24 @@ module.exports = (app) => {
     }
     
     req.body = trimObject(req.body)
+    console.log(req.body)
     if (!req.body.password.length) {
       res.send('Password is missing')
       return
     }
-
+    console.log("password accepted");
     if (req.body.password !== req.body.confirmPassword) {
       res.send('Password does not match')
       return
     }
     else delete req.body.confirmPassword
-
+    console.log("password match");
     let hashedPassword = await hashPassword(req.body.password)
 
     let user = new User({ ...req.body, password: hashedPassword })
-
+    console.log(user,"user");
     let userExist = await User.findOne({ email: user.email })
+    console.log(userExist);
     if (userExist) {
       res.send('E-mail already used/is missing')
       return
