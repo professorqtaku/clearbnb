@@ -1,4 +1,4 @@
-import{ useState, useContext } from "react";
+import{ useState, useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -17,12 +17,24 @@ export default function BookingForm(props) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [guests, setGuests] = useState();
+  const [totalPrice, setTotalPrice] = useState();
+  const [totalDays, setTotalDays] = useState(1);
   const [bookedDates, setBookedDates] = useState();
 
   const bookingSubmit = (e) => {
     e.preventDefault()
     if (!user) {
       return
+    }
+  }
+
+  const createBooking = () => {
+    const booking = {
+      client: user,
+      hosting: hosting,
+      timePeriod: [startDate.getTime(), endDate.getTime()],
+      totalPrice: totalPrice,
+      guestAmount: guests
     }
   }
 
@@ -37,15 +49,33 @@ export default function BookingForm(props) {
       );
   }
 
+  const changeStartDate = (date) => {
+    setStartDate(date)
+    if (date >= endDate) {
+      setEndDate(addDays(date,1))
+    }
+  }
+  
+  const countDays = (start, end) => {
+    let diff = end - start;
+    setTotalDays(Math.round(diff / 86400000));
+  };
+  
+  useEffect(() => {
+      
+      countDays(startDate, endDate)
+    }, [startDate, endDate])
+  
   return (
     <div className="container" style={styles.container}>
       <form className="row" onSubmit={bookingSubmit}>
         <div className="form-group col-12 col-md-6">
           <Label for="date">From</Label>
           <DatePicker
+            selectsStart
             selected={startDate}
             onChange={(date) => {
-              setStartDate(date);
+              changeStartDate(date);
             }}
             dateFormat="yyyy-MM-dd"
             minDate={new Date()}
@@ -54,11 +84,12 @@ export default function BookingForm(props) {
         <div className="form-group col-12 col-md-6">
           <Label for="date">To</Label>
           <DatePicker
+            selectsEnd
             selected={endDate}
             onChange={(date) => setEndDate(date)}
             dateFormat="yyyy-MM-dd"
-            startDate={startDate}
-            minDate={ addDays(startDate,1) }
+            startDate={addDays(new Date(), 1)}
+            minDate={addDays(startDate, 1)}
           />
         </div>
         <div className="form-group col-12 col-md-8">
