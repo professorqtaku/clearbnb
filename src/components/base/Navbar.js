@@ -1,4 +1,4 @@
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContextProvider";
 import GuestNav from './GuestNav'
