@@ -12,12 +12,15 @@ function RegisterForm(props) {
 
   const submitRegister = async (e) => {
     e.preventDefault();
-    let email = document.getElementById('inputEmail').value.toString().trim()
-    let password = document.getElementById("inputPassword").value;
+    let firstName = document.getElementById('firstNameInput').value.toString().trim()
+    let lastName = document.getElementById('lastNameInput').value.toString().trim()
+    let email = document.getElementById('emailInput').value.toString().trim()
+    let password = document.getElementById("passwordInput").value;
+    let confirmPassword = document.getElementById("confirmPasswordInput").value;
     console.log(email, password);
     if (email && password) {
       console.log("im here")
-      let isRegister = await register(email, password)
+      let isRegister = await register(firstName, lastName, email, password, confirmPassword)
       if (isRegister) {
         setRegisterError(false)
         if (window.location.pathname === "/register") {
@@ -29,10 +32,13 @@ function RegisterForm(props) {
     }
   }
 
-  const register = async (email, password) => {
+  const register = async (firstName, lastName, email, password,confirmPassword) => {
     let userInput = {
+      firstName: firstName,
+      lastName: lastName,
       email: email,
       password: password,
+      confirmPassword,
     };
 
     let res = await fetch("/api/register", {
