@@ -1,11 +1,8 @@
-import {useHistory} from 'react-router-dom'
 import CityList from '../components/CityList'
 import SearchBar from "../components/SearchBar"
 
 export default function HomePage() {
-  const history = useHistory()
 
-  
 
   return (
     <div className="homePage" style={styles.grid}>

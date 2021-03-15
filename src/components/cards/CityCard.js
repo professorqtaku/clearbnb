@@ -7,7 +7,7 @@ function CityCard(props) {
   return (
     <div className="container" style={styles.container}>
       <div style={styles.imageContainer}>
-        <img src={city.imageUrl} style={styles.image} />
+        <img src={city.imageUrl} alt={city.imageUrl} style={styles.image} />
       </div>
       <div className="container">
         <p style={styles.visitNow}>VISIT NOW</p>

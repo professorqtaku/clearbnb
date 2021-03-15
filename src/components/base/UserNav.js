@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 import { UserContext } from "../../contexts/UserContextProvider"
 import useWindowSize from "../../utils/useWindowSize"
 import Nav from './Nav'
