@@ -4,15 +4,25 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Form, FormGroup, Label } from 'reactstrap'
 import { UserContext } from '../../contexts/UserContextProvider'
+import LoginButton from '../buttons/LoginButton'
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
-export default function BookingForm() {
-  const history = useHistory();
+export default function BookingForm(props) {
+  const hosting = props.hosting
+  const today = new Date();
+  const tomorrow = today.setDate(today.getDate() + 1);
   const { user } = useContext(UserContext)
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [guests, setGuests] = useState("");
+
+  const bookingSubmit = (e) => {
+    e.preventDefault()
+    if (!user) {
+      return
+    }
+  }
 
   const bookButton = () => {
     if (user) {
@@ -21,29 +31,28 @@ export default function BookingForm() {
       )
     }
       return (
-        <button className="btn bg-light" type="submit" onClick="login">
-          Login
-        </button>
+        <LoginButton />
       );
   }
 
   return (
     <div className="container" style={styles.container}>
-      <form className="row">
-        <div className="form-group col-6">
+      <form className="row" onSubmit={bookingSubmit}>
+        <div className="form-group col-12 col-md-6">
           <Label for="date">From</Label>
           <DatePicker
-            style={styles.datePicker}
             selected={startDate}
             onChange={(date) => setStartDate(date)}
+            dateFormat="yyyy-MM-dd"
+            minDate={new Date()}
           />
         </div>
-        <div className="form-group col-6">
+        <div className="form-group col-12 col-md-6">
           <Label for="date">To</Label>
           <DatePicker
-            style={styles.datePicker}
             selected={endDate}
             onChange={(date) => setEndDate(date)}
+            dateFormat="yyyy-MM-dd"
           />
         </div>
         <div className="form-group col-6">
@@ -54,28 +63,19 @@ export default function BookingForm() {
           />
         </div>
         <div className="col-6">{bookButton()}</div>
-        <FormGroup></FormGroup>
       </form>
     </div>
   );
 }
 
 const styles = {
-  gridContainer: {
-    marginTop: "50px",
-    display: "grid",
-    gridTemplateRows: "3fr",
-    gridTemplateColumns: "repeat(2, 1fr)",
-    gridGap: "10px",
-  },
-
   input: {
     width: "100%",
   },
-  datePicker: {
-    width: "100%",
-  },
   container: {
-    backgroundColor: 'var(--lightgrey)'
+    backgroundColor: 'var(--lightgrey)',
+    maxWidth: '600px',
+    padding: '2vw',
+    borderRadius: '5px'
   }
 };

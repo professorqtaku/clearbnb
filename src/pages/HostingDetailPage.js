@@ -54,7 +54,7 @@ export default function HostingDetailPage(props) {
         <div className="row">
           <p>{hosting.description}</p>
         </div>
-        <BookingForm />
+        <BookingForm hosting={ hosting }/>
       </div>
     );
   };
