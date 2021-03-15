@@ -85,7 +85,7 @@ export default function BookingForm(props) {
   return (
     <div className="container" style={styles.container}>
       <form className="row" onSubmit={bookingSubmit}>
-        <div className="form-group col-12 col-md-6">
+        <div className="form-group col-12 col-md-6" style={styles.formGroup}>
           <Label for="date">From</Label>
           <DatePicker
             selectsStart
@@ -97,7 +97,7 @@ export default function BookingForm(props) {
             minDate={new Date()}
           />
         </div>
-        <div className="form-group col-12 col-md-6">
+        <div className="form-group col-12 col-md-6" style={styles.formGroup}>
           <Label for="date">To</Label>
           <DatePicker
             selectsEnd
@@ -108,7 +108,7 @@ export default function BookingForm(props) {
             minDate={addDays(startDate, 1)}
           />
         </div>
-        <div className="form-group col-12 col-md-8">
+        <div className="form-group col-12 col-md-8" style={styles.formGroup}>
           <Label>Guests</Label>
           <input
             className="form-control"
@@ -117,10 +117,10 @@ export default function BookingForm(props) {
             placeholder="Guests"
             min={1}
             max={hosting.guestAmount}
-            onChange={ changeGuestNumber }
+            onChange={changeGuestNumber}
           />
         </div>
-        <div className="col-8 col-md-4 align-self-end">
+        <div className="col-8 col-md-4 align-self-end" style={styles.center}>
           {bookButton()}
         </div>
       </form>
@@ -151,4 +151,10 @@ const styles = {
       border: "none !important",
     }
   },
+  center: {
+    margin: '0 auto'
+  },
+  formGroup: {
+    paddingTop: '10px'
+  }
 };
