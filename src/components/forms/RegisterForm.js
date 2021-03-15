@@ -2,13 +2,13 @@ import Radium from 'radium'
 import { UserContext } from '../../contexts/UserContextProvider'
 import { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import LoginErrorMessage from "../LoginErrorMessage";
+import RegisterErrorMessage from "../RegisterErrorMessage";
 
 function RegisterForm(props) {
   const { toggleModal } = props
   const { setUser } = useContext(UserContext)
   const history = useHistory()
-  const [loginError, setLoginError] = useState(false)
+  const [registerError, setRegisterError] = useState(false)
 
   const submitRegister = async (e) => {
     e.preventDefault();
@@ -17,25 +17,25 @@ function RegisterForm(props) {
     console.log(email, password);
     if (email && password) {
       console.log("im here")
-      let isLogin = await login(email, password)
-      if (isLogin) {
-        setLoginError(false)
+      let isRegister = await register(email, password)
+      if (isRegister) {
+        setRegisterError(false)
         if (window.location.pathname === "/register") {
           toggleModal()
           history.push("/mypage")
         }
       }
-      setLoginError(true)
+      setRegisterError(true)
     }
   }
 
-  const login = async (email, password) => {
+  const register = async (email, password) => {
     let userInput = {
       email: email,
       password: password,
     };
 
-    let res = await fetch("/api/login", {
+    let res = await fetch("/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -80,6 +80,7 @@ function RegisterForm(props) {
             <label htmlFor="password" className="form-label">Confirm Password</label>
             <input type="password" className="form-control" id="confirmPasswordInput" placeholder="Confirm Password"></input>
           </div>
+          <RegisterErrorMessage registerinError={registerError} />
           <button type="submit" style={styles.submit}>Register</button>
           </div>
           <div>
@@ -89,7 +90,9 @@ function RegisterForm(props) {
     </div>
    )
 }
-  
+
+export default Radium(RegisterForm)
+
   const styles = {
     gridContainer: {
       width: "90%",
