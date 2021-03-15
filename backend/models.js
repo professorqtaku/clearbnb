@@ -3,30 +3,20 @@ const mongoose = global.mongoose
 const User = mongoose.model("User", {
   email: {
     type: String,
-    required: true,
-    unique: true,
-    valiate: {
-      validator: function (v) {
-        return v !== undefined;
-      },
-    }
+    require: true,
+    unique: true
   },
   firstName: {
     type: String,
-    required: true,
-    valiate: {
-      validator: function (v) {
-        return v !== undefined;
-      },
-    }
+    require: true
   },
   lastName: {
     type: String,
-    required: true
+    require: true
   },
   password: {
     type: String,
-    required: true
+    require: true
   },
   phoneNumber: {
     type: Number
