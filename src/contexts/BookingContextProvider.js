@@ -13,7 +13,6 @@ export default function BookingContextProvider(props) {
 
   useEffect(() => {
     fetchBookings();
-    console.log(bookings);
   }, []);
 
   const addBooking = async (booking) => {

@@ -18,7 +18,7 @@ const DeleteButton = (props) => {
       method: "DELETE"
     })
     res = await res.json()
-    console.log(res);
+
     if (res.success) {
       history.push("/mypage")
     }

@@ -24,7 +24,6 @@ export default function BookingForm(props) {
   const bookingSubmit = (e) => {
     e.preventDefault()
     if (!user || totalPrice <= 0) {
-      console.log("No user/date invalid");
       return
     }
   }
@@ -117,6 +116,7 @@ export default function BookingForm(props) {
             min={1}
             max={hosting.guestAmount}
             onChange={changeGuestNumber}
+            required
           />
         </div>
         <div className="col-8 col-md-4 align-self-end" style={styles.center}>
