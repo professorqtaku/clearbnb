@@ -10,7 +10,6 @@ const MyHostingPage = () => {
   const [ myHostings, setMyHostings ] = useState()
 
   useEffect(() => {
-    console.log(hostings);
     if (hostings) {
       let matchedHostings = []
       for (let h of hostings) {
@@ -20,7 +19,6 @@ const MyHostingPage = () => {
       }
       setMyHostings(matchedHostings)
     }
-    console.log(myHostings);
   }, [hostings])
 
   const showHostingCards = (hostings) => {
