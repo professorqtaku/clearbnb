@@ -27,9 +27,9 @@ export default function SearchBar() {
   const [guests, setGuests] = useState('')
   
   return (
-    <div style={styles.gridContainer}>
+    <form style={styles.gridContainer}>
       <div style={styles.location}>
-        <input style={styles.input} onChange={event => setLocation(event.target.value)} placeholder="location"/>
+        <input type="text" style={styles.input} onChange={event => setLocation(event.target.value)} placeholder="location" required/>
       </div>
       <div style={styles.gridItem}>From
         <DatePicker style={styles.datePicker} selected={startDate} onChange={date => setStartDate(date)} />
@@ -43,7 +43,7 @@ export default function SearchBar() {
       <div style={styles.gridItem}>
         <button style={styles.input} onClick={goToSearchPage} >Search</button>
       </div>
-    </div> 
+    </form> 
   )
 }
 

@@ -12,6 +12,7 @@
     "react-amazing-proxy": "^1.0.63",
     "react-datepicker": "^3.6.0",
     "react-dom": "^17.0.1",
+    "react-onclickoutside": "^6.10.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "reactstrap": "^8.9.0",
