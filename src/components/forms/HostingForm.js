@@ -14,7 +14,26 @@ export default function HostingForm() {
         <AddressFormGroup />
         <div className="row">
           <FormGroup>
-            
+            <label htmlFor="title">Title*</label>
+            <input
+              className="form-control"
+              type="text"
+              name="title"
+              id="hostingTitleInput"
+              placeholder="Write something nice :)"
+              required
+            />
+          </FormGroup>
+          <FormGroup>
+            <label htmlFor="title">Description*</label>
+            <textarea
+              className="form-control"
+              type="text"
+              name="description"
+              id="hostingDescriptionInput"
+              placeholder="Write something nice about your place :)"
+              required
+            />
           </FormGroup>
         </div>
 
