@@ -49,8 +49,8 @@ export default function HostingInfoFormGroup(props) {
           Accommodation
         </label>
 
-        <select id="hostingAccommodationSelect" className="form-select">
-          <option selected disabled className="text-muted">
+        <select id="hostingAccommodationSelect" className="form-select" required>
+          <option selected disabled className="text-muted" value="">
             Choose the accommodation type
           </option>
           {accommodations
@@ -98,7 +98,9 @@ export default function HostingInfoFormGroup(props) {
           <input
             className="form-control"
             type="url"
+            id="hostingGalleryInput"
             placeholder="Paste the image url link here..."
+            required
           />
           <button
             href="#"
