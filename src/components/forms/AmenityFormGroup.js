@@ -14,7 +14,7 @@ function AmenityFormGroup(props) {
           id={checkboxId}
         />
         <label className="form-check-label">
-          <span className="material-icons align-self-end">
+          <span className="material-icons align-self-end" style={styles.icon}>
             {amenity.icon ? amenity.icon : null}
           </span>
           {amenity.description}
@@ -50,4 +50,7 @@ const styles = {
       gridTemplateColumns: "repeat(4, 1fr)",
     },
   },
+  icon: {
+    padding: "0 5px 0 0"
+  }
 };
