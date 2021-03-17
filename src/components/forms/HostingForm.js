@@ -1,6 +1,12 @@
-import { Form, Label, Col, FormGroup, Input, Button, Row, FormText} from 'reactstrap'
+import { Form, Label, Col, FormGroup, Input, Button, Row, FormText } from 'reactstrap'
+import {useContext} from 'react'
+import { AmenityContext } from '../../contexts/AmenityContextProvider'
+
 import AddressFormGroup from './AddressFormGroup'
+
 export default function HostingForm() {
+
+  const { amenities } = useContext(AmenityContext)
 
   const submitHosting = (e) => {
     e.preventDefault()
@@ -11,7 +17,6 @@ export default function HostingForm() {
   return (
     <div className="container">
       <Form onSubmit={submitHosting}>
-        <AddressFormGroup />
         <div className="row">
           <FormGroup>
             <label htmlFor="title">Title*</label>
@@ -36,7 +41,7 @@ export default function HostingForm() {
             />
           </FormGroup>
         </div>
-
+        <AddressFormGroup />
         <div className="mb-5"></div>
         <button className="btn" type="submit">
           Post a hosting
