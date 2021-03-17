@@ -52,8 +52,7 @@ module.exports = (app) => {
     const match = await checkPassword(user.password+salt, userExist.password)
     if (match) { 
       req.session.user = userExist;
-      userExist.password = ''
-      res.json(userExist); 
+      res.json({ success: "Logged in" });
       return
     }
     res.json({ error: 'Bad credentials' })  
