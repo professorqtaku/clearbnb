@@ -1,8 +1,6 @@
-import { useContext } from "react";
 import { FormGroup } from "reactstrap";
-import { AccommodationContext } from "../../contexts/AccommodationContextProvider";
-export default function HostingInfoFormGroup() {
-  const { accommodations } = useContext(AccommodationContext);
+export default function HostingInfoFormGroup(props) {
+  const accommodations = props.accommodations
 
   return (
     <div className="row">
@@ -99,6 +97,7 @@ export default function HostingInfoFormGroup() {
         <div className="input-group">
           <input
             className="form-control"
+            type="url"
             placeholder="Paste the image url link here..."
           />
           <button

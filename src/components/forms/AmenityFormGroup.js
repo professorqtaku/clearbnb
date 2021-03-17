@@ -1,18 +1,17 @@
-import { useContext } from "react";
 import Radium from 'radium'
-import { AmenityContext } from "../../contexts/AmenityContextProvider";
 
-function AmenityFormGroup() {
-  const { amenities } = useContext(AmenityContext);
+function AmenityFormGroup(props) {
+  const amenities = props.amenities
 
   const amenityCheckbox = (amenity) => {
+    const checkboxId = "hosting" + amenity.description + "Checkbox"
     return (
       <div className="form-check" key={amenity.description}>
         <input
           className="form-check-input"
           type="checkbox"
           value=""
-          id="flexCheckDefault"
+          id={checkboxId}
         />
         <label className="form-check-label">
           <span className="material-icons align-self-end">
@@ -44,12 +43,11 @@ const styles = {
     "@media (min-width: 400px)": {
       gridTemplateColumns: "repeat(2, 1fr)",
     },
-    "@media (min-width: 600px)": {
+    "@media (min-width: 800px)": {
       gridTemplateColumns: "repeat(3, 1fr)",
     },
-    "@media (min-width: 800px)": {
+    "@media (min-width: 1200px)": {
       gridTemplateColumns: "repeat(4, 1fr)",
     },
-    
   },
 };
