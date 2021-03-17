@@ -1,9 +1,14 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import BookingForm from '../components/forms/BookingForm'
+import { UserContext } from '../contexts/UserContextProvider'
+import DeleteButton from '../components/buttons/DeleteButton'
 
 export default function HostingDetailPage(props) {
   const { hostingId } = useParams();
   const [hosting, setHosting] = useState(null);
+  const { user } = useContext(UserContext)
+
 
   const fetchHosting = async (hostingId) => {
     let res = await fetch(`/rest/hostings/${hostingId}`);
@@ -11,16 +16,24 @@ export default function HostingDetailPage(props) {
     setHosting(res);
   };
 
+  const userView = (hosting, user) => {
+    if (user) {
+      if (hosting.host._id === user._id) {
+        return hostView(hosting);
+      }
+    }
+    return <BookingForm hosting={hosting} />;
+  }
+
   useEffect(() => {
     fetchHosting(hostingId);
   }, [hostingId]);
 
   useEffect(() => {
-    console.log("Hosting", hosting);
-  }, [hosting]);
+    hosting && console.log(hosting.host._id);
+  }, [hosting, user]);
 
-  const defaultView = (hosting) => {
-    console.log(hosting._id);
+  const defaultView = (hosting, user) => {
     return (
       <div>
         <h2>{hosting.title}</h2>
@@ -53,16 +66,27 @@ export default function HostingDetailPage(props) {
         <div className="row">
           <p>{hosting.description}</p>
         </div>
+        { userView(hosting, user) }
       </div>
     );
   };
+
+  const hostView = (hosting) => {
+    return (
+      <div style={styles.delete}>
+        <DeleteButton hosting={hosting}/>
+      </div>
+    )
+  }
 
   const loading = (
     <div className="spinner-border" role="status">
       <span className="sr-only">Loading...</span>
     </div>
   );
-  return <div className="container">{hosting ? defaultView(hosting) : loading}</div>;
+  return <div className="container">
+    {hosting ? defaultView(hosting, user) : loading}
+  </div>;
 }
 
 const styles = {
@@ -76,4 +100,8 @@ const styles = {
     margin: "0",
     border: "1px solid black",
   },
+  delete: {
+    margin: "0 auto",
+    width: "50%"
+  }
 };

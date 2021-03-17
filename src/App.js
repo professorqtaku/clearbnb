@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import HostingContextProvider from './contexts/HostingContextProvider'
+import BookingContextProvider from './contexts/BookingContextProvider'
 import UserContextProvider from './contexts/UserContextProvider'
 
 import HomePage from './pages/HomePage'
@@ -7,39 +8,43 @@ import SearchResultPage from './pages/SearchResultPage'
 import MyPage from './pages/MyPage'
 import HostingDetailPage from './pages/HostingDetailPage'
 import RegisterPage from './pages/RegisterPage'
-import Modal from './components/base/Modal'
+import MyHostingPage from './pages/MyHostingPage'
 import Navbar from './components/base/Navbar'
 import Footer from './components/base/Footer'
+
 import { StyleRoot } from 'radium'
 
 
 function App() {
   return (
     <StyleRoot>
-
-      <div className="App">
+      <div className="App" style={styles.app}>
         <HostingContextProvider>
-          <UserContextProvider>
-            <Router>
-              <header className="App-header">
-                <Navbar />
-              </header>
+          <BookingContextProvider>
+            <UserContextProvider>
+              <Router>
+                <header className="App-header">
+                  <Navbar />
+                </header>
 
-              <main>
-                <Switch>
-                  <Route exact path="/" component={HomePage} />
-                  <Route exact path="/register" component={RegisterPage} />
-                  <Route exact path="/search/" component={SearchResultPage} />
-                  <Route exact path="/myPage" component={MyPage} />
-                  <Route exact path="/hosting/:hostingId" component={HostingDetailPage} />
-                </Switch>
-              </main>
+                <main>
+                  <Switch>
+                    <Route exact path="/" component={HomePage} />
+                    <Route exact path="/register" component={RegisterPage} />
+                    <Route exact path="/myPage" component={MyPage} />
+                    <Route exact path="/hosting/:hostingId"
+                      component={HostingDetailPage} />
+                    <Route exact path="/mypage/hostings" component={MyHostingPage} />
+                    <Route exact path="/search/" component={SearchResultPage} />
+                  </Switch>
+                </main>
 
-              <footer>
-                <Footer />
-              </footer>
-            </Router>
-          </UserContextProvider>
+                <footer>
+                  <Footer />
+                </footer>
+              </Router>
+            </UserContextProvider>
+          </BookingContextProvider>
         </HostingContextProvider>
       </div>
     </StyleRoot>
@@ -49,3 +54,10 @@ function App() {
 
 
 export default App;
+
+const styles = {
+  app: {
+    display: "grid",
+    gridTemplateRows: "70,14px 1fr 54,52px"
+  }
+}

@@ -14,9 +14,7 @@ function LoginForm(props) {
     e.preventDefault();
     let email = document.getElementById('inputEmail').value.toString().trim()
     let password = document.getElementById("inputPassword").value;
-    console.log(email, password);
     if (email && password) {
-      console.log("im here")
       let isLogin = await login(email, password)
       if (isLogin) {
         setLoginError(false)
