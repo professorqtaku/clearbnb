@@ -8,6 +8,8 @@ import MyPage from './pages/MyPage'
 import HostingDetailPage from './pages/HostingDetailPage'
 import RegisterPage from './pages/RegisterPage'
 import MyHostingPage from './pages/MyHostingPage'
+import PostHostingPage from './pages/PostHostingPage'
+
 import Navbar from './components/base/Navbar'
 import Footer from './components/base/Footer'
 
@@ -33,6 +35,7 @@ function App() {
                     <Route exact path="/hosting/:hostingId"
                       component={HostingDetailPage}/>
                     <Route exact path="/mypage/hostings" component={MyHostingPage} />
+                    <Route exact path="/mypage/post" component={PostHostingPage} />
                   </Switch>
                 </main>
 
