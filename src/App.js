@@ -3,6 +3,7 @@ import HostingContextProvider from './contexts/HostingContextProvider'
 import BookingContextProvider from './contexts/BookingContextProvider'
 import UserContextProvider from './contexts/UserContextProvider'
 import AmenityContextProvider from './contexts/AmenityContextProvider'
+import AccommodationContextProvider from './contexts/AccommodationContextProvider'
 
 import HomePage from './pages/HomePage'
 import MyPage from './pages/MyPage'
@@ -20,6 +21,7 @@ function App() {
   return (
     <StyleRoot>
       <div className="App" style={styles.app}>
+        <AccommodationContextProvider>
         <AmenityContextProvider>
           <HostingContextProvider>
             <BookingContextProvider>
@@ -60,6 +62,7 @@ function App() {
             </BookingContextProvider>
           </HostingContextProvider>
         </AmenityContextProvider>
+        </AccommodationContextProvider>
       </div>
     </StyleRoot>
   );

@@ -1,47 +1,29 @@
-import { Form, Label, Col, FormGroup, Input, Button, Row, FormText } from 'reactstrap'
-import {useContext} from 'react'
-import { AmenityContext } from '../../contexts/AmenityContextProvider'
+import {Form} from "reactstrap";
+import { useContext } from "react";
+import { AccommodationContext } from "../../contexts/AccommodationContextProvider";
 
-import AddressFormGroup from './AddressFormGroup'
+import AddressFormGroup from "./AddressFormGroup";
+import HostingInfoFormGroup from "./HostingInfoFormGroup";
+import AmenityFormGroup from "./AmenityFormGroup";
 
 export default function HostingForm() {
-
-  const { amenities } = useContext(AmenityContext)
+  const { accommodations } = useContext(AccommodationContext);
 
   const submitHosting = (e) => {
-    e.preventDefault()
-    let street = document.getElementById("hostingStreetInput").value
-    console.log(street);
+    e.preventDefault();
+    let street = document.getElementById("hostingAccommodationSelect").value;
+  };
+
+  const amenityCheckbox = (a) => {
+    return(<option key={a._id}>{a.description}</option>)
   }
 
   return (
-    <div className="container">
+    <div className="container" style={styles.container}>
       <Form onSubmit={submitHosting}>
-        <div className="row">
-          <FormGroup>
-            <label htmlFor="title">Title*</label>
-            <input
-              className="form-control"
-              type="text"
-              name="title"
-              id="hostingTitleInput"
-              placeholder="Write something nice :)"
-              required
-            />
-          </FormGroup>
-          <FormGroup>
-            <label htmlFor="title">Description*</label>
-            <textarea
-              className="form-control"
-              type="text"
-              name="description"
-              id="hostingDescriptionInput"
-              placeholder="Write something nice about your place :)"
-              required
-            />
-          </FormGroup>
-        </div>
+        <HostingInfoFormGroup />
         <AddressFormGroup />
+        <AmenityFormGroup />
         <div className="mb-5"></div>
         <button className="btn" type="submit">
           Post a hosting
@@ -49,4 +31,12 @@ export default function HostingForm() {
       </Form>
     </div>
   );
+}
+
+const styles = {
+  container: {
+    backgroundColor: "var(--lightgrey)",
+    padding: "2vw",
+    borderRadius: "10px"
+  }
 }
