@@ -1,7 +1,7 @@
 const models = require('../models.js')
 const bcrypt = require('bcrypt')
 
-
+const salt = "ouwÖEBG231r0/&=T#R(GQFQ"
 
 module.exports = (app) => {
   app.post('/api/users', async (req, res) => {
@@ -23,7 +23,7 @@ module.exports = (app) => {
     }
     else delete req.body.confirmPassword
 
-    let hashedPassword = await hashPassword(req.body.password)
+    let hashedPassword = await hashPassword(req.body.password + salt)
 
     let user = new User({ ...req.body, password: hashedPassword })
 
@@ -49,7 +49,7 @@ module.exports = (app) => {
       return
     }
     
-    const match = await checkPassword(user.password, userExist.password)
+    const match = await checkPassword(user.password+salt, userExist.password)
     if (match) { 
       req.session.user = userExist;
       userExist.password = ''
@@ -77,6 +77,11 @@ module.exports = (app) => {
       res.json({ error: "Was not logged in" });
     }
   });
+
+  app.get("/api/test", (req, res) => {
+    console.log(req.session.secret);
+    res.send(req.session.secret);
+  })
 }
 
 const hashPassword = async (password) => {
