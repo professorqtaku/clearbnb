@@ -22,9 +22,10 @@ function App() {
           <BookingContextProvider>
             <UserContextProvider>
               <Router>
-                <header className="App-header">
+                <div className="page-container">
+
                   <Navbar />
-                </header>
+                
 
                 <main>
                   <Switch>
@@ -34,10 +35,10 @@ function App() {
                     <Route exact path="/hosting/:hostingId"
                       component={HostingDetailPage}/>
                     <Route exact path="/mypage/hostings" component={MyHostingPage} />
-                    <Route exact path="/AboutPage" component ={Aboutpage} />
+                    <Route exact path="/about" component ={Aboutpage} />
                   </Switch>
                 </main>
-
+ </div>
                 <footer>
                   <Footer />
                 </footer>
