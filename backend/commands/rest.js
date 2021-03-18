@@ -39,22 +39,21 @@ module.exports = (app) => {
     let Address = models['addresses']
     let Availability = models['availabilities']
 
-    if (req.body.address) {
-      let address = new Address(req.body.address)
-      req.body.address = address
-    }
-
+    let address = new Address(req.body.address)
     let hosting = new Hosting(req.body);
-
+    hosting.address = address
+    
     if (req.body.availabilities.length) {
       req.body.availabilities[0].hosting = hosting
       let availability = new Availability(req.body.availabilities[0])
-      req.body.availabilities = [availability]
-      console.log(req.body.availabilities);
+      await availability.save()
+        .catch((e) => console.log("Availability save failed", e))
+      delete req.body.availabilities
     }
-    console.log("hosting", hosting);
+
     try {
-      //await doc.save()
+      await address.save()
+      await hosting.save()
       res.json(hosting)
       return
     }
