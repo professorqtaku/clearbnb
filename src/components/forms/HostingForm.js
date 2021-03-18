@@ -4,6 +4,7 @@ import Radium from "radium";
 import { AccommodationContext } from "../../contexts/AccommodationContextProvider";
 import { AmenityContext } from "../../contexts/AmenityContextProvider";
 import { UserContext } from "../../contexts/UserContextProvider";
+import { HostingContext } from "../../contexts/HostingContextProvider";
 
 import AddressFormGroup from "./AddressFormGroup";
 import HostingInfoFormGroup from "./HostingInfoFormGroup";
@@ -14,6 +15,7 @@ function HostingForm() {
   const { accommodations } = useContext(AccommodationContext);
   const { amenities } = useContext(AmenityContext);
   const { user } = useContext(UserContext);
+  const { hostings,addHosting } = useContext(HostingContext);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [totalDays, setTotalDays] = useState(0);
@@ -21,11 +23,16 @@ function HostingForm() {
   useEffect(() => {
     countDays(startDate, endDate);
   }, [startDate, endDate])
+
+  useEffect(() => {
+    console.log(hostings, "hostings");
+  }, [hostings])
   
-  const submitHosting = (e) => {
+  const submitHosting = async (e) => {
     e.preventDefault();
     let hosting = getInputValues();
-    console.log(hosting);
+    let isSaved = await addHosting(hosting)
+    console.log(isSaved);
 
   };
 
@@ -47,7 +54,8 @@ function HostingForm() {
       availabilities: []
     };
     if (totalDays >= 1) {
-      hosting.availabilities.push([startDate.getTime(), endDate.getTime()]);
+      hosting.availabilities.push({
+        timePeriod :[startDate.getTime(), endDate.getTime()]});
     }
     amenities.map((amenity) =>
       document.getElementById("hosting" + amenity.description + "Checkbox")

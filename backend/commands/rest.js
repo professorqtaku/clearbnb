@@ -1,3 +1,4 @@
+const { availabilities } = require("../models.js");
 const models = require("../models.js");
 
 module.exports = (app) => {
@@ -13,7 +14,7 @@ module.exports = (app) => {
         .find().populate(['host', 'address']).exec()
     }
     catch (e) {
-      res.send('model not found')
+      res.json({error:"model not found"})
       return
     }
     res.json(docs)
@@ -33,6 +34,38 @@ module.exports = (app) => {
     res.json(doc)
   })
 
+  app.post('/rest/hostings/', async (req, res) => {
+    let Hosting = models['hostings']
+    let Address = models['addresses']
+    let Availability = models['availabilities']
+
+    if (req.body.address) {
+      let address = new Address(req.body.address)
+      req.body.address = address
+    }
+
+    let hosting = new Hosting(req.body);
+
+    if (req.body.availabilities.length) {
+      req.body.availabilities[0].hosting = hosting
+      let availability = new Availability(req.body.availabilities[0])
+      req.body.availabilities = [availability]
+      console.log(req.body.availabilities);
+    }
+    console.log("hosting", hosting);
+    try {
+      //await doc.save()
+      res.json(hosting)
+      return
+    }
+    catch (e) {
+      res.json({ error: 'Save failed' });
+      return
+    }
+
+    res.json(doc)
+  })
+
   app.post('/rest/:model/', async (req, res) => {
     let model = models[req.params.model]
     let doc = new model(req.body)
@@ -40,7 +73,7 @@ module.exports = (app) => {
       await doc.save()
     }
     catch (e) {
-      res.send('Save failed')
+      res.json({ error: "Save failed" });
       return
     }
 
