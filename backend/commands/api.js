@@ -13,12 +13,11 @@ module.exports = (app) => {
     
     req.body = trimObject(req.body)
     if (!req.body.password.length) {
-      res.send('Password is missing')
+      res.json({error:'Password is missing'})
       return
     }
-
     if (req.body.password !== req.body.confirmPassword) {
-      res.send('Password does not match')
+      res.json({error:'Password does not match'})
       return
     }
     else delete req.body.confirmPassword
@@ -26,16 +25,19 @@ module.exports = (app) => {
     let hashedPassword = await hashPassword(req.body.password + salt)
 
     let user = new User({ ...req.body, password: hashedPassword })
-
     let userExist = await User.findOne({ email: user.email })
     if (userExist) {
-      res.send('E-mail already used/is missing')
+      res.json({error:'E-mail already used/is missing'})
       return
     }
     await user.save()
-      .then(() => res.json({ 'success': true }))
-      .catch(() => res.send('Save failed'))
+      .then(() => {
+        req.session.user = user
+        res.json({ success: true })
+      })
+      .catch(() => res.json({error:'Save failed'}))
   })
+
   app.post('/api/login', async (req, res) => {
     if (req.session.user) {
       res.json({ error: "Someone is already logged in" });

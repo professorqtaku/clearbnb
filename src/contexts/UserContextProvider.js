@@ -12,8 +12,12 @@ export default function UserContextProvider(props) {
         return await res.json()
       })
       .then(user => {
-        if(!user.error)
-          setUser(user) 
+        if (!user.error) {
+          setUser(user)
+        }
+        else {
+          setUser(null)
+        }
       })
       .catch((e) => console.log('Already login error', e))
   }
