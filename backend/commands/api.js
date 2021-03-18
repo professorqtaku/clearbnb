@@ -5,7 +5,6 @@ const salt = "Truffle5@lt";
 
 module.exports = (app) => {
   app.post('/api/users', async (req, res) => {
-    console.log("start");
     let User = models['users']
     if (req.session.user) {
       res.json({ error: 'Someone is already logged in' })
@@ -34,9 +33,13 @@ module.exports = (app) => {
       return
     }
     await user.save()
-      .then(() => res.json({ success: true }))
+      .then(() => {
+        req.session.user = user
+        res.json({ success: true })
+      })
       .catch(() => res.json({error:'Save failed'}))
   })
+
   app.post('/api/login', async (req, res) => {
     if (req.session.user) {
       res.json({ error: "Someone is already logged in" });
