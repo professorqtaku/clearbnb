@@ -29,14 +29,6 @@ code {
   box-shadow: none;
 }
 
-main {
-  margin: 0 auto 0;
-}
-
-/* temp */
-.homePage input{
-  width: 100%;
-}
 .react-datepicker-wrapper,
 .react-datepicker__input-container,
 .react-datepicker__input-container input {

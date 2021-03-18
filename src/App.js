@@ -17,7 +17,6 @@ import Footer from "./components/base/Footer";
 
 import { StyleRoot } from "radium";
 
-
 function App() {
   return (
     <StyleRoot>
@@ -72,8 +71,6 @@ function App() {
     </StyleRoot>
   );
 }
-
-
 
 export default App;
 
