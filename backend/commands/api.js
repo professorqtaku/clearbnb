@@ -1,7 +1,7 @@
 const models = require('../models.js')
 const bcrypt = require('bcrypt')
 
-
+const salt = "Truffle5@lt";
 
 module.exports = (app) => {
   app.post('/api/users', async (req, res) => {
@@ -23,7 +23,7 @@ module.exports = (app) => {
     }
     else delete req.body.confirmPassword
 
-    let hashedPassword = await hashPassword(req.body.password)
+    let hashedPassword = await hashPassword(req.body.password + salt)
 
     let user = new User({ ...req.body, password: hashedPassword })
 
@@ -49,11 +49,10 @@ module.exports = (app) => {
       return
     }
     
-    const match = await checkPassword(user.password, userExist.password)
+    const match = await checkPassword(user.password+salt, userExist.password)
     if (match) { 
       req.session.user = userExist;
-      userExist.password = ''
-      res.json(userExist); 
+      res.json({ success: "Logged in" });
       return
     }
     res.json({ error: 'Bad credentials' })  
