@@ -1,13 +1,19 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { UserContext } from '../contexts/UserContextProvider'
+import { HostingContext } from '../contexts/HostingContextProvider'
 import PostingModal from '../components/modals/PostingModal'
 
 export default function MyPage() {
   const history = useHistory()
   const { user } = useContext(UserContext)
+  const { fetchHostings } = useContext(HostingContext)
   const [postModal, setPostModal] = useState()
   const togglePostModal = () => setPostModal(!postModal)
+
+  useEffect(() => {
+    fetchHostings()
+  }, [])
 
   const goTo = (e) => {
     if (e.target.value === "search") {

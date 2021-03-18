@@ -35,7 +35,7 @@ export default function HostingDetailPage(props) {
         <h2>{hosting.title}</h2>
         <img
           src={hosting.galleries[0]}
-          alt={hosting.galleries[0]}
+          alt="Image of the place"
           style={styles.image}
         />
         <div className="row">
@@ -62,7 +62,7 @@ export default function HostingDetailPage(props) {
         <div className="row">
           <p>{hosting.description}</p>
         </div>
-        { userView(hosting, user) }
+        {userView(hosting, user)}
       </div>
     );
   };

@@ -12,19 +12,19 @@ const MyHostingPage = () => {
   useEffect(() => {
     if (hostings) {
       let matchedHostings = []
-      for (let h of hostings) {
-        if (h.host._id === user._id) {
-          matchedHostings.push(h)
+      for (let hosting of hostings) {
+        if (hosting.host._id === user._id) {
+          matchedHostings.push(hosting)
         }
       }
       setMyHostings(matchedHostings)
     }
-  }, [hostings])
+  }, [hostings, myHostings])
 
   const showHostingCards = (hostings) => {
     return (
       <div className="container" style={styles.cardlist}>
-         {hostings.map(h => <MyHostingCard key={ h._id } hosting={ h }/>)} 
+         {hostings.map(hosting => <MyHostingCard key={ hosting._id } hosting={ hosting }/>)} 
       </div>
     )
   }
