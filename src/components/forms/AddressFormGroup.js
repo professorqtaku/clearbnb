@@ -56,7 +56,6 @@ export default function AddressFormGroup() {
             className="form-control"
             type="text"
             id="hostingCountryInput"
-            placeholder="Apartment, studio, or floor"
             required
           />
         </FormGroup>

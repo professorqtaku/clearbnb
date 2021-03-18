@@ -4,12 +4,13 @@ import HostingForm from "../forms/HostingForm";
 
 function PostingModal(props) {
   const { modal, toggle } = props;
+  
 
   return (
     <div>
-      <Modal isOpen={modal} toggle={toggle}>
+      <Modal isOpen={modal} toggle={toggle} size="lg">
         <div className="modal-header" toggle={toggle}>
-          <h5 className="modal-title">Log in</h5>
+          <h5 className="modal-title">Post a hosting</h5>
           <button
             type="button"
             className="btn-close"

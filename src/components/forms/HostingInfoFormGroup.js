@@ -26,7 +26,7 @@ export default function HostingInfoFormGroup(props) {
           required
         />
       </FormGroup>
-      <FormGroup className="col-12 col-md-6 col-lg-3 mb-3">
+      <FormGroup className="col-12 col-md-6 mb-3">
         <label className=" form-label">Price per night*</label>
         <div className="input-group">
           <span class="input-group-text">$</span>
@@ -44,7 +44,7 @@ export default function HostingInfoFormGroup(props) {
         </div>
       </FormGroup>
 
-      <FormGroup className="col-md-6 col-lg-3 mb-3">
+      <FormGroup className="col-md-6 mb-3">
         <label for="select" className="form-label">
           Accommodation
         </label>
@@ -60,7 +60,7 @@ export default function HostingInfoFormGroup(props) {
             : null}
         </select>
       </FormGroup>
-      <FormGroup className="col-sm-4 col-lg-2 mb-3">
+      <FormGroup className="col-sm-4 mb-3">
         <label className=" form-label">Guests*</label>
         <input
           className="form-control"
@@ -70,7 +70,7 @@ export default function HostingInfoFormGroup(props) {
           required
         />
       </FormGroup>
-      <FormGroup className="col-6 col-sm-4 col-lg-2 mb-3">
+      <FormGroup className="col-6 col-sm-4 mb-3">
         <label className=" form-label">Beds*</label>
         <input
           className="form-control"
@@ -80,7 +80,7 @@ export default function HostingInfoFormGroup(props) {
           required
         />
       </FormGroup>
-      <FormGroup className="col-6 col-sm-4 col-lg-2 mb-3">
+      <FormGroup className="col-6 col-sm-4 mb-3">
         <label className=" form-label">Bedrooms*</label>
         <input
           className="form-control"
