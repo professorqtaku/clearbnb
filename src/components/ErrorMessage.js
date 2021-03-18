@@ -1,14 +1,14 @@
 export default function LoginErrorMessage(props) {
-  const loginError = props.loginError
-  const message = () => {
+  const { showMessage, message } = props
+  const printMessage = () => {
     return (
       <p>
-        Email/password incorrect
+        { message }
       </p>
     )
   }
   
-  return <div style={styles.message}>{loginError ? message() : ''} </div>;
+  return <div style={styles.message}>{showMessage ? printMessage() : null} </div>;
 }
 
 const styles = {

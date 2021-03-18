@@ -11,6 +11,7 @@ import AddressFormGroup from "./AddressFormGroup";
 import HostingInfoFormGroup from "./HostingInfoFormGroup";
 import AmenityFormGroup from "./AmenityFormGroup";
 import DatePickerFormGroup from "./DatePickerFormGroup";
+import ErrorMessage from '../ErrorMessage'
 
 function HostingForm(props) {
   const { toggleModal } = props
@@ -23,6 +24,7 @@ function HostingForm(props) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [totalDays, setTotalDays] = useState(0);
+  const [isSaved, setIsSaved] = useState(true);
 
   useEffect(() => {
     countDays(startDate, endDate);
@@ -37,8 +39,12 @@ function HostingForm(props) {
     let hosting = getInputValues();
     let newHostingId = await addHosting(hosting)
     if (newHostingId) {
+      setIsSaved(true)
       toggleModal()
       history.push("/hosting/" + newHostingId)
+    }
+    else {
+      setIsSaved(false)
     }
 
   };
@@ -102,6 +108,7 @@ function HostingForm(props) {
         />
         <AmenityFormGroup amenities={amenities} />
         <div className="mb-5 mt-5" style={styles.buttonContainer}>
+          <ErrorMessage showMessage={!isSaved} message="Hosting save failed, please try again"/>
           <button
             className="btn align-self-center"
             type="submit"
