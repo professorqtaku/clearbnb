@@ -21,12 +21,7 @@ export default function UserContextProvider(props) {
     useEffect(() => {
       fetchUser();
     }, []);
-   
-    useEffect(() => {
-      console.log(user !== null);
-    }, [user]);
 
-  
   const values = {
     user,
     setUser,

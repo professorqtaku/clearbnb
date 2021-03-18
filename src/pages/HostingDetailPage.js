@@ -29,10 +29,6 @@ export default function HostingDetailPage(props) {
     fetchHosting(hostingId);
   }, [hostingId]);
 
-  useEffect(() => {
-    hosting && console.log(hosting.host._id);
-  }, [hosting, user]);
-
   const defaultView = (hosting, user) => {
     return (
       <div>

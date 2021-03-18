@@ -30,9 +30,6 @@ function HostingForm(props) {
     countDays(startDate, endDate);
   }, [startDate, endDate])
 
-  useEffect(() => {
-    console.log(hostings, "hostings");
-  }, [hostings])
   
   const submitHosting = async (e) => {
     e.preventDefault();

@@ -95,12 +95,12 @@ module.exports = (app) => {
     Object.assign(hosting, req.body)
     try {
       await hosting.save()
+      res.json(hosting)
     }
     catch(e) {
-      console.log(e);
+      res.json({error:"Save failed"})
     }
 
-    res.json(hosting)
   })
 
   app.delete('/rest/hostings/:id', async (req, res) => {

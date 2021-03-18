@@ -25,7 +25,6 @@ export default function HostingContextProvider(props) {
     if (res.error) {
       return false;
     }
-    console.log(hosting.address);
     let newHostings = [...hostings, res];
     setHostings(newHostings);
     return res._id;
