@@ -6,7 +6,7 @@ import LoginErrorMessage from "../LoginErrorMessage";
 
 function LoginForm(props) {
   const { toggleModal } = props
-  const { setUser } = useContext(UserContext)
+  const { setUser, fetchUser } = useContext(UserContext)
   const history = useHistory()
   const [loginError, setLoginError] = useState(false)
 
@@ -14,9 +14,7 @@ function LoginForm(props) {
     e.preventDefault();
     let email = document.getElementById('inputEmail').value.toString().trim()
     let password = document.getElementById("inputPassword").value;
-    console.log(email, password);
     if (email && password) {
-      console.log("im here")
       let isLogin = await login(email, password)
       if (isLogin) {
         setLoginError(false)
@@ -44,8 +42,8 @@ function LoginForm(props) {
       body: JSON.stringify(userInput),
     });
     res = await res.json();
-    if (!res.error) {
-      setUser(res);
+    if (res.success) {
+      fetchUser()
       return true;
     }
     return false;

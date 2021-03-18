@@ -3,6 +3,10 @@ const models = require("../models.js");
 module.exports = (app) => {
 
   app.get('/rest/:model', async (req, res) => {
+    if (req.params.model === "users") {
+      res.json({ error: "Fetch unavailable" });
+      return
+    }
     let docs = ''
     try {
       docs = await models[req.params.model]
@@ -16,12 +20,14 @@ module.exports = (app) => {
   })
 
   app.get('/rest/:model/:id', async (req, res) => {
+    if (req.params.model === "users") {
+      res.json({ error: "Fetch unavailable" });
+    }
     let doc = ''
     try {
       doc = await models[req.params.model].findById(req.params.id).populate(['host', 'address', 'accommodation']).exec()
     }
     catch (e) {
-      res.send('Not found')
       return
     }
     res.json(doc)
@@ -63,5 +69,15 @@ module.exports = (app) => {
     }
 
     res.json(hosting)
+  })
+
+  app.delete('/rest/hostings/:id', async (req, res) => {
+    let model = models['hostings']
+    let hosting = await model.findByIdAndRemove(req.params.id);
+    if (hosting) {
+      res.json({ success: "Delete successful" })
+      return
+    }
+    res.json({error: "Hosting not found"})
   })
 };
