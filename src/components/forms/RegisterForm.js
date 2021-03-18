@@ -4,10 +4,12 @@ import { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import RegisterErrorMessage from "../RegisterErrorMessage";
 
+
 function RegisterForm(props) {
-  const { setUser } = useContext(UserContext)
+  const { setUser, fetchUser } = useContext(UserContext)
   const history = useHistory()
   const [registerError, setRegisterError] = useState(false)
+  
 
   const submitRegister = async (e) => {
     e.preventDefault();
@@ -16,7 +18,6 @@ function RegisterForm(props) {
     let email = document.getElementById('emailInput').value.toString().trim()
     let password = document.getElementById("passwordInput").value;
     let confirmPassword = document.getElementById("confirmPasswordInput").value;
-    console.log(email, password);
     if (email && password) {
       let isRegister = await register(firstName, lastName, email, password, confirmPassword)
       if (isRegister) {
@@ -37,7 +38,7 @@ function RegisterForm(props) {
       password: password,
       confirmPassword,
     };
-
+    console.log("before fetch");
     let res = await fetch("/api/users", {
       method: "POST",
       headers: {
@@ -47,9 +48,8 @@ function RegisterForm(props) {
       body: JSON.stringify(userInput),
     });
     res = await res.json();
-    console.log ("hejhej");
-    if (!res.error) {
-      setUser(res);
+    if (res.success){
+      fetchUser();
       return true;
     }
     return false;

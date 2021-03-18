@@ -7,6 +7,7 @@ export default function UserContextProvider(props) {
   const [user, setUser] = useState(null)
 
   const fetchUser = async () => {
+    console.log("fetch");
     await fetch('/api/login')
       .then(async (res) => {
         return await res.json()
