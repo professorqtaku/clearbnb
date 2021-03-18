@@ -12,12 +12,10 @@ module.exports = (app) => {
     }
     
     req.body = trimObject(req.body)
-    console.log(req.body)
     if (!req.body.password.length) {
       res.json({error:'Password is missing'})
       return
     }
-    console.log("password accepted");
     if (req.body.password !== req.body.confirmPassword) {
       res.json({error:'Password does not match'})
       return

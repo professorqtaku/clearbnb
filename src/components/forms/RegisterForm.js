@@ -6,7 +6,7 @@ import RegisterErrorMessage from "../RegisterErrorMessage";
 
 
 function RegisterForm(props) {
-  const { setUser, fetchUser } = useContext(UserContext)
+  const { fetchUser } = useContext(UserContext)
   const history = useHistory()
   const [registerError, setRegisterError] = useState(false)
   
@@ -38,7 +38,6 @@ function RegisterForm(props) {
       password: password,
       confirmPassword,
     };
-    console.log("before fetch");
     let res = await fetch("/api/users", {
       method: "POST",
       headers: {
@@ -56,7 +55,6 @@ function RegisterForm(props) {
   };
 
   const toLogin = () => {
-
     history.push('/login')
   }
 
