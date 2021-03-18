@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
-export default function SearchBar() {
+export default function SearchBar(props) {
 
-  const history = useHistory()
-  const goToSearchPage = () => {
+  const setIsSearch = props.setIsSearch
+  
+  const goToSearchPage = (event) => {
+    event.preventDefault()
 
     const urlSearch = [{
       location: `${location}`,
@@ -18,7 +20,7 @@ export default function SearchBar() {
     }]
 
     localStorage.setItem("search", `${JSON.stringify(urlSearch)}`);
-    history.push('/search/')
+    setIsSearch(true)
   }
 
   const [location, setLocation] = useState('')
@@ -27,7 +29,7 @@ export default function SearchBar() {
   const [guests, setGuests] = useState('')
   
   return (
-    <form style={styles.gridContainer}>
+    <form style={styles.gridContainer} onSubmit={goToSearchPage}>
       <div style={styles.location}>
         <input type="text" style={styles.input} onChange={event => setLocation(event.target.value)} placeholder="location" required/>
       </div>
@@ -41,7 +43,7 @@ export default function SearchBar() {
         <input style={styles.input} onChange={event => setGuests(event.target.value)} placeholder="Guests"/>
       </div>
       <div style={styles.gridItem}>
-        <button style={styles.input} onClick={goToSearchPage} >Search</button>
+        <button style={styles.input} type="submit">Search</button>
       </div>
     </form> 
   )

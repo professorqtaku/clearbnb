@@ -24,13 +24,12 @@ export default function ResultList() {
     if (allFilteredList.length === 0) {
       noMatches = "No matches found"
     } else {
-      noMatches =""
+      noMatches = ""
     }
     const card = hostingItem => (
-      <div style={styles.cardStyle}>
+      <div style={styles.cardStyle} key={hostingItem._id}>
         <div
           className="card"
-          key={hostingItem._id}
           style={styles.cardWrapper}
           onClick={() => history.push('/hosting/' + hostingItem._id)}
         >
@@ -40,15 +39,15 @@ export default function ResultList() {
             borderRadius: '2px',
             objectFit: 'cover'
           }}
-            key={hostingItem.galleries}
             src={hostingItem.galleries[0]}
             alt={'Image not found'}
 
           />
           <div>
-            <h3 style={styles.title} key={hostingItem.title} >{hostingItem.title}</h3>
-            <p style={styles.info} key={hostingItem.host.firstName}>{hostingItem.host.firstName}{hostingItem.host.lastName} </p>
-            <p style={styles.info} key={hostingItem.price}>${hostingItem.price}/night </p>
+            <h3 style={styles.title} >{hostingItem.title}</h3>
+            <p style={styles.info} >{hostingItem.host.firstName}{hostingItem.host.lastName} </p>
+            <p style={styles.info}>${hostingItem.price}/night </p>
+            <p style={styles.info} >{hostingItem.guestAmount} Guests</p>
           </div>
         </div>
       </div>

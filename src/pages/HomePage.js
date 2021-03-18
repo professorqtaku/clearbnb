@@ -1,17 +1,25 @@
 import CityList from '../components/CityList'
 import SearchBar from "../components/SearchBar"
+import { useState } from "react"
+import ResultList from "../components/lists/ResultList"
 
 export default function HomePage() {
 
+  const [isSearch, setIsSearch] = useState(false)
+  
+  
+
 
   return (
+    
     <div className="homePage" style={styles.grid}>
-      <div style={styles.row1}>
-        <SearchBar />
+      <div>
+        <SearchBar setIsSearch={setIsSearch}/>
       </div>
-        <CityList />
+      {isSearch ? <ResultList /> : <CityList />}
     </div>
   )
+  
 }
 const styles = {
   grid: {

@@ -4,7 +4,6 @@ import BookingContextProvider from './contexts/BookingContextProvider'
 import UserContextProvider from './contexts/UserContextProvider'
 
 import HomePage from './pages/HomePage'
-import SearchResultPage from './pages/SearchResultPage'
 import MyPage from './pages/MyPage'
 import HostingDetailPage from './pages/HostingDetailPage'
 import RegisterPage from './pages/RegisterPage'
@@ -35,7 +34,6 @@ function App() {
                     <Route exact path="/hosting/:hostingId"
                       component={HostingDetailPage} />
                     <Route exact path="/mypage/hostings" component={MyHostingPage} />
-                    <Route exact path="/search/" component={SearchResultPage} />
                   </Switch>
                 </main>
 
