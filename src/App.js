@@ -10,6 +10,7 @@ import RegisterPage from './pages/RegisterPage'
 import MyHostingPage from './pages/MyHostingPage'
 import Navbar from './components/base/Navbar'
 import Footer from './components/base/Footer'
+import Aboutpage from'./pages/AboutPage'
 
 import { StyleRoot } from 'radium'
 
@@ -33,6 +34,7 @@ function App() {
                     <Route exact path="/hosting/:hostingId"
                       component={HostingDetailPage}/>
                     <Route exact path="/mypage/hostings" component={MyHostingPage} />
+                    <Route exact path="/AboutPage" component ={Aboutpage} />
                   </Switch>
                 </main>
 
