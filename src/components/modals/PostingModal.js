@@ -20,7 +20,7 @@ function PostingModal(props) {
           ></button>
         </div>
         <ModalBody>
-          <HostingForm />
+          <HostingForm toggleModal={toggle} />
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={toggle}>

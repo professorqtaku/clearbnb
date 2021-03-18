@@ -43,14 +43,15 @@ const styles = {
     "@media (min-width: 400px)": {
       gridTemplateColumns: "repeat(2, 1fr)",
     },
-    "@media (min-width: 800px)": {
+    "@media (min-width: 500px)": {
       gridTemplateColumns: "repeat(3, 1fr)",
     },
-    "@media (min-width: 1200px)": {
-      gridTemplateColumns: "repeat(4, 1fr)",
+    "@media (min-width: 996px)": {
+      gridGap: "1vw",
+      gridTemplateColumns: "repeat(5, 1fr)",
     },
   },
   icon: {
-    padding: "0 5px 0 0"
-  }
+    padding: "0 5px 0 0",
+  },
 };

@@ -1,5 +1,6 @@
 import { Form, Label } from "reactstrap";
 import { useContext, useState, useEffect } from "react";
+import { useHistory } from 'react-router-dom'
 import Radium from "radium";
 import { AccommodationContext } from "../../contexts/AccommodationContextProvider";
 import { AmenityContext } from "../../contexts/AmenityContextProvider";
@@ -11,7 +12,10 @@ import HostingInfoFormGroup from "./HostingInfoFormGroup";
 import AmenityFormGroup from "./AmenityFormGroup";
 import DatePickerFormGroup from "./DatePickerFormGroup";
 
-function HostingForm() {
+function HostingForm(props) {
+  const { toggleModal } = props
+  const history = useHistory()
+
   const { accommodations } = useContext(AccommodationContext);
   const { amenities } = useContext(AmenityContext);
   const { user } = useContext(UserContext);
@@ -31,8 +35,11 @@ function HostingForm() {
   const submitHosting = async (e) => {
     e.preventDefault();
     let hosting = getInputValues();
-    let isSaved = await addHosting(hosting)
-    console.log(isSaved);
+    let newHostingId = await addHosting(hosting)
+    if (newHostingId) {
+      toggleModal()
+      history.push("/hosting/" + newHostingId)
+    }
 
   };
 
