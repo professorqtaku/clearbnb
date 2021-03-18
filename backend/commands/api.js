@@ -1,7 +1,7 @@
 const models = require('../models.js')
 const bcrypt = require('bcrypt')
 
-const salt = "ouwÖEBG231r0/&=T#R(GQFQ"
+const salt = "Truffle5@lt";
 
 module.exports = (app) => {
   app.post('/api/users', async (req, res) => {
@@ -76,11 +76,6 @@ module.exports = (app) => {
       res.json({ error: "Was not logged in" });
     }
   });
-
-  app.get("/api/test", (req, res) => {
-    console.log(req.session.secret);
-    res.send(req.session.secret);
-  })
 }
 
 const hashPassword = async (password) => {
