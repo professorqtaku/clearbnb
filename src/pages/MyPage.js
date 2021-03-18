@@ -1,10 +1,13 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { UserContext } from '../contexts/UserContextProvider'
+import PostingModal from '../components/modals/PostingModal'
 
 export default function MyPage() {
   const history = useHistory()
   const { user } = useContext(UserContext)
+  const [postModal, setPostModal] = useState()
+  const togglePostModal = () => setPostModal(!postModal)
 
   const goTo = (e) => {
     if (e.target.value === "search") {
@@ -43,15 +46,10 @@ export default function MyPage() {
         >
           My hostings
         </button>
-        <button
-          className="btn btn-primary"
-          type="button"
-          style={styles.btn}
-          value="post"
-          onClick={goTo}
-        >
+        <button className="btn btn-primary"onClick={togglePostModal} style={styles.btn}>
           Post a hosting
         </button>
+        <PostingModal modal={postModal} toggle={togglePostModal} />
         <button
           className="btn btn-primary"
           type="button"
