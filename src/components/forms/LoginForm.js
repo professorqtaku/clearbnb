@@ -6,7 +6,7 @@ import LoginErrorMessage from "../LoginErrorMessage";
 
 function LoginForm(props) {
   const { toggleModal } = props
-  const { setUser } = useContext(UserContext)
+  const { setUser, fetchUser } = useContext(UserContext)
   const history = useHistory()
   const [loginError, setLoginError] = useState(false)
 
@@ -42,8 +42,8 @@ function LoginForm(props) {
       body: JSON.stringify(userInput),
     });
     res = await res.json();
-    if (!res.error) {
-      setUser(res);
+    if (res.success) {
+      fetchUser()
       return true;
     }
     return false;
