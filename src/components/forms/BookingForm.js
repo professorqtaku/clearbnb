@@ -6,6 +6,7 @@ import { Label } from "reactstrap";
 import { UserContext } from "../../contexts/UserContextProvider";
 import LoginButton from "../buttons/LoginButton";
 import { addDays, getDate, getDay, getTime } from "date-fns";
+import ErrorMessage from '../ErrorMessage'
 
 export default function BookingForm(props) {
   const { hosting, availabilities } = props;
@@ -44,6 +45,7 @@ export default function BookingForm(props) {
           type="submit"
           onClick="book"
           style={styles.button}
+          disabled={disableDatePicker()}
         >
           Book
         </button>
@@ -160,6 +162,7 @@ export default function BookingForm(props) {
           {bookButton()}
         </div>
       </form>
+        <ErrorMessage showMessage={disableDatePicker()} message="No dates available"/>
       <hr />
       <div>
         <span>Total price: {totalPrice}</span>
