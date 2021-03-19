@@ -2,24 +2,22 @@ import{ useState, useContext, useEffect } from "react";
 import { forwardRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Form, FormGroup, Label, Input } from 'reactstrap'
+import { Label } from 'reactstrap'
 import { UserContext } from '../../contexts/UserContextProvider'
 import LoginButton from '../buttons/LoginButton'
 import { addDays } from 'date-fns'
-// CSS Modules, react-datepicker-cssmodules.css
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 export default function BookingForm(props) {
   const { hosting, availabilities } = props;
-  const today = new Date();
-  const tomorrow = today.setDate(today.getDate() + 1);
+  // const today = new Date();
+  // const tomorrow = today.setDate(today.getDate() + 1);
   const { user } = useContext(UserContext)
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [guests, setGuests] = useState();
   const [totalPrice, setTotalPrice] = useState();
   const [totalDays, setTotalDays] = useState(1);
-  const [bookedDates, setBookedDates] = useState();
+  // const [bookedDates, setBookedDates] = useState();
 
   const bookingSubmit = (e) => {
     e.preventDefault()

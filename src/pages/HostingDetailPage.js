@@ -3,6 +3,7 @@ import { useEffect, useState, useContext } from "react";
 import BookingForm from '../components/forms/BookingForm'
 import { UserContext } from '../contexts/UserContextProvider'
 import DeleteButton from '../components/buttons/DeleteButton'
+import NoImage from '../assets/img/noimage.png'
 
 export default function HostingDetailPage(props) {
   const { hostingId } = useParams();
@@ -52,7 +53,8 @@ export default function HostingDetailPage(props) {
         <h2>{hosting.title}</h2>
         <img
           src={hosting.galleries[0]}
-          alt="Image of the place"
+          alt="hosting"
+          onError={event => event.target.src = NoImage}
           style={styles.image}
         />
         <div className="row">

@@ -1,5 +1,7 @@
 import { useHistory } from 'react-router-dom'
 import Radium from 'radium'
+import NoImage from '../../assets/img/noimage.png'
+          
 
 const MyHostingCard = (props) => {
   const hosting = props.hosting;
@@ -11,9 +13,14 @@ const MyHostingCard = (props) => {
 
   return (
     <div class="card mb-3" style={styles.card} onClick={goTo}>
-      <div class="row g-0">
+      <div class="row g-0" style={styles.row}>
         <div class="col-md-4">
-          <img src={hosting.galleries[0]} alt="..." style={styles.image} />
+          <img
+            src={hosting.galleries[0]}
+            alt="..."
+            style={styles.image}
+            onError={(event) => (event.target.src = NoImage)}
+          />
         </div>
         <div class="col-md-8">
           <div class="card-body">
@@ -59,4 +66,7 @@ const styles = {
       transform: "scale(1.03)",
     },
   },
+  row: {
+    height: "100%"
+  }
 };

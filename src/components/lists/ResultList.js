@@ -1,6 +1,6 @@
 import { HostingContext } from '../../contexts/HostingContextProvider'
-import { useEffect, useState, useContext, forwardRef } from 'react'
-import { useParams, withRouter, useHistory } from "react-router-dom";
+import { useEffect, useContext} from 'react'
+import { useHistory } from "react-router-dom";
 
 
 export default function ResultList() {
@@ -33,12 +33,7 @@ export default function ResultList() {
           style={styles.cardWrapper}
           onClick={() => history.push('/hosting/' + hostingItem._id)}
         >
-          <img style={{
-            width: '100%',
-            height: '100px',
-            borderRadius: '2px',
-            objectFit: 'cover'
-          }}
+          <img style={styles.image}
             src={hostingItem.galleries[0]}
             alt={'Image not found'}
 
@@ -72,29 +67,35 @@ export default function ResultList() {
 
 const styles = {
   list: {
-    marginTop: '5vw',
-    marginBottom: '5vw',
-    display: 'grid',
-    gridTemplateColumns: '1fr',
-    gridTemplateRows: '1fr',
-    gridGap: '2vw'
+    marginTop: "5vw",
+    marginBottom: "5vw",
+    display: "grid",
+    gridTemplateColumns: "1fr",
+    gridTemplateRows: "1fr",
+    gridGap: "2vw",
   },
   cardWrapper: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    padding: '2px',
-    gridGap: '2vw'
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    padding: "2px",
+    gridGap: "2vw",
   },
   title: {
-    fontSize: '16px',
-    margin: '0'
+    fontSize: "16px",
+    margin: "0",
   },
   info: {
-    margin: '0'
+    margin: "0",
   },
   noMatchesFound: {
-    textAlign: 'center',
-    paddingTop: '30px'
-  }
-}
+    textAlign: "center",
+    paddingTop: "30px",
+  },
+  image: {
+    width: "100%",
+    height: "100px",
+    borderRadius: "2px",
+    objectFit: "cover",
+  },
+};
 

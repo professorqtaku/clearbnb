@@ -3,8 +3,7 @@ import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import LoginForm from "../forms/LoginForm";
 import Radium from 'radium'
 
-const ModalExample = (props) => {
-  const { buttonLabel, className } = props;
+const LoginButton = (props) => {
 
   const [modal, setModal] = useState(false);
 
@@ -13,7 +12,7 @@ const ModalExample = (props) => {
   return (
     <div>
       <button className="btn" style={styles.button} onClick={toggle}>Log in</button>
-      <Modal isOpen={modal} toggle={toggle} className={className}>
+      <Modal isOpen={modal} toggle={toggle}>
         <div className="modal-header" toggle={toggle}>
           <h5 className="modal-title">Log in</h5>
           <button
@@ -37,7 +36,7 @@ const ModalExample = (props) => {
   );
 };
 
-export default Radium(ModalExample);
+export default Radium(LoginButton);
 
 const styles = {
   button: {
