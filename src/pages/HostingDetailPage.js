@@ -7,20 +7,29 @@ import DeleteButton from '../components/buttons/DeleteButton'
 export default function HostingDetailPage(props) {
   const { hostingId } = useParams();
   const [hosting, setHosting] = useState(null);
-  const [availabilities, setAvailabilities] = useState(null);
+  const [availabilities, setAvailabilities] = useState(1);
   const { user } = useContext(UserContext)
 
 
   const fetchHosting = async (hostingId) => {
     let res = await fetch(`/rest/hostings/${hostingId}`);
-    res = await res.json();
-    setHosting(res);
+    try {
+      res = await res.json();
+      setHosting(res);
+    } catch (e) {
+      console.log("error", e);
+    }
   };
 
   const fetchAvailabilites = async (hostingId) => {
-    let res = await fetch(`/view/availabilities/${hostingId}`)
-    res = await res.json()
-    console.log(res);
+    let res = await fetch(`/rest/view/availabilities/${hostingId}`);
+    try {
+      res = await res.json();
+      setAvailabilities(res)
+    }
+    catch (e) {
+      console.log("error", e);
+    }
   }
 
   const userView = (hosting, user) => {
@@ -89,7 +98,7 @@ export default function HostingDetailPage(props) {
     </div>
   );
   return <div className="container">
-    {hosting ? defaultView(hosting, user) : loading}
+    {hosting && availabilities ? defaultView(hosting, user) : loading}
   </div>;
 }
 
