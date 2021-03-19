@@ -9,6 +9,7 @@ export default function HostingDetailPage(props) {
   const { hostingId } = useParams();
   const [hosting, setHosting] = useState(null);
   const [availabilities, setAvailabilities] = useState(1);
+  const [availableDates, setAvailableDates] = useState(null)
   const { user } = useContext(UserContext)
 
 
@@ -33,6 +34,11 @@ export default function HostingDetailPage(props) {
     }
   }
 
+  useEffect(() => {
+    fetchHosting(hostingId);
+    fetchAvailabilites(hostingId);
+  }, [hostingId]);
+
   const userView = (hosting, user) => {
     if (user) {
       if (hosting.host._id === user._id) {
@@ -41,11 +47,6 @@ export default function HostingDetailPage(props) {
     }
     return <BookingForm hosting={hosting} availabilities={availabilities} />;
   }
-
-  useEffect(() => {
-    fetchHosting(hostingId);
-    fetchAvailabilites(hostingId);
-  }, [hostingId]);
 
   const defaultView = (hosting, user) => {
     return (

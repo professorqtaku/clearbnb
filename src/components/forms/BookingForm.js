@@ -5,53 +5,24 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Label } from "reactstrap";
 import { UserContext } from "../../contexts/UserContextProvider";
 import LoginButton from "../buttons/LoginButton";
-import { addDays, getDate, getDay, getTime } from "date-fns";
-import ErrorMessage from '../ErrorMessage'
+import { addDays, getTime } from "date-fns";
+import ErrorMessage from "../ErrorMessage";
 
 export default function BookingForm(props) {
   const { hosting, availabilities } = props;
-  // const today = new Date();
-  // const tomorrow = today.setDate(today.getDate() + 1);
   const { user } = useContext(UserContext);
+
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [guests, setGuests] = useState();
   const [totalPrice, setTotalPrice] = useState();
   const [totalDays, setTotalDays] = useState(1);
-  // const [bookedDates, setBookedDates] = useState();
 
   const bookingSubmit = (e) => {
     e.preventDefault();
     if (!user || totalPrice <= 0) {
       return;
     }
-  };
-
-  const createBooking = () => {
-    const booking = {
-      client: user,
-      hosting: hosting,
-      timePeriod: [startDate.getTime(), endDate.getTime()],
-      totalPrice: totalPrice,
-      guestAmount: guests,
-    };
-  };
-
-  const bookButton = () => {
-    if (user) {
-      return (
-        <button
-          className="btn"
-          type="submit"
-          onClick="book"
-          style={styles.button}
-          disabled={disableDatePicker()}
-        >
-          Book
-        </button>
-      );
-    }
-    return <LoginButton />;
   };
 
   const changeStartDate = (date) => {
@@ -80,27 +51,20 @@ export default function BookingForm(props) {
     }
   };
 
-  
   const DatePickerCustomInput = forwardRef(({ value, onClick }, ref) => (
-    <input
-    className="form-control"
-    style={styles.input}
-    onClick={onClick}
-    ref={ref}
-    value={value}
-    />
-    ));
-    
+    <input className="form-control" onClick={onClick} ref={ref} value={value} />
+  ));
+
   const disableDatePicker = () => {
     return !availabilities.length;
   };
-  
-  const availableDates = date => {
+
+  const availableDates = (date) => {
     for (let availability of availabilities) {
-      let startTime = availability.timePeriod[0]
-      let endTime = availability.timePeriod[1]     
-      let startDate = new Date(startTime).toLocaleDateString()
-      let endDate = new Date(endTime).toLocaleDateString()
+      let startTime = availability.timePeriod[0];
+      let endTime = availability.timePeriod[1];
+      let startDate = new Date(startTime).toLocaleDateString();
+      let endDate = new Date(endTime).toLocaleDateString();
 
       if (
         (getTime(date) >= startTime && getTime(date) <= endTime) ||
@@ -110,20 +74,20 @@ export default function BookingForm(props) {
         return true;
       }
     }
-    return false
+    return false;
   };
-    
-    useEffect(() => {
-      setTotalPrice(hosting.price);
-      countDays(startDate, endDate);
-      countPrice(totalDays, hosting.price);
-    }, [startDate, endDate, totalDays, guests]);
-  
+
+  useEffect(() => {
+    setTotalPrice(hosting.price);
+    countDays(startDate, endDate);
+    countPrice(totalDays, hosting.price);
+  }, [startDate, endDate, totalDays, guests]);
+
   return (
     <div className="container" style={styles.container}>
       <form className="row" onSubmit={bookingSubmit}>
         <div className="form-group col-12 col-md-6" style={styles.formGroup}>
-          <Label for="date">From</Label>
+          <Label>From</Label>
           <DatePicker
             selectsStart
             selected={startDate}
@@ -139,7 +103,7 @@ export default function BookingForm(props) {
           />
         </div>
         <div className="form-group col-12 col-md-6" style={styles.formGroup}>
-          <Label for="date">To</Label>
+          <Label>To</Label>
           <DatePicker
             selectsEnd
             selected={endDate}
@@ -153,11 +117,10 @@ export default function BookingForm(props) {
             filterDate={availableDates}
           />
         </div>
-        <div className="form-group col-12 col-md-8" style={styles.formGroup}>
+        <div className="form-group col-12 col-md-8 mb-3" style={styles.formGroup}>
           <Label>Guests</Label>
           <input
             className="form-control"
-            style={styles.input}
             type="number"
             placeholder="Guests"
             min={1}
@@ -166,11 +129,23 @@ export default function BookingForm(props) {
             required
           />
         </div>
-        <div className="col-8 col-md-4 align-self-end" style={styles.center}>
-          {bookButton()}
+        <div className="col-8 col-md-4 align-self-end mb-3" style={styles.center}>
+          {user ? (
+            <button
+              className="btn"
+              type="submit"
+              onClick="book"
+              style={styles.button}
+              disabled={disableDatePicker()}
+            >
+              Book
+            </button>
+          ) : (
+            <LoginButton />
+          )}
         </div>
       </form>
-        <ErrorMessage showMessage={disableDatePicker()} message="No dates available"/>
+      <ErrorMessage showMessage={disableDatePicker()} message="No dates available" />
       <hr />
       <div>
         <span>Total price: {totalPrice}</span>
@@ -180,7 +155,6 @@ export default function BookingForm(props) {
 }
 
 const styles = {
-  input: {},
   container: {
     backgroundColor: "var(--lightgrey)",
     maxWidth: "600px",
