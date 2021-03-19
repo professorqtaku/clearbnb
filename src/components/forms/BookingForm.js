@@ -1,17 +1,17 @@
-import{ useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { forwardRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Label } from 'reactstrap'
-import { UserContext } from '../../contexts/UserContextProvider'
-import LoginButton from '../buttons/LoginButton'
-import { addDays } from 'date-fns'
+import { Label } from "reactstrap";
+import { UserContext } from "../../contexts/UserContextProvider";
+import LoginButton from "../buttons/LoginButton";
+import { addDays, getDate, getDay, getTime } from "date-fns";
 
 export default function BookingForm(props) {
   const { hosting, availabilities } = props;
   // const today = new Date();
   // const tomorrow = today.setDate(today.getDate() + 1);
-  const { user } = useContext(UserContext)
+  const { user } = useContext(UserContext);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [guests, setGuests] = useState();
@@ -20,11 +20,11 @@ export default function BookingForm(props) {
   // const [bookedDates, setBookedDates] = useState();
 
   const bookingSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (!user || totalPrice <= 0) {
-      return
+      return;
     }
-  }
+  };
 
   const createBooking = () => {
     const booking = {
@@ -32,28 +32,33 @@ export default function BookingForm(props) {
       hosting: hosting,
       timePeriod: [startDate.getTime(), endDate.getTime()],
       totalPrice: totalPrice,
-      guestAmount: guests
-    }
-  }
+      guestAmount: guests,
+    };
+  };
 
   const bookButton = () => {
     if (user) {
       return (
-        <button className="btn" type="submit" onClick="book" style={styles.button }>Book</button>
-      )
-    }
-      return (
-        <LoginButton />
+        <button
+          className="btn"
+          type="submit"
+          onClick="book"
+          style={styles.button}
+        >
+          Book
+        </button>
       );
-  }
+    }
+    return <LoginButton />;
+  };
 
   const changeStartDate = (date) => {
-    setStartDate(date)
+    setStartDate(date);
     if (date >= endDate) {
-      setEndDate(addDays(date,1))
+      setEndDate(addDays(date, 1));
     }
-  }
-  
+  };
+
   const countDays = (start, end) => {
     let diff = end - start;
     setTotalDays(Math.round(diff / 86400000));
@@ -64,33 +69,45 @@ export default function BookingForm(props) {
     setTotalPrice(total);
   };
 
-  const changeGuestNumber = e => {
+  const changeGuestNumber = (e) => {
     if (e.target.value > hosting.guestAmount) {
-      setGuests(hosting.guestAmount)
-      e.target.value = hosting.guestAmount
-    } else { setGuests(e.target.value) }      
-  }
+      setGuests(hosting.guestAmount);
+      e.target.value = hosting.guestAmount;
+    } else {
+      setGuests(e.target.value);
+    }
+  };
+
   
-  useEffect(() => {
-
-    setTotalPrice(hosting.price);
-    countDays(startDate, endDate)
-    countPrice(totalDays, hosting.price)
-  }, [startDate, endDate, totalDays, guests])
-
   const DatePickerCustomInput = forwardRef(({ value, onClick }, ref) => (
     <input
-      className="form-control"
-      style={styles.input}
-      onClick={onClick}
-      ref={ref}
-      value={value}
+    className="form-control"
+    style={styles.input}
+    onClick={onClick}
+    ref={ref}
+    value={value}
     />
-  ));
-
-  const disableDatePicker = () => {
-    return !availabilities.length;
-  }
+    ));
+    
+    const disableDatePicker = () => {
+      return !availabilities.length;
+    };
+  const availableDates = date => {
+    for (let availability of availabilities) {
+      let startDate = availability.timePeriod[0]
+      let endDate = availability.timePeriod[1]
+      if (getTime(date) >= startDate && getTime(date) <= endDate) {
+        console.log(date);
+      }
+        return getTime(date) >= startDate && getTime(date) <= endDate;
+    }
+  };
+    
+    useEffect(() => {
+      setTotalPrice(hosting.price);
+      countDays(startDate, endDate);
+      countPrice(totalDays, hosting.price);
+    }, [startDate, endDate, totalDays, guests]);
   
   return (
     <div className="container" style={styles.container}>
@@ -108,6 +125,7 @@ export default function BookingForm(props) {
             customInput={<DatePickerCustomInput />}
             closeOnScroll={true}
             disabled={disableDatePicker()}
+            filterDate={availableDates}
           />
         </div>
         <div className="form-group col-12 col-md-6" style={styles.formGroup}>
@@ -122,6 +140,7 @@ export default function BookingForm(props) {
             closeOnScroll={true}
             customInput={<DatePickerCustomInput />}
             disabled={disableDatePicker()}
+            filterDate={availableDates}
           />
         </div>
         <div className="form-group col-12 col-md-8" style={styles.formGroup}>
@@ -159,19 +178,19 @@ const styles = {
   },
   button: {
     backgroundColor: "var(--pink)",
-    textAlign: 'center',
+    textAlign: "center",
     color: "white",
-    width: '100%',
+    width: "100%",
     fontWeight: "bold",
     borderRadius: "50px",
     ":focus": {
       border: "none !important",
-    }
+    },
   },
   center: {
-    margin: '0 auto'
+    margin: "0 auto",
   },
   formGroup: {
-    paddingTop: '10px'
-  }
+    paddingTop: "10px",
+  },
 };
