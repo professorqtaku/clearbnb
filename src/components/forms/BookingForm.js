@@ -1,5 +1,5 @@
 import{ useState, useContext, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { forwardRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Form, FormGroup, Label, Input } from 'reactstrap'
@@ -10,7 +10,7 @@ import { addDays } from 'date-fns'
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 export default function BookingForm(props) {
-  const hosting = props.hosting
+  const { hosting, availabilities } = props;
   const today = new Date();
   const tomorrow = today.setDate(today.getDate() + 1);
   const { user } = useContext(UserContext)
@@ -78,7 +78,21 @@ export default function BookingForm(props) {
     setTotalPrice(hosting.price);
     countDays(startDate, endDate)
     countPrice(totalDays, hosting.price)
-    }, [startDate, endDate, totalDays, guests])
+  }, [startDate, endDate, totalDays, guests])
+
+  const DatePickerCustomInput = forwardRef(({ value, onClick }, ref) => (
+    <input
+      className="form-control"
+      style={styles.input}
+      onClick={onClick}
+      ref={ref}
+      value={value}
+    />
+  ));
+
+  const disableDatePicker = () => {
+    return !availabilities.length;
+  }
   
   return (
     <div className="container" style={styles.container}>
@@ -93,6 +107,9 @@ export default function BookingForm(props) {
             }}
             dateFormat="yyyy-MM-dd"
             minDate={new Date()}
+            customInput={<DatePickerCustomInput />}
+            closeOnScroll={true}
+            disabled={disableDatePicker()}
           />
         </div>
         <div className="form-group col-12 col-md-6" style={styles.formGroup}>
@@ -104,6 +121,9 @@ export default function BookingForm(props) {
             dateFormat="yyyy-MM-dd"
             startDate={addDays(new Date(), 1)}
             minDate={addDays(startDate, 1)}
+            closeOnScroll={true}
+            customInput={<DatePickerCustomInput />}
+            disabled={disableDatePicker()}
           />
         </div>
         <div className="form-group col-12 col-md-8" style={styles.formGroup}>

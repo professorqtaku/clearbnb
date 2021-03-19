@@ -1,4 +1,3 @@
-const { accommodations, hostings } = require("../models.js");
 const models = require("../models.js");
 
 module.exports = (app) => {
@@ -8,13 +7,11 @@ module.exports = (app) => {
     const hostingId = req.params.hostingId
 
     let availabilities = await Availability.find({hosting: hostingId})
-    console.log(availabilities);
     try {
       res.json(availabilities)
     } catch {
       res.json({ error: "Fetch failed" })
     }
-    
   })
 
 
