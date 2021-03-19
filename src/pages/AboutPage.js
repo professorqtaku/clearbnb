@@ -7,7 +7,7 @@ import Background from'../background.jpg'
 const AboutPage = () => {
 
     return(
-      <div style={{ backgroundImage: `url(${Background})`, height: '100vh', margin: '0' }}>
+      <div style={{ backgroundImage: `url(${Background})`, height: '100vh', margin: '0', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
 
         
           <div style={{ width: '100%' }}>
