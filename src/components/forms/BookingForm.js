@@ -91,18 +91,26 @@ export default function BookingForm(props) {
     />
     ));
     
-    const disableDatePicker = () => {
-      return !availabilities.length;
-    };
+  const disableDatePicker = () => {
+    return !availabilities.length;
+  };
+  
   const availableDates = date => {
     for (let availability of availabilities) {
-      let startDate = availability.timePeriod[0]
-      let endDate = availability.timePeriod[1]
-      if (getTime(date) >= startDate && getTime(date) <= endDate) {
-        console.log(date);
+      let startTime = availability.timePeriod[0]
+      let endTime = availability.timePeriod[1]     
+      let startDate = new Date(startTime).toLocaleDateString()
+      let endDate = new Date(endTime).toLocaleDateString()
+
+      if (
+        (getTime(date) >= startTime && getTime(date) <= endTime) ||
+        date.toLocaleDateString() === startDate ||
+        date.toLocaleDateString() === endDate
+      ) {
+        return true;
       }
-        return getTime(date) >= startDate && getTime(date) <= endDate;
     }
+    return false
   };
     
     useEffect(() => {
