@@ -1,4 +1,4 @@
-import { Form, Label } from "reactstrap";
+import { Form} from "reactstrap";
 import { useContext, useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom'
 import Radium from "radium";
@@ -20,7 +20,7 @@ function HostingForm(props) {
   const { accommodations } = useContext(AccommodationContext);
   const { amenities } = useContext(AmenityContext);
   const { user } = useContext(UserContext);
-  const { hostings,addHosting } = useContext(HostingContext);
+  const { addHosting } = useContext(HostingContext);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [totalDays, setTotalDays] = useState(0);

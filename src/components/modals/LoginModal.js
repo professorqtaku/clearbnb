@@ -4,7 +4,6 @@ import LoginForm from '../forms/LoginForm'
 import Nav from '../base/Nav'
 
 function LoginModal(props){
-  const { buttonLabel, className } = props;
 
   const [modal, setModal] = useState(false);
 
@@ -13,7 +12,7 @@ function LoginModal(props){
   return (
     <div>
       <Nav content="Log in" onClick={toggle} />
-      <Modal isOpen={modal} toggle={toggle} className={className}>
+      <Modal isOpen={modal} toggle={toggle}>
         <div className="modal-header" toggle={toggle}>
           <h5 className="modal-title">Log in</h5>
           <button

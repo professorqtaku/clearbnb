@@ -1,8 +1,4 @@
-import {
-  Label,
-  Col,
-  FormGroup
-} from "reactstrap";
+import { Label, FormGroup } from "reactstrap";
 
 export default function AddressFormGroup() {
   return (
