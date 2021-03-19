@@ -1,4 +1,3 @@
-const { availabilities } = require("../models.js");
 const models = require("../models.js");
 
 module.exports = (app) => {
