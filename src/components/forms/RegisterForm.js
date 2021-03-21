@@ -2,7 +2,7 @@ import Radium from 'radium'
 import { UserContext } from '../../contexts/UserContextProvider'
 import { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import ErrorMessage from "../ErrorMessage";
+import ErrorMessage from "../ErrorMessage"
 
 function RegisterForm(props) {
   const { toggleModal } = props
@@ -19,10 +19,7 @@ function RegisterForm(props) {
     let confirmPassword = document.getElementById("confirmPasswordInput").value
 
       let isRegister = await register( email, firstName, lastName, password, confirmPassword)
-      let emailTaken = await User.findOne({ email: user.email })
-      if (emailTaken ) {
-        
-      }
+
       if (isRegister) {
         setRegisterError(true)
         }
