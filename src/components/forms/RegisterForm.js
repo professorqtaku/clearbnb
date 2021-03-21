@@ -20,7 +20,7 @@ function RegisterForm(props) {
 
       let isRegister = await register( email, firstName, lastName, password, confirmPassword)
       if (isRegister) {
-        setRegisterError(false)
+        setRegisterError(true)
         }
   }
   const register = async (email, firstName, lastName, password, confirmPassword) => {
@@ -84,7 +84,7 @@ function RegisterForm(props) {
               <input type="password" className="form-control" id="confirmPasswordInput" placeholder="Confirm Password"
                style={styles.input} required></input>
             </div>
-            <ErrorMessage showMessage={registerError} passwordMessage = "E-mail invalid/Already in Use"/>
+            <ErrorMessage showMessage={registerError} message = "Password does not match"/>
             <button type="submit" style={styles.submit}>Register</button>
             </form>
             </div>
