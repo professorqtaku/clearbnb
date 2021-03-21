@@ -21,7 +21,7 @@ function RegisterForm(props) {
       let isRegister = await register(firstName, lastName, email, password)
       if (isRegister) {
         setRegisterError(false)
-        if (window.location.pathname === "/register") {
+        if (window.location.pathname === "/login") {
           toggleModal()
           history.push("/mypage")
         }
