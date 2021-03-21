@@ -13,12 +13,12 @@ module.exports = (app) => {
     
     req.body = trimObject(req.body)
     if (!req.body.password.length) {
-      res.send('Password is missing')
+      res.json('Password is missing')
       return
     }
 
     if (req.body.password !== req.body.confirmPassword) {
-      res.send('Password does not match')
+      res.json('Password does not match')
       return
     }
     else delete req.body.confirmPassword
@@ -29,11 +29,14 @@ module.exports = (app) => {
 
     let userExist = await User.findOne({ email: user.email })
     if (userExist) {
-      res.send('E-mail already used/is missing')
+      res.json('E-mail already used/is missing')
       return
     }
     await user.save()
-      .then(() => res.json({ 'success': true }))
+    .then(() => {
+      req.session.user = user
+      res.json({ success: true })
+    })
       .catch(() => res.send('Save failed'))
   })
   app.post('/api/login', async (req, res) => {

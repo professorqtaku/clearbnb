@@ -16,29 +16,23 @@ function RegisterForm(props) {
     let lastName = document.getElementById('lastNameInput').value.toString().trim()
     let email = document.getElementById('emailInput').value.toString().trim()
     let password = document.getElementById("passwordInput").value;
-    let confirmPassword = document.getElementById("confirmPasswordInput").value;
-    if (email && password && confirmPassword === password) {
-      let isRegister = await register( email, firstName, lastName, password)
+    let confirmPassword = document.getElementById("confirmPasswordInput").value
+
+      let isRegister = await register( email, firstName, lastName, password, confirmPassword)
       if (isRegister) {
         setRegisterError(false)
-        if (window.location.pathname === "/login") {
-          toggleModal()
-          history.push("/mypage")
         }
-      }
-      setRegisterError(true)
-    }
   }
-
-  const register = async (email, firstName, lastName, password) => {
+  const register = async (email, firstName, lastName, password, confirmPassword) => {
     let userInput = {
       email: email,
       firstName: firstName,
       lastName: lastName,
       password: password,
+      confirmPassword: confirmPassword
     };
 
-    let res = await fetch("/api/register", {
+    let res = await fetch("/api/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -46,17 +40,18 @@ function RegisterForm(props) {
       },
       body: JSON.stringify(userInput),
     });
+
     res = await res.json();
     if (res.success) {
       fetchUser()
-      return true;
+      history.push('/MyPage')
     }
-    return false;
+    return true;
   };
 
   const toLogin = () => {
     toggleModal()
-    history.push('/Login')
+    history.push('/')
   }
 
     return (
@@ -89,7 +84,7 @@ function RegisterForm(props) {
               <input type="password" className="form-control" id="confirmPasswordInput" placeholder="Confirm Password"
                style={styles.input} required></input>
             </div>
-            <ErrorMessage showMessage={registerError} message="Email/password incorrect"/>
+            <ErrorMessage showMessage={registerError} passwordMessage = "E-mail invalid/Already in Use"/>
             <button type="submit" style={styles.submit}>Register</button>
             </form>
             </div>
