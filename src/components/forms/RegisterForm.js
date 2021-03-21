@@ -19,6 +19,10 @@ function RegisterForm(props) {
     let confirmPassword = document.getElementById("confirmPasswordInput").value
 
       let isRegister = await register( email, firstName, lastName, password, confirmPassword)
+      let emailTaken = await User.findOne({ email: user.email })
+      if (emailTaken ) {
+        
+      }
       if (isRegister) {
         setRegisterError(true)
         }
