@@ -11,25 +11,17 @@ const RegisterButton = (props) => {
 
   return (
     <div>
-      <button className="btn" style={styles.button} onClick={toggle}>Log in</button>
+      <button className="btn" style={styles.button} onClick={toggle}>Register</button>
       <Modal isOpen={modal} toggle={toggle}>
         <div className="modal-header" toggle={toggle}>
-          <h5 className="modal-title">Become a member</h5>
-          <button
-            type="button"
-            className="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-            onClick={toggle}
-          ></button>
+         <h5 className="modal-title">Register</h5>
+         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={toggle}></button>
         </div>
         <ModalBody>
           <RegisterForm toggleModal={toggle} />
         </ModalBody>
         <ModalFooter>
-          <Button color="secondary" onClick={toggle}>
-            Close
-          </Button>
+          <Button color="secondary" onClick={toggle}> Close </Button>
         </ModalFooter>
       </Modal>
     </div>
