@@ -18,7 +18,7 @@ function RegisterForm(props) {
     let password = document.getElementById("passwordInput").value;
     let confirmPassword = document.getElementById("confirmPasswordInput").value;
     if (email && password && confirmPassword === password) {
-      let isRegister = await register(firstName, lastName, email, password)
+      let isRegister = await register( email, firstName, lastName, password)
       if (isRegister) {
         setRegisterError(false)
         if (window.location.pathname === "/login") {
@@ -30,11 +30,11 @@ function RegisterForm(props) {
     }
   }
 
-  const register = async (firstName, lastName, email, password) => {
+  const register = async (email, firstName, lastName, password) => {
     let userInput = {
+      email: email,
       firstName: firstName,
       lastName: lastName,
-      email: email,
       password: password,
     };
 
