@@ -1,6 +1,7 @@
 import { HostingContext } from '../../contexts/HostingContextProvider'
 import { useEffect, useContext} from 'react'
 import { useHistory } from "react-router-dom";
+import MyHostingCard from "../cards/HostingCard"
 
 
 export default function ResultList() {
@@ -26,33 +27,33 @@ export default function ResultList() {
     } else {
       noMatches = ""
     }
-    const card = hostingItem => (
-      <div style={styles.cardStyle} key={hostingItem._id}>
-        <div
-          className="card"
-          style={styles.cardWrapper}
-          onClick={() => history.push('/hosting/' + hostingItem._id)}
-        >
-          <img style={styles.image}
-            src={hostingItem.galleries[0]}
-            alt={'Image not found'}
+    // const card = hostingItem => (
+    //   <div style={styles.cardStyle} key={hostingItem._id}>
+    //     <div
+    //       className="card"
+    //       style={styles.cardWrapper}
+    //       onClick={() => history.push('/hosting/' + hostingItem._id)}
+    //     >
+    //       <img style={styles.image}
+    //         src={hostingItem.galleries[0]}
+    //         alt={'Image not found'}
 
-          />
-          <div>
-            <h3 style={styles.title} >{hostingItem.title}</h3>
-            <p style={styles.info} >{hostingItem.host.firstName}{hostingItem.host.lastName} </p>
-            <p style={styles.info}>${hostingItem.price}/night </p>
-            <p style={styles.info} >{hostingItem.guestAmount} Guests</p>
-          </div>
-        </div>
-      </div>
-    )
+    //       />
+    //       <div>
+    //         <h3 style={styles.title} >{hostingItem.title}</h3>
+    //         <p style={styles.info} >{hostingItem.host.firstName}{hostingItem.host.lastName} </p>
+    //         <p style={styles.info}>${hostingItem.price}/night </p>
+    //         <p style={styles.info} >{hostingItem.guestAmount} Guests</p>
+    //       </div>
+    //     </div>
+    //   </div>
+    // )
 
     return (
       <div>
         <h4 style={styles.noMatchesFound}>{noMatches}</h4>
         <div style={styles.list} >
-          {allFilteredList.map(hostingItem => card(hostingItem))}
+          {allFilteredList.map(hosting => <MyHostingCard key={hosting._id} hosting={hosting} />)}
         </div>
       </div>
     )
