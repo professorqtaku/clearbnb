@@ -1,3 +1,4 @@
+const { is } = require('date-fns/locale')
 const models = require('../models')
  
 module.exports = (app) => {
@@ -17,8 +18,14 @@ module.exports = (app) => {
     }
 
     let availabilities = await Availability.find({ hosting: (booking.hosting) }).exec();
+    let bookings = await Booking.find({ hosting: booking.hosting }).exec();
     
-    let isValid = checkAvailability(availabilities, booking.timePeriod)
+    let isValid = checkAvailability(
+      availabilities,
+      bookings,
+      booking.timePeriod[0],
+      booking.timePeriod[1]
+    );
     
     if (!isValid) {
       res.json({ error: "Booked time unavailable" });
@@ -35,27 +42,51 @@ module.exports = (app) => {
 
 }
 
-const checkAvailability = (availabilities, periodToCheck) => {
+const checkAvailability = (availabilities, bookings, startDate, endDate) => {
   if (availabilities.length === 0) {
     return false
   }
-
   let isValid = false;
-  for (let a of availabilities) {
-    let startDate = a.timePeriod[0];
-    let endDate = a.timePeriod[1];
-    if (
-      periodToCheck[0] >= startDate &&
-      periodToCheck[1] <= endDate
-    ) {
+  for (let availability of availabilities) {
+    let availablityStartDate = availability.timePeriod[0];
+    let avalabilityEndDate = availability.timePeriod[1];
+    if (startDate >= availablityStartDate && endDate <= avalabilityEndDate) {
       isValid = true;
       break;
     }
   }
-
+  if (isValid) {
+    isValid = false
+    for (let booking of bookings) {
+      let bookingStartDate = booking.timePeriod[0];
+      let bookingEndDate = booking.timePeriod[1]
+      if (
+        startDate >= bookingStartDate &&
+        endDate >= bookingEndDate ||
+        startDate <= bookingStartDate &&
+        endDate <= bookingEndDate
+      ) {
+        isValid = true
+        break;
+      }
+    }
+  }
   return isValid
 }
 
 const changeTimeStamp = (startDate, endDate) => {
-  
+  startDate = new Date(startDate);
+  startDate = new Date(
+    startDate.getFullYear(),
+    startDate.getMonth(),
+    startDate.getDate()
+  );
+  endDate = new Date(endDate);
+  endDate.setDate(endDate.getDate() + 1);
+  endDate = new Date(
+    endDate.getFullYear(),
+    endDate.getMonth(),
+    endDate.getDate()
+  );
+  return [startDate, endDate - 1];
 }
