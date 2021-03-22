@@ -63,14 +63,7 @@ export default function BookingForm(props) {
     for (let availability of availabilities) {
       let startTime = availability.timePeriod[0];
       let endTime = availability.timePeriod[1];
-      let startDate = new Date(startTime).toLocaleDateString();
-      let endDate = new Date(endTime).toLocaleDateString();
-
-      if (
-        (getTime(date) >= startTime && getTime(date) <= endTime) ||
-        date.toLocaleDateString() === startDate ||
-        date.toLocaleDateString() === endDate
-      ) {
+      if (getTime(date) >= startTime && getTime(date) <= endTime) {
         return true;
       }
     }
