@@ -25,7 +25,7 @@ module.exports = (app) => {
     }
     let doc = ''
     try {
-      doc = await models[req.params.model].findById(req.params.id).populate(['host', 'address', 'accommodation']).exec()
+      doc = await models[req.params.model].findById(req.params.id).populate(['host', 'address', 'accommodation', 'hosting', 'client']).exec()
     }
     catch (e) {
       return
