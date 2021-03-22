@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
-import LoginForm from '../forms/LoginForm'
-import Nav from '../base/Nav'
+import LoginForm from "../forms/LoginForm";
+import Radium from 'radium'
 
-function LoginModal(props){
+const LoginButton = (props) => {
 
   const [modal, setModal] = useState(false);
 
@@ -11,7 +11,7 @@ function LoginModal(props){
 
   return (
     <div>
-      <Nav content="Log in" onClick={toggle} />
+      <button className="btn" style={styles.button} onClick={toggle}>Log in</button>
       <Modal isOpen={modal} toggle={toggle}>
         <div className="modal-header" toggle={toggle}>
           <h5 className="modal-title">Log in</h5>
@@ -36,4 +36,17 @@ function LoginModal(props){
   );
 };
 
-export default LoginModal;
+export default Radium(LoginButton);
+
+const styles = {
+  button: {
+    backgroundColor: 'var(--pink)',
+    color: 'white',
+    fontWeight: 'bold',
+    width: '100%',
+    borderRadius: '50px',
+    ':focus': {
+      border: 'none !important'
+    }
+  }
+}

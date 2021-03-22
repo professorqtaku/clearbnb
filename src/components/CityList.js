@@ -5,7 +5,7 @@ function CityList(props) {
 
   return (
     <div className="container" style={styles}>
-      {cities.map(c => <CityCard key={c.name} city={ c }/>)}
+      {cities.map(city => <CityCard key={city.name} city={ city }/>)}
     </div>
   );
 }

@@ -16,6 +16,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 code {
@@ -27,3 +28,26 @@ code {
   outline: none !important;
   box-shadow: none;
 }
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container,
+.react-datepicker__input-container input {
+    display: block;
+    width: 100%;
+    
+}
+
+.react-datepicker__input-container input {
+    border: 0.1px solid var(--darkgrey);
+    border-radius: 5px;
+} 
+
+.form-check-input:checked {
+  background-color: var(--pink) !important;
+  border-color: var(--pink) !important;
+}
+.form-check-input:focus {
+  box-shadow: 0 0 10px 1px var(--pink), 0 0 10px 1px #fff !important;
+}
+
+

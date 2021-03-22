@@ -3,20 +3,20 @@ const mongoose = global.mongoose
 const User = mongoose.model("User", {
   email: {
     type: String,
-    require: true,
+    required: true,
     unique: true
   },
   firstName: {
     type: String,
-    require: true
+    required: true
   },
   lastName: {
     type: String,
-    require: true
+    required: true
   },
   password: {
     type: String,
-    require: true
+    required: true
   },
   phoneNumber: {
     type: Number
@@ -87,29 +87,31 @@ const Hosting = mongoose.model("Hosting", {
   }],
   accommodation: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Accommodation"
+    ref: "Accommodation",
+    required: true
   },
   galleries: [{
-    type: String
+    type: String,
+    required: true
   }],
   title: {
     type: String,
-    require: true
+    required: true
   },
   description: {
     type: String,
   },
   guestAmount: {
     type: Number,
-    require: true
+    required: true
   },
   bedAmount: {
     type: Number,
-    require: true
+    required: true
   },
   bedroomAmount: {
     type: Number,
-    require: true
+    required: true
   },
 
 

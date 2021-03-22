@@ -1,20 +1,15 @@
-import React, { useState } from "react";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
-import LoginForm from '../forms/LoginForm'
-import Nav from '../base/Nav'
+import HostingForm from "../forms/HostingForm";
 
-function LoginModal(props){
-
-  const [modal, setModal] = useState(false);
-
-  const toggle = () => setModal(!modal);
+function PostingModal(props) {
+  const { modal, toggle } = props;
+  
 
   return (
     <div>
-      <Nav content="Log in" onClick={toggle} />
-      <Modal isOpen={modal} toggle={toggle}>
+      <Modal isOpen={modal} toggle={toggle} size="lg">
         <div className="modal-header" toggle={toggle}>
-          <h5 className="modal-title">Log in</h5>
+          <h5 className="modal-title">Post a hosting</h5>
           <button
             type="button"
             className="btn-close"
@@ -24,7 +19,7 @@ function LoginModal(props){
           ></button>
         </div>
         <ModalBody>
-          <LoginForm toggleModal={toggle} />
+          <HostingForm toggleModal={toggle} />
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={toggle}>
@@ -36,4 +31,4 @@ function LoginModal(props){
   );
 };
 
-export default LoginModal;
+export default PostingModal;

@@ -1,7 +1,7 @@
 const models = require('../models.js')
 const bcrypt = require('bcrypt')
 
-
+const salt = "Truffle5@lt";
 
 module.exports = (app) => {
   app.post('/api/users', async (req, res) => {
@@ -10,30 +10,33 @@ module.exports = (app) => {
       res.json({ error: 'Someone is already logged in' })
       return
     }
-
+    
     req.body = trimObject(req.body)
     if (!req.body.password.length) {
-      res.send('Password is missing')
+      res.json({ error: 'Password is missing'})
       return
     }
 
     if (req.body.password !== req.body.confirmPassword) {
-      res.send('Password does not match')
+      res.json({ error: 'Password does not match'})
       return
     }
     else delete req.body.confirmPassword
 
-    let hashedPassword = await hashPassword(req.body.password)
+    let hashedPassword = await hashPassword(req.body.password + salt)
 
     let user = new User({ ...req.body, password: hashedPassword })
 
     let userExist = await User.findOne({ email: user.email })
     if (userExist) {
-      res.send('E-mail already used/is missing')
+      res.json( {error: "E-mail already used/is missing"});
       return
     }
     await user.save()
-      .then(() => res.json({ 'success': true }))
+    .then(() => {
+      req.session.user = user
+      res.json({ success: true })
+    })
       .catch(() => res.send('Save failed'))
   })
   app.post('/api/login', async (req, res) => {
@@ -41,22 +44,21 @@ module.exports = (app) => {
       res.json({ error: "Someone is already logged in" });
       return
     }
-
+    
     let user = req.body
     let userExist = await models['users'].findOne({ email: user.email })
     if (!userExist) {
       res.json({ error: 'Bad credentials' })
       return
     }
-
-    const match = await checkPassword(user.password, userExist.password)
-    if (match) {
+    
+    const match = await checkPassword(user.password+salt, userExist.password)
+    if (match) { 
       req.session.user = userExist;
-      userExist.password = ''
-      res.json(userExist);
+      res.json({ success: "Logged in" });
       return
     }
-    res.json({ error: 'Bad credentials' })
+    res.json({ error: 'Bad credentials' })  
   })
 
   app.get("/api/login", (req, res) => {
@@ -65,7 +67,7 @@ module.exports = (app) => {
       delete user.password; // remove password in answer
       res.json(user);
     } else {
-      res.json({ error: "Not logged in" });
+      res.json({ error: "Not logged in" }); 
     }
   });
 
