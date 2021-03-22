@@ -28,7 +28,7 @@ export default function SearchBar(props) {
   const [guests, setGuests] = useState('')
 
   return (
-    <form style={padding} onSubmit={goToSearchPage}>
+    <form style={{ margin: "0 auto 0" }} onSubmit={goToSearchPage}>
       <div className="container" style={styles.container}>
         <div className="row">
 
@@ -54,7 +54,7 @@ export default function SearchBar(props) {
 
           <div className="col-6 col-md-3 col-lg-2">
             <label></label>
-            <button className="form-control" type="submit">Search</button>
+            <button style={styles.button }className="form-control" type="submit">Search</button>
           </div>
 
         </div>
@@ -67,9 +67,11 @@ const styles = {
   container: {
     padding: "1em",
     borderRadius: "10px",
-    backgroundColor: "rgb:",
+    backgroundColor: "rgba(255,255,255,0.7)",
+  },
+  button: {
+    color: "white",
+    backgroundColor: "#4CAF50",
+    textDecoration: "none"
   }
-}
-const padding = {
-  marginTop: "3vh"
 }
