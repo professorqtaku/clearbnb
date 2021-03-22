@@ -65,6 +65,10 @@ module.exports = (app) => {
   })
 
   app.post('/rest/:model/', async (req, res) => {
+    if (req.params.model === "bookings" || req.params.model === "users") {
+      res.json({ error: "Post unavailable" });
+      return;
+    }
     let model = models[req.params.model]
     let doc = new model(req.body)
     try {

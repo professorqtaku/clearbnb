@@ -5,17 +5,17 @@ module.exports = (app) => {
     const Booking = models['bookings']
     const Availability = models['availabilities']
     let booking = new Booking(req.body)
+
+    booking.timePeriod = changeTimeStamp(booking.timePeriod[0], booking.timePeriod[1])
     
     if (
       req.body.hosting.guestAmount < booking.guestAmount ||
       booking.timePeriod[1] - booking.timePeriod[0] < 86400000
     ) {
-      res.json({ error: "invalid input" });
+      res.json({ error: "Invalid input" });
       return;
     }
 
-
-    
     let availabilities = await Availability.find({ hosting: (booking.hosting) }).exec();
     
     let isValid = checkAvailability(availabilities, booking.timePeriod)
@@ -24,12 +24,12 @@ module.exports = (app) => {
       res.json({ error: "Booked time unavailable" });
       return
     }
+    res.send('Everything is fine')
+    return
 
-    
-
-      await booking.save()
-        .then(() => res.json(booking))
-        .catch(() => res.json({ error: "Save failed" }));
+      // await booking.save()
+      //   .then(() => res.json(booking))
+      //   .catch(() => res.json({ error: "Save failed" }));
   })
 
 
@@ -54,4 +54,8 @@ const checkAvailability = (availabilities, periodToCheck) => {
   }
 
   return isValid
+}
+
+const changeTimeStamp = (startDate, endDate) => {
+  
 }
