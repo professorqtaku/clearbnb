@@ -1,4 +1,3 @@
-const { is } = require('date-fns/locale')
 const models = require('../models')
  
 module.exports = (app) => {
@@ -31,12 +30,10 @@ module.exports = (app) => {
       res.json({ error: "Booked time unavailable" });
       return
     }
-    res.send('Everything is fine')
-    return
 
-      // await booking.save()
-      //   .then(() => res.json(booking))
-      //   .catch(() => res.json({ error: "Save failed" }));
+    await booking.save()
+      .then(() => res.json(booking))
+      .catch(() => res.json({ error: "Save failed" }));
   })
 
 
@@ -61,13 +58,13 @@ const checkAvailability = (availabilities, bookings, startDate, endDate) => {
       let bookingStartDate = booking.timePeriod[0];
       let bookingEndDate = booking.timePeriod[1]
       if (
-        startDate >= bookingStartDate &&
-        endDate >= bookingEndDate ||
         startDate <= bookingStartDate &&
-        endDate <= bookingEndDate
+        endDate <= bookingEndDate ||
+        startDate >= bookingStartDate &&
+        endDate >= bookingEndDate
       ) {
-        isValid = true
-        break;
+        isValid = false
+        break
       }
     }
   }
