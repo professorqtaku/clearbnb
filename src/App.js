@@ -8,7 +8,6 @@ import AccommodationContextProvider from "./contexts/AccommodationContextProvide
 import HomePage from "./pages/HomePage";
 import MyPage from "./pages/MyPage";
 import HostingDetailPage from "./pages/HostingDetailPage";
-import RegisterPage from "./pages/RegisterPage";
 import MyHostingPage from "./pages/MyHostingPage";
 import PostHostingPage from "./pages/PostHostingPage";
 
@@ -34,11 +33,6 @@ function App() {
                     <main>
                       <Switch>
                         <Route exact path="/" component={HomePage} />
-                        <Route
-                          exact
-                          path="/register"
-                          component={RegisterPage}
-                        />
                         <Route exact path="/myPage" component={MyPage} />
                         <Route
                           exact

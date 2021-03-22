@@ -7,7 +7,29 @@ export default function LoginErrorMessage(props) {
       </p>
     )
   }
-  
+  return <div style={styles.message}>{showMessage ? printMessage() : null} </div>;
+}
+
+export function RegisterErrorMessage(props) {
+  const { showMessage, message } = props
+  const printMessage = () => {
+    return (
+      <p>
+        { message }
+      </p>
+    )
+  }
+  return <div style={styles.message}>{showMessage ? printMessage() : null} </div>;
+}
+export function SecondRegisterErrorMessage(props) {
+  const { showMessage, message } = props
+  const printMessage = () => {
+    return (
+      <p>
+        { message }
+      </p>
+    )
+  }
   return <div style={styles.message}>{showMessage ? printMessage() : null} </div>;
 }
 
