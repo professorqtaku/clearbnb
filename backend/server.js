@@ -27,8 +27,10 @@ global.mongoose.connect(atlasUrl, {
 
 const rest = require("./commands/rest");
 const api = require("./commands/api");
+const auth = require("./commands/auth");
 rest(app);
 api(app);
+auth(app);
 
 app.listen(3001, () => {
   console.log("Server started ar port 3001");
