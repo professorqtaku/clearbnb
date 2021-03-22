@@ -4,13 +4,16 @@ import { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import ErrorMessage from "../ErrorMessage"
 
+
 function RegisterForm(props) {
   const { toggleModal } = props
   const { fetchUser } = useContext(UserContext)
   const history = useHistory()
   const [registerError, setRegisterError] = useState(false)
+  const [secondRegisterError, setSecondRegisterError] = useState(false)
 
   const submitRegister = async (e) => {
+    
     e.preventDefault();
     let firstName = document.getElementById('firstNameInput').value.toString().trim()
     let lastName = document.getElementById('lastNameInput').value.toString().trim()
@@ -18,15 +21,19 @@ function RegisterForm(props) {
     let password = document.getElementById("passwordInput").value;
     let confirmPassword = document.getElementById("confirmPasswordInput").value
 
-      let isRegister = await register( email, firstName, lastName, password, confirmPassword)
+    setRegisterError(false)
+    setSecondRegisterError(false)
 
-      if (isRegister && password === confirmPassword) {
-        setRegisterError(false)
-        
-        }
-      else{
+    let response = await register( email, firstName, lastName, password, confirmPassword)
+
+      if (password !== confirmPassword) {
         setRegisterError(true)
       }
+      else if(response.error && password === confirmPassword) {
+        setSecondRegisterError(true)
+        setRegisterError(false)
+        }
+     
   }
   const register = async (email, firstName, lastName, password, confirmPassword) => {
     let userInput = {
@@ -51,7 +58,7 @@ function RegisterForm(props) {
       fetchUser()
       history.push('/MyPage')
     }
-    return true;
+    return res;
   };
 
   const toLogin = () => {
@@ -89,9 +96,8 @@ function RegisterForm(props) {
               <input type="password" className="form-control" id="confirmPasswordInput" placeholder="Confirm Password"
                style={styles.input} required></input>
             </div>
-            {
-              //<div style= {styles.message}><p>E-mail already used/is missing</p></div>
-            }
+            
+            <ErrorMessage showMessage={secondRegisterError} message = "E-mail already used/is missing"/>
             <ErrorMessage showMessage={registerError} message = "Password does not match"/>
             
             <button type="submit" style={styles.submit}>Register</button>

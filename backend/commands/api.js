@@ -13,12 +13,12 @@ module.exports = (app) => {
     
     req.body = trimObject(req.body)
     if (!req.body.password.length) {
-      res.json('Password is missing')
+      res.json({ error: 'Password is missing'})
       return
     }
 
     if (req.body.password !== req.body.confirmPassword) {
-      res.json('Password does not match')
+      res.json({ error: 'Password does not match'})
       return
     }
     else delete req.body.confirmPassword
@@ -29,7 +29,7 @@ module.exports = (app) => {
 
     let userExist = await User.findOne({ email: user.email })
     if (userExist) {
-      res.json('E-mail already used/is missing')
+      res.json( {error: "E-mail already used/is missing"});
       return
     }
     await user.save()
