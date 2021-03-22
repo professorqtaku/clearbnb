@@ -29,31 +29,47 @@ export default function SearchBar(props) {
 
   return (
     <form style={padding} onSubmit={goToSearchPage}>
-      <div className="form-group">
-        <div className="col">
-          <input className="form-control" type="text" placeholder="location" onChange={event => setLocation(event.target.value)} required />
-        </div>
-        <div className="form-group row">
-          <div className="col">From
-        <DatePicker className="form-control" selected={startDate} onChange={date => setStartDate(date)} />
+      <div className="container" style={styles.container}>
+        <div className="row">
+
+          <div className="col-md-3 col-lg-4">
+            <label>Location</label>
+            <input className="form-control" type="text" placeholder="location" onChange={event => setLocation(event.target.value)} required />
           </div>
-          <div className="col">To
-        <DatePicker className="form-control" selected={endDate} onChange={date => setEndDate(date)} />
+
+          <div className="col-6 col-md-3 col-lg-2">
+            <label>From</label>
+            <DatePicker className="form-control" selected={startDate} onChange={date => setStartDate(date)} />
           </div>
-        </div>
-        <div className="form-group row">
-          <div className="col">
+
+          <div className="col-6 col-md-3 col-lg-2">
+            <label>To</label>
+            <DatePicker className="form-control" selected={endDate} onChange={date => setEndDate(date)} />
+          </div>
+
+          <div className="col-6 col-md-3 col-lg-2">
+            <label>Guests</label>
             <input className="form-control" type="text" placeholder="Guests" onChange={event => setGuests(event.target.value)} />
           </div>
-          <div className="col">
+
+          <div className="col-6 col-md-3 col-lg-2">
+            <label></label>
             <button className="form-control" type="submit">Search</button>
           </div>
+
         </div>
       </div>
     </form >
   )
 }
 
+const styles = {
+  container: {
+    padding: "1em",
+    borderRadius: "10px",
+    backgroundColor: "rgb:",
+  }
+}
 const padding = {
   marginTop: "3vh"
 }
