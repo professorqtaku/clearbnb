@@ -28,45 +28,32 @@ export default function SearchBar(props) {
   const [guests, setGuests] = useState('')
 
   return (
-    <form style={styles.gridContainer} onSubmit={goToSearchPage}>
-      <div style={styles.location}>
-        <input type="text" style={styles.input} onChange={event => setLocation(event.target.value)} placeholder="location" required />
+    <form style={padding} onSubmit={goToSearchPage}>
+      <div className="form-group">
+        <div className="col">
+          <input className="form-control" type="text" placeholder="location" onChange={event => setLocation(event.target.value)} required />
+        </div>
+        <div className="form-group row">
+          <div className="col">From
+        <DatePicker className="form-control" selected={startDate} onChange={date => setStartDate(date)} />
+          </div>
+          <div className="col">To
+        <DatePicker className="form-control" selected={endDate} onChange={date => setEndDate(date)} />
+          </div>
+        </div>
+        <div className="form-group row">
+          <div className="col">
+            <input className="form-control" type="text" placeholder="Guests" onChange={event => setGuests(event.target.value)} />
+          </div>
+          <div className="col">
+            <button className="form-control" type="submit">Search</button>
+          </div>
+        </div>
       </div>
-      <div style={styles.gridItem}>From
-        <DatePicker style={styles.datePicker} selected={startDate} onChange={date => setStartDate(date)} />
-      </div>
-      <div style={styles.gridItem}>To
-        <DatePicker style={styles.datePicker} selected={endDate} onChange={date => setEndDate(date)} />
-      </div>
-      <div style={styles.gridItem}>
-        <input style={styles.input} onChange={event => setGuests(event.target.value)} placeholder="Guests" />
-      </div>
-      <div style={styles.gridItem}>
-        <button style={styles.input} type="submit">Search</button>
-      </div>
-    </form>
+    </form >
   )
 }
 
-const styles = {
-  gridContainer: {
-    marginTop: '50px',
-    // backgroundColor: 'rgba(255, 255, 255, 0.73)',
-    display: 'grid',
-    gridTemplateRows: '3fr',
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gridGap: '10px'
-  },
-
-  input: {
-    width: '100%'
-  },
-
-  location: {
-    gridArea: '1/1/2/3'
-  },
-
-  datePicker: {
-    width: '100%'
-  }
+const padding = {
+  marginTop: "3vh"
 }

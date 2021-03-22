@@ -25,12 +25,14 @@ const HostingCard = (props) => {
         <div className="col-md-8">
           <div className="card-body">
             <h5 className="card-title">{hosting.title}</h5>
-            <p className="card-text">
-              <span>{hosting.guestAmount} guests</span>
-              <br />
-              <span>{hosting.bedAmount} beds</span>
-            </p>
-            <p className="col-g-2 card-text">{hosting.price}/night</p>
+            <div className="row-md-8">
+              <p className="col-md-3 card-text">
+                <span>{hosting.guestAmount} guests</span>
+                <br />
+                <span>{hosting.bedAmount} beds</span>
+              </p>
+              <p className="col-md-3 card-text">{hosting.price}/night</p>
+            </div>
           </div>
         </div>
       </div>
