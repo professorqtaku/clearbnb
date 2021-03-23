@@ -17,6 +17,11 @@ import Footer from "./components/base/Footer";
 import { StyleRoot } from "radium";
 
 function App() {
+
+  const page404 = () => (
+    <h1>Page not found: {window.location.pathname}</h1>
+  )
+
   return (
     <StyleRoot>
       <div className="App" style={styles.app}>
@@ -48,6 +53,10 @@ function App() {
                           exact
                           path="/mypage/post"
                           component={PostHostingPage}
+                        />
+                        <Route
+                          path="*"
+                          component={page404}
                         />
                       </Switch>
                     </main>
