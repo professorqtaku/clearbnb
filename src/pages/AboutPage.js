@@ -24,7 +24,10 @@ const AboutPage = () => {
      
     );
 }
- 
+
+export default AboutPage;
+
+
 const styles ={
 
   box: {
@@ -32,28 +35,27 @@ const styles ={
     float: 'center',
     margin: '30vh 0 0 20vh',
     maxWidth: '400px',
-    backgroundColor: 'red',
-    opacity: '70%',
+    backgroundColor: "var(--pink)",
+    opacity: '90%',
     padding: '30px',
     borderRadius: '10px'
 
   },
   text: {
-    color: 'white',
-    fontWeight: '900',
+    color: "white",
+    fontWeight: '500',
     letterSpacing: '0.7px'
   },
   background: {
     backgroundImage: ''
   },
   p:{
-    color: 'black',
+    color: "white !important",
   }
 
 
 }
 
-    export default AboutPage;
 
 
 
