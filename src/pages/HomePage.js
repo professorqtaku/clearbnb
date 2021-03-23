@@ -13,7 +13,7 @@ export default function HomePage() {
   return (
 
     <div className="homePage">
-      <div class="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundPosition: 'center', height: "60vh", marginBottom: "5vw"}}>
+      <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundPosition: 'center', height: "60vh", marginBottom: "5vw"}}>
         <SearchBar setIsSearch={setIsSearch} />
       </div>
       {isSearch ? <ResultList /> : <CityList />}

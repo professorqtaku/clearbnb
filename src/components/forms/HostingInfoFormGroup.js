@@ -29,7 +29,7 @@ export default function HostingInfoFormGroup(props) {
       <FormGroup className="col-12 col-md-6 mb-3">
         <label className=" form-label">Price per night*</label>
         <div className="input-group">
-          <span class="input-group-text">$</span>
+          <span className="input-group-text">$</span>
           <input
             className="form-control"
             type="number"

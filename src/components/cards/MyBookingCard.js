@@ -27,9 +27,9 @@ const MyBookingCard = (props) => {
   }
 
   return (
-    <div class="card mb-3" style={styles.card} onClick={goTo}>
-      <div class="row g-0" style={styles.row}>
-        <div class="col-md-4">
+    <div className="card mb-3" style={styles.card} onClick={goTo}>
+      <div className="row g-0" style={styles.row}>
+        <div className="col-md-4">
           <img
             src={booking.hosting.galleries[0]}
             alt="..."
@@ -37,14 +37,14 @@ const MyBookingCard = (props) => {
             onError={(event) => (event.target.src = NoImage)}
           />
         </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">{booking.hosting.title}</h5>
-            <p class="card-text">
-              <span>{showDate()}</span>
-            </p>
-            <p class="card-text">
-              <small class="text-muted">${booking.totalPrice}</small>
+        <div className="col-md-8">
+          <div className="card-body">
+            <h5 className="card-title">{booking.hosting.title}</h5>
+            <h6 className="card-title">
+              {showDate()}
+            </h6>
+            <p className="card-text">
+              ${booking.totalPrice}
             </p>
           </div>
         </div>
