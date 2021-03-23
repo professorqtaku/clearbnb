@@ -25,7 +25,7 @@ const AboutPage = () => {
     );
 }
 
-export default AboutPage;
+export default Radium(AboutPage) ;
 
 
 const styles ={
@@ -33,24 +33,31 @@ const styles ={
   box: {
     display: 'inline-block',
     float: 'center',
-    margin: '30vh 0 0 20vh',
-    maxWidth: '400px',
+    margin: '50px ',
+    marginTop: '100px',
+    maxWidth: '300px',
     backgroundColor: "var(--pink)",
     opacity: '90%',
     padding: '30px',
-    borderRadius: '10px'
+    borderRadius: '30px',
+    textAlign: 'center'
 
   },
   text: {
+    textAlign: 'center',
     color: "white",
     fontWeight: '500',
-    letterSpacing: '0.7px'
+    letterSpacing: '0.7px',
+    margin:'auto'
+    
   },
   background: {
-    backgroundImage: ''
+    backgroundImage: '../background.jpg',
+    height:'100vh'
   },
   p:{
     color: "white !important",
+    textAlign: 'center'
   }
 
 
