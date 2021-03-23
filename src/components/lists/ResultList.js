@@ -1,8 +1,6 @@
 import { HostingContext } from '../../contexts/HostingContextProvider'
-import { useEffect, useContext} from 'react'
-import { useHistory } from "react-router-dom";
+import { useEffect, useContext } from 'react'
 import MyHostingCard from "../cards/HostingCard"
-
 
 export default function ResultList() {
 
@@ -16,10 +14,10 @@ export default function ResultList() {
     const search = JSON.parse(localStorage.getItem("search"));
     const searchGuests = search[0].guests
     const filterByCity = hostings.filter((hosting) => hosting.address.city.includes(search[0].location));
+
     var allFilteredList;
     if (searchGuests === "") {
       allFilteredList = filterByCity
-      console.log("no guest input")
     } else {
       allFilteredList = filterByCity.filter((item) => item.guestAmount === parseInt(searchGuests));
     }
