@@ -10,7 +10,7 @@ const AboutPage = () => {
       <div style={{ backgroundImage: `url(${Background})`, height: '100vh', margin: '0', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
 
         
-          <div style={{ width: '100%' }}>
+        <div style={styles.div}>
             <div style={styles.box}>
               <p style={styles.text}>
              
@@ -28,7 +28,11 @@ const AboutPage = () => {
 export default Radium(AboutPage) ;
 
 
-const styles ={
+const styles = {
+  
+  div: {
+    width: '100%'
+  },
 
   box: {
     display: 'inline-block',
@@ -36,8 +40,7 @@ const styles ={
     margin: '50px ',
     marginTop: '100px',
     maxWidth: '300px',
-    backgroundColor: "var(--pink)",
-    opacity: '90%',
+    backgroundColor: "rgba(255, 100, 111, 0.9)",
     padding: '30px',
     borderRadius: '30px',
     textAlign: 'center'
