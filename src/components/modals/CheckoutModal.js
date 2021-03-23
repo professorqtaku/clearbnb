@@ -21,6 +21,9 @@ function CheckoutModal(props){
         </div>
         <ModalBody>
         <div> 
+            <button>
+                type="button" 
+            </button>
         </div>
         </ModalBody>
         <ModalFooter>
