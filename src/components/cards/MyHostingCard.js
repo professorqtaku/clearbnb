@@ -12,9 +12,9 @@ const MyHostingCard = (props) => {
   }
 
   return (
-    <div class="card mb-3" style={styles.card} onClick={goTo}>
-      <div class="row g-0" style={styles.row}>
-        <div class="col-md-4">
+    <div className="card mb-3" style={styles.card} onClick={goTo}>
+      <div className="row g-0" style={styles.row}>
+        <div className="col-md-4">
           <img
             src={hosting.galleries[0]}
             alt="..."
@@ -22,16 +22,16 @@ const MyHostingCard = (props) => {
             onError={(event) => (event.target.src = NoImage)}
           />
         </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">{hosting.title}</h5>
-            <p class="card-text">
+        <div className="col-md-8">
+          <div className="card-body">
+            <h5 className="card-title">{hosting.title}</h5>
+            <p className="card-text">
               <span>{hosting.address.street}</span>
               <br />
               <span>{hosting.address.city}</span>
             </p>
-            <p class="card-text">
-              <small class="text-muted">${hosting.price}/night</small>
+            <p className="card-text">
+              <small className="text-muted">${hosting.price}/night</small>
             </p>
           </div>
         </div>

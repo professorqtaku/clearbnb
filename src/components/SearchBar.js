@@ -18,9 +18,9 @@ function SearchBar(props) {
       endDate: (`${endDate.getDay()}` + `${endDate.getDate()}` + `${endDate.getFullYear()}`),
       guests: `${guests}`,
     }]
-
     localStorage.setItem("search", `${JSON.stringify(urlSearch)}`);
-    setIsSearch(true)
+    setIsSearch(JSON.stringify(urlSearch))
+
   }
 
   const [location, setLocation] = useState('')
@@ -55,7 +55,7 @@ function SearchBar(props) {
 
           <div className="col-6 col-lg-2">
             <label></label>
-            <button style={styles.button }className="form-control" type="submit">Search</button>
+            <button style={styles.button} className="form-control" type="submit">Search</button>
           </div>
 
         </div>
