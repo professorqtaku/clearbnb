@@ -7,6 +7,7 @@ import { UserContext } from "../../contexts/UserContextProvider";
 import LoginButton from "../buttons/LoginButton";
 import { addDays, getTime } from "date-fns";
 import ErrorMessage from "../ErrorMessage";
+import CheckoutModal from "../modals/CheckoutModal"
 
 export default function BookingForm(props) {
   const { hosting, availabilities, bookedDates } = props;
@@ -17,12 +18,16 @@ export default function BookingForm(props) {
   const [guests, setGuests] = useState();
   const [totalPrice, setTotalPrice] = useState();
   const [totalDays, setTotalDays] = useState(1);
+  const [checkoutModal, setCheckoutModal] = useState(false);
+  const toggleCheckout = () => setCheckoutModal(!checkoutModal);
+
 
   const bookingSubmit = (e) => {
     e.preventDefault();
     if (!user || totalPrice <= 0) {
       return;
     }
+    toggleCheckout();
   };
 
   const changeStartDate = (date) => {
@@ -132,15 +137,18 @@ export default function BookingForm(props) {
           style={styles.center}
         >
           {user ? (
+          <div>
             <button
               className="btn"
               type="submit"
-              onClick="book"
               style={styles.button}
               disabled={disableDatePicker()}
             >
               Book
             </button>
+            <CheckoutModal modal = {checkoutModal} toggle = {toggleCheckout}/>
+
+          </div>
           ) : (
             <LoginButton />
           )}
