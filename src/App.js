@@ -10,6 +10,7 @@ import MyPage from "./pages/MyPage";
 import HostingDetailPage from "./pages/HostingDetailPage";
 import MyHostingPage from "./pages/MyHostingPage";
 import PostHostingPage from "./pages/PostHostingPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 import Navbar from "./components/base/Navbar";
 import Footer from "./components/base/Footer";
@@ -17,11 +18,6 @@ import Footer from "./components/base/Footer";
 import { StyleRoot } from "radium";
 
 function App() {
-
-  const page404 = () => (
-    <h1>Page not found: {window.location.pathname}</h1>
-  )
-
   return (
     <StyleRoot>
       <div className="App" style={styles.app}>
@@ -56,7 +52,7 @@ function App() {
                         />
                         <Route
                           path="*"
-                          component={page404}
+                          component={NotFoundPage}
                         />
                       </Switch>
                     </main>
