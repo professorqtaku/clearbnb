@@ -146,8 +146,8 @@ export default function BookingForm(props) {
             >
               Book
             </button>
-            <CheckoutModal modal = {checkoutModal} toggle = {toggleCheckout} hosting = {hosting} user = {user}
-            timePeriod = {timePeriod} startDate = {startDate} endDate = {endDate} totalPrice = {totalPrice}/>
+              <CheckoutModal modal={checkoutModal} toggle={toggleCheckout} hosting={hosting} user={user}
+                startDate={startDate} endDate={endDate} totalPrice={totalPrice} />
             
           </div>
           ) : (

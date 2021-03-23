@@ -1,15 +1,50 @@
-import React, { useState } from "react";
+import { useState } from 'react'
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
-import BookingForm from "../forms/BookingForm";
+import Radium from 'radium'
+import ErrorMessage from '../ErrorMessage'
 
 
 function CheckoutModal(props){
+  const { modal, toggle, hosting, user, guestAmount, startDate, endDate, totalPrice } = props;
 
-  const {modal, toggle, hosting, user, guestAmount, startDate, endDate, totalPrice} = props;
+  const [bookingError, setBookingError] = useState(false)
+
+  const modalOpen = () => {
+    setBookingError(false)
+  }
+  
+  const confirmBooking = async () => {
+    let booking = {
+      client: user,
+      hosting: hosting,
+      timePeriod: [startDate, endDate],
+      guestAmount: guestAmount,
+      totalPrice, totalPrice
+    }
+    console.log("you clicked confirm");
+    let res = await fetch("/api/bookings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(booking),
+    });
+    res = await res.json()
+    console.log(res);
+    if (res.error) {
+      setBookingError(true)
+      setTimeout(() => {
+        toggle()
+      }, 3000);
+      return
+    }
+  }
+
   
   return (
     <div>
-      <Modal isOpen={modal} toggle={toggle}>
+      <Modal isOpen={modal} toggle={toggle} onOpened={modalOpen}> 
         <div className="modal-header" toggle={toggle}>
           <h5 className="modal-title">Checkout</h5>
           <button
@@ -21,12 +56,12 @@ function CheckoutModal(props){
           ></button>
         </div>
         <ModalBody>
-        <div> 
-            <button>
-                type="button" 
-
+          <div>
+            <button onClick={confirmBooking} style={styles.button}>
+              type="button"
             </button>
-        </div>
+            <ErrorMessage showMessage={bookingError} message="The date you chose is already booked, please try again with another date. Close in 3s..."/>
+          </div>
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={toggle}>
@@ -38,4 +73,19 @@ function CheckoutModal(props){
   );
 };
 
-export default CheckoutModal;
+export default Radium(CheckoutModal);
+
+
+const styles = {
+  button: {
+    backgroundColor: "var(--pink)",
+    textAlign: "center",
+    color: "white",
+    width: "100%",
+    fontWeight: "bold",
+    borderRadius: "50px",
+    ":focus": {
+      border: "none !important",
+    }
+  }
+}
