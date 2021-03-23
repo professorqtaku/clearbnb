@@ -3,6 +3,7 @@
   --green: #00CE8F;
   --lightgrey: #EDEDED;
   --darkgrey: #ADADAD;
+  --whiteTrans: rgba(255,255,255,0.7);
 }
 
 *{

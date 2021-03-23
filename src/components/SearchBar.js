@@ -1,10 +1,11 @@
+import Radium from "radium";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
-export default function SearchBar(props) {
+function SearchBar(props) {
 
   const setIsSearch = props.setIsSearch
 
@@ -28,45 +29,55 @@ export default function SearchBar(props) {
   const [guests, setGuests] = useState('')
 
   return (
-    <form style={styles.gridContainer} onSubmit={goToSearchPage}>
-      <div style={styles.location}>
-        <input type="text" style={styles.input} onChange={event => setLocation(event.target.value)} placeholder="location" required />
+    <form style={{ margin: "0 auto 0" }} onSubmit={goToSearchPage}>
+      <div className="container" style={styles.container}>
+        <div className="row">
+
+          <div className=" col-lg-4">
+            <label>Location</label>
+            <input className="form-control" type="text" placeholder="location" onChange={event => setLocation(event.target.value)} required />
+          </div>
+
+          <div className="col-6 col-lg-2">
+            <label>From</label>
+            <DatePicker className="form-control" selected={startDate} onChange={date => setStartDate(date)} />
+          </div>
+
+          <div className="col-6 col-lg-2">
+            <label>To</label>
+            <DatePicker className="form-control" selected={endDate} onChange={date => setEndDate(date)} />
+          </div>
+
+          <div className="col-6 col-lg-2">
+            <label>Guests</label>
+            <input className="form-control" type="text" placeholder="Guests" onChange={event => setGuests(event.target.value)} />
+          </div>
+
+          <div className="col-6 col-lg-2">
+            <label></label>
+            <button style={styles.button }className="form-control" type="submit">Search</button>
+          </div>
+
+        </div>
       </div>
-      <div style={styles.gridItem}>From
-        <DatePicker style={styles.datePicker} selected={startDate} onChange={date => setStartDate(date)} />
-      </div>
-      <div style={styles.gridItem}>To
-        <DatePicker style={styles.datePicker} selected={endDate} onChange={date => setEndDate(date)} />
-      </div>
-      <div style={styles.gridItem}>
-        <input style={styles.input} onChange={event => setGuests(event.target.value)} placeholder="Guests" />
-      </div>
-      <div style={styles.gridItem}>
-        <button style={styles.input} type="submit">Search</button>
-      </div>
-    </form>
+    </form >
   )
 }
 
+export default Radium(SearchBar)
+
 const styles = {
-  gridContainer: {
-    marginTop: '50px',
-    // backgroundColor: 'rgba(255, 255, 255, 0.73)',
-    display: 'grid',
-    gridTemplateRows: '3fr',
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gridGap: '10px'
+  container: {
+    padding: "1em",
+    borderRadius: "10px",
+    backgroundColor: "rgba(255,255,255,0.7)",
+    '@media (min-width: 700px) AND (max-width: 990px)': {
+      maxWidth: "500px"
+    },
   },
-
-  input: {
-    width: '100%'
-  },
-
-  location: {
-    gridArea: '1/1/2/3'
-  },
-
-  datePicker: {
-    width: '100%'
+  button: {
+    color: "white",
+    backgroundColor: "#4CAF50",
+    textDecoration: "none"
   }
 }

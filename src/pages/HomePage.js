@@ -2,6 +2,7 @@ import CityList from '../components/CityList'
 import { useState } from "react"
 import ResultList from "../components/lists/ResultList"
 import SearchBar from "../components/SearchBar"
+import banner from "../assets/img/banner.jpg"
 
 
 export default function HomePage() {
@@ -11,8 +12,8 @@ export default function HomePage() {
 
   return (
 
-    <div className="homePage" style={styles.grid}>
-      <div>
+    <div className="homePage">
+      <div class="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundPosition: 'center', height: "60vh", marginBottom: "5vw"}}>
         <SearchBar setIsSearch={setIsSearch} />
       </div>
       {isSearch ? <ResultList /> : <CityList />}
@@ -20,14 +21,6 @@ export default function HomePage() {
   )
 }
 
-const styles = {
-  grid: {
-    margin: '0 auto 0',
-    width: '95vw',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(1,fr)'
-  },
-  banner: {
-    gridRow: '1',
-  },
+const padding = {
+  marginBottom: "5vw"
 }
