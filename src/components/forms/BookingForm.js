@@ -10,7 +10,7 @@ import ErrorMessage from "../ErrorMessage";
 import CheckoutModal from "../modals/CheckoutModal"
 
 export default function BookingForm(props) {
-  const { hosting, availabilities, bookedDates } = props;
+  const { hosting, availabilities, bookedDates, setIsBooked } = props;
   const { user } = useContext(UserContext);
 
   const [startDate, setStartDate] = useState(new Date());
@@ -147,7 +147,7 @@ export default function BookingForm(props) {
               Book
             </button>
               <CheckoutModal modal={checkoutModal} toggle={toggleCheckout} hosting={hosting} user={user}
-                startDate={startDate} endDate={endDate} totalPrice={totalPrice} guestAmount={guests} />
+                startDate={startDate} endDate={endDate} totalPrice={totalPrice} guestAmount={guests} setIsBooked={setIsBooked}/>
             
           </div>
           ) : (

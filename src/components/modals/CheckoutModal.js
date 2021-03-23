@@ -1,14 +1,11 @@
 import { useState } from 'react'
-import {useHistory} from 'react-router-dom'
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import Radium from 'radium'
 import ErrorMessage from '../ErrorMessage'
 
 
 function CheckoutModal(props){
-  const { modal, toggle, hosting, user, guestAmount, startDate, endDate, totalPrice } = props;
-
-  const history = useHistory()
+  const { modal, toggle, hosting, user, guestAmount, startDate, endDate, totalPrice, setIsBooked } = props;
 
   const [bookingError, setBookingError] = useState(false)
 
@@ -42,7 +39,7 @@ function CheckoutModal(props){
       return
     }
     else if (!res.error) {
-      history.push(`/booking/${res._id}`)
+      setIsBooked(true)
     }
   }
 
