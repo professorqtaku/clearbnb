@@ -52,8 +52,7 @@ const checkAvailability = (availabilities, bookings, startDate, endDate) => {
       break;
     }
   }
-  if (isValid) {
-    isValid = false
+  if (isValid && bookings) {
     for (let booking of bookings) {
       let bookingStartDate = booking.timePeriod[0];
       let bookingEndDate = booking.timePeriod[1]

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import {useHistory} from 'react-router-dom'
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import Radium from 'radium'
 import ErrorMessage from '../ErrorMessage'
@@ -6,6 +7,8 @@ import ErrorMessage from '../ErrorMessage'
 
 function CheckoutModal(props){
   const { modal, toggle, hosting, user, guestAmount, startDate, endDate, totalPrice } = props;
+
+  const history = useHistory()
 
   const [bookingError, setBookingError] = useState(false)
 
@@ -17,11 +20,10 @@ function CheckoutModal(props){
     let booking = {
       client: user,
       hosting: hosting,
-      timePeriod: [startDate, endDate],
+      timePeriod: [startDate.getTime(), endDate.getTime()],
       guestAmount: guestAmount,
       totalPrice, totalPrice
     }
-    console.log("you clicked confirm");
     let res = await fetch("/api/bookings", {
       method: "POST",
       headers: {
@@ -38,6 +40,9 @@ function CheckoutModal(props){
         toggle()
       }, 3000);
       return
+    }
+    else if (!res.error) {
+      history.push(`/booking/${res._id}`)
     }
   }
 
