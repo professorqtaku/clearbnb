@@ -10,6 +10,7 @@ import MyPage from "./pages/MyPage";
 import HostingDetailPage from "./pages/HostingDetailPage";
 import MyHostingPage from "./pages/MyHostingPage";
 import PostHostingPage from "./pages/PostHostingPage";
+import BookingDetailPage from "./pages/BookingDetailPage"
 
 import Navbar from "./components/base/Navbar";
 import Footer from "./components/base/Footer";
@@ -49,6 +50,7 @@ function App() {
                           path="/mypage/post"
                           component={PostHostingPage}
                         />
+                        <Route exact path="/booking/:bookingId" component={BookingDetailPage}/>
                       </Switch>
                     </main>
 

@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
-import BookingForm from '../components/forms/BookingForm'
 import { UserContext } from '../contexts/UserContextProvider'
+import BookingForm from '../components/forms/BookingForm'
+import ConfirmView from '../components/views/ConfirmView'
 import DeleteButton from '../components/buttons/DeleteButton'
 import NoImage from '../assets/img/noimage.png'
 
@@ -10,6 +11,7 @@ export default function HostingDetailPage(props) {
   const [hosting, setHosting] = useState(null);
   const [availabilities, setAvailabilities] = useState(1);
   const [bookedDates, setBookedDates] = useState(null)
+  const [isBooked, serIsBooked] = useState(true)
   const { user } = useContext(UserContext)
 
 

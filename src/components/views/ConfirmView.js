@@ -5,7 +5,7 @@ export default function HostingDetailPage() {
 
   return (
     <div className="container">
-      <h1>Booking details</h1>
+      <h1>Thank you for your reservation!</h1>
     </div>
   );
 }
