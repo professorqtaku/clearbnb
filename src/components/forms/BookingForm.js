@@ -93,6 +93,7 @@ export default function BookingForm(props) {
             closeOnScroll={true}
             disabled={disableDatePicker()}
             filterDate={availableDates}
+            excludeDates={bookedDates}
           />
         </div>
         <div className="form-group col-12 col-md-6" style={styles.formGroup}>
@@ -108,9 +109,13 @@ export default function BookingForm(props) {
             customInput={<DatePickerCustomInput />}
             disabled={disableDatePicker()}
             filterDate={availableDates}
+            excludeDates={bookedDates}
           />
         </div>
-        <div className="form-group col-12 col-md-8 mb-3" style={styles.formGroup}>
+        <div
+          className="form-group col-12 col-md-8 mb-3"
+          style={styles.formGroup}
+        >
           <Label>Guests</Label>
           <input
             className="form-control"
@@ -122,7 +127,10 @@ export default function BookingForm(props) {
             required
           />
         </div>
-        <div className="col-8 col-md-4 align-self-end mb-3" style={styles.center}>
+        <div
+          className="col-8 col-md-4 align-self-end mb-3"
+          style={styles.center}
+        >
           {user ? (
             <button
               className="btn"
@@ -138,7 +146,10 @@ export default function BookingForm(props) {
           )}
         </div>
       </form>
-      <ErrorMessage showMessage={disableDatePicker()} message="No dates available" />
+      <ErrorMessage
+        showMessage={disableDatePicker()}
+        message="No dates available"
+      />
       <hr />
       <div>
         <span>Total price: {totalPrice}</span>

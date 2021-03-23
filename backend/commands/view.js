@@ -1,18 +1,21 @@
 const models = require("../models.js");
 
 module.exports = (app) => {
-  app.get('/rest/view/availabilities/:hostingId', async (req, res) => {
-    const Availability = models['availabilities']
+  app.get('/rest/view/:model/:hostingId', async (req, res) => {
+    if (req.params.model !== "bookings" && req.params.model !== "availabilities") {
+      res.json({error: "Model unavailable"})
+      return
+    }
+      const model = models[req.params.model];
 
     const hostingId = req.params.hostingId
 
-    let availabilities = await Availability.find({hosting: hostingId})
+    let docs = await model.find({hosting: hostingId})
     try {
-      res.json(availabilities)
+      res.json(docs)
     } catch {
       res.json({ error: "Fetch failed" })
     }
   })
-
 
 }

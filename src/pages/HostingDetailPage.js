@@ -8,6 +8,7 @@ import NoImage from '../assets/img/noimage.png'
 export default function HostingDetailPage(props) {
   const { hostingId } = useParams();
   const [hosting, setHosting] = useState(null);
+  const [bookings, setBookings] = useState(null);
   const [availabilities, setAvailabilities] = useState(1);
   const [availableDates, setAvailableDates] = useState(null)
   const { user } = useContext(UserContext)
@@ -24,6 +25,17 @@ export default function HostingDetailPage(props) {
   };
 
   const fetchAvailabilites = async (hostingId) => {
+    let res = await fetch(`/rest/view/availabilities/${hostingId}`);
+    try {
+      res = await res.json();
+      setAvailabilities(res)
+    }
+    catch (e) {
+      console.log("error", e);
+    }
+  }
+
+  const fetchBookings = async (hostingId) => {
     let res = await fetch(`/rest/view/availabilities/${hostingId}`);
     try {
       res = await res.json();
