@@ -44,7 +44,6 @@ module.exports = (app) => {
     
     if (req.body.availabilities.length) {
       req.body.availabilities[0].hosting = hosting
-      console.log(req.body.availabilities[0].timePeriod);
       let availability = new Availability(req.body.availabilities[0])
       availability.timePeriod = changeDate(availability.timePeriod[0], availability.timePeriod[1])
       await availability.save()
