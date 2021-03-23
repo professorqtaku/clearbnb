@@ -9,7 +9,7 @@ import { addDays, getTime } from "date-fns";
 import ErrorMessage from "../ErrorMessage";
 
 export default function BookingForm(props) {
-  const { hosting, availabilities } = props;
+  const { hosting, availabilities, bookedDates } = props;
   const { user } = useContext(UserContext);
 
   const [startDate, setStartDate] = useState(new Date());

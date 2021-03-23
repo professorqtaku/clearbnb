@@ -8,9 +8,8 @@ import NoImage from '../assets/img/noimage.png'
 export default function HostingDetailPage(props) {
   const { hostingId } = useParams();
   const [hosting, setHosting] = useState(null);
-  const [bookings, setBookings] = useState(null);
   const [availabilities, setAvailabilities] = useState(1);
-  const [availableDates, setAvailableDates] = useState(null)
+  const [bookedDates, setBookedDates] = useState(null)
   const { user } = useContext(UserContext)
 
 
@@ -36,10 +35,21 @@ export default function HostingDetailPage(props) {
   }
 
   const fetchBookings = async (hostingId) => {
-    let res = await fetch(`/rest/view/availabilities/${hostingId}`);
+    let res = await fetch(`/rest/view/bookings/${hostingId}`);
     try {
       res = await res.json();
-      setAvailabilities(res)
+      if (!res.error) {
+        let dates = []
+        res.map((booking) => {
+          let startDate = booking.timePeriod[0]
+          let endDate = booking.timePeriod[1]
+          while (startDate <= endDate) {
+            dates.push(startDate);
+            startDate += 86400000;
+          }
+        })
+        setBookedDates(dates);
+      }
     }
     catch (e) {
       console.log("error", e);
@@ -49,8 +59,7 @@ export default function HostingDetailPage(props) {
   useEffect(() => {
     fetchHosting(hostingId);
     fetchAvailabilites(hostingId);
-    console.log(hosting);
-    console.log(user);
+    fetchBookings(hostingId)
   }, [hostingId, user]);
 
   const userView = (hosting, user) => {
@@ -59,7 +68,7 @@ export default function HostingDetailPage(props) {
         return hostView(hosting);
       }
     }
-    return <BookingForm hosting={hosting} availabilities={availabilities} />;
+    return <BookingForm hosting={hosting} availabilities={availabilities} bookedDates={bookedDates} />;
   }
 
   const defaultView = (hosting, user) => {
