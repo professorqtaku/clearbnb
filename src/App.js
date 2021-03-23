@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 import MyPage from "./pages/MyPage";
 import HostingDetailPage from "./pages/HostingDetailPage";
 import MyHostingPage from "./pages/MyHostingPage";
+import MyBookingPage from "./pages/MyBookingPage";
 import PostHostingPage from "./pages/PostHostingPage";
 
 import Navbar from "./components/base/Navbar";
@@ -43,6 +44,11 @@ function App() {
                           exact
                           path="/mypage/hostings"
                           component={MyHostingPage}
+                        />
+                        <Route
+                          exact
+                          path="/mypage/bookings"
+                          component={MyBookingPage}
                         />
                         <Route
                           exact
