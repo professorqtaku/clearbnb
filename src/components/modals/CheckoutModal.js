@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
+import BookingForm from "../forms/BookingForm";
 
 
 function CheckoutModal(props){
 
-  const {modal, toggle} = props;
-
+  const {modal, toggle, hosting, user, guestAmount, startDate, endDate, totalPrice} = props;
+  
   return (
     <div>
       <Modal isOpen={modal} toggle={toggle}>
@@ -23,6 +24,7 @@ function CheckoutModal(props){
         <div> 
             <button>
                 type="button" 
+
             </button>
         </div>
         </ModalBody>
