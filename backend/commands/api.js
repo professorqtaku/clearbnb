@@ -29,7 +29,7 @@ module.exports = (app) => {
 
     let userExist = await User.findOne({ email: user.email })
     if (userExist) {
-      res.json( {error: "E-mail already used/is missing"});
+      res.json( {error: 'E-mail already used/is missing'});
       return
     }
     await user.save()

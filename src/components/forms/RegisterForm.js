@@ -3,6 +3,7 @@ import { UserContext } from '../../contexts/UserContextProvider'
 import { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import ErrorMessage from "../ErrorMessage"
+import { ListGroup } from 'reactstrap'
 
 
 function RegisterForm(props) {
@@ -26,15 +27,13 @@ function RegisterForm(props) {
 
     let response = await register( email, firstName, lastName, password, confirmPassword)
 
-      if (password !== confirmPassword) {
-        setRegisterError(true)
+      if (Object.is(response.error, ('Password does not match'))) {
+          setRegisterError(true)
       }
-      else if(response.error && password === confirmPassword) {
-        setSecondRegisterError(true)
-        setRegisterError(false)
-        }
-     
-  }
+      if (Object.is(response.error, ('E-mail already used/is missing'))) {
+          setSecondRegisterError(true)
+      }
+    }
   const register = async (email, firstName, lastName, password, confirmPassword) => {
     let userInput = {
       email: email,
