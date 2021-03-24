@@ -9,14 +9,17 @@ module.exports = (app) => {
     let hostingId = req.params.id;
 
     try {
-      await Hosting.findByIdAndRemove(hostingId);
-      await Booking.deleteMany({ hosting: hostingId })
-      await Availability.deleteMany({ hosting: hostingId });
-      res.json({ success: "Delete successful" });
-      return;
+      let hosting = await Hosting.findByIdAndRemove(hostingId);
+      if (hosting) { 
+        await Booking.deleteMany({ hosting: hostingId })
+        await Availability.deleteMany({ hosting: hostingId });
+        res.json({ success: "Delete successful" });
+        return;
+      }
+      res.json({ error: "Hosting not found" })
     }
     catch(e) {
-      res.json({ error: "Hosting not found" })
+      res.json({ error: "Delete failed" })
     }
   });
 };
