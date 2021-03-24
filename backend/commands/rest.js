@@ -10,7 +10,7 @@ module.exports = (app) => {
     let docs = ''
     try {
       docs = await models[req.params.model]
-        .find().populate(['host', 'address']).exec()
+        .find().populate(['host', 'address', 'hosting', 'client']).exec()
     }
     catch (e) {
       res.json({error:"model not found"})
@@ -45,6 +45,7 @@ module.exports = (app) => {
     if (req.body.availabilities.length) {
       req.body.availabilities[0].hosting = hosting
       let availability = new Availability(req.body.availabilities[0])
+      availability.timePeriod = changeDate(availability.timePeriod[0], availability.timePeriod[1])
       await availability.save()
         .catch((e) => console.log("Availability save failed", e))
       delete req.body.availabilities
@@ -60,8 +61,6 @@ module.exports = (app) => {
       res.json({ error: 'Save failed' });
       return
     }
-
-    res.json(doc)
   })
 
   app.post('/rest/:model/', async (req, res) => {
@@ -116,3 +115,13 @@ module.exports = (app) => {
     res.json({error: "Hosting not found"})
   })
 };
+
+const changeDate = (startDate, endDate) => {
+  startDate = new Date(startDate)
+  startDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate())
+  endDate = new Date(endDate)
+  endDate.setDate(endDate.getDate() + 1);
+  endDate = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate())
+
+  return [startDate, endDate - 1]
+}
