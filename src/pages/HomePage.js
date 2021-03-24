@@ -1,4 +1,4 @@
-import CityList from '../components/CityList'
+
 import { useState } from "react"
 import ResultList from "../components/lists/ResultList"
 import SearchBar from "../components/SearchBar"
@@ -15,7 +15,7 @@ export default function HomePage() {
       <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundPosition: 'center', height: "60vh", marginBottom: "5vw" }}>
         <SearchBar setIsSearch={setIsSearch} />
       </div>
-      {isSearch ? <ResultList /> : <CityList />}
+      {isSearch ? <ResultList /> : null}
     </div>
   )
 }

@@ -40,7 +40,7 @@ function SearchBar(props) {
 
           <div className=" col-lg-4">
             <label>Location</label>
-            <input className="form-control" type="text" placeholder="location" onChange={event => setLocation(event.target.value)} required />
+            <input className="form-control" type="text" placeholder="Location" onChange={event => setLocation(event.target.value)} required />
           </div>
 
           <div className="col-6 col-lg-2">
