@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 
-export default function HostingDetailPage() {
+export default function HostingDetailPage(props) {
   const bookingId = useParams();
 
   return (
     <div className="container">
-      <h1>Booking details</h1>
+      <h1>Thank you for your reservation!</h1>
     </div>
   );
 }

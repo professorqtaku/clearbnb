@@ -26,9 +26,11 @@ global.mongoose.connect(atlasUrl, {
 });
 
 const rest = require("./commands/rest");
+const view = require("./commands/view");
 const api = require("./commands/api");
 const auth = require("./commands/auth");
 rest(app);
+view(app);
 api(app);
 auth(app);
 

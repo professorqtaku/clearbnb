@@ -10,7 +10,7 @@ module.exports = (app) => {
     let docs = ''
     try {
       docs = await models[req.params.model]
-        .find().populate(['host', 'address']).exec()
+        .find().populate(['host', 'address', 'hosting', 'client']).exec()
     }
     catch (e) {
       res.json({error:"model not found"})
@@ -25,7 +25,7 @@ module.exports = (app) => {
     }
     let doc = ''
     try {
-      doc = await models[req.params.model].findById(req.params.id).populate(['host', 'address', 'accommodation']).exec()
+      doc = await models[req.params.model].findById(req.params.id).populate(['host', 'address', 'accommodation', 'hosting', 'client']).exec()
     }
     catch (e) {
       return
@@ -64,6 +64,10 @@ module.exports = (app) => {
   })
 
   app.post('/rest/:model/', async (req, res) => {
+    if (req.params.model === "bookings" || req.params.model === "users") {
+      res.json({ error: "Post unavailable" });
+      return;
+    }
     let model = models[req.params.model]
     let doc = new model(req.body)
     try {

@@ -53,7 +53,7 @@ function HostingForm(props) {
       host: user,
       amenities: [],
       accommodation: accommodations.find(
-        (accommodation) => (accommodation.description = document.getElementById("hostingAccommodationSelect").value)
+        (accommodation) => (accommodation.description === document.getElementById("hostingAccommodationSelect").value)
       ),
       galleries: [document.getElementById("hostingGalleryInput").value],
       title: document.getElementById("hostingTitleInput").value,
