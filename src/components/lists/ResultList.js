@@ -1,8 +1,9 @@
 import { HostingContext } from '../../contexts/HostingContextProvider'
 import { useEffect, useContext } from 'react'
-import MyHostingCard from "../cards/HostingCard"
+import HostingCard from "../cards/HostingCard"
+import Radium from 'radium'
 
-export default function ResultList() {
+const ResultList = () => {
 
   const { hostings } = useContext(HostingContext)
 
@@ -32,9 +33,11 @@ export default function ResultList() {
     return (
       <div>
         <h4 style={styles.noMatchesFound}>{noMatches}</h4>
-        <div style={styles.list} >
-          {allFilteredList.map(hosting => <MyHostingCard key={hosting._id} hosting={hosting} />)}
+
+        <div className="container" style={styles.grid}>
+          {allFilteredList.map(hosting => <HostingCard className="m-20 col-md-6 col-lg-6" key={hosting._id} hosting={hosting} />)}
         </div>
+
       </div>
     )
   }
@@ -46,37 +49,23 @@ export default function ResultList() {
   return <div className="container">{hostings ? renderResults(hostings) : loading}</div>;
 }
 
+export default Radium(ResultList)
+
 const styles = {
-  list: {
-    marginTop: "5vw",
-    marginBottom: "5vw",
+
+  grid: {
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridTemplateRows: "1fr",
     gridGap: "2vw",
+    '@media (min-width: 1000px)': {
+      gridTemplateColumns: "repeat(2, 1fr)",
+    }
   },
-  cardWrapper: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    padding: "2px",
-    gridGap: "2vw",
-  },
-  title: {
-    fontSize: "16px",
-    margin: "0",
-  },
-  info: {
-    margin: "0",
-  },
+
   noMatchesFound: {
     textAlign: "center",
     paddingTop: "30px",
   },
-  image: {
-    width: "100%",
-    height: "100px",
-    borderRadius: "2px",
-    objectFit: "cover",
-  },
-};
+
+}
 
