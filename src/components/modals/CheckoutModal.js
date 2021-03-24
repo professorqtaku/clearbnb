@@ -30,12 +30,11 @@ function CheckoutModal(props){
       body: JSON.stringify(booking),
     });
     res = await res.json()
-    console.log(res);
     if (res.error) {
       setBookingError(true)
       setTimeout(() => {
         toggle()
-      }, 3000);
+      }, 5000);
       return
     }
     else if (!res.error) {

@@ -40,7 +40,7 @@ export default function HostingInfoFormGroup(props) {
           />
         </div>
         <div className="form-text">
-          ClearBnB takes 15% profit of the selling price
+          ClearBnB adds 15% on top of the selling price as a service fee.
         </div>
       </FormGroup>
 
