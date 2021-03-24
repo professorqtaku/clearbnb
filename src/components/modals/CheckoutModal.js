@@ -149,10 +149,10 @@ const styles = {
   button: {
     color: "white",
     width: "40%",
-    paddingTop: "5px",
-    paddingBottom: "5px",
+    minWidth: "100px",
+    padding: "10px",
     backgroundColor: "var(--pink)",
-    borderRadius: "20px",
+    borderRadius: "50px",
     border: "none",
     transition: "200ms",
     ":hover": {
