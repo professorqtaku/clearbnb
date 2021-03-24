@@ -10,7 +10,7 @@ module.exports = (app) => {
     let docs = ''
     try {
       docs = await models[req.params.model]
-        .find().populate(['host', 'address']).exec()
+        .find().populate(['host', 'address', 'hosting', 'client']).exec()
     }
     catch (e) {
       res.json({error:"model not found"})
