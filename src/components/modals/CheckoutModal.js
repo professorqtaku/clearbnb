@@ -67,37 +67,44 @@ function CheckoutModal(props){
             style={styles.gridContainer}
             className="container overflow-hidden"
           >
-            <div className="row justify-content-around">
-              <div className="col">
-                <p>
-                  Total: <br />
-                  <small className="text-muted">${totalPrice}</small>
-                </p>
-              </div>
+            <div className="row mb-4">
+              <h3 className="text-muted">{hosting.title}</h3>
+            </div>
 
-              <div className="col-7 col-md-6">
-                <p>
-                  Date: <br />
-                  <small className="text-muted">
-                    from {changeDateFormat(startDate)}
-                  </small>
-                  <br />
-                  <small className="text-muted">
-                    to {changeDateFormat(endDate)}
-                  </small>
-                </p>
+            <div className="row mb-2">
+              <h6 className="col-sm-2 mb-0">Date</h6>
+              <div className="col-sm-10">
+                <h6 className="col-12 d-flex justify-content-sm-end">
+                  <span style={styles.mutedText}>from</span>
+                  {changeDateFormat(startDate)}
+                </h6>
+                <h6 className="col-12 d-flex justify-content-sm-end">
+                  <span style={styles.mutedText}>to</span>
+                  {changeDateFormat(endDate)}
+                </h6>
               </div>
             </div>
-            <div className="row justify-content-around p-1">
-              <div className="col">
-                Guests: <br />
-                <small className="text-muted">{guestAmount}</small>
-              </div>
-              <div className="col-7 col-md-6">
-                Nights: <br />
-                <small className="text-muted">{totalNights}</small>
-              </div>
+
+            <div className="row mb-2">
+              <h6 className="col-sm-2 mb-0">Guests</h6>
+              <h6 className="col-sm-10 d-flex justify-content-sm-end">
+                {guestAmount}
+              </h6>
             </div>
+            <div className="row mb-2">
+              <h6 className="col-sm-2 mb-0">Nights</h6>
+              <h6 className="col-sm-10 d-flex justify-content-sm-end">
+                {totalNights}
+              </h6>
+            </div>
+            <hr />
+            <div className="row justify-content-around">
+              <h3 className="col-2 mb-0">Total</h3>
+              <h3 className="col-10 d-flex justify-content-end text-muted">
+                ${totalPrice}
+              </h3>
+            </div>
+
             <div className="row justify-content-around mt-3">
               <button
                 onClick={confirmBooking}
@@ -153,5 +160,9 @@ const styles = {
       cursor: "pointer",
       transform: "scale(1.03)",
     }
+  },
+  mutedText: {
+    color: "var(--darkgrey)",
+    width: "50px"
   }
 }
