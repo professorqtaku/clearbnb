@@ -7,20 +7,15 @@ import banner from "../assets/img/banner.jpg"
 
 export default function HomePage() {
 
-  const [isSearch, setIsSearch] = useState(false)
-
+  const [isSearch, setIsSearch] = useState("")
 
   return (
 
     <div className="homePage">
-      <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundPosition: 'center', height: "60vh", marginBottom: "5vw"}}>
+      <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundPosition: 'center', height: "60vh", marginBottom: "5vw" }}>
         <SearchBar setIsSearch={setIsSearch} />
       </div>
       {isSearch ? <ResultList /> : <CityList />}
     </div>
   )
-}
-
-const padding = {
-  marginBottom: "5vw"
 }

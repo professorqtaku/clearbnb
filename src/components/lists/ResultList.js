@@ -1,17 +1,13 @@
 import { HostingContext } from '../../contexts/HostingContextProvider'
-import { useEffect, useContext} from 'react'
-import { useHistory } from "react-router-dom";
-import MyHostingCard from "../cards/HostingCard"
+import { useEffect, useContext } from 'react'
+import HostingCard from "../cards/HostingCard"
+import Radium from 'radium'
 
-
-export default function ResultList() {
-  const history = useHistory()
+const ResultList = () => {
 
   const { hostings } = useContext(HostingContext)
 
   useEffect(() => {
-    console.log("hostings: ", hostings
-    )
   }, [hostings]);
 
   const renderResults = (hostings) => {
@@ -19,7 +15,13 @@ export default function ResultList() {
     const search = JSON.parse(localStorage.getItem("search"));
     const searchGuests = search[0].guests
     const filterByCity = hostings.filter((hosting) => hosting.address.city.includes(search[0].location));
-    const allFilteredList = filterByCity.filter((item) => item.guestAmount === parseInt(searchGuests));
+
+    var allFilteredList;
+    if (searchGuests === "") {
+      allFilteredList = filterByCity
+    } else {
+      allFilteredList = filterByCity.filter((item) => item.guestAmount === parseInt(searchGuests));
+    }
 
     var noMatches;
     if (allFilteredList.length === 0) {
@@ -27,34 +29,15 @@ export default function ResultList() {
     } else {
       noMatches = ""
     }
-    // const card = hostingItem => (
-    //   <div style={styles.cardStyle} key={hostingItem._id}>
-    //     <div
-    //       className="card"
-    //       style={styles.cardWrapper}
-    //       onClick={() => history.push('/hosting/' + hostingItem._id)}
-    //     >
-    //       <img style={styles.image}
-    //         src={hostingItem.galleries[0]}
-    //         alt={'Image not found'}
-
-    //       />
-    //       <div>
-    //         <h3 style={styles.title} >{hostingItem.title}</h3>
-    //         <p style={styles.info} >{hostingItem.host.firstName}{hostingItem.host.lastName} </p>
-    //         <p style={styles.info}>${hostingItem.price}/night </p>
-    //         <p style={styles.info} >{hostingItem.guestAmount} Guests</p>
-    //       </div>
-    //     </div>
-    //   </div>
-    // )
 
     return (
       <div>
         <h4 style={styles.noMatchesFound}>{noMatches}</h4>
-        <div style={styles.list} >
-          {allFilteredList.map(hosting => <MyHostingCard key={hosting._id} hosting={hosting} />)}
+
+        <div className="container" style={styles.grid}>
+          {allFilteredList.map(hosting => <HostingCard className="m-20 col-md-6 col-lg-6" key={hosting._id} hosting={hosting} />)}
         </div>
+
       </div>
     )
   }
@@ -66,37 +49,23 @@ export default function ResultList() {
   return <div className="container">{hostings ? renderResults(hostings) : loading}</div>;
 }
 
+export default Radium(ResultList)
+
 const styles = {
-  list: {
-    marginTop: "5vw",
-    marginBottom: "5vw",
+
+  grid: {
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridTemplateRows: "1fr",
     gridGap: "2vw",
+    '@media (min-width: 1000px)': {
+      gridTemplateColumns: "repeat(2, 1fr)",
+    }
   },
-  cardWrapper: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    padding: "2px",
-    gridGap: "2vw",
-  },
-  title: {
-    fontSize: "16px",
-    margin: "0",
-  },
-  info: {
-    margin: "0",
-  },
+
   noMatchesFound: {
     textAlign: "center",
     paddingTop: "30px",
   },
-  image: {
-    width: "100%",
-    height: "100px",
-    borderRadius: "2px",
-    objectFit: "cover",
-  },
-};
+
+}
 
