@@ -5,7 +5,7 @@ import ErrorMessage from '../ErrorMessage'
 
 
 function CheckoutModal(props){
-  const { modal, toggle, hosting, user, guestAmount, startDate, endDate, totalPrice, setIsBooked } = props;
+  const { modal, toggle, hosting, user, guestAmount, startDate, endDate, totalPrice, setIsBooked, totalNights } = props;
 
   const [bookingError, setBookingError] = useState(false)
 
@@ -43,10 +43,15 @@ function CheckoutModal(props){
     }
   }
 
+  const changeDateFormat = (date) => {
+    date = date.toLocaleDateString()
+    return date
+  }
+
   
   return (
     <div>
-      <Modal isOpen={modal} toggle={toggle} onOpened={modalOpen}> 
+      <Modal isOpen={modal} toggle={toggle} onOpened={modalOpen}>
         <div className="modal-header" toggle={toggle}>
           <h5 className="modal-title">Checkout</h5>
           <button
@@ -58,26 +63,57 @@ function CheckoutModal(props){
           ></button>
         </div>
         <ModalBody>
-          <div style={styles.gridContainer} className="container overflow-hidden">
+          <div
+            style={styles.gridContainer}
+            className="container overflow-hidden"
+          >
             <div className="row justify-content-around">
-            <div className="col">Total: <br/> {totalPrice}</div>
-            <div className="col">Date: <br/> {startDate.toLocaleDateString()} -
-             <br/> {endDate.toLocaleDateString()}</div>
+              <div className="col">
+                <p>
+                  Total: <br />
+                  <small className="text-muted">${totalPrice}</small>
+                </p>
+              </div>
+
+              <div className="col-7 col-md-6">
+                <p>
+                  Date: <br />
+                  <small className="text-muted">
+                    from {changeDateFormat(startDate)}
+                  </small>
+                  <br />
+                  <small className="text-muted">
+                    to {changeDateFormat(endDate)}
+                  </small>
+                </p>
+              </div>
             </div>
-          <div className="row justify-content-around p-1">
-            <div className="col">Guests: <br/> {guestAmount}</div>
-            <div className="col">Nights: <br/> ?</div>
-          </div>
-          <div className= "row justify-content-around">
-            <button onClick={confirmBooking} style={styles.button}
-              className="text-center"
-              type="button"
-              className="btn-btn"
-              data-bs-dismiss="modal">
+            <div className="row justify-content-around p-1">
+              <div className="col">
+                Guests: <br />
+                <small className="text-muted">{guestAmount}</small>
+              </div>
+              <div className="col-7 col-md-6">
+                Nights: <br />
+                <small className="text-muted">{totalNights}</small>
+              </div>
+            </div>
+            <div className="row justify-content-around mt-3">
+              <button
+                onClick={confirmBooking}
+                style={styles.button}
+                className="text-center"
+                type="button"
+                className="btn-btn"
+                data-bs-dismiss="modal"
+              >
                 Confirm
-            </button>
-          </div>
-            <ErrorMessage showMessage={bookingError} message="The date you chose is already booked, please try again with another date. Close in 3s..."/>
+              </button>
+            </div>
+            <ErrorMessage
+              showMessage={bookingError}
+              message="The date you chose is already booked, please try again with another date. Close in 3s..."
+            />
           </div>
         </ModalBody>
         <ModalFooter>
@@ -111,7 +147,6 @@ const styles = {
     backgroundColor: "var(--pink)",
     borderRadius: "20px",
     border: "none",
-    marginBottom: "10px",
     transition: "200ms",
     ":hover": {
       opacity: "0.8",
