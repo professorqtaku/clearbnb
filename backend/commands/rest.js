@@ -100,16 +100,6 @@ module.exports = (app) => {
     }
 
   })
-
-  app.delete('/rest/hostings/:id', async (req, res) => {
-    let model = models['hostings']
-    let hosting = await model.findByIdAndRemove(req.params.id);
-    if (hosting) {
-      res.json({ success: "Delete successful" })
-      return
-    }
-    res.json({error: "Hosting not found"})
-  })
 };
 
 const changeDate = (startDate, endDate) => {

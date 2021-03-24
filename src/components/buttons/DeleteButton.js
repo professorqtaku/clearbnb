@@ -7,14 +7,14 @@ const DeleteButton = (props) => {
   const hosting = props.hosting
   const history = useHistory()
 
-  const { buttonLabel, className } = props;
+  const { className } = props;
 
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
 
   const deleteHosting = async () => {
-    let res = await fetch('/rest/hostings/' + hosting._id, {
+    let res = await fetch('/api/hostings/' + hosting._id, {
       method: "DELETE"
     })
     res = await res.json()
