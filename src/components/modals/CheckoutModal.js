@@ -58,10 +58,25 @@ function CheckoutModal(props){
           ></button>
         </div>
         <ModalBody>
-          <div>
-            <button onClick={confirmBooking} style={styles.button}>
+          <div style={styles.gridContainer} className="container overflow-hidden">
+            <div className="row justify-content-around">
+            <div className="col">Total: <br/> {totalPrice}</div>
+            <div className="col">Date: <br/> {startDate.toLocaleDateString()} -
+             <br/> {endDate.toLocaleDateString()}</div>
+            </div>
+          <div className="row justify-content-around p-1">
+            <div className="col">Guests: <br/> {guestAmount}</div>
+            <div className="col">Nights: <br/> ?</div>
+          </div>
+          <div className= "row justify-content-around">
+            <button onClick={confirmBooking} style={styles.button}
+              className="text-center"
               type="button"
+              className="btn-btn"
+              data-bs-dismiss="modal">
+                Confirm
             </button>
+          </div>
             <ErrorMessage showMessage={bookingError} message="The date you chose is already booked, please try again with another date. Close in 3s..."/>
           </div>
         </ModalBody>
@@ -79,15 +94,29 @@ export default Radium(CheckoutModal);
 
 
 const styles = {
+  gridContainer: {
+    width: "90%",
+    maxWidth: "400px",
+    display: "grid",
+    borderRadius: "20px",
+    padding: "20px",
+    backgroundColor: "var(--lightgrey)",
+  },
+  
   button: {
-    backgroundColor: "var(--pink)",
-    textAlign: "center",
     color: "white",
-    width: "100%",
-    fontWeight: "bold",
-    borderRadius: "50px",
-    ":focus": {
-      border: "none !important",
+    width: "40%",
+    paddingTop: "5px",
+    paddingBottom: "5px",
+    backgroundColor: "var(--pink)",
+    borderRadius: "20px",
+    border: "none",
+    marginBottom: "10px",
+    transition: "200ms",
+    ":hover": {
+      opacity: "0.8",
+      cursor: "pointer",
+      transform: "scale(1.03)",
     }
   }
 }
