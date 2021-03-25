@@ -136,7 +136,7 @@ export default function HostingDetailPage(props) {
     <div className="container">
       {hosting && availabilities ? (
         isBooked ? (
-          <ConfirmView hosting={hosting} />
+          <ConfirmView title={hosting.title} />
         ) : (
           defaultView(hosting, user)
         )
