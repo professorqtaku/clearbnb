@@ -1,10 +1,17 @@
+import { getSuggestedQuery } from '@testing-library/dom'
+import robotError from '../assets/img/robotError.jpg'
+
 export default function NotFoundPage() {
   return (
     <div style={styles}>
-      <h1 style={styles.title}>404
-      {/*<p style={styles.link}>{window.location.pathname}</p>*/}
-      </h1>
-      <p style={styles.link}>Page not found</p>
+      <div style={styles.text}>
+        <h1 style={styles.title}>404 <p style={styles.link}>Page not found</p></h1>
+
+      </div>
+      <div style={styles.picture}>
+        <img style={styles.image} src={robotError} />
+      </div>
+
     </div>
   )
 }
@@ -17,21 +24,26 @@ const styles = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   textAlign: 'center',*/
-
+  display: 'grid',
+  gridTemplateColumns: '40% 60%',
   margin: '0 auto',
-  textAlign: 'center',
-  marginTop: '10%',
-  marginBottom: '20%',
-
-
-
-
+  marginTop: '5%',
+  marginBottom: '3%',
+  text: {
+    textAlign: 'right',
+  },
+  picture: {
+  },
   title: {
+    marginTop: '10%',
     fontSize: '10em',
   },
 
   link: {
     color: 'grey',
-    fontSize: '2em',
+    fontSize: '39px',
+  },
+  image: {
+    backgroundColor: 'blue',
   }
 }
