@@ -118,12 +118,13 @@ function CheckoutModal(props){
             </div>
             <ErrorMessage
               showMessage={bookingError}
-              message="The date you chose is already booked, please try again with another date. Close in 3s..."
+              height={"20vh"}
+              message="The date you chose is already booked, please try again with another date. This window will close in few seconds..."
             />
           </div>
         </ModalBody>
         <ModalFooter>
-          <Button color="secondary" onClick={toggle}>
+          <Button onClick={toggle}>
             Close
           </Button>
         </ModalFooter>
@@ -154,11 +155,6 @@ const styles = {
     borderRadius: "50px",
     border: "none",
     transition: "200ms",
-    ":hover": {
-      opacity: "0.8",
-      cursor: "pointer",
-      transform: "scale(1.03)",
-    }
   },
   mutedText: {
     color: "var(--darkgrey)",

@@ -38,6 +38,11 @@ module.exports = (app) => {
     let Address = models['addresses']
     let Availability = models['availabilities']
 
+    if (req.body.guestAmount < 1) {
+      res.json({ error: "Cannot have less thatn 1 guest in a hosting" });
+      return
+    }
+
     let address = new Address(req.body.address)
     let hosting = new Hosting(req.body);
     hosting.address = address
