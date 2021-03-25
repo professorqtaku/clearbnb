@@ -76,20 +76,11 @@ const checkAvailability = (availabilities, bookings, startDate, endDate) => {
       break;
     }
   }
-  console.log(bookings.length);
   if (isValid && bookings.length) {
     for (let booking of bookings) {
       let bookingStartDate = booking.timePeriod[0];
       let bookingEndDate = booking.timePeriod[1]
 
-      console.log(
-        "bokad start i intervall",
-        bookingStartDate >= startDate && bookingStartDate <= endDate
-      );
-      console.log(
-        "bokad end i intervall",
-        bookingEndDate >= startDate && bookingEndDate <= endDate
-      );
       if (
         (bookingStartDate >= startDate && bookingStartDate <= endDate) ||
         (bookingEndDate >= startDate && bookingEndDate <= endDate)
@@ -99,7 +90,6 @@ const checkAvailability = (availabilities, bookings, startDate, endDate) => {
       }
     }
   }
-  console.log(isValid);
   return isValid
 }
 

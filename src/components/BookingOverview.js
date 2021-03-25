@@ -6,6 +6,11 @@ export default function BookingOverview(props) {
     return date;
   };
 
+  const countDays = (start, end) => {
+    let diff = end - start;
+    return (Math.round(diff / 86400000));
+  };
+
   return (
     <div style={styles.gridContainer} className="container overflow-hidden">
       <div className="row mb-4">
@@ -35,7 +40,7 @@ export default function BookingOverview(props) {
       <div className="row mb-2">
         <h6 className="col-sm-2 mb-0">Nights</h6>
         <h6 className="col-sm-10 d-flex justify-content-sm-end">
-          {nights}
+          {countDays(startDate, endDate)}
         </h6>
       </div>
       <hr />
@@ -58,22 +63,7 @@ const styles = {
     padding: "20px",
     backgroundColor: "var(--lightgrey)",
   },
-
-  button: {
-    color: "white",
-    width: "40%",
-    minWidth: "100px",
-    padding: "10px",
-    backgroundColor: "var(--pink)",
-    borderRadius: "50px",
-    border: "none",
-    transition: "200ms",
-    ":hover": {
-      opacity: "0.8",
-      cursor: "pointer",
-      transform: "scale(1.03)",
-    },
-  },
+  
   mutedText: {
     color: "var(--darkgrey)",
     width: "50px",

@@ -6,7 +6,17 @@ import ErrorMessage from '../ErrorMessage'
 
 
 function CheckoutModal(props){
-  const { modal, toggle, hosting, user, guestAmount, startDate, endDate, totalPrice, setIsBooked, totalNights } = props;
+  const {
+    modal,
+    toggle,
+    hosting,
+    user,
+    guestAmount,
+    startDate,
+    endDate,
+    totalPrice,
+    setBooking
+  } = props;
 
   const [bookingError, setBookingError] = useState(false)
 
@@ -39,8 +49,7 @@ function CheckoutModal(props){
       return
     }
     else if (!res.error) {
-      console.log("no error");
-      setIsBooked(true)
+      setBooking(res)
     }
   }
 
@@ -64,7 +73,6 @@ function CheckoutModal(props){
             startDate={startDate}
             endDate={endDate}
             guests={guestAmount}
-            nights={totalNights}
             totalPrice={totalPrice}
           />
           <div className="row justify-content-around mt-3">
