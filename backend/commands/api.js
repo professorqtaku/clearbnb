@@ -68,6 +68,9 @@ const checkAvailability = (availabilities, bookings, startDate, endDate) => {
   }
   let isValid = false;
   for (let availability of availabilities) {
+    console.log(availability.timePeriod);
+    console.log(startDate, endDate);
+
     let availablityStartDate = availability.timePeriod[0];
     let avalabilityEndDate = availability.timePeriod[1];
     if (startDate >= availablityStartDate && endDate <= avalabilityEndDate) {
@@ -75,11 +78,19 @@ const checkAvailability = (availabilities, bookings, startDate, endDate) => {
       break;
     }
   }
+  console.log(bookings.length);
   if (isValid && bookings.length) {
     isValid = false;
     for (let booking of bookings) {
       let bookingStartDate = booking.timePeriod[0];
       let bookingEndDate = booking.timePeriod[1]
+
+      console.log("tidigare ",(startDate < bookingStartDate &&
+        endDate < bookingStartDate));
+      console.log(
+        "senare , ",
+        startDate > bookingEndDate && endDate > bookingEndDate
+      );
       if (
         (startDate < bookingStartDate &&
         endDate < bookingStartDate) ||
@@ -87,7 +98,9 @@ const checkAvailability = (availabilities, bookings, startDate, endDate) => {
         endDate > bookingEndDate)
       ) {
         isValid = true
-        break
+      }
+      else {
+        isValid = false
       }
     }
   }

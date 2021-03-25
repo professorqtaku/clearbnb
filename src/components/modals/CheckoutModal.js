@@ -39,6 +39,7 @@ function CheckoutModal(props){
       return
     }
     else if (!res.error) {
+      console.log("no error");
       setIsBooked(true)
     }
   }
@@ -80,7 +81,7 @@ function CheckoutModal(props){
           </div>
           <ErrorMessage
             showMessage={bookingError}
-            message="The date you chose is already booked, please try again with another date. Close in 3s..."
+            message="The date you chose is already booked, please try again with another date. This window will close in few seconds..."
           />
         </ModalBody>
         <ModalFooter>
