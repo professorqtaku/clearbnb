@@ -10,7 +10,7 @@ const MyHostingPage = () => {
   const [ myHostings, setMyHostings ] = useState()
 
   useEffect(() => {
-    if (hostings) {
+    if (hostings.length && user) {
       let matchedHostings = []
       for (let hosting of hostings) {
         if (hosting.host._id === user._id) {

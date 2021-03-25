@@ -84,7 +84,7 @@ function CheckoutModal(props){
           />
         </ModalBody>
         <ModalFooter>
-          <Button color="secondary" onClick={toggle}>
+          <Button onClick={toggle}>
             Close
           </Button>
         </ModalFooter>
@@ -114,7 +114,7 @@ const styles = {
     backgroundColor: "var(--pink)",
     borderRadius: "50px",
     border: "none",
-    transition: "200ms"
+    transition: "200ms",
   },
   mutedText: {
     color: "var(--darkgrey)",

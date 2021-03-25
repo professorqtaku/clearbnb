@@ -10,7 +10,7 @@ const MyBookingPage = () => {
   const [myBookings, setMyBookings] = useState();
 
   useEffect(() => {
-    if (bookings) {
+    if (bookings.length && user) {
       let matchedBookings = [];
       for (let booking of bookings) {
         if (booking.client._id === user._id) {

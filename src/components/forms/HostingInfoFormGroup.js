@@ -66,7 +66,7 @@ export default function HostingInfoFormGroup(props) {
           className="form-control"
           type="number"
           id="hostingGuestAmountInput"
-          min={0}
+          min={1}
           required
         />
       </FormGroup>
