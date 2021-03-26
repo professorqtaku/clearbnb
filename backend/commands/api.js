@@ -1,101 +1,111 @@
-const models = require('../models.js')
-const bcrypt = require('bcrypt')
-
-
-
+const models = require('../models')
+ 
 module.exports = (app) => {
-  app.post('/api/users', async (req, res) => {
-    let User = models['users']
-    if (req.session.user) {
-      res.json({ error: 'Someone is already logged in' })
-      return
-    }
-    
-    req.body = trimObject(req.body)
-    if (!req.body.password.length) {
-      res.send('Password is missing')
-      return
-    }
+  app.delete("/api/hostings/:id", async (req, res) => {
+    let Hosting = models["hostings"]
+    let Booking = models["bookings"]
+    let Availability = models["availabilities"]
 
-    if (req.body.password !== req.body.confirmPassword) {
-      res.send('Password does not match')
-      return
-    }
-    else delete req.body.confirmPassword
+    let hostingId = req.params.id;
 
-    let hashedPassword = await hashPassword(req.body.password)
-
-    let user = new User({ ...req.body, password: hashedPassword })
-
-    let userExist = await User.findOne({ email: user.email })
-    if (userExist) {
-      res.send('E-mail already used/is missing')
-      return
+    try {
+      let hosting = await Hosting.findByIdAndRemove(hostingId);
+      if (hosting) { 
+        await Booking.deleteMany({ hosting: hostingId })
+        await Availability.deleteMany({ hosting: hostingId });
+        res.json({ success: "Delete successful" });
+        return;
+      }
+      res.json({ error: "Hosting not found" })
     }
-    await user.save()
-      .then(() => res.json({ 'success': true }))
-      .catch(() => res.send('Save failed'))
-  })
-  app.post('/api/login', async (req, res) => {
-    if (req.session.user) {
-      res.json({ error: "Someone is already logged in" });
-      return
+    catch(e) {
+      res.json({ error: "Delete failed" })
     }
-    
-    let user = req.body
-    let userExist = await models['users'].findOne({ email: user.email })
-    if (!userExist) {
-      res.json({ error: 'Bad credentials' })
-      return
-    }
-    
-    const match = await checkPassword(user.password, userExist.password)
-    if (match) { 
-      req.session.user = userExist;
-      userExist.password = ''
-      res.json(userExist); 
-      return
-    }
-    res.json({ error: 'Bad credentials' })  
   })
 
-  app.get("/api/login", (req, res) => {
-    if (req.session.user) {
-      let user = { ...req.session.user };
-      delete user.password; // remove password in answer
-      res.json(user);
-    } else {
-      res.json({ error: "Not logged in" }); 
+  
+  app.post('/api/bookings', async (req, res) => {
+    const Booking = models['bookings']
+    const Availability = models['availabilities']
+    let booking = new Booking(req.body)
+
+    booking.timePeriod = changeTimeStamp(booking.timePeriod[0], booking.timePeriod[1])
+    
+    if (
+      req.body.hosting.guestAmount < booking.guestAmount ||
+      booking.timePeriod[1] - booking.timePeriod[0] < 86400000
+    ) {
+      res.json({ error: "Invalid input" });
+      return;
     }
-  });
 
-  app.delete("/api/login", (req, res) => {
-    if (req.session.user) {
-      delete req.session.user;
-      res.json({ success: "Logged out" });
-    } else {
-      res.json({ error: "Was not logged in" });
+    let availabilities = await Availability.find({ hosting: (booking.hosting) }).exec();
+    let bookings = await Booking.find({ hosting: booking.hosting }).exec();
+    
+    let isValid = checkAvailability(
+      availabilities,
+      bookings,
+      booking.timePeriod[0],
+      booking.timePeriod[1]
+    );
+    
+    if (!isValid) {
+      res.json({ error: "Booked time unavailable" });
+      return
     }
-  });
+
+    await booking.save()
+      .then(() => res.json(booking))
+      .catch(() => res.json({ error: "Save failed" }));
+  })
+
+
 }
 
-const hashPassword = async (password) => {
-  const saltRounds = 10;
-  try {
-    return await bcrypt.hash(password, saltRounds);
-  } catch (e) {
-    res.send({ error: "Hash failed" });
-    return;
+const checkAvailability = (availabilities, bookings, startDate, endDate) => {
+  if (availabilities.length === 0) {
+    return false
   }
+  let isValid = false;
+  for (let availability of availabilities) {
+
+    let availablityStartDate = availability.timePeriod[0];
+    let avalabilityEndDate = availability.timePeriod[1];
+    if (startDate >= availablityStartDate && endDate <= avalabilityEndDate) {
+      isValid = true;
+      break;
+    }
+  }
+  if (isValid && bookings.length) {
+    for (let booking of bookings) {
+      let bookingStartDate = booking.timePeriod[0];
+      let bookingEndDate = booking.timePeriod[1]
+
+      if (
+        (bookingStartDate >= startDate && bookingStartDate <= endDate) ||
+        (bookingEndDate >= startDate && bookingEndDate <= endDate)
+      ) {
+        isValid = false;
+        break;
+      }
+    }
+  }
+  return isValid
 }
 
-const trimObject = (objectToTrim) => {
-  for (let [key, value] of Object.entries(objectToTrim)) {
-    if (value.length) objectToTrim[key] = value.trim();
-  }
-  return objectToTrim
-}
-const checkPassword = async (password, passwordHash) => {
-  const match = await bcrypt.compare(password, passwordHash)
-  return match
+const changeTimeStamp = (startDate, endDate) => {
+  startDate = new Date(startDate);
+  startDate = new Date(
+    startDate.getFullYear(),
+    startDate.getMonth(),
+    startDate.getDate()
+  );
+  endDate = new Date(endDate);
+  endDate.setDate(endDate.getDate() + 1);
+  endDate = new Date(
+    endDate.getFullYear(),
+    endDate.getMonth(),
+    endDate.getDate()
+  );
+  return [startDate, endDate - 1];
 }

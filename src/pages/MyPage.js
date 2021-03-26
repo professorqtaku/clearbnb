@@ -1,10 +1,23 @@
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { UserContext } from '../contexts/UserContextProvider'
+import { HostingContext } from '../contexts/HostingContextProvider'
+import { BookingContext } from '../contexts/BookingContextProvider'
+import PostingModal from '../components/modals/PostingModal'
 
 export default function MyPage() {
   const history = useHistory()
   const { user } = useContext(UserContext)
+  const { fetchHostings } = useContext(HostingContext)
+  const { bookings, fetchBookings } = useContext(BookingContext)
+  const [postModal, setPostModal] = useState()
+  const togglePostModal = () => setPostModal(!postModal)
+
+  useEffect(() => {
+    fetchHostings()
+    fetchBookings()
+    console.log(bookings, "bookings");
+  }, [])
 
   const goTo = (e) => {
     if (e.target.value === "search") {
@@ -43,15 +56,10 @@ export default function MyPage() {
         >
           My hostings
         </button>
-        <button
-          className="btn btn-primary"
-          type="button"
-          style={styles.btn}
-          value="post"
-          onClick={goTo}
-        >
+        <button className="btn btn-primary"onClick={togglePostModal} style={styles.btn}>
           Post a hosting
         </button>
+        <PostingModal modal={postModal} toggle={togglePostModal} />
         <button
           className="btn btn-primary"
           type="button"

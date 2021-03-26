@@ -2,11 +2,11 @@ import Radium from 'radium'
 import { UserContext } from '../../contexts/UserContextProvider'
 import { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import LoginErrorMessage from "../LoginErrorMessage";
+import ErrorMessage from "../ErrorMessage";
 
 function LoginForm(props) {
   const { toggleModal } = props
-  const { setUser } = useContext(UserContext)
+  const { fetchUser } = useContext(UserContext)
   const history = useHistory()
   const [loginError, setLoginError] = useState(false)
 
@@ -42,8 +42,8 @@ function LoginForm(props) {
       body: JSON.stringify(userInput),
     });
     res = await res.json();
-    if (!res.error) {
-      setUser(res);
+    if (res.success) {
+      fetchUser()
       return true;
     }
     return false;
@@ -85,7 +85,7 @@ function LoginForm(props) {
                 required
               />
             </div>
-            <LoginErrorMessage loginError={loginError} />
+            <ErrorMessage showMessage={loginError} message="Email/password incorrect"/>
             <button type="submit" style={styles.submit}>
               Log in
             </button>

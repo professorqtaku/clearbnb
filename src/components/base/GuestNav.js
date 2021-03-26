@@ -1,5 +1,6 @@
 import Nav from "./Nav";
 import LoginModal from "../modals/LoginModal"
+import RegisterModal from "../modals/RegisterModal";
 
 
 export default function GuestNav() {
@@ -12,8 +13,8 @@ export default function GuestNav() {
     >
       <div className="mx-auto"></div>
       <ul className="navbar-nav">
-        <Nav content="Become member" value="register" />
         <LoginModal/>
+        <RegisterModal/>
       </ul>
     </div>
   );
