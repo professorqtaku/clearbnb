@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { forwardRef } from "react";
+import DatePickerCustomInput from "../DatePickerCustomInput";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Label } from "reactstrap";
@@ -55,10 +55,6 @@ export default function BookingForm(props) {
       setGuests(e.target.value);
     }
   };
-
-  const DatePickerCustomInput = forwardRef(({ value, onClick }, ref) => (
-    <input className="form-control" onClick={onClick} ref={ref} value={value} />
-  ));
 
   const disableDatePicker = () => {
     return !availabilities.length;

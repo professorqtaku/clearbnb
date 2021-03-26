@@ -1,7 +1,6 @@
-import { forwardRef } from "react";
 import { Label } from "reactstrap";
 import DatePicker from "react-datepicker";
-import { addDays } from "date-fns";
+import DatePickerCustomInput from "../DatePickerCustomInput";
 
 export default function DatePickerFormGroup(props) {
   const { startDate, setStartDate, endDate, setEndDate } = props;
@@ -12,16 +11,7 @@ export default function DatePickerFormGroup(props) {
       setEndDate(date);
     }
   };
-
-  const DatePickerCustomInput = forwardRef(({ value, onClick }, ref) => (
-    <input
-      className="form-control"
-      onClick={onClick}
-      ref={ref}
-      value={value}
-    />
-  ));
-
+  
   return (
     <div className="row mb-5">
       <h4>Available dates</h4>

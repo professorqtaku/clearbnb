@@ -1,10 +1,9 @@
 import Radium from "radium";
-import { useState, forwardRef } from "react";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays } from 'date-fns'
-// CSS Modules, react-datepicker-cssmodules.css
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import DatePickerCustomInput from './DatePickerCustomInput'
 
 function SearchBar(props) {
 
@@ -12,15 +11,6 @@ function SearchBar(props) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [guests, setGuests] = useState('')
-
-    const DatePickerCustomInput = forwardRef(({ value, onClick }, ref) => (
-      <input
-        className="form-control"
-        onClick={onClick}
-        ref={ref}
-        value={value}
-      />
-    ));
 
   const changeStartDate = (date) => {
     setStartDate(date)
