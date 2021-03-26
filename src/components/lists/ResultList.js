@@ -13,6 +13,8 @@ const ResultList = () => {
     fetchAvailabilities()
   }, [])
 
+  
+
   const isAvailable = (hosting, startDate, endDate) => {
     for (let availability of availabilities) {
       if (availability.hosting === hosting._id) {
