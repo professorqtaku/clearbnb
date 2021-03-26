@@ -6,12 +6,12 @@ export default function NotFoundPage() {
     <div style={styles}>
       <div class="container-fluid">
         <div class="row" style={styles.rows}>
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4" style={styles.text}>
-            <h1 style={styles.title}>404 <p style={styles.link}>Page not found</p></h1>
-
+          <div class="col-lg-2"></div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3" style={styles.text}>
+            <h1 style={styles.title}>404<p style={styles.link}>Page not found</p></h1>
           </div>
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8" style={styles.picture}>
-            <img style={styles.image} src={robotError} />
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6" style={styles.picture}>
+            <img style={styles.picture} src={robotError} />
           </div>
         </div>
       </div>
@@ -28,8 +28,8 @@ const styles = {
   transform: 'translate(-50%, -50%)',
   textAlign: 'center',*/
 
-  marginTop: '5%',
-  marginBottom: '2%',
+  marginTop: '10%',
+  marginBottom: '10%',
 
   maxWidth: '1200px',
   margin: '0 auto',
@@ -40,9 +40,12 @@ const styles = {
   },
 
   text: {
-    textAlign: 'right',
+    textAlign: 'center',
   },
   picture: {
+    maxWidth: '100%',
+    height: 'auto',
+    textAlign: 'center',
   },
   title: {
     marginTop: '10%',
