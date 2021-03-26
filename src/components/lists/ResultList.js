@@ -8,93 +8,82 @@ const ResultList = () => {
 
   const { hostings } = useContext(HostingContext)
   const { availabilities, fetchAvailabilities } = useContext(AvailabilityContext)
-  const [ filteredHostings, setFilteredHostings] = useState(null)
 
   useEffect(() => {
     fetchAvailabilities()
   }, [])
 
+  const isAvailable = (hosting, startDate, endDate) => {
+    for (let availability of availabilities) {
+      if (availability.hosting === hosting._id) {
+        let availableStartDate = availability.timePeriod[0];
+        let availableEndDate = availability.timePeriod[1];
+        if (
+          startDate >= availableStartDate &&
+          startDate <= availableEndDate &&
+          endDate >= availableStartDate &&
+          endDate <= availableEndDate
+        )
+          return true;
+      }
+    }
+    return false;
+  };
 
-  useEffect(() => {
-  }, [hostings, availabilities]);
-
-  const renderResults = (hostings, availabilities) => {
-
+  const filterHostings = () => {
     const search = JSON.parse(localStorage.getItem("search"));
     const searchGuests = search[0].guests
-    const cityFilteredHostings = hostings.filter((hosting) => hosting.address.city.toLowerCase().includes(search[0].location.toLowerCase()));
-    //console.log("cityFilteredHostings: ", cityFilteredHostings)
+    let filteredHostings = hostings.filter((hosting) =>
+      hosting.address.city.toLowerCase().trim().includes(search[0].location.toLowerCase().trim()));
+    
+    filteredHostings = filteredHostings.filter((hosting) =>
+      isAvailable(
+        hosting,
+        parseInt(search[0].startDate),
+        parseInt(search[0].endDate)
+      )
+    );
 
-    const availableHostings = cityFilteredHostings.filter((hosting) => {
-      for (let availability of availabilities) {
-        if (availability.hosting === hosting._id) {
-          // det sökta intervallet behöver befinna i tillgängliga intervallet
-          let availableStartDate = availability.timePeriod[0];
-          let availableEndDate = availability.timePeriod[1];
-          if (
-            search[0].startDate >= availableStartDate &&
-            search[0].startDate >= availableEndDate &&
-            search[0].endDate <= availableStartDate &&
-            search[0].endDate <= availableEndDate
-          )
-            // availablity.timePeriod[1] <= search[0].endDate
-            console.log(true);
-            return true
-        }
-      }
-      return false
-    })
-    console.log(availableHostings);
-    const getHostingAvailabilities = availabilities.filter((availability) => availability.hosting === cityFilteredHostings._id)
-    console.log("getHostingAvailabilities: ", getHostingAvailabilities)
+    if(searchGuests !=="" ){
+      filteredHostings = filteredHostings.filter((hosting) => hosting.guestAmount >= parseInt(searchGuests));
+    }
+    return filteredHostings
+  }
 
-
-    var allFilteredList;
-
-    //filter only by location if guests input is empty
-    if (searchGuests === "") {
-      allFilteredList = cityFilteredHostings
+  const renderResult = (hostings) => {
+    let noMatches;
+    if (hostings.length === 0) {
+      noMatches = "No matches found";
     } else {
-      allFilteredList = cityFilteredHostings.filter((item) => item.guestAmount === parseInt(searchGuests));
+      noMatches = "";
     }
-
-    console.log("allFilteredList before avail: ", allFilteredList)
-
-    //filter availability
-    for (let availability in getHostingAvailabilities) {
-      if (getHostingAvailabilities.timePeriod[0] >= search[0].startDate && getHostingAvailabilities.timePeriod[1] <= search[0].endDate) {
-        const filterByAvailability = allFilteredList.filter((item) => item._id === availability.hosting._id)
-        allFilteredList = filterByAvailability
-      }
-    }
-
-
-    console.log("allFilteredList after avail: ", allFilteredList)
-
-    var noMatches;
-    if (allFilteredList.length === 0) {
-      noMatches = "No matches found"
-    } else {
-      noMatches = ""
-    }
-
     return (
       <div>
         <h4 style={styles.noMatchesFound}>{noMatches}</h4>
 
         <div className="container mb-5" style={styles.grid}>
-          {allFilteredList.map(hosting => <HostingCard className="m-20 col-md-6 col-lg-6" key={hosting._id} hosting={hosting} />)}
+          {hostings.map((hosting) => (
+            <HostingCard
+              className="m-20 col-md-6 col-lg-6"
+              key={hosting._id}
+              hosting={hosting}
+            />
+          ))}
         </div>
-
       </div>
-    )
+    );
   }
+
   const loading = (
     <div>
       Loading...
     </div>
   );
-  return <div className="container">{hostings && availabilities ? renderResults(hostings, availabilities) : loading}</div>;
+  return (
+    <div className="container">
+      {hostings && availabilities ? renderResult(filterHostings()) : loading}
+    </div>
+  );
 }
 
 export default Radium(ResultList)
