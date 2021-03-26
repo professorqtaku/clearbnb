@@ -1,13 +1,38 @@
-import React from "react";
-import {useHistory } from "react-router-dom"
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContextProvider";
+import { useHistory } from "react-router-dom"
 import Radium from 'radium'
-import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from "react-dom";
 
 const Footer = () => {
   const history = useHistory()
+  const { user } = useContext(UserContext);
+
   const goTo = (event) => {
     history.push(`/${event.target.value}`)
   }
+
+  const becomeMemberButton = (
+    <button
+      className="btn text-uppercase text-muted"
+      value="register"
+      style={styles.button}
+      key="footer-signup"
+    >
+      Become a member
+    </button>
+  );
+
+  const searchHostingButton = (
+    <button
+      className="btn text-uppercase text-muted"
+      value=""
+      onClick={goTo}
+      style={styles.button}
+      key="footer-signup"
+    >
+      Search hostings
+    </button>
+  );
 
   return (
     <div className="container-fluid" style={styles.container}>
@@ -36,14 +61,7 @@ const Footer = () => {
             </button>
           </div>
           <div className="col-md-4 mb-3 text-center" style={styles.link}>
-            <button
-              className="btn text-uppercase text-muted"
-              value="register"
-              style={styles.button}
-              key="footer-signup"
-            >
-              Become a member
-            </button>
+            {user ? searchHostingButton : becomeMemberButton }
           </div>
         </div>
         <hr />
