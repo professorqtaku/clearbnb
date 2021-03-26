@@ -11,34 +11,11 @@ const Footer = () => {
     history.push(`/${event.target.value}`)
   }
 
-  const becomeMemberButton = (
-    <button
-      className="btn text-uppercase text-muted"
-      value="register"
-      style={styles.button}
-      key="footer-signup"
-    >
-      Become a member
-    </button>
-  );
-
-  const searchHostingButton = (
-    <button
-      className="btn text-uppercase text-muted"
-      value=""
-      onClick={goTo}
-      style={styles.button}
-      key="footer-signup"
-    >
-      Search hostings
-    </button>
-  );
-
   return (
     <div className="container-fluid" style={styles.container}>
       <div className="container mt-5">
         <div className="row font-small">
-          <div className="col-md-4 mb-3 text-center" style={styles.link}>
+          <div className="col-md-6 mb-3 text-center" style={styles.link}>
             <button
               className="btn text-uppercase text-muted"
               onClick={goTo}
@@ -49,7 +26,7 @@ const Footer = () => {
               About us
             </button>
           </div>
-          <div className="col-md-4 mb-3 text-center" style={styles.link}>
+          <div className="col-md-6 mb-3 text-center" style={styles.link}>
             <button
               className="btn text-uppercase text-muted"
               onClick={goTo}
@@ -59,9 +36,6 @@ const Footer = () => {
             >
               Contact us
             </button>
-          </div>
-          <div className="col-md-4 mb-3 text-center" style={styles.link}>
-            {user ? searchHostingButton : becomeMemberButton }
           </div>
         </div>
         <hr />

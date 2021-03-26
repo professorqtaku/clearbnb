@@ -34,7 +34,7 @@ const ResultList = () => {
       <div>
         <h4 style={styles.noMatchesFound}>{noMatches}</h4>
 
-        <div className="container" style={styles.grid}>
+        <div className="container mb-3" style={styles.grid}>
           {allFilteredList.map(hosting => <HostingCard className="m-20 col-md-6 col-lg-6" key={hosting._id} hosting={hosting} />)}
         </div>
 
