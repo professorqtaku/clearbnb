@@ -6,8 +6,7 @@ import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from "react-dom";
 const Footer = () => {
   const history = useHistory()
   const goTo = (event) => {
-    console.log(event.target.value);
-    //history.push(`/${event.target.value}`)
+    history.push(`/${event.target.value}`)
   }
 
   return (
@@ -39,8 +38,7 @@ const Footer = () => {
           <div className="col-md-4 mb-3 text-center" style={styles.link}>
             <button
               className="btn text-uppercase text-muted"
-              onClick={goTo}
-              value="about"
+              value="register"
               style={styles.button}
               key="footer-signup"
             >
