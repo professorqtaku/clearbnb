@@ -11,7 +11,7 @@ export default function HostingDetailPage(props) {
   const [hosting, setHosting] = useState(null);
   const [availabilities, setAvailabilities] = useState(1);
   const [bookedDates, setBookedDates] = useState(null)
-  const [isBooked, setIsBooked] = useState(false)
+  const [booking, setBooking] = useState(null)
   const { user } = useContext(UserContext)
 
 
@@ -75,7 +75,7 @@ export default function HostingDetailPage(props) {
         hosting={hosting}
         availabilities={availabilities}
         bookedDates={bookedDates}
-        setIsBooked={setIsBooked}
+        setBooking={setBooking}
       />
     );
   }
@@ -135,8 +135,8 @@ export default function HostingDetailPage(props) {
   return (
     <div className="container">
       {hosting && availabilities ? (
-        isBooked ? (
-          <ConfirmView hosting={hosting} />
+        booking ? (
+          <ConfirmView title={hosting.title} booking={booking} />
         ) : (
           defaultView(hosting, user)
         )

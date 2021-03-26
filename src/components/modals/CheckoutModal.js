@@ -1,11 +1,22 @@
 import { useState } from 'react'
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import Radium from 'radium'
+import BookingOverview from '../BookingOverview'
 import ErrorMessage from '../ErrorMessage'
 
 
 function CheckoutModal(props){
-  const { modal, toggle, hosting, user, guestAmount, startDate, endDate, totalPrice, setIsBooked, totalNights } = props;
+  const {
+    modal,
+    toggle,
+    hosting,
+    user,
+    guestAmount,
+    startDate,
+    endDate,
+    totalPrice,
+    setBooking
+  } = props;
 
   const [bookingError, setBookingError] = useState(false)
 
@@ -38,13 +49,8 @@ function CheckoutModal(props){
       return
     }
     else if (!res.error) {
-      setIsBooked(true)
+      setBooking(res)
     }
-  }
-
-  const changeDateFormat = (date) => {
-    date = date.toLocaleDateString()
-    return date
   }
 
   
@@ -62,68 +68,32 @@ function CheckoutModal(props){
           ></button>
         </div>
         <ModalBody>
-          <div
-            style={styles.gridContainer}
-            className="container overflow-hidden"
-          >
-            <div className="row mb-4">
-              <h3 className="text-muted">{hosting.title}</h3>
-            </div>
-
-            <div className="row mb-2">
-              <h6 className="col-sm-2 mb-0">Date</h6>
-              <div className="col-sm-10">
-                <h6 className="col-12 d-flex justify-content-sm-end">
-                  <span style={styles.mutedText}>from</span>
-                  {changeDateFormat(startDate)}
-                </h6>
-                <h6 className="col-12 d-flex justify-content-sm-end">
-                  <span style={styles.mutedText}>to</span>
-                  {changeDateFormat(endDate)}
-                </h6>
-              </div>
-            </div>
-
-            <div className="row mb-2">
-              <h6 className="col-sm-2 mb-0">Guests</h6>
-              <h6 className="col-sm-10 d-flex justify-content-sm-end">
-                {guestAmount}
-              </h6>
-            </div>
-            <div className="row mb-2">
-              <h6 className="col-sm-2 mb-0">Nights</h6>
-              <h6 className="col-sm-10 d-flex justify-content-sm-end">
-                {totalNights}
-              </h6>
-            </div>
-            <hr />
-            <div className="row justify-content-around">
-              <h3 className="col-2 mb-0">Total</h3>
-              <h3 className="col-10 d-flex justify-content-end text-muted">
-                ${totalPrice}
-              </h3>
-            </div>
-
-            <div className="row justify-content-around mt-3">
-              <button
-                onClick={confirmBooking}
-                style={styles.button}
-                className="text-center"
-                type="button"
-                className="btn-btn"
-                data-bs-dismiss="modal"
-              >
-                Confirm
-              </button>
-            </div>
-            <ErrorMessage
-              showMessage={bookingError}
-              message="The date you chose is already booked, please try again with another date. Close in 3s..."
-            />
+          <BookingOverview
+            title={hosting.title}
+            startDate={startDate}
+            endDate={endDate}
+            guests={guestAmount}
+            totalPrice={totalPrice}
+          />
+          <div className="row justify-content-around mt-3">
+            <button
+              onClick={confirmBooking}
+              style={styles.button}
+              className="text-center"
+              type="button"
+              className="btn-btn"
+              data-bs-dismiss="modal"
+            >
+              Confirm
+            </button>
           </div>
+          <ErrorMessage
+            showMessage={bookingError}
+            message="The date you chose is already booked, please try again with another date. This window will close in few seconds..."
+          />
         </ModalBody>
         <ModalFooter>
-          <Button color="secondary" onClick={toggle}>
+          <Button onClick={toggle}>
             Close
           </Button>
         </ModalFooter>
@@ -154,11 +124,6 @@ const styles = {
     borderRadius: "50px",
     border: "none",
     transition: "200ms",
-    ":hover": {
-      opacity: "0.8",
-      cursor: "pointer",
-      transform: "scale(1.03)",
-    }
   },
   mutedText: {
     color: "var(--darkgrey)",

@@ -5,12 +5,16 @@ import MyBookingCard from "../components/cards/MyBookingCard";
 import Radium from "radium";
 
 const MyBookingPage = () => {
-  const { bookings } = useContext(BookingContext);
+  const { bookings, fetchBookings } = useContext(BookingContext);
   const { user } = useContext(UserContext);
   const [myBookings, setMyBookings] = useState();
 
   useEffect(() => {
-    if (bookings) {
+    fetchBookings()
+  }, []);
+
+  useEffect(() => {
+    if (bookings && user) {
       let matchedBookings = [];
       for (let booking of bookings) {
         if (booking.client._id === user._id) {
@@ -24,7 +28,7 @@ const MyBookingPage = () => {
   const showBookingCards = (bookings) => {
     return (
       <div className="container" style={styles.cardlist}>
-        {myBookings.map((booking) => (
+        {bookings.map((booking) => (
           <MyBookingCard key={booking._id} booking={booking} />
         ))}
       </div>

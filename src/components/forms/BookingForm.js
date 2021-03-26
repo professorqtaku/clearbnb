@@ -10,7 +10,7 @@ import ErrorMessage from "../ErrorMessage";
 import CheckoutModal from "../modals/CheckoutModal"
 
 export default function BookingForm(props) {
-  const { hosting, availabilities, bookedDates, setIsBooked } = props;
+  const { hosting, availabilities, bookedDates, setBooking } = props;
   const { user } = useContext(UserContext);
 
   const [startDate, setStartDate] = useState(new Date());
@@ -137,19 +137,27 @@ export default function BookingForm(props) {
           style={styles.center}
         >
           {user ? (
-          <div>
-            <button
-              className="btn"
-              type="submit"
-              style={styles.button}
-              disabled={disableDatePicker()}
-            >
-              Book
-            </button>
-              <CheckoutModal modal={checkoutModal} toggle={toggleCheckout} hosting={hosting} user={user}
-                startDate={startDate} endDate={endDate} totalPrice={totalPrice} guestAmount={guests} setIsBooked={setIsBooked} totalNights={totalDays}/>
-            
-          </div>
+            <div>
+              <button
+                className="btn"
+                type="submit"
+                style={styles.button}
+                disabled={disableDatePicker()}
+              >
+                Book
+              </button>
+              <CheckoutModal
+                modal={checkoutModal}
+                toggle={toggleCheckout}
+                hosting={hosting}
+                user={user}
+                startDate={startDate}
+                endDate={endDate}
+                totalPrice={totalPrice}
+                guestAmount={guests}
+                setBooking={setBooking}
+              />
+            </div>
           ) : (
             <LoginButton />
           )}

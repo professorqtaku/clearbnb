@@ -68,6 +68,7 @@ const checkAvailability = (availabilities, bookings, startDate, endDate) => {
   }
   let isValid = false;
   for (let availability of availabilities) {
+
     let availablityStartDate = availability.timePeriod[0];
     let avalabilityEndDate = availability.timePeriod[1];
     if (startDate >= availablityStartDate && endDate <= avalabilityEndDate) {
@@ -75,18 +76,17 @@ const checkAvailability = (availabilities, bookings, startDate, endDate) => {
       break;
     }
   }
-  if (isValid && bookings) {
+  if (isValid && bookings.length) {
     for (let booking of bookings) {
       let bookingStartDate = booking.timePeriod[0];
       let bookingEndDate = booking.timePeriod[1]
+
       if (
-        (startDate >= bookingStartDate &&
-        startDate <= bookingEndDate) ||
-        (endDate >= bookingStartDate &&
-        endDate <= bookingEndDate)
+        (bookingStartDate >= startDate && bookingStartDate <= endDate) ||
+        (bookingEndDate >= startDate && bookingEndDate <= endDate)
       ) {
-        isValid = false
-        break
+        isValid = false;
+        break;
       }
     }
   }
