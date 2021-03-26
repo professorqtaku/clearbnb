@@ -28,8 +28,8 @@ const styles = {
   transform: 'translate(-50%, -50%)',
   textAlign: 'center',*/
 
-  marginTop: '10%',
-  marginBottom: '10%',
+  marginTop: '50px',
+  marginBottom: '50px',
 
   maxWidth: '1200px',
   margin: '0 auto',
