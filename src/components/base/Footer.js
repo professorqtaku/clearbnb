@@ -1,51 +1,53 @@
 //import Radium from 'radium'
 import { useHistory } from "react-router-dom";
-//import {Container,Row,Col} from "reactstrap"
+import {Container,Row,Col} from "reactstrap"
 import React from 'react'
-import {Link} from "react-router-dom"
 
 
 
 
 const Footer = () => {
-  const history = useHistory();
+
+ const history=useHistory();
+ const goTo = (e) => {
+  history.push("/" + e.target.value);
+  }
   return (
-    <div className="footer" style={styles.footer}>
-      <Link
-      className="btn btn-sm"
-      style={styles.Link} onClick={() => history.push('/about')}>About us</Link>
-      <Link
-      className="btn btn-sm"
-      style={styles.Link} onClick={()=> history.push('/contact')}>Contact us</Link>
-      <Link
-      className="btn btn-sm"
-      style={styles.Link} onClick={() => history.push('/register')}>Become member</Link>
-      <p style={styles.copyright}>Copyright 2021 | Group 5 TH Lund</p>
-    </div>
-  )
-}
+    <div className="container-fluid">
+        <Row style={{color:"var(--pink)"}}className="font-small indigo " >
+
+          <Col sm="5" md="3" className="mb-3">
+          </Col>
+          <Col sm="5" md="3" className="mb-3">
+          <button className="mt-5 mb-3" style={styles.button} onClick={goTo} value="about">
+           About us
+          </button>
+          </Col>
+
+          <Col sm="5" md="3" className="mb-3">
+          <button className="mt-5 mb-3" style={styles.button} onClick={goTo} value="contact">
+           Contact us
+          </button>
+          </Col>
+          </Row>
+   </div>
+
+   );
+
+  }
+
 export default Footer;
+
 const styles = {
-  footer: {
-    backgroundColor: "var(--lightgrey)",
-    color: "var(--darkgrey) !important",
-    textAlign:"center"
-    
-  },
- Link: {
-    color: "var(--pink)",
-    ":focus":{
-      textAlign:"center"
-    },
-    marginTop: "20px",
-    fontSize: "18px",
-  },
-  
-  copyright: {
-    color: "#9C9C9C",
-    textAlign: "center",
-    margin: "20",
-    padding: "20",
-    fontSize: "14px",
+button: {
+backgroundColor: 'var(--pink)',
+ color: 'white',
+  fontWeight: 'bold',
+  width: '100%',
+  borderRadius: '50px',
+  ':focus': {
+    border: 'none !important'
   }
 }
+}
+   
