@@ -1,6 +1,6 @@
 import { HostingContext } from '../../contexts/HostingContextProvider'
 import { AvailabilityContext } from '../../contexts/AvailabilityContextProvider'
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import HostingCard from "../cards/HostingCard"
 import Radium from 'radium'
 
@@ -8,6 +8,7 @@ const ResultList = () => {
 
   const { hostings } = useContext(HostingContext)
   const { availabilities, fetchAvailabilities } = useContext(AvailabilityContext)
+  const [ filteredHostings, setFilteredHostings] = useState(null)
 
   useEffect(() => {
     fetchAvailabilities()
@@ -19,26 +20,31 @@ const ResultList = () => {
 
   const renderResults = (hostings, availabilities) => {
 
-    console.log("availabilities: ", availabilities)
-    console.log("hostings: ", hostings)
-
-
-
     const search = JSON.parse(localStorage.getItem("search"));
     const searchGuests = search[0].guests
-    const cityFilteredHostings = hostings.filter((hosting) => hosting.address.city.includes(search[0].location));
-    console.log("cityFilteredHostings: ", cityFilteredHostings)
+    const cityFilteredHostings = hostings.filter((hosting) => hosting.address.city.toLowerCase().includes(search[0].location.toLowerCase()));
+    //console.log("cityFilteredHostings: ", cityFilteredHostings)
 
     const availableHostings = cityFilteredHostings.filter((hosting) => {
-      for (let availablity of availabilities) {
-        if (availablity.hosting === hosting._id) {
-          if (availablity.timePeriod[0] >= search[0].startDate && availablity.timePeriod[0] <= search[0].endDate)
+      for (let availability of availabilities) {
+        if (availability.hosting === hosting._id) {
+          // det sökta intervallet behöver befinna i tillgängliga intervallet
+          let availableStartDate = availability.timePeriod[0];
+          let availableEndDate = availability.timePeriod[1];
+          if (
+            search[0].startDate >= availableStartDate &&
+            search[0].startDate >= availableEndDate &&
+            search[0].endDate <= availableStartDate &&
+            search[0].endDate <= availableEndDate
+          )
             // availablity.timePeriod[1] <= search[0].endDate
+            console.log(true);
             return true
         }
       }
       return false
     })
+    console.log(availableHostings);
     const getHostingAvailabilities = availabilities.filter((availability) => availability.hosting === cityFilteredHostings._id)
     console.log("getHostingAvailabilities: ", getHostingAvailabilities)
 
@@ -76,7 +82,7 @@ const ResultList = () => {
       <div>
         <h4 style={styles.noMatchesFound}>{noMatches}</h4>
 
-        <div className="container" style={styles.grid}>
+        <div className="container mb-5" style={styles.grid}>
           {allFilteredList.map(hosting => <HostingCard className="m-20 col-md-6 col-lg-6" key={hosting._id} hosting={hosting} />)}
         </div>
 

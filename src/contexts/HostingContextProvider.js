@@ -12,7 +12,6 @@ export default function HostingContextProvider(props) {
   };
 
   useEffect(() => {
-    console.log("fetched hosting");
     fetchHostings();
   }, []);
 
