@@ -22,15 +22,24 @@ const ResultList = () => {
     console.log("availabilities: ", availabilities)
     console.log("hostings: ", hostings)
 
-    
+
 
     const search = JSON.parse(localStorage.getItem("search"));
     const searchGuests = search[0].guests
-    const filterByCity = hostings.filter((hosting) => hosting.address.city.includes(search[0].location));
-    console.log("filterByCity: ", filterByCity)
+    const cityFilteredHostings = hostings.filter((hosting) => hosting.address.city.includes(search[0].location));
+    console.log("cityFilteredHostings: ", cityFilteredHostings)
 
-    const getHostingAvailabilities = availabilities.filter((item) => item.hosting._id.includes(filterByCity._id))
-    console.log("availability.hosting._id: ", availabilities[0].hosting._id, filterByCity[0]._id)
+    const availableHostings = cityFilteredHostings.filter((hosting) => {
+      for (let availablity of availabilities) {
+        if (availablity.hosting === hosting._id) {
+          if (availablity.timePeriod[0] >= search[0].startDate && availablity.timePeriod[0] <= search[0].endDate)
+            // availablity.timePeriod[1] <= search[0].endDate
+            return true
+        }
+      }
+      return false
+    })
+    const getHostingAvailabilities = availabilities.filter((availability) => availability.hosting === cityFilteredHostings._id)
     console.log("getHostingAvailabilities: ", getHostingAvailabilities)
 
 
@@ -38,9 +47,9 @@ const ResultList = () => {
 
     //filter only by location if guests input is empty
     if (searchGuests === "") {
-      allFilteredList = filterByCity
+      allFilteredList = cityFilteredHostings
     } else {
-      allFilteredList = filterByCity.filter((item) => item.guestAmount === parseInt(searchGuests));
+      allFilteredList = cityFilteredHostings.filter((item) => item.guestAmount === parseInt(searchGuests));
     }
 
     console.log("allFilteredList before avail: ", allFilteredList)
@@ -52,9 +61,9 @@ const ResultList = () => {
         allFilteredList = filterByAvailability
       }
     }
-    
 
-    console.log("allFilteredList after avail: ",allFilteredList)
+
+    console.log("allFilteredList after avail: ", allFilteredList)
 
     var noMatches;
     if (allFilteredList.length === 0) {
