@@ -4,7 +4,7 @@ import { UserContext } from '../contexts/UserContextProvider'
 import { HostingContext } from '../contexts/HostingContextProvider'
 import { BookingContext } from '../contexts/BookingContextProvider'
 import PostingModal from '../components/modals/PostingModal'
-import banner from "../assets/img/banner.jpg"
+import myPageBackground from "../assets/img/myPageBackground.jpg"
 
 export default function MyPage() {
   const history = useHistory()
@@ -36,7 +36,7 @@ export default function MyPage() {
   )
 
   const userView = (
-    <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundPosition: 'center', height: "60vh", marginBottom: "5vw" }}>
+    <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${myPageBackground})`, backgroundSize: 'cover', backgroundPosition: 'center', height: "60vh",}}>
     <div className="container text-center">
       <div className="d-grid gap-2" style={styles.wrapper}>
         <h1>My Page</h1>
