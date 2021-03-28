@@ -157,6 +157,7 @@ const styles = {
   info: {
     margin: "0",
     border: "1px solid black",
+    borderRadius: "5px",
   },
   delete: {
     margin: "0 auto",
