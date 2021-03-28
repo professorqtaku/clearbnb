@@ -109,6 +109,7 @@ export default function HostingDetailPage(props) {
           <p className="col-4 col-md-2" style={styles.info}>
             {hosting.bedAmount} {hosting.bedAmount > 1 ? "Beds" : "Bed"}
           </p>
+          <p>{hosting.address.street} in {hosting.address.city} </p>
           <h2 className="col-md-6">$ {hosting.price}/night </h2>
         </div>
         <div className="row">
