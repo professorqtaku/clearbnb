@@ -134,7 +134,7 @@ export default function HostingDetailPage(props) {
     </div>
   );
   return (
-    <div className="container">
+    <div className="container" style={styles.container}>
       {hosting && availabilities ? (
         booking ? (
           <ConfirmView title={hosting.title} booking={booking} />
@@ -163,5 +163,8 @@ const styles = {
   delete: {
     margin: "0 auto",
     width: "50%"
+  },
+  container:{
+    marginBottom: "5px"
   }
 };
