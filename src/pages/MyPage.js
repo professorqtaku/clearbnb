@@ -35,9 +35,8 @@ export default function MyPage() {
   )
 
   const userView = (
-    <div className="container text-center">
+    <div className="container text-center d-flex p-2 align-items-center" style={styles.container}>
       <div className="d-grid gap-2" style={styles.wrapper}>
-        <h2>My Page</h2>
         <button
           className="btn btn-primary"
           type="button"
@@ -79,6 +78,9 @@ export default function MyPage() {
 }
 
 const styles = {
+  container: {
+    height: '100%'
+  },
   btn: {
     backgroundColor: 'var(--pink)',
     border: 'none',
@@ -86,11 +88,14 @@ const styles = {
     margin: '1vh 0',
     width: '100%',
     borderRadius: '50px',
-    boxShadow: '2px 3px 5px grey',
+    boxShadow: '2px 3px 5px lightgrey',
   },
   wrapper: {
     width: '100%',
     maxWidth: '400px',
-    margin: '0 auto'
+    margin: '0 auto',
+    padding: "1em",
+    borderRadius: "10px",
+    backgroundColor: "rgba(255,255,255,0.8)",
   }
 }

@@ -81,6 +81,7 @@ function App() {
 export default App;
 
 const styles = {
+  
   app: {
     display: "grid",
     gridTemplateRows: "70,14px 1fr 54,52px",

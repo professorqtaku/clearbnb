@@ -82,7 +82,7 @@ export default function HostingDetailPage(props) {
 
   const defaultView = (hosting, user) => {
     return (
-      <div>
+      <div style={styles.container}>
         <h2>{hosting.title}</h2>
         <img
           src={hosting.galleries[0]}
@@ -148,6 +148,14 @@ export default function HostingDetailPage(props) {
 }
 
 const styles = {
+  container: {
+    padding: "1em",
+    borderRadius: "10px",
+    backgroundColor: "rgba(255,255,255,0.8)",
+    marginTop: '5vw',
+    marginBottom: '5vw',
+
+  },
   image: {
     width: "100%",
     height: "calc(25vh + 10vw)",

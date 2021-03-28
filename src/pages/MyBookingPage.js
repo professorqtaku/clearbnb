@@ -37,7 +37,7 @@ const MyBookingPage = () => {
 
   return (
     <div className="container" style={styles.page}>
-      <h5 className="">My bookings</h5>
+      <h5 className="text-center">My bookings</h5>
       {myBookings && showBookingCards(myBookings)}
     </div>
   );
@@ -46,15 +46,19 @@ const MyBookingPage = () => {
 export default Radium(MyBookingPage);
 
 const styles = {
-  page: {
-    backgroundColor: "var(--lightgrey",
-  },
+  // page: {
+  //   backgroundColor: "var(--lightgrey",
+  // },
   cardlist: {
+    padding: "1em",
+    borderRadius: "10px",
+    backgroundColor: "rgba(255,255,255,0.8)",
     display: "grid",
+    gridGap: "2vw",
     gridTemplateColumns: "1fr",
     "@media (min-width: 1000px)": {
       gridTemplateColumns: "repeat(2, 1fr)",
-      gridGap: "2vw",
+      
     },
   },
 };
