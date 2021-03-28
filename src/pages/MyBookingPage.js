@@ -37,8 +37,8 @@ const MyBookingPage = () => {
   };
 
   return (
-   <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundPosition: 'center', height: "60vh", marginBottom: "5vw" }}>
-    <div className="container" style={styles.page}>
+   <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${myBookingsBackground})`, backgroundSize: 'cover', backgroundPosition: 'center',}}>
+    <div className="" style={styles.page}>
       <h5 className="">My bookings</h5>
       {myBookings && showBookingCards(myBookings)}
     </div>
@@ -50,7 +50,12 @@ export default Radium(MyBookingPage);
 
 const styles = {
   page: {
-    backgroundColor: "var(--lightgrey",
+    width: '100%',
+    maxWidth: '400px',
+    margin: '0 auto',
+    padding: "1em",
+    borderRadius: "10px",
+    backgroundColor: "rgba(255,255,255,0.7)",
   },
   cardlist: {
     display: "grid",
