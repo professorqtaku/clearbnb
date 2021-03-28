@@ -7,6 +7,7 @@ const HostingCard = (props) => {
   const hosting = props.hosting;
   const className = props.className
   const history = useHistory()
+  const customerPrice= Math.round((parseInt(hosting.price) *1.15))
 
   const goTo = () => {
     history.push("/hosting/" + hosting._id)
@@ -28,9 +29,9 @@ const HostingCard = (props) => {
         <div className="card-body col-12 col-md-7 col-lg-7 ">
           <div className="row">
             <h5 className="col-12 card-title">{hosting.title}</h5>
+            <p style={styles.font} className="col-6 card-text">{JSON.stringify(hosting.address.city)}</p>
             <p style={styles.font} className="col-12 card-text">{hosting.guestAmount} guests</p>
-            <p style={styles.font} className="col-6 card-text">{hosting.bedAmount} beds</p>
-            <p style={styles.price} className="col-6 d-flex justify-content-end card-text">${hosting.price}/night</p>
+            <p style={styles.price} className="col-6 d-flex justify-content-end card-text">${customerPrice}/night</p>
           </div>
         </div>
       </div>

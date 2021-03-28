@@ -16,6 +16,7 @@ export default function Footer() {
     footer: {
       backgroundColor: "var(--lightgrey)",
       color: "var(--darkgrey) !important",
+      marginTop: "5px",
       
     },
     button: {
