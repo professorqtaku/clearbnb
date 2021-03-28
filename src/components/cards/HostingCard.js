@@ -74,6 +74,8 @@ const styles = {
   price: {
     fontSize: "18px",
     fontWeight: "500",
-    color: "rgb(70,70,70)"
+    color: "rgb(70,70,70)",
+    width: "100%"
+    
   }
 };
