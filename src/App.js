@@ -16,6 +16,8 @@ import BookingDetailPage from "./pages/BookingDetailPage"
 import Navbar from "./components/base/Navbar";
 import Footer from "./components/base/Footer";
 
+import banner from "./assets/img/banner.jpg"
+
 import { StyleRoot } from "radium";
 
 function App() {
@@ -32,7 +34,9 @@ function App() {
                       <Navbar />
                     </header>
 
-                    <main>
+                    <main style={{
+                      minHeight: '90vh', backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'
+                    }}>
                       <Switch>
                         <Route exact path="/" component={HomePage} />
                         <Route exact path="/myPage" component={MyPage} />
@@ -56,7 +60,7 @@ function App() {
                           path="/mypage/post"
                           component={PostHostingPage}
                         />
-                        <Route exact path="/booking/:bookingId" component={BookingDetailPage}/>
+                        <Route exact path="/booking/:bookingId" component={BookingDetailPage} />
                       </Switch>
                     </main>
 

@@ -37,7 +37,7 @@ export default function MyPage() {
   const userView = (
     <div className="container text-center">
       <div className="d-grid gap-2" style={styles.wrapper}>
-        <h1>My Page</h1>
+        <h2>My Page</h2>
         <button
           className="btn btn-primary"
           type="button"
