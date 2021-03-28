@@ -50,8 +50,7 @@ export default Radium(MyBookingPage);
 
 const styles = {
   page: {
-    width: '100%',
-    maxWidth: '400px',
+    maxwidth: "400px",
     margin: '0 auto',
     padding: "1em",
     borderRadius: "10px",
