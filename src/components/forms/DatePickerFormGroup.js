@@ -38,7 +38,6 @@ export default function DatePickerFormGroup(props) {
           minDate={startDate}
         />
       </div>
-      <div className="form-text">You can add more dates later</div>
     </div>
   );
 }
