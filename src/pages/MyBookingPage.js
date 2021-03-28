@@ -3,6 +3,7 @@ import { BookingContext } from "../contexts/BookingContextProvider";
 import { UserContext } from "../contexts/UserContextProvider";
 import MyBookingCard from "../components/cards/MyBookingCard";
 import Radium from "radium";
+import myBookingsBackground from "../assets/img/myBookingsBackground.jpg"
 
 const MyBookingPage = () => {
   const { bookings, fetchBookings } = useContext(BookingContext);
@@ -36,10 +37,12 @@ const MyBookingPage = () => {
   };
 
   return (
+   <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundPosition: 'center', height: "60vh", marginBottom: "5vw" }}>
     <div className="container" style={styles.page}>
       <h5 className="">My bookings</h5>
       {myBookings && showBookingCards(myBookings)}
     </div>
+  </div>
   );
 };
 
