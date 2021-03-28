@@ -39,7 +39,7 @@ const MyBookingPage = () => {
   return (
    <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${myBookingsBackground})`, backgroundSize: 'cover', backgroundPosition: 'center',}}>
     <div className="" style={styles.page}>
-      <h5 className="">My bookings</h5>
+      <h5 className="">My Bookings</h5>
       {myBookings && showBookingCards(myBookings)}
     </div>
   </div>
