@@ -14,6 +14,7 @@ export default function UserContextProvider(props) {
       .then(user => {
         if (!user.error) {
           setUser(user)
+          console.log("user not null");
         }
         else {
           setUser(null)
@@ -24,6 +25,7 @@ export default function UserContextProvider(props) {
 
     useEffect(() => {
       fetchUser();
+      console.log("from user contect useeffect");
     }, []);
 
   const values = {

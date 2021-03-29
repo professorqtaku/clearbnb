@@ -1,14 +1,24 @@
 import { useHistory } from "react-router-dom";
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../../contexts/UserContextProvider"
 import useWindowSize from "../../utils/useWindowSize"
 import Nav from './Nav'
+import LoginToast from './LoginToast'
 
 export default function UserNav(props) {
   const history = useHistory();
   const { user, setUser } = useContext(UserContext);
+  const [showToast, setShowToast] = useState(false)
+  const toggle = () => setShowToast(!showToast)
   
   const { width } = useWindowSize()
+
+  useEffect(() => {
+    toggle()
+    // setTimeout(() => {
+    //   setShowToast(false)
+    // }, 3000)
+  }, [])
 
   const logout = async () => {
     let res = await fetch("/api/login", {
@@ -45,10 +55,11 @@ export default function UserNav(props) {
     >
       <div className="mx-auto"></div>
       <ul className="navbar-nav">
-        { showIcon(width) }
-        <Nav content={user.firstName} value="mypage" textColor={ colorText }/>
-        <Nav content="Logout" onClick={logout} value="logout"/>
+        {showIcon(width)}
+        <Nav content={user.firstName} value="mypage" textColor={colorText} />
+        <Nav content="Logout" onClick={logout} value="logout" />
       </ul>
+      <LoginToast show={showToast} setShow={setShowToast} />
     </div>
   );
 }
