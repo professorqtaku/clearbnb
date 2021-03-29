@@ -29,7 +29,7 @@ export default function HostingInfoFormGroup(props) {
       <FormGroup className="col-12 col-md-6 mb-3">
         <label className=" form-label">Price per night*</label>
         <div className="input-group">
-          <span class="input-group-text">$</span>
+          <span className="input-group-text">$</span>
           <input
             className="form-control"
             type="number"
@@ -40,7 +40,7 @@ export default function HostingInfoFormGroup(props) {
           />
         </div>
         <div className="form-text">
-          ClearBnB takes 15% profit of the selling price
+          ClearBnB adds 15% on top of the selling price as a service fee.
         </div>
       </FormGroup>
 
@@ -66,7 +66,7 @@ export default function HostingInfoFormGroup(props) {
           className="form-control"
           type="number"
           id="hostingGuestAmountInput"
-          min={0}
+          min={1}
           required
         />
       </FormGroup>

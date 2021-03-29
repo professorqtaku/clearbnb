@@ -49,11 +49,6 @@ function LoginForm(props) {
     return false;
   };
 
-  const toRegister = () => {
-    toggleModal()
-    history.push('/register')
-  }
-
   return (
     <div style={styles.gridContainer} className="container">
       <div>
@@ -90,16 +85,6 @@ function LoginForm(props) {
               Log in
             </button>
           </form>
-          <div>
-            <button
-              type="button"
-              className="btn btn-link"
-              style={styles.link}
-              onClick={toRegister}
-            >
-              Not a member yet?
-            </button>
-          </div>
         </div>
       </div>
     </div>

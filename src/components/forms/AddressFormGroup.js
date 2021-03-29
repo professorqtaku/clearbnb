@@ -25,7 +25,7 @@ export default function AddressFormGroup() {
             required
           />
         </FormGroup>
-        <FormGroup className="col-md-3 col-sm-6 mb-3">
+        <FormGroup className="col-sm-6 col-lg-3 mb-3">
           <Label for="state">State/Region/County</Label>
           <input
             className="form-control"
@@ -34,7 +34,7 @@ export default function AddressFormGroup() {
             id="hostingCountyInput"
           />
         </FormGroup>
-        <FormGroup className="col-md-3 col-sm-6 mb-3">
+        <FormGroup className="col-sm-6 col-lg-3 mb-3">
           <Label for="zipCode">Zip code*</Label>
           <input
             className="form-control"
@@ -46,7 +46,7 @@ export default function AddressFormGroup() {
             required
           />
         </FormGroup>
-        <FormGroup className="col-md-6 mb-3">
+        <FormGroup className="col-lg-6 mb-3">
           <Label for="country">Country*</Label>
           <input
             className="form-control"

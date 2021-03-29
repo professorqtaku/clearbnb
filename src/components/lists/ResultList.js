@@ -1,102 +1,110 @@
 import { HostingContext } from '../../contexts/HostingContextProvider'
-import { useEffect, useContext} from 'react'
-import { useHistory } from "react-router-dom";
-import MyHostingCard from "../cards/HostingCard"
+import { AvailabilityContext } from '../../contexts/AvailabilityContextProvider'
+import { useEffect, useContext, useState } from 'react'
+import HostingCard from "../cards/HostingCard"
+import Radium from 'radium'
 
-
-export default function ResultList() {
-  const history = useHistory()
+const ResultList = () => {
 
   const { hostings } = useContext(HostingContext)
+  const { availabilities, fetchAvailabilities } = useContext(AvailabilityContext)
 
   useEffect(() => {
-    console.log("hostings: ", hostings
-    )
-  }, [hostings]);
+    fetchAvailabilities()
+  }, [])
 
-  const renderResults = (hostings) => {
+  const isAvailable = (hosting, startDate, endDate) => {
+    for (let availability of availabilities) {
+      if (availability.hosting === hosting._id) {
+        let availableStartDate = availability.timePeriod[0];
+        let availableEndDate = availability.timePeriod[1];
+        if (
+          startDate >= availableStartDate &&
+          startDate <= availableEndDate &&
+          endDate >= availableStartDate &&
+          endDate <= availableEndDate
+        )
+          return true;
+      }
+    }
+    return false;
+  };
 
+  const filterHostings = () => {
     const search = JSON.parse(localStorage.getItem("search"));
     const searchGuests = search[0].guests
-    const filterByCity = hostings.filter((hosting) => hosting.address.city.includes(search[0].location));
-    const allFilteredList = filterByCity.filter((item) => item.guestAmount === parseInt(searchGuests));
+    let filteredHostings = hostings.filter((hosting) =>
+      hosting.address.city.toLowerCase().trim().includes(search[0].location.toLowerCase().trim()));
+    
+    filteredHostings = filteredHostings.filter((hosting) =>
+      isAvailable(
+        hosting,
+        parseInt(search[0].startDate),
+        parseInt(search[0].endDate)
+      )
+    );
 
-    var noMatches;
-    if (allFilteredList.length === 0) {
-      noMatches = "No matches found"
-    } else {
-      noMatches = ""
+    if(searchGuests !=="" ){
+      filteredHostings = filteredHostings.filter((hosting) => hosting.guestAmount >= parseInt(searchGuests));
     }
-    // const card = hostingItem => (
-    //   <div style={styles.cardStyle} key={hostingItem._id}>
-    //     <div
-    //       className="card"
-    //       style={styles.cardWrapper}
-    //       onClick={() => history.push('/hosting/' + hostingItem._id)}
-    //     >
-    //       <img style={styles.image}
-    //         src={hostingItem.galleries[0]}
-    //         alt={'Image not found'}
+    return filteredHostings
+  }
 
-    //       />
-    //       <div>
-    //         <h3 style={styles.title} >{hostingItem.title}</h3>
-    //         <p style={styles.info} >{hostingItem.host.firstName}{hostingItem.host.lastName} </p>
-    //         <p style={styles.info}>${hostingItem.price}/night </p>
-    //         <p style={styles.info} >{hostingItem.guestAmount} Guests</p>
-    //       </div>
-    //     </div>
-    //   </div>
-    // )
-
+  const renderResult = (hostings) => {
+    let noMatches;
+    if (hostings.length === 0) {
+      noMatches = "No matches found";
+    } else {
+      noMatches = "";
+    }
     return (
       <div>
         <h4 style={styles.noMatchesFound}>{noMatches}</h4>
-        <div style={styles.list} >
-          {allFilteredList.map(hosting => <MyHostingCard key={hosting._id} hosting={hosting} />)}
+
+        <div className="container mb-5" style={styles.grid}>
+          {hostings.map((hosting) => (
+            <HostingCard
+              className="m-20 col-md-6 col-lg-6"
+              key={hosting._id}
+              hosting={hosting}
+            />
+          ))}
         </div>
       </div>
-    )
+    );
   }
+
   const loading = (
     <div>
       Loading...
     </div>
   );
-  return <div className="container">{hostings ? renderResults(hostings) : loading}</div>;
+  return (
+    <div className="container">
+      {hostings && availabilities ? renderResult(filterHostings()) : loading}
+    </div>
+  );
 }
 
+export default Radium(ResultList)
+
 const styles = {
-  list: {
-    marginTop: "5vw",
-    marginBottom: "5vw",
+
+  grid: {
+    maxWidth: '1000px',
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridTemplateRows: "1fr",
     gridGap: "2vw",
+    '@media (min-width: 1000px)': {
+      gridTemplateColumns: "repeat(2, 1fr)",
+    },
+    marginBottom: "5px",
   },
-  cardWrapper: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    padding: "2px",
-    gridGap: "2vw",
-  },
-  title: {
-    fontSize: "16px",
-    margin: "0",
-  },
-  info: {
-    margin: "0",
-  },
+
   noMatchesFound: {
     textAlign: "center",
     paddingTop: "30px",
   },
-  image: {
-    width: "100%",
-    height: "100px",
-    borderRadius: "2px",
-    objectFit: "cover",
-  },
-};
+
+}
 
