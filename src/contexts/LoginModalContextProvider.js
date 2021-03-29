@@ -7,7 +7,6 @@ export default function LoginModalContextProvider(props) {
 
   const toggleLoginModal = () => {
     setShowLoginModal(!showLoginModal)
-    console.log(showLoginModal);
   }
 
   const values = {

@@ -5,6 +5,7 @@ import useWindowSize from "../../utils/useWindowSize"
 import Nav from './Nav'
 
 export default function UserNav(props) {
+  const { toggleToast } = props
   const history = useHistory();
   const { user, setUser } = useContext(UserContext);
   const { width } = useWindowSize()
@@ -16,7 +17,7 @@ export default function UserNav(props) {
     res = await res.json();
     if (res.success) {
       setUser(null);
-      console.log("logged out");
+      toggleToast()
       history.push("/");
     }
   }

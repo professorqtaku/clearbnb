@@ -3,16 +3,23 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContextProvider";
 import GuestNav from './GuestNav'
 import UserNav from './UserNav'
-import LoginToast from './StatusToast'
+import StatusToast from './StatusToast'
 
 export default function Navbar(props) {
   const { user } = useContext(UserContext);
   const history = useHistory();
   const [showLoginToast, setShowLoginToast] = useState(false)
+  const [showLogoutToast, setShowLogoutToast] = useState(false)
   const toggleLoginToast = () => {
     setShowLoginToast(!showLoginToast)
     setTimeout(() => {
         setShowLoginToast(false)
+      }, 5000)
+  }
+  const toggleLogoutToast = () => {
+    setShowLogoutToast(!showLogoutToast)
+    setTimeout(() => {
+        setShowLogoutToast(false)
       }, 5000)
   }
 
@@ -23,7 +30,7 @@ export default function Navbar(props) {
   const nav = () => {
     if(user)
     return (
-      <UserNav />
+      <UserNav toggleToast={toggleLogoutToast}/>
       )
     return <GuestNav toggleToast={toggleLoginToast}/>
 }
@@ -55,7 +62,8 @@ export default function Navbar(props) {
           {nav()}
         </div>
       </nav>
-      <LoginToast show={showLoginToast} setShow={setShowLoginToast} content="Login successful"/>
+      <StatusToast show={showLoginToast} setShow={setShowLoginToast} content="Login successful"/>
+      <StatusToast show={showLogoutToast} setShow={setShowLogoutToast} content="Logout successful"/>
     </div>
   );
 }
