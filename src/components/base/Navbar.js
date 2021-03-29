@@ -75,6 +75,6 @@ const styles = {
     color: "white !important",
   },
   logo: {
-    height: "100%"
+    maxHeight:"50px",
   }
 };
