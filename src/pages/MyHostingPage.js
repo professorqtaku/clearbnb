@@ -45,17 +45,17 @@ export default Radium(MyHostingPage)
 const styles = {
   page: {
     maxwidth: "400px",
-    margin: '0 auto',
+    margin: "0 auto",
     padding: "1em",
     borderRadius: "10px",
-    backgroundColor: "rgba(255,255,255,0.7)",
+    backgroundColor: "var(--whiteTrans)",
   },
   cardlist: {
     display: "grid",
     gridTemplateColumns: "1fr",
-    '@media (min-width: 1000px)': {
+    "@media (min-width: 1000px)": {
       gridTemplateColumns: "repeat(2, 1fr)",
-      gridGap: "3vh"
+      gridGap: "3vh",
+    },
   },
-  }
 };

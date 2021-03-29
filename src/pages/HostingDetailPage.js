@@ -5,6 +5,7 @@ import BookingForm from '../components/forms/BookingForm'
 import ConfirmView from '../components/views/ConfirmView'
 import DeleteButton from '../components/buttons/DeleteButton'
 import NoImage from '../assets/img/noimage.png'
+import Loading from '../components/base/Loading'
 
 export default function HostingDetailPage(props) {
   const { hostingId } = useParams();
@@ -133,11 +134,6 @@ export default function HostingDetailPage(props) {
     )
   }
 
-  const loading = (
-    <div className="spinner-border" role="status">
-      <span className="sr-only">Loading...</span>
-    </div>
-  );
   return (
     <div className="container" style={styles.container}>
       {hosting && availabilities ? (
@@ -147,7 +143,7 @@ export default function HostingDetailPage(props) {
           defaultView(hosting, user)
         )
       ) : (
-        loading
+        <Loading />
       )}
     </div>
   );
@@ -157,10 +153,9 @@ const styles = {
   container: {
     padding: "1em",
     borderRadius: "10px",
-    backgroundColor: "rgba(255,255,255,0.8)",
-    marginTop: '5vw',
-    marginBottom: '5vw',
-
+    backgroundColor: "var(--whiteTrans)",
+    marginBottom: "5vw",
+    height: "100%",
   },
   image: {
     width: "100%",
@@ -175,9 +170,6 @@ const styles = {
   },
   delete: {
     margin: "0 auto",
-    width: "50%"
+    width: "50%",
   },
-  container:{
-    marginBottom: "5px"
-  }
 };

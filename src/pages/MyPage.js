@@ -5,6 +5,7 @@ import { HostingContext } from '../contexts/HostingContextProvider'
 import { BookingContext } from '../contexts/BookingContextProvider'
 import PostingModal from '../components/modals/PostingModal'
 import myPageBackground from "../assets/img/myPageBackground.jpg"
+import Loading from "../components/base/Loading"
 
 export default function MyPage() {
   const history = useHistory()
@@ -17,7 +18,6 @@ export default function MyPage() {
   useEffect(() => {
     fetchHostings()
     fetchBookings()
-    console.log(bookings, "bookings");
   }, [])
 
   const goTo = (e) => {
@@ -28,12 +28,6 @@ export default function MyPage() {
       history.push("/mypage/" + e.target.value)
     }
   }
-
-  const loading = () => (
-    <div className="spinner-border" role="status">
-      <span className="sr-only">Loading...</span>
-    </div>
-  )
 
   const userView = (
     <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${myPageBackground})`, backgroundSize: 'cover', backgroundPosition: 'center', height: "100%", }}>
@@ -76,29 +70,29 @@ export default function MyPage() {
   );
 
   return (
-    user ? userView : loading
+    user ? userView : <Loading />
   )
 }
 
 const styles = {
   container: {
-    height: '100%'
+    height: "100%",
   },
   btn: {
-    backgroundColor: 'var(--pink)',
-    border: 'none',
-    padding: '20px 0',
-    margin: '1vh 0',
-    width: '100%',
-    borderRadius: '50px',
-    boxShadow: '2px 3px 5px lightgrey',
+    backgroundColor: "var(--pink)",
+    border: "none",
+    padding: "20px 0",
+    margin: "1vh 0",
+    width: "100%",
+    borderRadius: "50px",
+    boxShadow: "2px 3px 5px lightgrey",
   },
   wrapper: {
-    width: '100%',
-    maxWidth: '400px',
-    margin: '0 auto',
+    width: "100%",
+    maxWidth: "400px",
+    margin: "0 auto",
     padding: "1em",
     borderRadius: "10px",
-    backgroundColor: "rgba(255,255,255,0.7)",
+    backgroundColor: "var(--whiteTrans)",
   },
-}
+};
