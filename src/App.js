@@ -35,7 +35,7 @@ function App() {
                     </header>
 
                     <main style={{
-                      minHeight: '90vh', backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'
+                      minHeight: '90vh'
                     }}>
                       <Switch>
                         <Route exact path="/" component={HomePage} />
@@ -81,7 +81,7 @@ function App() {
 export default App;
 
 const styles = {
-  
+
   app: {
     display: "grid",
     gridTemplateRows: "70,14px 1fr 54,52px",

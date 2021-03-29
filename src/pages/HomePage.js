@@ -12,7 +12,9 @@ export default function HomePage() {
   return (
 
     <div className="homePage" style={{ height: '60vh' }}>
-      <div className="d-flex p-2 align-items-center" style={{ height: '100%' }}>
+      <div className="d-flex p-2 align-items-center" style={{
+        minHeight: '80vh', backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'
+      }}>
         <SearchBar setIsSearch={setIsSearch} />
       </div>
       {isSearch ? <ResultList /> : null}
