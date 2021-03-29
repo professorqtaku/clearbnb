@@ -4,6 +4,7 @@ import { UserContext } from '../contexts/UserContextProvider'
 import { HostingContext } from '../contexts/HostingContextProvider'
 import { BookingContext } from '../contexts/BookingContextProvider'
 import PostingModal from '../components/modals/PostingModal'
+import myPageBackground from "../assets/img/myPageBackground.jpg"
 
 export default function MyPage() {
   const history = useHistory()
@@ -35,39 +36,41 @@ export default function MyPage() {
   )
 
   const userView = (
-    <div className="container text-center d-flex p-2 align-items-center" style={styles.container}>
-      <div className="d-grid gap-2" style={styles.wrapper}>
-        <button
-          className="btn btn-primary"
-          type="button"
-          style={styles.btn}
-          value="bookings"
-          onClick={goTo}
-        >
-          My bookings
+    <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${myPageBackground})`, backgroundSize: 'cover', backgroundPosition: 'center', height: "60vh", }}>
+      <div className="container text-center">
+        <div className="d-grid gap-2" style={styles.wrapper}>
+          <button
+            className="btn btn-primary"
+            type="button"
+            style={styles.btn}
+            value="bookings"
+            onClick={goTo}
+          >
+            My bookings
         </button>
-        <button
-          className="btn btn-primary"
-          type="button"
-          style={styles.btn}
-          value="hostings"
-          onClick={goTo}
-        >
-          My hostings
+          <button
+            className="btn btn-primary"
+            type="button"
+            style={styles.btn}
+            value="hostings"
+            onClick={goTo}
+          >
+            My hostings
         </button>
-        <button className="btn btn-primary"onClick={togglePostModal} style={styles.btn}>
-          Post a hosting
+          <button className="btn btn-primary" onClick={togglePostModal} style={styles.btn}>
+            Post a hosting
         </button>
-        <PostingModal modal={postModal} toggle={togglePostModal} />
-        <button
-          className="btn btn-primary"
-          type="button"
-          style={styles.btn}
-          value="search"
-          onClick={goTo}
-        >
-          Search places
+          <PostingModal modal={postModal} toggle={togglePostModal} />
+          <button
+            className="btn btn-primary"
+            type="button"
+            style={styles.btn}
+            value="search"
+            onClick={goTo}
+          >
+            Search places
         </button>
+        </div>
       </div>
     </div>
   );
@@ -96,6 +99,6 @@ const styles = {
     margin: '0 auto',
     padding: "1em",
     borderRadius: "10px",
-    backgroundColor: "rgba(255,255,255,0.8)",
-  }
+    backgroundColor: "rgba(255,255,255,0.7)",
+  },
 }

@@ -67,7 +67,7 @@ const styles = {
     },
   },
   card: {
-    maxWidth: "540px",
+    maxWidth: "400px",
     transition: "200ms",
     margin: "0 auto",
     borderRadius: "10px",

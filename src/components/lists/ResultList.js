@@ -59,7 +59,8 @@ const styles = {
     gridGap: "2vw",
     '@media (min-width: 1000px)': {
       gridTemplateColumns: "repeat(2, 1fr)",
-    }
+    },
+    marginBottom: "5px",
   },
 
   noMatchesFound: {

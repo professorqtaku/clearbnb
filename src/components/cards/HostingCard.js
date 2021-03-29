@@ -7,6 +7,9 @@ const HostingCard = (props) => {
   const hosting = props.hosting;
   const className = props.className
   const history = useHistory()
+  const customerPrice= Math.round((parseInt(hosting.price) *1.15))
+  const city = JSON.stringify(hosting.address.city)
+  const citySliced = city.slice(1, -1)
 
   const goTo = () => {
     history.push("/hosting/" + hosting._id)
@@ -29,9 +32,9 @@ const HostingCard = (props) => {
           <div className="row">
             <p className="col-12 " style={styles.font}>{hosting.address.city}</p>
             <h5 className="col-12 card-title">{hosting.title}</h5>
+            <p style={styles.font} className="col-6 card-text">{citySliced}</p>
             <p style={styles.font} className="col-12 card-text">{hosting.guestAmount} guests</p>
-            <p style={styles.font} className="col-6 card-text">{hosting.bedAmount} beds</p>
-            <p style={styles.price} className="col-6 d-flex justify-content-end card-text">${hosting.price}/night</p>
+            <p style={styles.price} className="col-6 d-flex justify-content-end card-text">${customerPrice}/night</p>
           </div>
         </div>
       </div>
@@ -74,6 +77,8 @@ const styles = {
   price: {
     fontSize: "18px",
     fontWeight: "500",
-    color: "rgb(70,70,70)"
+    color: "rgb(70,70,70)",
+    width: "100%"
+    
   }
 };

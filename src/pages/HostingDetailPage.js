@@ -13,7 +13,12 @@ export default function HostingDetailPage(props) {
   const [bookedDates, setBookedDates] = useState(null)
   const [booking, setBooking] = useState(null)
   const { user } = useContext(UserContext)
-
+  
+  const customerPrice = (price) => {
+    return(
+    Math.round((parseInt(price*100)*1.15))/100
+    )
+  }
 
   const fetchHosting = async (hostingId) => {
     let res = await fetch(`/rest/hostings/${hostingId}`);
@@ -109,7 +114,8 @@ export default function HostingDetailPage(props) {
           <p className="col-4 col-md-2" style={styles.info}>
             {hosting.bedAmount} {hosting.bedAmount > 1 ? "Beds" : "Bed"}
           </p>
-          <h2 className="col-md-6">$ {hosting.price}/night </h2>
+          <p>{hosting.address.street} in {hosting.address.city} </p>
+          <h2 className="col-md-6">$ {customerPrice(hosting.price)}/night </h2>
         </div>
         <div className="row">
           <p>{hosting.description}</p>
@@ -133,7 +139,7 @@ export default function HostingDetailPage(props) {
     </div>
   );
   return (
-    <div className="container">
+    <div className="container" style={styles.container}>
       {hosting && availabilities ? (
         booking ? (
           <ConfirmView title={hosting.title} booking={booking} />
@@ -170,5 +176,8 @@ const styles = {
   delete: {
     margin: "0 auto",
     width: "50%"
+  },
+  container:{
+    marginBottom: "5px"
   }
 };

@@ -3,6 +3,7 @@ import { HostingContext } from '../contexts/HostingContextProvider'
 import { UserContext } from '../contexts/UserContextProvider'
 import MyHostingCard from '../components/cards/MyHostingCard'
 import Radium from 'radium'
+import myHostingBackground from "../assets/img/myHostingBackground.jpg"
 
 const MyHostingPage = () => {
   const { hostings } = useContext(HostingContext)
@@ -30,9 +31,11 @@ const MyHostingPage = () => {
   }
 
   return (
-    <div className="container" style={styles.page}>
+    <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${myHostingBackground})`, backgroundSize: 'cover', backgroundPosition: 'center',}}>
+    <div className="" style={styles.page}>
       <h5 className="">My hostings</h5>
       {myHostings && showHostingCards(myHostings) }
+    </div>
     </div>
   )
 }
@@ -41,7 +44,11 @@ export default Radium(MyHostingPage)
 
 const styles = {
   page: {
-    backgroundColor: "var(--lightgrey",
+    maxwidth: "400px",
+    margin: '0 auto',
+    padding: "1em",
+    borderRadius: "10px",
+    backgroundColor: "rgba(255,255,255,0.7)",
   },
   cardlist: {
     display: "grid",

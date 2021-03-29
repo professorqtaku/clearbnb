@@ -16,8 +16,8 @@ export default function Footer() {
     footer: {
       backgroundColor: "var(--lightgrey)",
       color: "var(--darkgrey) !important",
-      
     },
+    
     button: {
       color: "var(--darkgrey)",
       ":focus": {
