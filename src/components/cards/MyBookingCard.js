@@ -1,16 +1,13 @@
-import { useEffect } from 'react'
-import { useHistory } from "react-router-dom";
+import { useState } from 'react'
 import Radium from "radium";
 import NoImage from "../../assets/img/noimage.png";
 import BookingModal from "../modals/BookingModal"
 
 const MyBookingCard = (props) => {
   const booking = props.booking;
-  const history = useHistory();
+  const [modal, setModal] = useState(false);
 
-  const goTo = () => {
-    history.push("/booking/" + booking._id);
-  };
+  const toggle = () => setModal(!modal);
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -28,28 +25,31 @@ const MyBookingCard = (props) => {
   }
 
   return (
-    <div className="card" style={styles.card} onClick={goTo}>
-      <div className="row g-0" style={styles.row}>
-        <div className="col-md-4">
-          <img
-            src={booking.hosting.galleries[0]}
-            alt="..."
-            style={styles.image}
-            onError={(event) => (event.target.src = NoImage)}
-          />
-        </div>
-        <div className="col-md-8">
-          <div className="card-body">
-            <h5 className="card-title">{booking.hosting.title}</h5>
-            <h6 className="card-title">
-              {showDate()}
-            </h6>
-            <p className="card-text">
-              ${booking.totalPrice}
-            </p>
+    <div>
+      <div className="card" style={styles.card} onClick={toggle}>
+        <div className="row g-0" style={styles.row}>
+          <div className="col-md-4">
+            <img
+              src={booking.hosting.galleries[0]}
+              alt="..."
+              style={styles.image}
+              onError={(event) => (event.target.src = NoImage)}
+            />
+          </div>
+          <div className="col-md-8">
+            <div className="card-body">
+              <h5 className="card-title">{booking.hosting.title}</h5>
+              <h6 className="card-title">
+                {showDate()}
+              </h6>
+              <p className="card-text">
+                ${booking.totalPrice}
+              </p>
+            </div>
           </div>
         </div>
       </div>
+      <BookingModal modal={modal} toggle={toggle} booking={booking} />
     </div>
   );
 };

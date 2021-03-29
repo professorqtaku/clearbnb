@@ -3,10 +3,11 @@ import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import BookingConfirmationView from "../views/BookingConfirmationView"
 
 function BookingModal(props) {
-
-  const [modal, setModal] = useState(false);
-
-  const toggle = () => setModal(!modal);
+  const {
+    modal,
+    toggle,
+    booking
+  } = props;
 
   return (
     <div>
