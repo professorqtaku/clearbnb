@@ -2,7 +2,7 @@
 import { useState } from "react"
 import ResultList from "../components/lists/ResultList"
 import SearchBar from "../components/SearchBar"
-import banner from "../assets/img/banner.jpg"
+import banner from "../assets/img/myBookingsBackground.jpg"
 
 
 export default function HomePage() {
@@ -12,10 +12,16 @@ export default function HomePage() {
   return (
 
     <div className="homePage">
+
       <div className="d-flex p-2 align-items-center" style={{
-        minHeight: '80vh', backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'
+        minHeight: '92vh', backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'bottom'
       }}>
-        <SearchBar setIsSearch={setIsSearch} />
+        <div className="container">
+          <div className="row">
+            <h1 className="col-12 text-center align-items-flexend" style={styles.h1}>Where do you want to go?</h1>
+            <SearchBar className="col-12" setIsSearch={setIsSearch} />
+          </div>
+        </div>
       </div>
       {isSearch ? <ResultList /> : <p style={styles.paragraph}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nullam non nisi est sit. Scelerisque mauris pellentesque pulvinar pellentesque habitant. Sit amet venenatis urna cursus eget nunc scelerisque viverra mauris. Quis risus sed vulputate odio. Sed euismod nisi porta lorem mollis aliquam ut.</p>}
     </div>
@@ -23,6 +29,11 @@ export default function HomePage() {
 }
 
 const styles = {
+  h1: {
+    color: 'white',
+    fontWeight: '700',
+    padding: '2vh'
+  },
   paragraph: {
     fontSize: '20px',
     textAlign: 'center',
