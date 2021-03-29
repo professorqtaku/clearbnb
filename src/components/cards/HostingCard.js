@@ -30,9 +30,8 @@ const HostingCard = (props) => {
 
         <div className="card-body col-12 col-md-7 col-lg-7 ">
           <div className="row">
-            <p className="col-12 " style={styles.font}>{hosting.address.city}</p>
+             <p style={styles.font} className="col-6 card-text">{citySliced}</p>
             <h5 className="col-12 card-title">{hosting.title}</h5>
-            <p style={styles.font} className="col-6 card-text">{citySliced}</p>
             <p style={styles.font} className="col-12 card-text">{hosting.guestAmount} guests</p>
             <p style={styles.price} className="col-6 d-flex justify-content-end card-text">${customerPrice}/night</p>
           </div>
@@ -80,5 +79,8 @@ const styles = {
     color: "rgb(70,70,70)",
     width: "100%"
     
+  },
+  row: {
+    height: '100%'
   }
 };
