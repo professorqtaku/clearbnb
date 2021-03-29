@@ -1,7 +1,8 @@
-import {useEffect} from 'react'
+import { useEffect } from 'react'
 import { useHistory } from "react-router-dom";
 import Radium from "radium";
 import NoImage from "../../assets/img/noimage.png";
+import BookingModal from "../modals/BookingModal"
 
 const MyBookingCard = (props) => {
   const booking = props.booking;
