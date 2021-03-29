@@ -118,7 +118,7 @@ const styles = {
 
   button: {
     color: "white",
-    backgroundColor: "#4CAF50",
+    backgroundColor: "var(--green)",
     textDecoration: "none",
     border: '1px white solid'
   }
