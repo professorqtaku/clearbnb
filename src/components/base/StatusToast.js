@@ -37,6 +37,7 @@ const styles = {
   text: {
     fontWeight: "bold",
     margin: "0",
-    padding: "0"
+    padding: "0",
+    color: "white"
   }
 }
