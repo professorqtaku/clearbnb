@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 import ErrorMessage from "../ErrorMessage";
 
 function LoginForm(props) {
-  const { toggleModal } = props
+  const { toggleModal, toggleToast } = props
   const { fetchUser } = useContext(UserContext)
   const history = useHistory()
   const [loginError, setLoginError] = useState(false)
@@ -44,6 +44,7 @@ function LoginForm(props) {
     res = await res.json();
     if (res.success) {
       fetchUser()
+      toggleToast()
       return true;
     }
     return false;

@@ -1,12 +1,15 @@
 import { useHistory } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContextProvider";
 import GuestNav from './GuestNav'
 import UserNav from './UserNav'
+import LoginToast from './LoginToast'
 
 export default function Navbar(props) {
   const { user } = useContext(UserContext);
   const history = useHistory();
+  const [showLoginToast, setShowLoginToast] = useState(false)
+  const toggleLoginToast= () => setShowLoginToast(!showLoginToast)
 
   const goTo = (e) => {
     history.push("/" + e.target.value);
@@ -17,7 +20,7 @@ export default function Navbar(props) {
     return (
       <UserNav />
       )
-    return <GuestNav />
+    return <GuestNav toggleToast={toggleLoginToast}/>
 }
 
   return (
@@ -47,6 +50,7 @@ export default function Navbar(props) {
           {nav()}
         </div>
       </nav>
+      <LoginToast show={showLoginToast} setShow={setShowLoginToast} />
     </div>
   );
 }

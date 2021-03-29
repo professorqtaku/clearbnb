@@ -3,7 +3,8 @@ import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import LoginForm from '../forms/LoginForm'
 import Nav from '../base/Nav'
 
-function LoginModal(props){
+function LoginModal(props) {
+  const { toggleToast } = props
 
   const [modal, setModal] = useState(false);
 
@@ -24,7 +25,7 @@ function LoginModal(props){
           ></button>
         </div>
         <ModalBody>
-          <LoginForm toggleModal={toggle} />
+          <LoginForm toggleModal={toggle} toggleToast={toggleToast} />
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={toggle}>
