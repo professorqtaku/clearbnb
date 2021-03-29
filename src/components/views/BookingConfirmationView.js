@@ -28,6 +28,7 @@ const styles = {
     border: "1px solid grey",
     borderRadius: "20px",
     padding: "20px",
+    backgroundColor: "var(--lightgrey)"
   },
 
   submit: {

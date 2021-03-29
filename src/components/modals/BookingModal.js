@@ -6,14 +6,13 @@ function BookingModal(props) {
   const {
     modal,
     toggle,
-    booking
   } = props;
 
   return (
     <div>
       <Modal isOpen={modal} toggle={toggle}>
         <div className="modal-header" toggle={toggle}>
-          <h5 className="modal-title">Booking</h5>
+          <h5 className="modal-title">Booking Confirmation</h5>
           <button
             type="button"
             className="btn-close"
