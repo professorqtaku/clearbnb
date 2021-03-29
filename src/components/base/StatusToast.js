@@ -1,7 +1,7 @@
 import { Toast, ToastBody} from "reactstrap";
 
-const LoginToast = (props) => {
-  const { show, setShow } = props;
+export default function StatusToast(props){
+  const { show, setShow, content } = props;
   const toggle = () => setShow(!show)
 
   return (
@@ -13,7 +13,7 @@ const LoginToast = (props) => {
       >
         <div class="d-flex">
           <ToastBody>
-            <p style={styles.text}>Login successful</p>
+            <p style={styles.text}>{content}</p>
           </ToastBody>
           <button
             type="button"
@@ -27,8 +27,6 @@ const LoginToast = (props) => {
     </div>
   );
 };
-
-export default LoginToast;
 
 const styles = {
   container: {

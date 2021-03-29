@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import LoginForm from '../forms/LoginForm'
-import Nav from '../base/Nav'
 
 function LoginModal(props) {
-  const { toggleToast } = props
-
-  const [modal, setModal] = useState(false);
-
-  const toggle = () => setModal(!modal);
+  const { modal, toggle, toggleToast } = props
 
   return (
     <div>
-      <Nav content="Log in" onClick={toggle} />
       <Modal isOpen={modal} toggle={toggle}>
         <div className="modal-header" toggle={toggle}>
           <h5 className="modal-title">Log in</h5>

@@ -5,7 +5,6 @@ import NoImage from '../../assets/img/noimage.png'
 
 const HostingCard = (props) => {
   const hosting = props.hosting;
-  const className = props.className
   const history = useHistory()
   const customerPrice= Math.round((parseInt(hosting.price) *1.15))
   const city = JSON.stringify(hosting.address.city)
