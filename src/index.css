@@ -38,6 +38,10 @@ button, button > * {
   text-decoration: none !important;
 }
 
+.datePicker{
+  border-style: none;
+}
+
 
 
 
