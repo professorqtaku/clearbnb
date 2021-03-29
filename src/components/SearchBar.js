@@ -1,9 +1,10 @@
 import Radium from "radium";
-import { useState } from "react";
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays } from 'date-fns'
-import DatePickerCustomInput from './DatePickerCustomInput'
+// CSS Modules, react-datepicker-cssmodules.css
+// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 function SearchBar(props) {
 
@@ -36,28 +37,21 @@ function SearchBar(props) {
     <form style={{ margin: "0 auto 0" }} onSubmit={goToSearchPage}>
       <div className="container" style={styles.container}>
         <div className="row">
+
           <div className=" col-lg-4">
             <label>Location</label>
-            <input
-              className="form-control"
-              type="text"
-              placeholder="Location"
-              onChange={(event) => setLocation(event.target.value)}
-              required
-            />
+            <input className="form-control" type="text" placeholder="Location" onChange={event => setLocation(event.target.value)} required />
           </div>
 
           <div className="col-6 col-lg-2">
             <label>From</label>
             <DatePicker
-              className="form-control"
               selectsStart
               selected={startDate}
               onChange={(date) => {
                 changeStartDate(date);
               }}
               dateFormat="yyyy-MM-dd"
-              customInput={<DatePickerCustomInput />}
               minDate={new Date()}
             />
           </div>
@@ -65,12 +59,10 @@ function SearchBar(props) {
           <div className="col-6 col-lg-2">
             <label>To</label>
             <DatePicker
-              className="form-control"
               selectsEnd
               selected={endDate}
               onChange={(date) => setEndDate(date)}
               dateFormat="yyyy-MM-dd"
-              customInput={<DatePickerCustomInput />}
               startDate={addDays(new Date(), 1)}
               minDate={addDays(startDate, 1)}
             />
@@ -78,48 +70,34 @@ function SearchBar(props) {
 
           <div className="col-6 col-lg-2">
             <label>Guests</label>
-            <input
-              className="form-control"
-              type="text"
-              placeholder="Guests"
-              onChange={(event) => setGuests(event.target.value)}
-            />
+            <input className="form-control" type="text" placeholder="Guests" onChange={event => setGuests(event.target.value)} />
           </div>
 
           <div className="col-6 col-lg-2">
             <label></label>
-            <button
-              style={styles.button}
-              className="form-control"
-              type="submit"
-            >
-              Search
-            </button>
+            <button style={styles.button} className="form-control" type="submit">Search</button>
           </div>
+
         </div>
       </div>
-    </form>
-  );
+    </form >
+  )
 }
 
 export default Radium(SearchBar)
 
 const styles = {
   container: {
-    fontFamily: 'var(--fontQuickSand)',
-    fontWeight: 'regular',
     padding: "1em",
     borderRadius: "10px",
-    backgroundColor: "rgba(255,255,255,0.8)",
+    backgroundColor: "rgba(255,255,255,0.7)",
     '@media (min-width: 700px) AND (max-width: 990px)': {
       maxWidth: "500px"
     },
   },
-
   button: {
     color: "white",
     backgroundColor: "#4CAF50",
-    textDecoration: "none",
-    border: '1px white solid'
+    textDecoration: "none"
   }
 }

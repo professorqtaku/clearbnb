@@ -13,12 +13,7 @@ export default function HostingDetailPage(props) {
   const [bookedDates, setBookedDates] = useState(null)
   const [booking, setBooking] = useState(null)
   const { user } = useContext(UserContext)
-  
-  const customerPrice = (price) => {
-    return(
-    Math.round((parseInt(price*100)*1.15))/100
-    )
-  }
+
 
   const fetchHosting = async (hostingId) => {
     let res = await fetch(`/rest/hostings/${hostingId}`);
@@ -87,7 +82,7 @@ export default function HostingDetailPage(props) {
 
   const defaultView = (hosting, user) => {
     return (
-      <div style={styles.container}>
+      <div>
         <h2>{hosting.title}</h2>
         <img
           src={hosting.galleries[0]}
@@ -114,8 +109,7 @@ export default function HostingDetailPage(props) {
           <p className="col-4 col-md-2" style={styles.info}>
             {hosting.bedAmount} {hosting.bedAmount > 1 ? "Beds" : "Bed"}
           </p>
-          <p>{hosting.address.street} in {hosting.address.city} </p>
-          <h2 className="col-md-6">$ {customerPrice(hosting.price)}/night </h2>
+          <h2 className="col-md-6">$ {hosting.price}/night </h2>
         </div>
         <div className="row">
           <p>{hosting.description}</p>
@@ -139,7 +133,7 @@ export default function HostingDetailPage(props) {
     </div>
   );
   return (
-    <div className="container" style={styles.container}>
+    <div className="container">
       {hosting && availabilities ? (
         booking ? (
           <ConfirmView title={hosting.title} booking={booking} />
@@ -154,14 +148,6 @@ export default function HostingDetailPage(props) {
 }
 
 const styles = {
-  container: {
-    padding: "1em",
-    borderRadius: "10px",
-    backgroundColor: "rgba(255,255,255,0.8)",
-    marginTop: '5vw',
-    marginBottom: '5vw',
-
-  },
   image: {
     width: "100%",
     height: "calc(25vh + 10vw)",
@@ -171,13 +157,9 @@ const styles = {
   info: {
     margin: "0",
     border: "1px solid black",
-    borderRadius: "5px",
   },
   delete: {
     margin: "0 auto",
     width: "50%"
-  },
-  container:{
-    marginBottom: "5px"
   }
 };

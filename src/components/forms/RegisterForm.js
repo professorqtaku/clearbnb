@@ -61,6 +61,11 @@ function RegisterForm(props) {
     return res;
   };
 
+  const toLogin = () => {
+    toggleModal()
+    history.push('/')
+  }
+
     return (
       <div>
         <div style={styles.gridContainer} className="container">
@@ -98,6 +103,11 @@ function RegisterForm(props) {
             <button type="submit" style={styles.submit}>Register</button>
             </form>
             </div>
+            <div>
+            <button type="button" className="btn btn-link" style={styles.link} onClick={toLogin}>
+              Already a member?
+            </button>
+          </div>
         </div>
       </div>
     )

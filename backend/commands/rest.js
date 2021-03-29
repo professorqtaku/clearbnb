@@ -9,15 +9,11 @@ module.exports = (app) => {
     }
     let docs = ''
     try {
-      if (req.params.model === "availabilities") {
-        docs = await models[req.params.model].find()
-      } else {
-        docs = await models[req.params.model]
-          .find().populate(['host', 'address', 'hosting', 'client']).exec()
-      }
+      docs = await models[req.params.model]
+        .find().populate(['host', 'address', 'hosting', 'client']).exec()
     }
     catch (e) {
-      res.json({ error: "model not found" })
+      res.json({error:"model not found"})
       return
     }
     res.json(docs)
@@ -50,7 +46,7 @@ module.exports = (app) => {
     let address = new Address(req.body.address)
     let hosting = new Hosting(req.body);
     hosting.address = address
-
+    
     if (req.body.availabilities.length) {
       req.body.availabilities[0].hosting = hosting
       let availability = new Availability(req.body.availabilities[0])
@@ -93,7 +89,7 @@ module.exports = (app) => {
   app.put('/rest/hostings/:id', async (req, res) => {
     let model = models['hostings']
     let hosting = await model.findById(req.params.id)
-
+    
     if (req.body.galleries) {
       hosting.galleries = hosting.galleries.concat(req.body.galleries)
       delete req.body.galleries
@@ -108,8 +104,8 @@ module.exports = (app) => {
       await hosting.save()
       res.json(hosting)
     }
-    catch (e) {
-      res.json({ error: "Save failed" })
+    catch(e) {
+      res.json({error:"Save failed"})
     }
 
   })

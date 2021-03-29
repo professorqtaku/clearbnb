@@ -77,7 +77,6 @@ const styles = {
     fontWeight: "bold",
     width: "100%",
     marginTop: '4vh',
-    marginBottom: '1vh',
     borderRadius: "50px",
     ":focus": {
       border: "none important",

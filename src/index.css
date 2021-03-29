@@ -4,11 +4,7 @@
   --lightgrey: #EDEDED;
   --darkgrey: #ADADAD;
   --whiteTrans: rgba(255,255,255,0.7);
-
-  --fontQuickSand: 'Quicksand', sans-serif;
-  
 }
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 *{
   box-sizing: border-box;
@@ -22,30 +18,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
-  font-family: var(--fontQuickSand);
 }
 
-p,label,a, span {
-  font-family: var(--fontQuickSand);
-}
-
-h1,h2,h3,h4,h5{
-  font-family: var(--fontQuickSand);
-}
-
-button, button > * {
-  font-family: var(--fontQuickSand) !important;
-  text-decoration: none !important;
-}
-
-
-
-
-
-/* code {
+code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-} */
+}
 
 .btn:focus{
   outline: none !important;

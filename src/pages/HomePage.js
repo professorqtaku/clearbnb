@@ -12,24 +12,10 @@ export default function HomePage() {
   return (
 
     <div className="homePage">
-      <div className="d-flex p-2 align-items-center" style={{
-        minHeight: '80vh', backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'
-      }}>
+      <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundPosition: 'center', height: "60vh", marginBottom: "5vw" }}>
         <SearchBar setIsSearch={setIsSearch} />
       </div>
-      {isSearch ? <ResultList /> : <p style={styles.paragraph}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nullam non nisi est sit. Scelerisque mauris pellentesque pulvinar pellentesque habitant. Sit amet venenatis urna cursus eget nunc scelerisque viverra mauris. Quis risus sed vulputate odio. Sed euismod nisi porta lorem mollis aliquam ut.</p>}
+      {isSearch ? <ResultList /> : null}
     </div>
   )
-}
-
-const styles = {
-  paragraph: {
-    fontSize: '20px',
-    textAlign: 'center',
-    padding: '5vw 15vw',
-    width: '100%',
-    margin: '0 auto',
-    color: 'rgb(120,120,120)',
-    fontStyle: 'italic'
-  }
 }

@@ -55,7 +55,7 @@ const styles = {
     },
   },
   card: {
-    maxWidth: "400px",
+    maxWidth: "540px",
     transition: "200ms",
     margin: "0 auto",
     border: "1px solid var(--darkgrey)",
