@@ -12,7 +12,15 @@ function BookingConfirmationView(props) {
 
   return (
     <div style={styles.gridContainer} className="container">
-      <p>hej</p>
+      <p>hosting.galleries[0]</p>
+      <p>hosting.title</p>
+      <p>hosting.address</p>
+      <p>hosting.host</p>
+      <p>booking.totalPrice</p>
+      <p>booking.guestAmount</p>
+      <p>booking.timePeriod[0]</p>
+      <p>booking.timePeriod[1]</p>
+
     </div>
   );
 
