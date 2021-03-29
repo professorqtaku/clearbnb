@@ -44,6 +44,7 @@ export default function BookingForm(props) {
 
   const countPrice = (days, price) => {
     let total = days * price;
+    total =  Math.round((parseInt(total*100)*1.15))/100
     setTotalPrice(total);
   };
 

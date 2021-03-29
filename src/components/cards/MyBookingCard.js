@@ -6,7 +6,6 @@ import NoImage from "../../assets/img/noimage.png";
 const MyBookingCard = (props) => {
   const booking = props.booking;
   const history = useHistory();
-  const customerPrice= Math.round((parseInt(booking.totalPrice) *1.15))
 
   const goTo = () => {
     history.push("/booking/" + booking._id);
@@ -45,7 +44,7 @@ const MyBookingCard = (props) => {
               {showDate()}
             </h6>
             <p className="card-text">
-              ${customerPrice}
+              ${booking.totalPrice}
             </p>
           </div>
         </div>

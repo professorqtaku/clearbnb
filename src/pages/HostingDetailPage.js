@@ -13,7 +13,12 @@ export default function HostingDetailPage(props) {
   const [bookedDates, setBookedDates] = useState(null)
   const [booking, setBooking] = useState(null)
   const { user } = useContext(UserContext)
-
+  
+  const customerPrice = (price) => {
+    return(
+    Math.round((parseInt(price*100)*1.15))/100
+    )
+  }
 
   const fetchHosting = async (hostingId) => {
     let res = await fetch(`/rest/hostings/${hostingId}`);
@@ -110,7 +115,7 @@ export default function HostingDetailPage(props) {
             {hosting.bedAmount} {hosting.bedAmount > 1 ? "Beds" : "Bed"}
           </p>
           <p>{hosting.address.street} in {hosting.address.city} </p>
-          <h2 className="col-md-6">$ {hosting.price}/night </h2>
+          <h2 className="col-md-6">$ {customerPrice(hosting.price)}/night </h2>
         </div>
         <div className="row">
           <p>{hosting.description}</p>
