@@ -4,6 +4,7 @@ import { UserContext } from "../../contexts/UserContextProvider";
 import GuestNav from './GuestNav'
 import UserNav from './UserNav'
 import StatusToast from './StatusToast'
+import Logo from '../../assets/img/logo.png'
 
 export default function Navbar(props) {
   const { user } = useContext(UserContext);
@@ -24,7 +25,7 @@ export default function Navbar(props) {
   }
 
   const goTo = (e) => {
-    history.push("/" + e.target.value);
+    history.push("/");
   }
 
   const nav = () => {
@@ -42,8 +43,8 @@ export default function Navbar(props) {
         style={styles.navbar}
       >
         <div className="container-fluid">
-          <button className="btn navbar-brand me-auto" onClick={goTo} value="">
-            ClearBnB
+          <button className="btn navbar-brand me-auto" onClick={goTo}>
+            <img src={Logo} alt="ClearBnB" style={styles.logo}/>
           </button>
           <button
             className="navbar-toggler"
@@ -72,5 +73,8 @@ const styles = {
   navbar: {
     backgroundColor: "var(--pink)",
     color: "white !important",
+  },
+  logo: {
+    height: "100%"
   }
 };
