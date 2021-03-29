@@ -18,7 +18,9 @@ function LoginForm(props) {
         setLoginError(false)
         toggleModal()
       }
-      setLoginError(true)
+      else {
+        setLoginError(true)
+      }
     }
   }
 
