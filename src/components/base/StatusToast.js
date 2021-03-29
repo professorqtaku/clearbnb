@@ -5,10 +5,9 @@ export default function StatusToast(props){
   const toggle = () => setShow(!show)
 
   return (
-    <div>
       <Toast
         isOpen={show}
-        className="position-fixed translate-middle-y p-1"
+        className="position-fixed p-1"
         style={styles.container}
       >
         <div class="d-flex">
@@ -24,7 +23,6 @@ export default function StatusToast(props){
           ></button>
         </div>
       </Toast>
-    </div>
   );
 };
 
