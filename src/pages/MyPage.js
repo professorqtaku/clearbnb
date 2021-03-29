@@ -4,6 +4,7 @@ import { UserContext } from '../contexts/UserContextProvider'
 import { HostingContext } from '../contexts/HostingContextProvider'
 import { BookingContext } from '../contexts/BookingContextProvider'
 import PostingModal from '../components/modals/PostingModal'
+import myPageBackground from "../assets/img/myPageBackground.jpg"
 
 export default function MyPage() {
   const history = useHistory()
@@ -35,40 +36,41 @@ export default function MyPage() {
   )
 
   const userView = (
-    <div className="container text-center">
-      <div className="d-grid gap-2" style={styles.wrapper}>
-        <h1>My Page</h1>
-        <button
-          className="btn btn-primary"
-          type="button"
-          style={styles.btn}
-          value="bookings"
-          onClick={goTo}
-        >
-          My bookings
+    <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${myPageBackground})`, backgroundSize: 'cover', backgroundPosition: 'center', height: "100%", }}>
+      <div className="container text-center">
+        <div className="d-grid gap-2" style={styles.wrapper}>
+          <button
+            className="btn btn-primary"
+            type="button"
+            style={styles.btn}
+            value="bookings"
+            onClick={goTo}
+          >
+            My bookings
         </button>
-        <button
-          className="btn btn-primary"
-          type="button"
-          style={styles.btn}
-          value="hostings"
-          onClick={goTo}
-        >
-          My hostings
+          <button
+            className="btn btn-primary"
+            type="button"
+            style={styles.btn}
+            value="hostings"
+            onClick={goTo}
+          >
+            My hostings
         </button>
-        <button className="btn btn-primary"onClick={togglePostModal} style={styles.btn}>
-          Post a hosting
+          <button className="btn btn-primary" onClick={togglePostModal} style={styles.btn}>
+            Post a hosting
         </button>
-        <PostingModal modal={postModal} toggle={togglePostModal} />
-        <button
-          className="btn btn-primary"
-          type="button"
-          style={styles.btn}
-          value="search"
-          onClick={goTo}
-        >
-          Search places
+          <PostingModal modal={postModal} toggle={togglePostModal} />
+          <button
+            className="btn btn-primary"
+            type="button"
+            style={styles.btn}
+            value="search"
+            onClick={goTo}
+          >
+            Search places
         </button>
+        </div>
       </div>
     </div>
   );
@@ -79,6 +81,9 @@ export default function MyPage() {
 }
 
 const styles = {
+  container: {
+    height: '100%'
+  },
   btn: {
     backgroundColor: 'var(--pink)',
     border: 'none',
@@ -86,11 +91,14 @@ const styles = {
     margin: '1vh 0',
     width: '100%',
     borderRadius: '50px',
-    boxShadow: '2px 3px 5px grey',
+    boxShadow: '2px 3px 5px lightgrey',
   },
   wrapper: {
     width: '100%',
     maxWidth: '400px',
-    margin: '0 auto'
-  }
+    margin: '0 auto',
+    padding: "1em",
+    borderRadius: "10px",
+    backgroundColor: "rgba(255,255,255,0.7)",
+  },
 }

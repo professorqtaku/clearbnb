@@ -27,7 +27,7 @@ const MyBookingCard = (props) => {
   }
 
   return (
-    <div className="card mb-3" style={styles.card} onClick={goTo}>
+    <div className="card" style={styles.card} onClick={goTo}>
       <div className="row g-0" style={styles.row}>
         <div className="col-md-4">
           <img
@@ -59,7 +59,7 @@ const styles = {
   image: {
     width: "100%",
     objectFit: "cover",
-    height: "100%",
+    height: "170px",
     borderRadius: "10px 0 0 10px",
     "@media (max-width: 773px)": {
       height: "20vh",
@@ -67,10 +67,9 @@ const styles = {
     },
   },
   card: {
-    maxWidth: "540px",
+    maxWidth: "400px",
     transition: "200ms",
     margin: "0 auto",
-    border: "1px solid var(--darkgrey)",
     borderRadius: "10px",
     ":hover": {
       opacity: "0.8",

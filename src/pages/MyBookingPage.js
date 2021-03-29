@@ -3,6 +3,7 @@ import { BookingContext } from "../contexts/BookingContextProvider";
 import { UserContext } from "../contexts/UserContextProvider";
 import MyBookingCard from "../components/cards/MyBookingCard";
 import Radium from "radium";
+import myBookingsBackground from "../assets/img/myBookingsBackground.jpg"
 
 const MyBookingPage = () => {
   const { bookings, fetchBookings } = useContext(BookingContext);
@@ -36,9 +37,11 @@ const MyBookingPage = () => {
   };
 
   return (
-    <div className="container" style={styles.page}>
-      <h5 className="">My bookings</h5>
-      {myBookings && showBookingCards(myBookings)}
+    <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${myBookingsBackground})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100%' }}>
+      <div className="" style={styles.page}>
+        <h5 className="">My Bookings</h5>
+        {myBookings && showBookingCards(myBookings)}
+      </div>
     </div>
   );
 };
@@ -47,14 +50,22 @@ export default Radium(MyBookingPage);
 
 const styles = {
   page: {
-    backgroundColor: "var(--lightgrey",
+    maxwidth: "400px",
+    margin: '0 auto',
+    padding: "1em",
+    borderRadius: "10px",
+    backgroundColor: "rgba(255,255,255,0.7)",
   },
   cardlist: {
+    padding: "1em",
+    borderRadius: "10px",
+    backgroundColor: "rgba(255,255,255,0.8)",
     display: "grid",
+    gridGap: "3vh",
     gridTemplateColumns: "1fr",
     "@media (min-width: 1000px)": {
       gridTemplateColumns: "repeat(2, 1fr)",
-      gridGap: "2vw",
+
     },
   },
 };
