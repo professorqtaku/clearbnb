@@ -1,9 +1,9 @@
 import { Label } from "reactstrap";
 import DatePicker from "react-datepicker";
-import { addDays } from "date-fns";
+import DatePickerCustomInput from "../DatePickerCustomInput";
 
 export default function DatePickerFormGroup(props) {
-  const { startDate, setStartDate, endDate, setEndDate } = props
+  const { startDate, setStartDate, endDate, setEndDate } = props;
 
   const changeStartDate = (date) => {
     setStartDate(date);
@@ -25,6 +25,7 @@ export default function DatePickerFormGroup(props) {
           }}
           dateFormat="yyyy-MM-dd"
           minDate={new Date()}
+          customInput={<DatePickerCustomInput />}
         />
       </div>
       <div className="form-group col-12 col-md-6" style={styles.formGroup}>
@@ -36,9 +37,9 @@ export default function DatePickerFormGroup(props) {
           dateFormat="yyyy-MM-dd"
           startDate={new Date()}
           minDate={startDate}
+          customInput={<DatePickerCustomInput />}
         />
       </div>
-      <div className="form-text">You can add more dates later</div>
     </div>
   );
 }
