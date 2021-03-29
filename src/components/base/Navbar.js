@@ -38,12 +38,13 @@ export default function Navbar(props) {
             aria-label="Toggle navigation"
             id="navbarButton"
           >
-            <span className="material-icons" style={styles.icon}>
+            {/* <span className="material-icons text-white">
               menu
-            </span>
+            </span> */}
+            <span className="navbar-toggler-icon"></span>
           </button>
 
-          { nav() }
+          {nav()}
         </div>
       </nav>
     </div>
@@ -54,8 +55,5 @@ const styles = {
   navbar: {
     backgroundColor: "var(--pink)",
     color: "white !important",
-  },
-  icon: {
-    color: "white",
   }
 };
