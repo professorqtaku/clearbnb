@@ -16,6 +16,7 @@ export default function UserNav(props) {
     res = await res.json();
     if (res.success) {
       setUser(null);
+      console.log("logged out");
       history.push("/");
     }
   }

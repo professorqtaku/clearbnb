@@ -1,28 +1,30 @@
-import React, { useState } from "react";
+import { useContext } from "react";
+import { LoginModalContext } from "../../contexts/LoginModalContextProvider"
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import LoginForm from '../forms/LoginForm'
 
 function LoginModal(props) {
-  const { modal, toggle, toggleToast } = props
+  const { toggleLoginModal, showLoginModal } = useContext(LoginModalContext);
+  const { toggleToast } = props
 
   return (
     <div>
-      <Modal isOpen={modal} toggle={toggle}>
-        <div className="modal-header" toggle={toggle}>
+      <Modal isOpen={showLoginModal} toggle={toggleLoginModal}>
+        <div className="modal-header" toggle={toggleLoginModal}>
           <h5 className="modal-title">Log in</h5>
           <button
             type="button"
             className="btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
-            onClick={toggle}
+            onClick={toggleLoginModal}
           ></button>
         </div>
         <ModalBody>
-          <LoginForm toggleModal={toggle} toggleToast={toggleToast} />
+          <LoginForm toggleModal={toggleLoginModal} toggleToast={toggleToast} />
         </ModalBody>
         <ModalFooter>
-          <Button color="secondary" onClick={toggle}>
+          <Button color="secondary" onClick={toggleLoginModal}>
             Close
           </Button>
         </ModalFooter>

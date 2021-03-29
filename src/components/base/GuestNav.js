@@ -6,8 +6,9 @@ import Nav from "../base/Nav";
 
 
 export default function GuestNav(props) {
-  const { toggleLoginModal, showLoginModal } = useContext(LoginModalContext)
+  const { toggleLoginModal } = useContext(LoginModalContext)
   const { toggleToast } = props
+
   return (
     <div
       className="collapse navbar-collapse"
@@ -17,7 +18,7 @@ export default function GuestNav(props) {
       <div className="mx-auto"></div>
       <ul className="navbar-nav">
         <Nav content="Log in" onClick={toggleLoginModal} />
-        <LoginModal modal={showLoginModal} toggle={toggleLoginModal} toggleToast={toggleToast} />
+        <LoginModal toggleToast={toggleToast} />
         <RegisterModal />
       </ul>
     </div>

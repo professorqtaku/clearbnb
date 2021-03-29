@@ -1,13 +1,11 @@
 import Radium from 'radium'
 import { UserContext } from '../../contexts/UserContextProvider'
 import { useContext, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import ErrorMessage from "../ErrorMessage";
 
 function LoginForm(props) {
   const { toggleModal, toggleToast } = props
   const { fetchUser } = useContext(UserContext)
-  const history = useHistory()
   const [loginError, setLoginError] = useState(false)
 
   const submitLogin = async (e) => {
@@ -18,10 +16,7 @@ function LoginForm(props) {
       let isLogin = await login(email, password)
       if (isLogin) {
         setLoginError(false)
-        if (window.location.pathname === "/register") {
-          toggleModal()
-          history.push("/mypage")
-        }
+        toggleModal()
       }
       setLoginError(true)
     }

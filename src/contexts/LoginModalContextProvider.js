@@ -5,7 +5,10 @@ export const LoginModalContext = createContext();
 export default function LoginModalContextProvider(props) {
   const [showLoginModal, setShowLoginModal] = useState(false);
 
-  const toggleLoginModal = () => setShowLoginModal(!showLoginModal)
+  const toggleLoginModal = () => {
+    setShowLoginModal(!showLoginModal)
+    console.log(showLoginModal);
+  }
 
   const values = {
     showLoginModal,
