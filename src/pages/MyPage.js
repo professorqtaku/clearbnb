@@ -36,7 +36,7 @@ export default function MyPage() {
   )
 
   const userView = (
-    <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${myPageBackground})`, backgroundSize: 'cover', backgroundPosition: 'center', height: "60vh", }}>
+    <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${myPageBackground})`, backgroundSize: 'cover', backgroundPosition: 'center', height: "100%", }}>
       <div className="container text-center">
         <div className="d-grid gap-2" style={styles.wrapper}>
           <button

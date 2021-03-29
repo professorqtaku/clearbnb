@@ -37,7 +37,7 @@ const MyBookingPage = () => {
   };
 
   return (
-    <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${myBookingsBackground})`, backgroundSize: 'cover', backgroundPosition: 'center', }}>
+    <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${myBookingsBackground})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100%' }}>
       <div className="" style={styles.page}>
         <h5 className="">My Bookings</h5>
         {myBookings && showBookingCards(myBookings)}
@@ -61,7 +61,7 @@ const styles = {
     borderRadius: "10px",
     backgroundColor: "rgba(255,255,255,0.8)",
     display: "grid",
-    gridGap: "2vw",
+    gridGap: "3vh",
     gridTemplateColumns: "1fr",
     "@media (min-width: 1000px)": {
       gridTemplateColumns: "repeat(2, 1fr)",

@@ -31,7 +31,7 @@ const MyHostingPage = () => {
   }
 
   return (
-    <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${myHostingBackground})`, backgroundSize: 'cover', backgroundPosition: 'center',}}>
+    <div className="d-flex p-2 align-items-center" style={{ backgroundImage: `url(${myHostingBackground})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100%'}}>
     <div className="" style={styles.page}>
       <h5 className="">My hostings</h5>
       {myHostings && showHostingCards(myHostings) }
@@ -55,7 +55,7 @@ const styles = {
     gridTemplateColumns: "1fr",
     '@media (min-width: 1000px)': {
       gridTemplateColumns: "repeat(2, 1fr)",
-      gridGap: "2vw"
+      gridGap: "3vh"
   },
   }
 };
