@@ -17,7 +17,6 @@ import Aboutpage from'./pages/AboutPage'
 import Navbar from "./components/base/Navbar";
 import Footer from "./components/base/Footer";
 
-import banner from "./assets/img/banner.jpg"
 
 import { StyleRoot } from "radium";
 
@@ -63,6 +62,7 @@ function App() {
                             component={PostHostingPage}
                           />
                           <Route exact path="/booking/:bookingId" component={BookingDetailPage} />
+                          <Route exact path="/about" component={Aboutpage}/>
                         </Switch>
                       </main>
 
