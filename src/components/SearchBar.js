@@ -50,6 +50,7 @@ function SearchBar(props) {
           <div className="col-6 col-lg-2">
             <label>From</label>
             <DatePicker
+              className="form-control"
               selectsStart
               selected={startDate}
               onChange={(date) => {
@@ -64,6 +65,7 @@ function SearchBar(props) {
           <div className="col-6 col-lg-2">
             <label>To</label>
             <DatePicker
+              className="form-control"
               selectsEnd
               selected={endDate}
               onChange={(date) => setEndDate(date)}
@@ -104,16 +106,20 @@ export default Radium(SearchBar)
 
 const styles = {
   container: {
+    fontFamily: 'var(--fontQuickSand)',
+    fontWeight: 'regular',
     padding: "1em",
     borderRadius: "10px",
-    backgroundColor: "rgba(255,255,255,0.7)",
+    backgroundColor: "rgba(255,255,255,0.8)",
     '@media (min-width: 700px) AND (max-width: 990px)': {
       maxWidth: "500px"
     },
   },
+
   button: {
     color: "white",
     backgroundColor: "#4CAF50",
-    textDecoration: "none"
+    textDecoration: "none",
+    border: '1px white solid'
   }
 }

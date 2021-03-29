@@ -17,6 +17,8 @@ import BookingDetailPage from "./pages/BookingDetailPage"
 import Navbar from "./components/base/Navbar";
 import Footer from "./components/base/Footer";
 
+import banner from "./assets/img/banner.jpg"
+
 import { StyleRoot } from "radium";
 
 function App() {
@@ -34,7 +36,9 @@ function App() {
                         <Navbar />
                       </header>
 
-                      <main>
+                      <main style={{
+                        minHeight: '90vh'
+                      }}>
                         <Switch>
                           <Route exact path="/" component={HomePage} />
                           <Route exact path="/myPage" component={MyPage} />
@@ -81,6 +85,7 @@ function App() {
 export default App;
 
 const styles = {
+
   app: {
     display: "grid",
     gridTemplateRows: "70,14px 1fr 54,52px",

@@ -40,7 +40,6 @@ export default function DatePickerFormGroup(props) {
           customInput={<DatePickerCustomInput />}
         />
       </div>
-      <div className="form-text">You can add more dates later</div>
     </div>
   );
 }

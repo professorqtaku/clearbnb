@@ -91,12 +91,14 @@ export default Radium(ResultList)
 const styles = {
 
   grid: {
+    maxWidth: '1000px',
     display: "grid",
     gridTemplateColumns: "1fr",
     gridGap: "2vw",
     '@media (min-width: 1000px)': {
       gridTemplateColumns: "repeat(2, 1fr)",
-    }
+    },
+    marginBottom: "5px",
   },
 
   noMatchesFound: {
