@@ -1,0 +1,97 @@
+body{
+    
+}
+
+
+.contact__wrap{
+  text-align: center;
+ 
+}
+h1{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;  font-size: 56px;
+  margin-bottom: 50px;
+  color: #f1486d;
+  top: 30px;
+  padding: 20px;
+}
+.contact__form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto; 
+}
+.contact__form input{
+    height: 35px;
+    border: 2px solid #504c55;
+    border-radius: 15px;
+    padding-left: 5px;
+    margin-bottom: 10px;
+    transition: .2s;
+}
+.contact__form input:hover{
+    border: 2px solid #ff8080;
+}
+
+.contact__form input::form-control{
+    text-transform: uppercase;
+    font-size: 12px;
+    
+   
+}
+.contact__form textarea{
+    height: 150px;
+    border: 2px solid #4f4c55;
+    border-radius: 15px;
+    resize: none;
+    padding-left: 5px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+.contact__form textarea::form-control{
+    text-transform: uppercase;
+    font-size: 12px;
+}
+.contact__form textarea:hover{
+     border: 2px solid #ff8080;
+}
+.contact__form input[type="submit"]{
+    height: 40px;
+    font-size: 14px;
+    color: #fff;
+    background: #4f4c55;
+    text-transform: uppercase;
+    width: 50%;
+    transition: .2s;
+}
+.contact__form input[type="submit"]:hover{
+    font-size: 16px;
+    border: 0;
+}
+*:focus{
+  outline: #ff8080 auto 1px;
+}
+
+.contact__wrap{
+
+background-image: url("https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80");
+
+    background-color: #f7f5ff;
+   height: 100vh;
+   background-size: cover;
+}
+.fa-instagram{
+    position: absolute;
+    top: 3%;
+    right: 2%;
+    font-size: 38px;
+  }
+  
+  .fa-instagram:hover{
+    font-size: 42px;
+    color: #ff8080;
+    transition: all .1s linear;
+    cursor: pointer;
+  }
