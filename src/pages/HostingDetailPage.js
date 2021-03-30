@@ -114,7 +114,6 @@ export default function HostingDetailPage(props) {
             <p className="col-12">{hosting.description}</p>
             <hr />
             <div className="col-12 mt-4">
-              <h2 className="text-center">Book now</h2>
               <div>{userView(hosting, user)}</div>
             </div>
           </div>
