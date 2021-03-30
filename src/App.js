@@ -20,8 +20,8 @@ import Aboutpage from './pages/AboutPage'
 import Navbar from "./components/base/Navbar";
 import Footer from "./components/base/Footer";
 
-
 import { StyleRoot } from "radium";
+import ContactPage from "./pages/ContactPage";
 
 function App() {
   return (
@@ -73,7 +73,7 @@ function App() {
                               component={BookingDetailPage}
                             />
                             <Route exact path="/about" component={Aboutpage} />
-                            <Route path="*" component={NotFoundPage} />
+                            <Route path="/contact" component={ContactPage}/>
                           </Switch>
                         </main>
 
