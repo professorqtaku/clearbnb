@@ -14,10 +14,10 @@ export default function HostingDetailPage(props) {
   const [bookedDates, setBookedDates] = useState(null)
   const [booking, setBooking] = useState(null)
   const { user } = useContext(UserContext)
-  
+
   const customerPrice = (price) => {
-    return(
-    Math.round((parseInt(price*100)*1.15))/100
+    return (
+      Math.round((parseInt(price * 100) * 1.15)) / 100
     )
   }
 
@@ -96,40 +96,43 @@ export default function HostingDetailPage(props) {
           onError={event => event.target.src = NoImage}
           style={styles.image}
         />
-        <div className="row">
-          <div className="col-12 col-md-6">
-            <h5>
-              {hosting.accommodation.description} with {hosting.host.firstName}{" "}
-              {hosting.host.lastName}
-            </h5>
+        <div className="container">
+          <div className="row">
+            <div className="col-6 col-xs-12">
+              <h5 style={{ paddingTop: "1em" }}>
+                {hosting.accommodation.description} with {hosting.host.firstName}{" "}
+                {hosting.host.lastName}
+              </h5>
+              <span style={{ paddingTop: "1em" }}>
+                {hosting.guestAmount} {hosting.guestAmount > 1 ? "Guests" : "Guest"}
+              </span>
+
+              <span style={{ paddingTop: "1em" }}>
+                {hosting.bedroomAmount}{" "}
+                {hosting.bedroomAmount > 1 ? "Bedrooms" : "Bedroom"}
+              </span>
+
+              <span style={{ paddingTop: "1em", margin: '0 auto' }}>
+                {hosting.bedAmount} {hosting.bedAmount > 1 ? "Beds" : "Bed"}
+              </span>
+              <p style={{ paddingTop: "1em" }}>{hosting.address.street} in {hosting.address.city} </p>
+              <h2 style={{ paddingTop: "1em" }} >$ {customerPrice(hosting.price)}/night </h2>
+              <p style={{ paddingTop: "1em" }}>{hosting.description}</p>
+            </div>
+            <div className="col-6 col-xs-12">
+              {userView(hosting, user)}
+            </div>
           </div>
-          <p className="col-4 col-md-2" style={styles.info}>
-            {hosting.guestAmount} {hosting.guestAmount > 1 ? "Guests" : "Guest"}
-          </p>
-
-          <p className="col-4 col-md-2" style={styles.info}>
-            {hosting.bedroomAmount}{" "}
-            {hosting.bedroomAmount > 1 ? "Bedrooms" : "Bedroom"}
-          </p>
-
-          <p className="col-4 col-md-2" style={styles.info}>
-            {hosting.bedAmount} {hosting.bedAmount > 1 ? "Beds" : "Bed"}
-          </p>
-          <p>{hosting.address.street} in {hosting.address.city} </p>
-          <h2 className="col-md-6">$ {customerPrice(hosting.price)}/night </h2>
         </div>
-        <div className="row">
-          <p>{hosting.description}</p>
-        </div>
-        {userView(hosting, user)}
       </div>
+
     );
   };
 
   const hostView = (hosting) => {
     return (
       <div style={styles.delete}>
-        <DeleteButton hosting={hosting}/>
+        <DeleteButton hosting={hosting} />
       </div>
     )
   }
@@ -156,6 +159,7 @@ const styles = {
     backgroundColor: "var(--whiteTrans)",
     marginBottom: "5vw",
     height: "100%",
+    maxWidth: "1000px"
   },
   image: {
     width: "100%",
@@ -165,8 +169,7 @@ const styles = {
   },
   info: {
     margin: "0",
-    border: "1px solid black",
-    borderRadius: "5px",
+    borderRight: "1px solid black",
   },
   delete: {
     margin: "0 auto",
