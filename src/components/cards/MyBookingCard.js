@@ -1,4 +1,3 @@
-import {useEffect} from 'react'
 import { useHistory } from "react-router-dom";
 import Radium from "radium";
 import NoImage from "../../assets/img/noimage.png";

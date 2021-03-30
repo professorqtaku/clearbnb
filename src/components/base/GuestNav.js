@@ -1,10 +1,14 @@
-import Nav from "./Nav";
 import LoginModal from "../modals/LoginModal"
 import RegisterModal from "../modals/RegisterModal";
+import { useContext } from 'react'
+import {LoginModalContext} from '../../contexts/LoginModalContextProvider'
+import Nav from "../base/Nav";
 
 
-export default function GuestNav() {
-  
+export default function GuestNav(props) {
+  const { toggleLoginModal } = useContext(LoginModalContext)
+  const { toggleToast } = props
+
   return (
     <div
       className="collapse navbar-collapse"
@@ -13,8 +17,9 @@ export default function GuestNav() {
     >
       <div className="mx-auto"></div>
       <ul className="navbar-nav">
-        <LoginModal/>
-        <RegisterModal/>
+        <Nav content="Log in" onClick={toggleLoginModal} />
+        <LoginModal toggleToast={toggleToast} />
+        <RegisterModal />
       </ul>
     </div>
   );

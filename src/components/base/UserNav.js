@@ -5,9 +5,9 @@ import useWindowSize from "../../utils/useWindowSize"
 import Nav from './Nav'
 
 export default function UserNav(props) {
+  const { toggleToast } = props
   const history = useHistory();
   const { user, setUser } = useContext(UserContext);
-  
   const { width } = useWindowSize()
 
   const logout = async () => {
@@ -17,6 +17,7 @@ export default function UserNav(props) {
     res = await res.json();
     if (res.success) {
       setUser(null);
+      toggleToast()
       history.push("/");
     }
   }
@@ -45,9 +46,9 @@ export default function UserNav(props) {
     >
       <div className="mx-auto"></div>
       <ul className="navbar-nav">
-        { showIcon(width) }
-        <Nav content={user.firstName} value="mypage" textColor={ colorText }/>
-        <Nav content="Logout" onClick={logout} value="logout"/>
+        {showIcon(width)}
+        <Nav content={user.firstName} value="mypage" textColor={colorText} />
+        <Nav content="Logout" onClick={logout} value="logout" />
       </ul>
     </div>
   );

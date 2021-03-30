@@ -6,7 +6,6 @@ import ErrorMessage from "../ErrorMessage"
 
 
 function RegisterForm(props) {
-  const { toggleModal } = props
   const { fetchUser } = useContext(UserContext)
   const history = useHistory()
   const [registerError, setRegisterError] = useState(false)

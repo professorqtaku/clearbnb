@@ -1,37 +1,12 @@
-import React, { useState } from "react";
-import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
-import LoginForm from "../forms/LoginForm";
+import { useContext } from "react";
+import { LoginModalContext } from '../../contexts/LoginModalContextProvider'
 import Radium from 'radium'
 
 const LoginButton = (props) => {
-
-  const [modal, setModal] = useState(false);
-
-  const toggle = () => setModal(!modal);
-
+  const { toggleLoginModal }= useContext(LoginModalContext)
   return (
     <div>
-      <button className="btn" style={styles.button} onClick={toggle}>Log in</button>
-      <Modal isOpen={modal} toggle={toggle}>
-        <div className="modal-header" toggle={toggle}>
-          <h5 className="modal-title">Log in</h5>
-          <button
-            type="button"
-            className="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-            onClick={toggle}
-          ></button>
-        </div>
-        <ModalBody>
-          <LoginForm toggleModal={toggle} />
-        </ModalBody>
-        <ModalFooter>
-          <Button color="secondary" onClick={toggle}>
-            Close
-          </Button>
-        </ModalFooter>
-      </Modal>
+      <button className="btn" style={styles.button} onClick={ toggleLoginModal }>Log in</button>
     </div>
   );
 };
