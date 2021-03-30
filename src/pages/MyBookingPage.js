@@ -60,7 +60,7 @@ const styles = {
   cardlist: {
     padding: "1em",
     borderRadius: "10px",
-    backgroundColor: "var(--whiteTrans)",
+
     display: "grid",
     gridGap: "3vh",
     gridTemplateColumns: "1fr",
