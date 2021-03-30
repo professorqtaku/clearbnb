@@ -6,26 +6,42 @@ import { useHistory } from 'react-router-dom'
 
 function BookingConfirmationView(props) {
   const { booking } = props
-  // const { fetchUser } = useContext(UserContext)
-  // const history = useHistory()
   const { hostings, fetchHostings } = useContext(HostingContext)
-  console.log(booking)
-
+  const [hosting, setHosting ] = useState(null)
+  
   useEffect(() => {
     fetchHostings()
-    console.log(hostings)
+    let matchedHosting = hostings.filter((hosting) => booking.hosting._id === hosting._id)[0]
+    console.log(matchedHosting)
+    setHosting(matchedHosting)
   }, [])
 
-  return (
+
+
+  const renderView = (hosting, booking) => {
+    return (
     <div style={styles.gridContainer} className="container">
-      <p>{ booking.hosting.title}</p>
-      <p>address: {booking.hosting.address}</p>
-      <p>host: { booking.hosting.host}</p>
-      <p>totalPrice: { booking.totalPrice}</p>
-      <p>guestAmount: { booking.guestAmount}</p>
-      <p>From: { booking.timePeriod[0]}</p>
+      <p>{booking.hosting.title}</p>
+      <p>address: {hosting.address.city}</p>
+      <p>host: {booking.hosting.host}</p>
+      <p>totalPrice: {booking.totalPrice}</p>
+      <p>guestAmount: {booking.guestAmount}</p>
+      <p>From: {booking.timePeriod[0]}</p>
       <p>To: {booking.timePeriod[1]}</p>
 
+      </div>
+    )
+    
+  }
+
+  const loading = (
+    <div>
+      Loading...
+    </div>
+  );
+  return (
+    <div className="container">
+      {hosting ? renderView(hosting, booking) : loading}
     </div>
   );
 
