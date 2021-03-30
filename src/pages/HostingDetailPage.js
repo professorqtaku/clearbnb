@@ -89,38 +89,33 @@ export default function HostingDetailPage(props) {
   const defaultView = (hosting, user) => {
     return (
       <div style={styles.container}>
-        <h2>{hosting.title}</h2>
+        <h2 className="mb-3">{hosting.title}</h2>
         <img
+          className="mb-3"
           src={hosting.galleries[0]}
           alt="hosting"
           onError={event => event.target.src = NoImage}
           style={styles.image}
         />
-        <div className="container">
+        <div className="container m-0">
           <div className="row">
-            <div className="col-6 col-xs-12">
-              <h5 style={{ paddingTop: "1em" }}>
-                {hosting.accommodation.description} with {hosting.host.firstName}{" "}
-                {hosting.host.lastName}
-              </h5>
-              <span style={{ paddingTop: "1em" }}>
-                {hosting.guestAmount} {hosting.guestAmount > 1 ? "Guests" : "Guest"}
-              </span>
+            <h6 className="col-12 mb-2">
+              {hosting.accommodation.description} with {hosting.host.firstName}{" "}
+              {hosting.host.lastName}
+            </h6>
 
-              <span style={{ paddingTop: "1em" }}>
-                {hosting.bedroomAmount}{" "}
-                {hosting.bedroomAmount > 1 ? "Bedrooms" : "Bedroom"}
-              </span>
-
-              <span style={{ paddingTop: "1em", margin: '0 auto' }}>
-                {hosting.bedAmount} {hosting.bedAmount > 1 ? "Beds" : "Bed"}
-              </span>
-              <p style={{ paddingTop: "1em" }}>{hosting.address.street} in {hosting.address.city} </p>
-              <h2 style={{ paddingTop: "1em" }} >$ {customerPrice(hosting.price)}/night </h2>
-              <p style={{ paddingTop: "1em" }}>{hosting.description}</p>
+            <div className="col-12 mb-2 text-muted">
+              <span>{hosting.guestAmount} {hosting.guestAmount > 1 ? "Guests" : "Guest"}</span>
+              <span> | {hosting.bedroomAmount}{" "} {hosting.bedroomAmount > 1 ? "Bedrooms" : "Bedroom"}</span>
+              <span> | {hosting.bedAmount} {hosting.bedAmount > 1 ? "Beds" : "Bed"}</span>
             </div>
-            <div className="col-6 col-xs-12">
-              {userView(hosting, user)}
+            <p className="col-12">{hosting.address.street}, {hosting.address.city} </p>
+            <h3 className="col-12 mb-3">$ {customerPrice(hosting.price)}/night </h3>
+            <p className="col-12">{hosting.description}</p>
+            <hr />
+            <div className="col-12 mt-4">
+              <h2 className="text-center">Book now</h2>
+              <div>{userView(hosting, user)}</div>
             </div>
           </div>
         </div>
@@ -159,7 +154,7 @@ const styles = {
     backgroundColor: "var(--whiteTrans)",
     marginBottom: "5vw",
     height: "100%",
-    maxWidth: "1000px"
+    maxWidth: "900px"
   },
   image: {
     width: "100%",
