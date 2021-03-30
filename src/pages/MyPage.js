@@ -11,7 +11,7 @@ export default function MyPage() {
   const history = useHistory()
   const { user } = useContext(UserContext)
   const { fetchHostings } = useContext(HostingContext)
-  const { bookings, fetchBookings } = useContext(BookingContext)
+  const { fetchBookings } = useContext(BookingContext)
   const [postModal, setPostModal] = useState()
   const togglePostModal = () => setPostModal(!postModal)
 

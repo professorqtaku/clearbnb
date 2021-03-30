@@ -4,6 +4,7 @@ import { UserContext } from "../../contexts/UserContextProvider";
 import GuestNav from './GuestNav'
 import UserNav from './UserNav'
 import StatusToast from './StatusToast'
+import Logo from '../../assets/img/logo.png'
 
 export default function Navbar(props) {
   const { user } = useContext(UserContext);
@@ -13,27 +14,27 @@ export default function Navbar(props) {
   const toggleLoginToast = () => {
     setShowLoginToast(!showLoginToast)
     setTimeout(() => {
-        setShowLoginToast(false)
-      }, 5000)
+      setShowLoginToast(false)
+    }, 5000)
   }
   const toggleLogoutToast = () => {
     setShowLogoutToast(!showLogoutToast)
     setTimeout(() => {
-        setShowLogoutToast(false)
-      }, 5000)
+      setShowLogoutToast(false)
+    }, 5000)
   }
 
-  const goTo = (e) => {
-    history.push("/" + e.target.value);
+  const goToHome = (e) => {
+    history.push("/");
   }
 
   const nav = () => {
-    if(user)
-    return (
-      <UserNav toggleToast={toggleLogoutToast}/>
+    if (user)
+      return (
+        <UserNav toggleToast={toggleLogoutToast} />
       )
-    return <GuestNav toggleToast={toggleLoginToast}/>
-}
+    return <GuestNav toggleToast={toggleLoginToast} />
+  }
 
   return (
     <div>
@@ -42,8 +43,8 @@ export default function Navbar(props) {
         style={styles.navbar}
       >
         <div className="container-fluid">
-          <button className="btn navbar-brand me-auto" onClick={goTo} value="">
-            ClearBnB
+          <button className="btn navbar-brand me-auto" onClick={goToHome}>
+            <img src={Logo} alt="ClearBnB" style={styles.logo} />
           </button>
           <button
             className="navbar-toggler"
@@ -53,17 +54,14 @@ export default function Navbar(props) {
             aria-label="Toggle navigation"
             id="navbarButton"
           >
-            {/* <span className="material-icons text-white">
-              menu
-            </span> */}
             <span className="navbar-toggler-icon"></span>
           </button>
 
           {nav()}
         </div>
       </nav>
-      <StatusToast show={showLoginToast} setShow={setShowLoginToast} content="Login successful"/>
-      <StatusToast show={showLogoutToast} setShow={setShowLogoutToast} content="Logout successful"/>
+      <StatusToast show={showLoginToast} setShow={setShowLoginToast} content="Login successful" />
+      <StatusToast show={showLogoutToast} setShow={setShowLogoutToast} content="Logout successful" />
     </div>
   );
 }
@@ -72,5 +70,8 @@ const styles = {
   navbar: {
     backgroundColor: "var(--pink)",
     color: "white !important",
+  },
+  logo: {
+    maxHeight: "50px",
   }
 };
