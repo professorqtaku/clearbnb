@@ -49,7 +49,7 @@ const MyBookingCard = (props) => {
           </div>
         </div>
       </div>
-      <BookingModal key={ booking._id} modal={modal} toggle={toggle} booking={booking} />
+      <BookingModal key={booking._id} modal={modal} toggle={toggle} booking={booking} />
     </div>
   );
 };

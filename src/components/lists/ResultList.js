@@ -1,7 +1,8 @@
 import { HostingContext } from '../../contexts/HostingContextProvider'
 import { AvailabilityContext } from '../../contexts/AvailabilityContextProvider'
-import { useEffect, useContext, useState } from 'react'
+import { useEffect, useContext} from 'react'
 import HostingCard from "../cards/HostingCard"
+import Loading from "../base/Loading"
 import Radium from 'radium'
 
 const ResultList = () => {
@@ -73,15 +74,9 @@ const ResultList = () => {
       </div>
     );
   }
-
-  const loading = (
-    <div>
-      Loading...
-    </div>
-  );
   return (
     <div className="container">
-      {hostings && availabilities ? renderResult(filterHostings()) : loading}
+      {hostings && availabilities ? renderResult(filterHostings()) : <Loading />}
     </div>
   );
 }

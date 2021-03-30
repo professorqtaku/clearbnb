@@ -110,7 +110,7 @@ const styles = {
     fontWeight: 'regular',
     padding: "1em",
     borderRadius: "10px",
-    backgroundColor: "rgba(255,255,255,0.8)",
+    backgroundColor: "var(--whiteTrans)",
     '@media (min-width: 700px) AND (max-width: 990px)': {
       maxWidth: "500px"
     },
@@ -118,7 +118,7 @@ const styles = {
 
   button: {
     color: "white",
-    backgroundColor: "#4CAF50",
+    backgroundColor: "var(--green)",
     textDecoration: "none",
     border: '1px white solid'
   }

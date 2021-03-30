@@ -1,11 +1,8 @@
-import { useContext } from "react";
-import { UserContext } from "../../contexts/UserContextProvider";
 import { useHistory } from "react-router-dom"
 import Radium from 'radium'
 
 const Footer = () => {
   const history = useHistory()
-  const { user } = useContext(UserContext);
 
   const goTo = (event) => {
     history.push(`/${event.target.value}`)
