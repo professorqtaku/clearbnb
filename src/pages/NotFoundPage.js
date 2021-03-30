@@ -3,14 +3,14 @@ import robotError from '../assets/img/clearRob.png'
 export default function NotFoundPage() {
   return (
     <div style={styles}>
-      <div class="container-fluid">
-        <div class="row" style={styles.rows}>
-          <div class="col-lg-2"></div>
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3" style={styles.text}>
+      <div className="container-fluid">
+        <div className="row" style={styles.rows}>
+          <div className="col-lg-2"></div>
+          <div className="col-xs-12 col-sm-12 col-md-12 col-lg-3" style={styles.text}>
             <h1 style={styles.title}>404<p style={styles.link}>Page not found</p></h1>
           </div>
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6" style={styles.picture}>
-            <img style={styles.picture} src={robotError} alt={robotError}/>
+          <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6" style={styles.picture}>
+            <img style={styles.picture} src={robotError} alt={robotError} />
           </div>
         </div>
       </div>
