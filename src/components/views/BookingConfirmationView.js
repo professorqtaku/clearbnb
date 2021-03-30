@@ -3,6 +3,7 @@ import { UserContext } from '../../contexts/UserContextProvider'
 import { useContext, useState, useEffect} from 'react'
 import { HostingContext } from '../../contexts/HostingContextProvider'
 import { useHistory } from 'react-router-dom'
+import LoadingScreen from "../base/Loading"
 
 function BookingConfirmationView(props) {
   const { booking } = props
@@ -34,14 +35,9 @@ function BookingConfirmationView(props) {
     
   }
 
-  const loading = (
-    <div>
-      Loading...
-    </div>
-  );
   return (
     <div className="container">
-      {hosting ? renderView(hosting, booking) : loading}
+      {hosting ? renderView(hosting, booking) : <LoadingScreen/>}
     </div>
   );
 
