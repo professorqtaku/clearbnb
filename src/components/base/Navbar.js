@@ -1,12 +1,27 @@
 import { useHistory } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContextProvider";
 import GuestNav from './GuestNav'
 import UserNav from './UserNav'
+import StatusToast from './StatusToast'
 
 export default function Navbar(props) {
   const { user } = useContext(UserContext);
   const history = useHistory();
+  const [showLoginToast, setShowLoginToast] = useState(false)
+  const [showLogoutToast, setShowLogoutToast] = useState(false)
+  const toggleLoginToast = () => {
+    setShowLoginToast(!showLoginToast)
+    setTimeout(() => {
+        setShowLoginToast(false)
+      }, 5000)
+  }
+  const toggleLogoutToast = () => {
+    setShowLogoutToast(!showLogoutToast)
+    setTimeout(() => {
+        setShowLogoutToast(false)
+      }, 5000)
+  }
 
   const goTo = (e) => {
     history.push("/" + e.target.value);
@@ -15,9 +30,9 @@ export default function Navbar(props) {
   const nav = () => {
     if(user)
     return (
-      <UserNav />
+      <UserNav toggleToast={toggleLogoutToast}/>
       )
-    return <GuestNav />
+    return <GuestNav toggleToast={toggleLoginToast}/>
 }
 
   return (
@@ -38,14 +53,17 @@ export default function Navbar(props) {
             aria-label="Toggle navigation"
             id="navbarButton"
           >
-            <span className="material-icons" style={styles.icon}>
+            {/* <span className="material-icons text-white">
               menu
-            </span>
+            </span> */}
+            <span className="navbar-toggler-icon"></span>
           </button>
 
-          { nav() }
+          {nav()}
         </div>
       </nav>
+      <StatusToast show={showLoginToast} setShow={setShowLoginToast} content="Login successful"/>
+      <StatusToast show={showLogoutToast} setShow={setShowLogoutToast} content="Logout successful"/>
     </div>
   );
 }
@@ -54,8 +72,5 @@ const styles = {
   navbar: {
     backgroundColor: "var(--pink)",
     color: "white !important",
-  },
-  icon: {
-    color: "white",
   }
 };

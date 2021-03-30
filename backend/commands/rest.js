@@ -9,11 +9,15 @@ module.exports = (app) => {
     }
     let docs = ''
     try {
-      docs = await models[req.params.model]
-        .find().populate(['host', 'address']).exec()
+      if (req.params.model === "availabilities") {
+        docs = await models[req.params.model].find()
+      } else {
+        docs = await models[req.params.model]
+          .find().populate(['host', 'address', 'hosting', 'client']).exec()
+      }
     }
     catch (e) {
-      res.send('model not found')
+      res.json({ error: "model not found" })
       return
     }
     res.json(docs)
@@ -25,7 +29,7 @@ module.exports = (app) => {
     }
     let doc = ''
     try {
-      doc = await models[req.params.model].findById(req.params.id).populate(['host', 'address', 'accommodation']).exec()
+      doc = await models[req.params.model].findById(req.params.id).populate(['host', 'address', 'accommodation', 'hosting', 'client']).exec()
     }
     catch (e) {
       return
@@ -33,14 +37,53 @@ module.exports = (app) => {
     res.json(doc)
   })
 
+  app.post('/rest/hostings/', async (req, res) => {
+    let Hosting = models['hostings']
+    let Address = models['addresses']
+    let Availability = models['availabilities']
+
+    if (req.body.guestAmount < 1) {
+      res.json({ error: "Cannot have less thatn 1 guest in a hosting" });
+      return
+    }
+
+    let address = new Address(req.body.address)
+    let hosting = new Hosting(req.body);
+    hosting.address = address
+
+    if (req.body.availabilities.length) {
+      req.body.availabilities[0].hosting = hosting
+      let availability = new Availability(req.body.availabilities[0])
+      availability.timePeriod = changeDate(availability.timePeriod[0], availability.timePeriod[1])
+      await availability.save()
+        .catch((e) => console.log("Availability save failed", e))
+      delete req.body.availabilities
+    }
+
+    try {
+      await address.save()
+      await hosting.save()
+      res.json(hosting)
+      return
+    }
+    catch (e) {
+      res.json({ error: 'Save failed' });
+      return
+    }
+  })
+
   app.post('/rest/:model/', async (req, res) => {
+    if (req.params.model === "bookings" || req.params.model === "users") {
+      res.json({ error: "Post unavailable" });
+      return;
+    }
     let model = models[req.params.model]
     let doc = new model(req.body)
     try {
       await doc.save()
     }
     catch (e) {
-      res.send('Save failed')
+      res.json({ error: "Save failed" });
       return
     }
 
@@ -50,7 +93,7 @@ module.exports = (app) => {
   app.put('/rest/hostings/:id', async (req, res) => {
     let model = models['hostings']
     let hosting = await model.findById(req.params.id)
-    
+
     if (req.body.galleries) {
       hosting.galleries = hosting.galleries.concat(req.body.galleries)
       delete req.body.galleries
@@ -63,21 +106,21 @@ module.exports = (app) => {
     Object.assign(hosting, req.body)
     try {
       await hosting.save()
+      res.json(hosting)
     }
-    catch(e) {
-      console.log(e);
+    catch (e) {
+      res.json({ error: "Save failed" })
     }
 
-    res.json(hosting)
-  })
-
-  app.delete('/rest/hostings/:id', async (req, res) => {
-    let model = models['hostings']
-    let hosting = await model.findByIdAndRemove(req.params.id);
-    if (hosting) {
-      res.json({ success: "Delete successful" })
-      return
-    }
-    res.json({error: "Hosting not found"})
   })
 };
+
+const changeDate = (startDate, endDate) => {
+  startDate = new Date(startDate)
+  startDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate())
+  endDate = new Date(endDate)
+  endDate.setDate(endDate.getDate() + 1);
+  endDate = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate())
+
+  return [startDate, endDate - 1]
+}

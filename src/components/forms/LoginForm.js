@@ -1,13 +1,11 @@
 import Radium from 'radium'
 import { UserContext } from '../../contexts/UserContextProvider'
 import { useContext, useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import LoginErrorMessage from "../LoginErrorMessage";
+import ErrorMessage from "../ErrorMessage";
 
 function LoginForm(props) {
-  const { toggleModal } = props
-  const { setUser } = useContext(UserContext)
-  const history = useHistory()
+  const { toggleModal, toggleToast } = props
+  const { fetchUser } = useContext(UserContext)
   const [loginError, setLoginError] = useState(false)
 
   const submitLogin = async (e) => {
@@ -18,12 +16,11 @@ function LoginForm(props) {
       let isLogin = await login(email, password)
       if (isLogin) {
         setLoginError(false)
-        if (window.location.pathname === "/register") {
-          toggleModal()
-          history.push("/mypage")
-        }
+        toggleModal()
       }
-      setLoginError(true)
+      else {
+        setLoginError(true)
+      }
     }
   }
 
@@ -42,17 +39,13 @@ function LoginForm(props) {
       body: JSON.stringify(userInput),
     });
     res = await res.json();
-    if (!res.error) {
-      setUser(res);
+    if (res.success) {
+      fetchUser()
+      toggleToast()
       return true;
     }
     return false;
   };
-
-  const toRegister = () => {
-    toggleModal()
-    history.push('/register')
-  }
 
   return (
     <div style={styles.gridContainer} className="container">
@@ -85,21 +78,11 @@ function LoginForm(props) {
                 required
               />
             </div>
-            <LoginErrorMessage loginError={loginError} />
+            <ErrorMessage showMessage={loginError} message="Email/password incorrect"/>
             <button type="submit" style={styles.submit}>
               Log in
             </button>
           </form>
-          <div>
-            <button
-              type="button"
-              className="btn btn-link"
-              style={styles.link}
-              onClick={toRegister}
-            >
-              Not a member yet?
-            </button>
-          </div>
         </div>
       </div>
     </div>
