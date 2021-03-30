@@ -22,7 +22,6 @@ const MyBookingPage = () => {
           matchedBookings.push(booking);
         }
       }
-      console.log(matchedBookings);
       setMyBookings(matchedBookings);
     }
   }, [bookings]);

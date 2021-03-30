@@ -1,8 +1,6 @@
 import Radium from 'radium'
-import { UserContext } from '../../contexts/UserContextProvider'
 import { useContext, useState, useEffect } from 'react'
 import { HostingContext } from '../../contexts/HostingContextProvider'
-import { useHistory } from 'react-router-dom'
 import LoadingScreen from "../base/Loading"
 
 function BookingConfirmationView(props) {
@@ -13,8 +11,6 @@ function BookingConfirmationView(props) {
   useEffect(() => {
     fetchHostings()
     let matchedHosting = hostings.filter((hosting) => booking.hosting._id === hosting._id)[0]
-    console.log(matchedHosting)
-    console.log(booking)
     setHosting(matchedHosting)
   }, [])
 
@@ -33,32 +29,40 @@ function BookingConfirmationView(props) {
     );
   }
 
-
-
   const renderView = (hosting, booking) => {
     return (
-      <div className="container" style={styles.gridContainer}>
+      <div style={styles.gridContainer} className="container overflow-hidden">
+        <div className="row mb-2">
+          <h3 className="text-muted">{booking.hosting.title}</h3>
+        </div>
+        <div className="col-12 mb-0">
+            {hosting.address.street}, {hosting.address.city}
+        </div>
+        <hr />
+        <h6 className="col-12 mb-0">
+          {showDate()}
+        </h6>
+        <hr />
+          <div className="col-12 mb-0">Guests: {booking.guestAmount}</div>
+        <hr />
         <div className="row">
-          <div className="col">
-            <p>{booking.hosting.title}</p>
-            <div className="col">
-              <p>
-                <span>{showDate()}</span>
-                <span>, {hosting.address.street}, {hosting.address.city}</span>
-              </p>
-            </div>
-          </div>
-          <div className="col">
-            <p>Contact host:</p>
-            <p>{hosting.host.firstName} {hosting.host.lastName}</p>
-            <p>{hosting.host.email}</p>
-            <br></br>
-            <p>totalPrice: {booking.totalPrice}</p>
-          </div>
+          <h6 className="col-12 col-md-6">Contact host:</h6>
+          <p className="col-12 mb-1">
+            {hosting.host.firstName} {hosting.host.lastName}
+          </p>
+          <p className="col-12 mb-0">
+            {hosting.host.email}
+          </p>
+        </div>
+        <hr />
+        <div className="row justify-content-around mb-0">
+          <h5 className="col-2 mb-0">Total:</h5>
+          <h5 className="col-10 d-flex justify-content-end text-muted mb-0">
+            ${booking.totalPrice}
+          </h5>
         </div>
       </div>
     )
-
   }
 
   return (
@@ -73,7 +77,6 @@ export default Radium(BookingConfirmationView)
 
 const styles = {
   gridContainer: {
-    width: "90%",
     maxWidth: "400px",
     display: "grid",
     border: "1px solid grey",

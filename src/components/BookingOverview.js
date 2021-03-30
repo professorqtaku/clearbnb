@@ -1,7 +1,5 @@
 export default function BookingOverview(props) {
   const { title, startDate, endDate, guests, nights, totalPrice } = props
-
-  console.log(title)
   
   const changeDateFormat = (date) => {
     date = date.toLocaleDateString();
