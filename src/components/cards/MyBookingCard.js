@@ -4,7 +4,7 @@ import NoImage from "../../assets/img/noimage.png";
 import BookingModal from "../modals/BookingModal"
 
 const MyBookingCard = (props) => {
-  const booking = props.booking;
+  const { booking } = props
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
@@ -49,7 +49,7 @@ const MyBookingCard = (props) => {
           </div>
         </div>
       </div>
-      <BookingModal modal={modal} toggle={toggle} booking={booking} />
+      <BookingModal key={ booking._id} modal={modal} toggle={toggle} booking={booking} />
     </div>
   );
 };

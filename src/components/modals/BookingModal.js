@@ -6,6 +6,7 @@ function BookingModal(props) {
   const {
     modal,
     toggle,
+    booking
   } = props;
 
   return (
@@ -22,7 +23,9 @@ function BookingModal(props) {
           ></button>
         </div>
         <ModalBody>
-          <BookingConfirmationView toggleModal={toggle} />
+          <BookingConfirmationView
+            booking={booking}
+          />
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={toggle}>

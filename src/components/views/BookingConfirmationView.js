@@ -4,22 +4,23 @@ import { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 function BookingConfirmationView(props) {
-  const { toggleModal } = props
-  const { fetchUser } = useContext(UserContext)
-  const history = useHistory()
+  const { booking } = props
+  // const { fetchUser } = useContext(UserContext)
+  // const history = useHistory()
+
+  console.log(booking)
 
 
 
   return (
     <div style={styles.gridContainer} className="container">
-      <p>hosting.galleries[0]</p>
-      <p>hosting.title</p>
-      <p>hosting.address</p>
-      <p>hosting.host</p>
-      <p>booking.totalPrice</p>
-      <p>booking.guestAmount</p>
-      <p>booking.timePeriod[0]</p>
-      <p>booking.timePeriod[1]</p>
+      <p>{ booking.hosting.title}</p>
+      <p>address: {booking.hosting.address}</p>
+      <p>host: { booking.hosting.host}</p>
+      <p>totalPrice: { booking.totalPrice}</p>
+      <p>guestAmount: { booking.guestAmount}</p>
+      <p>From: { booking.timePeriod[0]}</p>
+      <p>To: {booking.timePeriod[1]}</p>
 
     </div>
   );
