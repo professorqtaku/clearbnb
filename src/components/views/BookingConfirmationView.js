@@ -1,16 +1,20 @@
 import Radium from 'radium'
 import { UserContext } from '../../contexts/UserContextProvider'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect} from 'react'
+import { HostingContext } from '../../contexts/HostingContextProvider'
 import { useHistory } from 'react-router-dom'
 
 function BookingConfirmationView(props) {
   const { booking } = props
   // const { fetchUser } = useContext(UserContext)
   // const history = useHistory()
-
+  const { hostings, fetchHostings } = useContext(HostingContext)
   console.log(booking)
 
-
+  useEffect(() => {
+    fetchHostings()
+    console.log(hostings)
+  }, [])
 
   return (
     <div style={styles.gridContainer} className="container">
