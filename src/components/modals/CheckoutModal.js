@@ -30,7 +30,7 @@ function CheckoutModal(props){
       hosting: hosting,
       timePeriod: [startDate.getTime(), endDate.getTime()],
       guestAmount: guestAmount,
-      totalPrice, totalPrice
+      totalPrice: totalPrice
     }
     let res = await fetch("/api/bookings", {
       method: "POST",
@@ -79,9 +79,8 @@ function CheckoutModal(props){
             <button
               onClick={confirmBooking}
               style={styles.button}
-              className="text-center"
+              className="btn text-center"
               type="button"
-              className="btn-btn"
               data-bs-dismiss="modal"
             >
               Confirm
