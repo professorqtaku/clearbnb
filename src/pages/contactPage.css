@@ -13,6 +13,8 @@ h1{
     sans-serif;  font-size: 56px;
   margin-bottom: 50px;
   color: #f1486d;
+  top: 30px;
+  padding: 20px;
 }
 .contact__form{
     display: flex;
