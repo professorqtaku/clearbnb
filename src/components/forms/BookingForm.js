@@ -48,15 +48,6 @@ export default function BookingForm(props) {
     setTotalPrice(total);
   };
 
-  const changeGuestNumber = (e) => {
-    if (e.target.value > hosting.guestAmount) {
-      setGuests(hosting.guestAmount);
-      e.target.value = hosting.guestAmount;
-    } else {
-      setGuests(e.target.value);
-    }
-  };
-
   const disableDatePicker = () => {
     return !availabilities.length;
   };
@@ -125,7 +116,7 @@ export default function BookingForm(props) {
             placeholder="Guests"
             min={1}
             max={hosting.guestAmount}
-            onChange={changeGuestNumber}
+            onChange={(e) => setGuests(e.target.value)}
             required
           />
         </div>
