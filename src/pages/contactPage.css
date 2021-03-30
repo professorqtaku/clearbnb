@@ -11,7 +11,7 @@ h1{
   font-family: 'Pacifico', cursive;
   font-size: 56px;
   margin-bottom: 50px;
-  color: #ec4367;
+  color: #f1486d;
 }
 .contact__form{
     display: flex;
@@ -72,10 +72,8 @@ h1{
 background-image: url("https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80");
 
     background-color: #f7f5ff;
-
-    height: 100vh;
-    width: 100vw;
-
+   height: 100vh;
+   background-size: cover;
 }
 .fa-instagram{
     position: absolute;
