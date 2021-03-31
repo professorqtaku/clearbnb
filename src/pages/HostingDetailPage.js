@@ -27,7 +27,6 @@ export default function HostingDetailPage(props) {
       res = await res.json();
       setHosting(res);
     } catch (e) {
-      console.log("error", e);
     }
   };
 
@@ -38,7 +37,6 @@ export default function HostingDetailPage(props) {
       setAvailabilities(res)
     }
     catch (e) {
-      console.log("error", e);
     }
   }
 
@@ -60,7 +58,6 @@ export default function HostingDetailPage(props) {
       }
     }
     catch (e) {
-      console.log("error", e);
     }
   }
 

@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react"
 import ResultList from "../components/lists/ResultList"
 import SearchBar from "../components/SearchBar"
@@ -14,7 +13,7 @@ export default function HomePage() {
     if (isSearch) {
       setMinHeight('45vh')
     }
-  });
+  },[]);
 
 
 

@@ -19,7 +19,7 @@ export default function UserContextProvider(props) {
           setUser(null)
         }
       })
-      .catch((e) => console.log('Already login error', e))
+      .catch((e) =>{})
   }
 
     useEffect(() => {

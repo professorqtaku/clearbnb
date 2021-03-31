@@ -56,7 +56,7 @@ module.exports = (app) => {
       let availability = new Availability(req.body.availabilities[0])
       availability.timePeriod = changeDate(availability.timePeriod[0], availability.timePeriod[1])
       await availability.save()
-        .catch((e) => console.log("Availability save failed", e))
+        .catch((e) => {})
       delete req.body.availabilities
     }
 

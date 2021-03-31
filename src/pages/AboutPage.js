@@ -1,6 +1,5 @@
 import React from'react'
 import Radium from 'radium'
-//import{Row, Col, Container} from 'reactstrap'
 import Background from'../background.jpg'
 
 

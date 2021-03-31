@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import BookingConfirmationView from "../views/BookingConfirmationView"
 
