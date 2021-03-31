@@ -46,7 +46,7 @@ export default function HostingInfoFormGroup(props) {
 
       <FormGroup className="col-md-6 mb-3">
         <label for="select" className="form-label">
-          Accommodation
+          Accommodation*
         </label>
 
         <select id="hostingAccommodationSelect" className="form-select" required>
