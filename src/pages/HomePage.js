@@ -13,14 +13,10 @@ export default function HomePage() {
     if (isSearch) {
       setMinHeight('45vh')
     }
-  },[]);
-
-
+  },[isSearch]);
 
   return (
-
     <div className="homePage">
-
       <div className="d-flex p-2 align-items-center" style={{
         minHeight: `${minHeight}`, transition: "300ms", backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: '10% 10%'
       }}>
