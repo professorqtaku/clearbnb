@@ -13,9 +13,7 @@ export default function HomePage() {
     if (isSearch) {
       setMinHeight('45vh')
     }
-  },[]);
-
-
+  },[isSearch]);
 
   return (
 
