@@ -48,10 +48,9 @@ function SearchBar(props) {
             />
           </div>
 
-          <div className="col-6 col-lg-2">
+          <div className="col-sm-6 col-lg-2">
             <label>From</label>
             <DatePicker
-
               className="datePicker form-control"
               selectsStart
               selected={startDate}
@@ -64,10 +63,9 @@ function SearchBar(props) {
             />
           </div>
 
-          <div className="col-6 col-lg-2">
+          <div className="col-sm-6 col-lg-2">
             <label>To</label>
             <DatePicker
-
               className="datePicker form-control"
               selectsEnd
               selected={endDate}

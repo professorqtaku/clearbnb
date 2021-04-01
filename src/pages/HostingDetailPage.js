@@ -94,7 +94,7 @@ export default function HostingDetailPage(props) {
     return (
       <div
         style={{
-          // backgroundImage: `url(${hosting.galleries[0]})`,
+          backgroundImage: `url(${hosting.galleries[0]})`,
           height: "100%",
           padding: "3vh 0",
           backgroundRepeat: "no-repeat",
@@ -174,15 +174,15 @@ export default function HostingDetailPage(props) {
 const styles = {
   containerFluid: {
     height: "100%",
-    padding: "0"
+    padding: "0",
   },
   container: {
     padding: "4vh 2vh",
     borderRadius: "10px",
-    backgroundColor: "var(--whiteTrans)",
+    backgroundColor: "rgba(255,255,255,0.9)",
     height: "100%",
     maxWidth: "900px",
-    margin: "0 auto"
+    margin: "0 auto",
   },
   image: {
     width: "100%",
