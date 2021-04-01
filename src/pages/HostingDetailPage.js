@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import Radium from "radium";
 import { useEffect, useState, useContext } from "react";
 import { UserContext } from '../contexts/UserContextProvider'
 import BookingForm from '../components/forms/BookingForm'
@@ -7,7 +8,7 @@ import DeleteButton from '../components/buttons/DeleteButton'
 import NoImage from '../assets/img/noimage.png'
 import Loading from '../components/base/Loading'
 
-export default function HostingDetailPage(props) {
+function HostingDetailPage(props) {
   const { hostingId } = useParams();
   const [hosting, setHosting] = useState(null);
   const [availabilities, setAvailabilities] = useState(1);
@@ -46,7 +47,7 @@ export default function HostingDetailPage(props) {
       res = await res.json();
       if (!res.error) {
         let dates = []
-        for(let booking of res) {
+        for (let booking of res) {
           let startDate = booking.timePeriod[0]
           let endDate = booking.timePeriod[1]
           while (startDate <= endDate) {
@@ -75,30 +76,31 @@ export default function HostingDetailPage(props) {
     }
     return (
       <BookingForm
-      hosting={hosting}
-      availabilities={availabilities}
-      bookedDates={bookedDates}
-      setBooking={setBooking}
+        hosting={hosting}
+        availabilities={availabilities}
+        bookedDates={bookedDates}
+        setBooking={setBooking}
       />
-      );
-    }
-    const hostView = (hosting) => {
-      return (
-        <div style={styles.delete}>
-          <DeleteButton hosting={hosting} />
-        </div>
-      )
-    }
-    
-    const defaultView = (hosting, user) => {
+    );
+  }
+  const hostView = (hosting) => {
+    return (
+      <div style={styles.delete}>
+        <DeleteButton hosting={hosting} />
+      </div>
+    )
+  }
+
+  const defaultView = (hosting, user) => {
     return (
       <div
         style={{
           backgroundImage: `url(${hosting.galleries[0]})`,
           height: "100%",
-          padding: "3vh 0",
+
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
+          ...styles.containerPadding
         }}
         className="container-fluid"
       >
@@ -171,7 +173,14 @@ export default function HostingDetailPage(props) {
   );
 }
 
+export default Radium(HostingDetailPage)
+
 const styles = {
+  containerPadding: {
+    '@media (min-width: 700px)': {
+      padding: '3vh 0'
+    }
+  },
   containerFluid: {
     height: "100%",
     padding: "0",
@@ -198,4 +207,5 @@ const styles = {
     margin: "0 auto",
     width: "50%",
   },
+
 };
