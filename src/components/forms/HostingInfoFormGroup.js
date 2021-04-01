@@ -102,13 +102,13 @@ export default function HostingInfoFormGroup(props) {
             placeholder="Paste the image url link here..."
             required
           />
-          <button
+          {/* <button
             href="#"
             className="btn btn-secondary btn-sm col-2 active align-self-end"
             type="button"
           >
             <span className="material-icons text-white">add</span>
-          </button>
+          </button> */}
         </div>
       </FormGroup>
     </div>

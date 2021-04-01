@@ -9,7 +9,7 @@ function LoginModal(props) {
 
   return (
     <div>
-      <Modal isOpen={showLoginModal}>
+      <Modal isOpen={showLoginModal} toggle={toggleLoginModal}>
         <div className="modal-header">
           <h5 className="modal-title">Log in</h5>
           <button
