@@ -75,61 +75,89 @@ export default function HostingDetailPage(props) {
     }
     return (
       <BookingForm
-        hosting={hosting}
-        availabilities={availabilities}
-        bookedDates={bookedDates}
-        setBooking={setBooking}
+      hosting={hosting}
+      availabilities={availabilities}
+      bookedDates={bookedDates}
+      setBooking={setBooking}
       />
-    );
-  }
-
-  const defaultView = (hosting, user) => {
+      );
+    }
+    const hostView = (hosting) => {
+      return (
+        <div style={styles.delete}>
+          <DeleteButton hosting={hosting} />
+        </div>
+      )
+    }
+    
+    const defaultView = (hosting, user) => {
     return (
-      <div style={styles.container}>
-        <h2 className="mb-3">{hosting.title}</h2>
-        <img
-          className="mb-3"
-          src={hosting.galleries[0]}
-          alt="hosting"
-          onError={event => event.target.src = NoImage}
-          style={styles.image}
-        />
-        <div className="container m-0">
-          <div className="row">
-            <h6 className="col-12 mb-2">
-              {hosting.accommodation.description} with {hosting.host.firstName}{" "}
-              {hosting.host.lastName}
-            </h6>
+      <div
+        style={{
+          // backgroundImage: `url(${hosting.galleries[0]})`,
+          height: "100%",
+          padding: "3vh 0",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}
+        className="container-fluid"
+      >
+        <div style={styles.container} className="container">
+          <h2 className="mb-3">{hosting.title}</h2>
+          <img
+            className="mb-3"
+            src={hosting.galleries[0]}
+            alt="hosting"
+            onError={(event) => (event.target.src = NoImage)}
+            style={styles.image}
+          />
+          <div className="container m-0">
+            <div className="row">
+              <h6 className="col-12 mb-2">
+                {hosting.accommodation.description} with{" "}
+                {hosting.host.firstName} {hosting.host.lastName}
+              </h6>
 
-            <div className="col-12 mb-2 text-muted">
-              <span>{hosting.guestAmount} {hosting.guestAmount > 1 ? "Guests" : "Guest"}</span>
-              <span> | {hosting.bedroomAmount}{" "} {hosting.bedroomAmount > 1 ? "Bedrooms" : "Bedroom"}</span>
-              <span> | {hosting.bedAmount} {hosting.bedAmount > 1 ? "Beds" : "Bed"}</span>
-            </div>
-            <p className="col-12">{hosting.address.street}, {hosting.address.city} </p>
-            <h3 className="col-12 mb-3">$ {customerPrice(hosting.price)}/night </h3>
-            <p className="col-12">{hosting.description}</p>
-            <hr />
-            <div className="col-12 mt-4">
-              <div>{userView(hosting, user)}</div>
+              <div className="col-12 mb-2 text-muted">
+                <span>
+                  {hosting.guestAmount}{" "}
+                  {hosting.guestAmount > 1 ? "Guests" : "Guest"}
+                </span>
+                <span>
+                  {" "}
+                  | {hosting.bedroomAmount}{" "}
+                  {hosting.bedroomAmount > 1 ? "Bedrooms" : "Bedroom"}
+                </span>
+                <span>
+                  {" "}
+                  | {hosting.bedAmount} {hosting.bedAmount > 1 ? "Beds" : "Bed"}
+                </span>
+              </div>
+              <p className="col-12">
+                {hosting.address.street}, {hosting.address.city}{" "}
+              </p>
+              <h3 className="col-12 mb-3">
+                $ {customerPrice(hosting.price)}/night{" "}
+              </h3>
+              <p className="col-12">{hosting.description}</p>
+              <hr />
+              <div className="col-12 mt-4">
+                <div>{userView(hosting, user)}</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
     );
   };
 
-  const hostView = (hosting) => {
-    return (
-      <div style={styles.delete}>
-        <DeleteButton hosting={hosting} />
-      </div>
-    )
-  }
 
   return (
-    <div className="container" style={styles.container}>
+    <div
+      className="container-fluid"
+      key="detailContainer"
+      style={styles.containerFluid}
+    >
       {hosting && availabilities ? (
         booking ? (
           <ConfirmView title={hosting.title} booking={booking} />
@@ -144,13 +172,17 @@ export default function HostingDetailPage(props) {
 }
 
 const styles = {
+  containerFluid: {
+    height: "100%",
+    padding: "0"
+  },
   container: {
-    padding: "1em",
+    padding: "4vh 2vh",
     borderRadius: "10px",
     backgroundColor: "var(--whiteTrans)",
-    marginBottom: "5vw",
     height: "100%",
-    maxWidth: "900px"
+    maxWidth: "900px",
+    margin: "0 auto"
   },
   image: {
     width: "100%",
