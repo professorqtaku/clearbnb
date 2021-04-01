@@ -28,7 +28,7 @@ export default function UserNav(props) {
       <Nav
         content={<span className="material-icons">person</span>}
         value="mypage"
-        textColor="var(--green)"
+        textColor="var(--lightpink)"
         />
     );
   }
