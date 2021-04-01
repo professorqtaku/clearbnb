@@ -67,7 +67,7 @@ export default function BookingForm(props) {
     setTotalPrice(hosting.price);
     countDays(startDate, endDate);
     countPrice(totalDays, hosting.price);
-  }, [startDate, endDate, totalDays, guests]);
+  }, [hosting.price, startDate, endDate, totalDays, guests]);
 
   return (
     <div className="container" style={styles.container}>

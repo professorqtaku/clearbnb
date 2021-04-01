@@ -28,7 +28,7 @@ const ContactPage = () => {
             onSubmit={e=>sendMessage(e)} 
             className="contact__form">
               <input 
-                value={inputs.name} 
+              defaultValue={inputs.name}
                 onChange={e=>handleInputChange(e)} 
                 type="text" name="name" 
                 placeholder="name" 
@@ -36,7 +36,7 @@ const ContactPage = () => {
                 maxLength="50" 
                 required/>
               <input 
-                value={inputs.email} 
+                defaultValue={inputs.email} 
                 onChange={e=>handleInputChange(e)} 
                 type="email" name="email" 
                 placeholder="email" 
@@ -44,7 +44,7 @@ const ContactPage = () => {
                 maxLength="50" 
                 required/>
               <textarea 
-                value={inputs.message} 
+                defaultValue={inputs.message} 
                 onChange={e=>handleInputChange(e)} 
                 type="text" name="message" 
                 placeholder="message" 
@@ -53,7 +53,7 @@ const ContactPage = () => {
                 required/>
               <input 
                 type="submit" 
-                value="send message"/>
+                defaultValue="send message"/>
           </form> 
         </div>
       )

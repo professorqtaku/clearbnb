@@ -46,14 +46,14 @@ export default function HostingDetailPage(props) {
       res = await res.json();
       if (!res.error) {
         let dates = []
-        res.map((booking) => {
+        for(let booking of res) {
           let startDate = booking.timePeriod[0]
           let endDate = booking.timePeriod[1]
           while (startDate <= endDate) {
             dates.push(startDate);
             startDate += 86400000;
           }
-        })
+        }
         setBookedDates(dates);
       }
     }

@@ -57,7 +57,7 @@ function CheckoutModal(props){
   return (
     <div>
       <Modal isOpen={modal} toggle={toggle} onOpened={modalOpen}>
-        <div className="modal-header" toggle={toggle}>
+        <div className="modal-header">
           <h5 className="modal-title">Checkout</h5>
           <button
             type="button"
