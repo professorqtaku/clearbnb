@@ -29,7 +29,7 @@ const DeleteButton = (props) => {
 
   return (
     <div>
-      <button className="btn" style={styles.button} onClick={toggle}>
+      <button className="btn" style={[{...styles.button}, {...styles.toggle}]} onClick={toggle}>
         Delete hosting
       </button>
       <Modal
@@ -76,8 +76,8 @@ const styles = {
     color: "white",
     fontWeight: "bold",
     width: "100%",
+    maxWidth: "200px",
     marginTop: '4vh',
-    marginBottom: '1vh',
     borderRadius: "50px",
     ":focus": {
       border: "none important",
@@ -85,10 +85,14 @@ const styles = {
   },
   body: {
     textAlign: 'center',
-    padding: '5vh 10vw',
+    padding: '5vh',
     width: '100%'
   },
   cancel: {
     backgroundColor: 'var(--pink)'
+  },
+  toggle: {
+    margin: "0",
+    maxWidth: "100%"
   }
 };

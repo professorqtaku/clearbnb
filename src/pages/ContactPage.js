@@ -1,7 +1,7 @@
 import React from'react'
 import Radium from'radium'
 import ReactDOM from'react-dom'
-import './contactPage.css'
+import '../contactPage.css'
 const ContactPage = () => {
 
       const [inputs, setInputs] = React.useState({name: '', email: '', message: ''});
